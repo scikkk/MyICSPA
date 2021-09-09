@@ -34,7 +34,9 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
+  // wk add	
   nemu_state.state = NEMU_QUIT;
+  // wk add
   return -1;
 
 }
