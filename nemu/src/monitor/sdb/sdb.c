@@ -4,6 +4,10 @@
 #include <readline/history.h>
 #include "sdb.h"
 
+// wk
+#include <memory/vaddr.h>
+// wk
+
 static int is_batch_mode = false;
 
 void init_regex();
@@ -68,7 +72,11 @@ static int cmd_info(char *args){
 static int cmd_x(char *args){
     int N = atoi(strtok(NULL, " "));
 	char *expr = strtok(NULL, " ");
-	printf("%d  %s\n", N, expr);
+	long value_of_expr = strtol(expr, &expr, 10);
+	for (int k = 0; k < value_of_expr; k++) {
+		printf("%x\n", vaddr_read(N+4*k, 4));
+	}
+
 	return 0;
 }
 // wk: scan memory
