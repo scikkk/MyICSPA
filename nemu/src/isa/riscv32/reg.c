@@ -10,8 +10,8 @@ const char *regs[] = {
 
 void isa_reg_display() {
 	// added by wk
-	for (int k = 0; k < 10; k++){
-	printf("%s ", regs[k]);
+	for (int k = 0; k <32; k++){
+	printf("%s\n", regs[k]);
 	}		
 	// added by wk
 }
