@@ -73,6 +73,7 @@ static int cmd_x(char *args){
     int N = atoi(strtok(NULL, " "));
 	char *expr = strtok(NULL, " ");
 	long value_of_expr = strtol(expr, &expr, 10);
+	printf("%d\t%ld\n",N, value_of_expr);
 	for (int k = 0; k < value_of_expr; k++) {
 		printf("%x\n", vaddr_read(N+4*k, 4));
 	}
