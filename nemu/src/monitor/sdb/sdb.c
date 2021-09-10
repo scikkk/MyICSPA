@@ -75,8 +75,8 @@ static int cmd_x(char *args){
 	char* next;
 	long value_of_expr = strtol(expr, &next, 10);
 	printf("%d\t%ld\t%s\n",N, value_of_expr,expr);
-	for (int k = 0; k < value_of_expr; k++) {
-		printf("%x\n", vaddr_read(N+4*k, 1));
+	for (int k = 0; k < N; k++) {
+		printf("%x\n", vaddr_read(value_of_expr+4*k, 4));
 	}
 
 	return 0;
