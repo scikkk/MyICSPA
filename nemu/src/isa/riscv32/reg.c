@@ -11,7 +11,7 @@ const char *regs[] = {
 void isa_reg_display() {
 	// added by wk
 	for (int k = 0; k <32; k++){
-	printf("%s\t\t0X\t\t\n", regs[k]);
+	printf("%s\t\t0X%x\t\t\n", regs[k], cpu.gpr[k]._32);
 	}		
 	// added by wk
 }
