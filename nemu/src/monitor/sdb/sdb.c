@@ -43,6 +43,17 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+
+// added by wk: execute by step
+static int cmd_si(char *args) {
+  int len_of_step = atoi(strtok(NULL, " "));
+  cpu_exec(len_of_step);
+  return 0;
+}
+// added by wk: execute by step
+
+
+
 static struct {
   const char *name;
   const char *description;
@@ -51,6 +62,7 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
+  { "si", "Let the program step through N instructions and then pause execution,\nWhen N is not given, it defaults to 1", cmd_si}, //wk
 
   /* TODO: Add more commands */
 
