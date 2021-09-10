@@ -54,7 +54,15 @@ static int cmd_si(char *args) {
 }
 // added by wk: execute by step
 
-
+// wk: print registers
+static int cmd_info(char *args){
+    char* parameter = strtok(NULL, " ");
+	if (strcmp(parameter, "r") == 0){
+		isa_reg_display();
+	}
+	return 0;
+}
+// wk: print registers
 
 static struct {
 	const char *name;
@@ -64,9 +72,9 @@ static struct {
 	{ "help", "Display informations about all supported commands", cmd_help },
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
-	{ "si", "Let the program step through N instructions and then pause execution,\nWhen N is not given, it defaults to 1", cmd_si}, //wk
-
 	/* TODO: Add more commands */
+	{ "si", "Let the program step through N instructions and then pause execution, When N is not given, it defaults to 1", cmd_si}, //wk
+	{"info", "Print register status", cmd_info}, //wk
 
 };
 
