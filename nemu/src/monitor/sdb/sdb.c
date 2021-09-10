@@ -44,7 +44,7 @@ static int cmd_q(char *args) {
 static int cmd_help(char *args);
 
 
-// added by wk: execute by step
+// wk: execute by step
 static int cmd_si(char *args) {
 	char* len_of_step_str = strtok(NULL, " ");
 	int len_of_step = 1;
@@ -52,7 +52,7 @@ static int cmd_si(char *args) {
 	cpu_exec(len_of_step);
 	return 0;
 }
-// added by wk: execute by step
+// wk: execute by step
 
 // wk: print registers
 static int cmd_info(char *args){
@@ -63,6 +63,15 @@ static int cmd_info(char *args){
 	return 0;
 }
 // wk: print registers
+
+// wk: scan memory
+static int cmd_x(char *args){
+    int N = atoi(strtok(NULL, " "));
+	char *expr = strtok(NULL, " ");
+	printf("%d  %s", N, expr);
+	return 0;
+}
+// wk: scan memory
 
 static struct {
 	const char *name;
@@ -75,7 +84,7 @@ static struct {
 	/* TODO: Add more commands */
 	{ "si", "Let the program step through N instructions and then pause execution, When N is not given, it defaults to 1", cmd_si}, //wk
 	{"info", "Print register status", cmd_info}, //wk
-
+	{"x", "Find the value of the expression EXPR, use the result as the starting memory address, and output N consecutive 4 bytes in hexadecimal form", cmd_x},
 };
 
 #define NR_CMD ARRLEN(cmd_table)
