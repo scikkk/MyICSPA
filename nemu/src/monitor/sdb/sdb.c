@@ -68,7 +68,7 @@ static int cmd_info(char *args){
 static int cmd_x(char *args){
     int N = atoi(strtok(NULL, " "));
 	char *expr = strtok(NULL, " ");
-	printf("%d  %s", N, expr);
+	printf("%d  %s\n", N, expr);
 	return 0;
 }
 // wk: scan memory
