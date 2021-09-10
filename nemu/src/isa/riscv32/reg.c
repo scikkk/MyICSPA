@@ -9,6 +9,9 @@ const char *regs[] = {
 };
 
 void isa_reg_display() {
+	// added by wk
+	
+	// added by wk
 }
 
 word_t isa_reg_str2val(const char *s, bool *success) {
