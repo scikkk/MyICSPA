@@ -5,11 +5,10 @@
 word_t expr(char *e, bool *success);
 
 int main(int argc, char *argv[]) {
-  bool s;
-  bool *ps = &s;
-	// bool *s = (bool*)malloc(sizeof(bool));
-  uint32_t res =  expr("1+1",ps);
+  bool *s = (bool*)malloc(sizeof(bool));
+  *s = true;
+  uint32_t res =  expr("1+1",s);
   printf("%u\n", res);
-  // free(s);
+  free(s);
   return 0;
 }
