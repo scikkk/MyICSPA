@@ -166,7 +166,7 @@ bool check_parentheses(int p, int q, bool *success) {
 			stack[top+1] = '\0';
 		}
 		else if (tokens[k].type == ')') {
-			if (stack[top-1] != '(') *success = false;
+			if (stack[top] != '(') *success = false;
 			stack[top] = '\0';
 			top--;
 		}
