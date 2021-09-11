@@ -1,20 +1,10 @@
 #include <common.h>
-
-void init_monitor(int, char *[]);
-void am_init_monitor();
-void engine_start();
-int is_exit_status_bad();
-
+//#include <nemu/src/monitor/sdb/sdb.h>
+word_t expr(char *e, bool *success);
 int main(int argc, char *argv[]) {
-  /* Initialize the monitor. */
-#ifdef CONFIG_TARGET_AM
-  am_init_monitor();
-#else
-  init_monitor(argc, argv);
-#endif
+  
 
-  /* Start engine. */
-  engine_start();
 
-  return is_exit_status_bad();
+  bool *s = (bool*)malloc(sizeof(bool));
+  return expr("1+1",s);
 }
