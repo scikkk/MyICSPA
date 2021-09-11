@@ -93,9 +93,10 @@ void find_signed_tokens(){
 				remove_token(0);
 				tokens[0].type = TK_SIGN_INT;
 			}
-			else if (tokens[k-1].type != ')' && tokens[k-1].type != TK_INT) {
+			else if (tokens[k-1].type != ')' && tokens[k-1].type != TK_INT && tokens[k-1].type != TK_SIGN_INT) {
 				remove_token(k);
-				tokens[k].type = TK_SIGN_INT;
+				if (tokens[k].type == TK_INT) tokens[k].type = TK_SIGN_INT;
+				else if (tokens[k].type == TK_SIGN_INT) tokens[k].type = TK_INT;
 				k--;
 			}
 		}
