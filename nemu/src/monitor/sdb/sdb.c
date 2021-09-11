@@ -82,6 +82,22 @@ static int cmd_x(char *args){
 }
 // wk: scan memory
 
+// wk: evaluate expressions
+static int cmd_p(char *args) {
+	char *e = strtok(NULL, " ");
+	bool* success = false;
+	uint32_t res = expr(e,success);
+	if (success) {
+		printf("%u\n", res);
+	}
+	else {
+		printf("表达式不合法！\n");
+	}
+	return 0;
+}
+// wk: evaluate expressions
+
+
 static struct {
 	const char *name;
 	const char *description;
@@ -94,6 +110,7 @@ static struct {
 	{ "si", "Let the program step through N instructions and then pause execution, When N is not given, it defaults to 1", cmd_si}, //wk
 	{"info", "Print register status", cmd_info}, //wk
 	{"x", "Find the value of the expression EXPR, use the result as the starting memory address, and output N consecutive 4 bytes in hexadecimal form", cmd_x},
+	{"p", "Find the value of the expression EXPR", cmd_p},
 };
 
 #define NR_CMD ARRLEN(cmd_table)
