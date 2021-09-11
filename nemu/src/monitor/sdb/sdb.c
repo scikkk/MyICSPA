@@ -84,7 +84,7 @@ static int cmd_x(char *args){
 
 // wk: evaluate expressions
 static int cmd_p(char *args) {
-	char *e = strtok(NULL, " ");
+	char *e = args;
 	bool* success = (bool*)malloc(sizeof(bool));
 	*success = true;
 	uint32_t res = expr(e,success);
