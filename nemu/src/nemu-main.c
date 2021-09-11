@@ -19,8 +19,8 @@ int main(int argc, char *argv[]) {
 	char e[65536];
 	//int num = scanf("%s", e);
 	//assert(num == 1);
-	FILE *fpread = fopen("/src/.input.txt", "r");
-	FILE *fpwrite = fopen("/src/.wkres.txt", "w");
+	FILE *fpread = fopen("input.txt", "r");
+	FILE *fpwrite = fopen("wkres.txt", "w");
 	assert(fpread != NULL || fpwrite == NULL);
 		printf("1:%s\n", e);
 	while (fgets(e, sizeof(e), fpread) != NULL) {
