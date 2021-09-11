@@ -40,6 +40,7 @@ static struct rule {
 	{"\\(", TK_LEFT_PARENTHESIS},          // left parenthesis
 	{"\\)", TK_RIGHT_PARENTHESIS},          // right parenthesis
 	{"[1-9][0-9]*", TK_INT},   // integral
+	// 负号
 	// wk
 };
 
