@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
 	FILE *fpread = fopen("/src/input.txt", "r");
 	FILE *fpwrite = fopen("/src/wkres.txt", "w");
 	assert(fpread != NULL || fpwrite == NULL);
-	
+printf("%s\n", "00000");	
 	for (int k = 0; k < 10; k++) {
 		int num = fscanf(fpread, "%s", e);
 		assert(num == 1);
