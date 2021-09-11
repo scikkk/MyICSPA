@@ -154,7 +154,7 @@ static bool make_token(char *e) {
 
 // wk
 bool pure_check_parenthesis(int p, int q) {
-	char stack[32];
+	char stack[10000];
 	int top = -1;
 	for (int k = p; k <= q; k++) {
 		if (tokens[k].type == '(') { 
