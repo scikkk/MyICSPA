@@ -93,7 +93,7 @@ void find_signed_tokens(){
 				remove_token(k);
 				if (tokens[k].type == TK_INT) tokens[k].type = TK_SIGN_INT;
 				else if (tokens[k].type == TK_SIGN_INT) tokens[k].type = TK_INT;
-				k--;
+				k++;
 			}
 		}
 	}}
