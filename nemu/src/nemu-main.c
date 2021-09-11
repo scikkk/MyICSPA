@@ -22,14 +22,18 @@ int main(int argc, char *argv[]) {
 	FILE *fpread = fopen("input.txt", "r");
 	FILE *fpwrite = fopen("wkres.txt", "w");
 	assert(fpread != NULL || fpwrite == NULL);
-		printf("1:%s\n", e);
-	while (fgets(e, sizeof(e), fpread) != NULL) {
-		printf("2:%s\n", e);
+	int k = 0;
+	while (fgets(e, sizeof(e), fpread) != NULL && k < 10) {
+		k++;
+		char right[10];
+	    strcpy(right, strtok(e, " "));
+		int len = strlen(e);
+		for (int k = 0; k < 65536-len;k++) e[k] = e[k+len+1];
 		bool success = true; 
 		uint32_t oneres = expr(e, &success);
 		if (success) {
 			printf("%u\n", oneres);
-			fprintf(fpwrite, "%u\n", oneres);
+			fprintf(fpwrite, "my: %u\tright: %s\n", oneres, right);
 		} 
 		else {
 			printf("表达式不合法！\n");
