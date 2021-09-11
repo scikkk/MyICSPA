@@ -16,11 +16,12 @@ int main(int argc, char *argv[]) {
 	init_monitor(argc, argv);
 #endif  
 
-#define WKK(b) bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb;
-#define WKKK(b) bbbbbbbbbbbbbbbbbbbbbbbbbbbbb;
 	char e[65536];
+	for(int k = 0; k < 65535; k++)
+	{
+		e[k] = '9';e[k+1] = '\0';
+	}
 	//int num = scanf("%s", e);
-	strcpy(e, "4444444WKKK(WKK(999999999999))4444444\0");
 	//assert(num == 1);
 	FILE *fpread = fopen("/src/input.txt", "r");
 	FILE *fpwrite = fopen("/src/wkres.txt", "w");
