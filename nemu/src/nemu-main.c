@@ -30,6 +30,7 @@ int main(int argc, char *argv[]) {
 	    strcpy(right, e);
 		int len = strlen(e);
 		for (int k = 0; k < 65535-len;k++) e[k] = e[k+len+1];
+		e[strlen(e)-2] = '\0'; //remove '\n'
 		printf("%s\n%s\n", right, e);
 		bool success = true; 
 		uint32_t oneres = expr(e, &success);
