@@ -22,8 +22,9 @@ int main(int argc, char *argv[]) {
 	FILE *fpread = fopen("/src/input.txt", "r");
 	FILE *fpwrite = fopen("/src/wkres.txt", "w");
 	assert(fpread != NULL || fpwrite == NULL);
-	while (fgets(e, sizeof(e), fpread) != NULL) {
 		printf("1:%s\n", e);
+	while (fgets(e, sizeof(e), fpread) != NULL) {
+		printf("2:%s\n", e);
 		bool success = true; 
 		uint32_t oneres = expr(e, &success);
 		if (success) {
