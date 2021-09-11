@@ -40,7 +40,7 @@ static struct rule {
 	{"/", TK_DIVIDE},           // divide
 	{"\\(", TK_LEFT_PARENTHESIS},          // left parenthesis
 	{"\\)", TK_RIGHT_PARENTHESIS},          // right parenthesis
-	{"[1-9][0-9]*", TK_INT},   // integral
+	{"[1-9][0-9]*|0", TK_INT},   // integral
 	// 负号
 	// wk
 };
