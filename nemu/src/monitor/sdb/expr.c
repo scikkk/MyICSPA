@@ -104,11 +104,11 @@ static bool make_token(char *e) {
 					//	case '/': tokens[nr_token].type = '/';break;
 					//	case '(': tokens[nr_token].type = '(';break;
 					//	case ')': tokens[nr_token].type = ')';break;
+					case TK_NOTYPE: break;
 					case TK_INT: strncpy(tokens[nr_token].str,substr_start,substr_len);
 					default: tokens[nr_token].type = rules[i].token_type;
-
+							 nr_token++;
 				}
-				nr_token++;
 				break;
 			}
 		}
