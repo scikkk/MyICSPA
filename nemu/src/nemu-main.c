@@ -17,13 +17,9 @@ int main(int argc, char *argv[]) {
 #endif  
 
 	char e[65536];
-	for(int k = 0; k < 65535; k++)
-	{
-		e[k] = '9';e[k+1] = '\0';
-	}
 	//int num = scanf("%s", e);
 	//assert(num == 1);
-	FILE *fpread = fopen("/src/input.txt", "r");
+	FILE *fpread = fopen("/src/in0put.txt", "r");
 	FILE *fpwrite = fopen("/src/wkres.txt", "w");
 	assert(fpread != NULL || fpwrite == NULL);
 		printf("1:%s\n", e);
