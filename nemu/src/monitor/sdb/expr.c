@@ -123,6 +123,98 @@ static bool make_token(char *e) {
 }
 
 
+// wk
+//
+bool check_parentheses(int p, int q, bool *success) {
+	if (tokens[p].type != '(' || tokens[q].type != ')') *success = false;
+	char stack[32];
+	stack[0] = '*';
+	int top = 0;
+	for (int k = p+1; k < q; k++) {
+		if (tokens[k].type == '(') {
+			top++;
+			stack[top] = '(';
+			stack[top+1] = '\0';
+		}
+		else if (tokens[k].type == ')') {
+			if (stack[top-1] != '(') *success = false;
+			stack[top] = '\0';
+			top--;
+		}
+	} 
+	if (*success == false) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
+uint32_t eval(int p, int q, bool* success) {
+  if (p > q) {
+    /* Bad expression */
+	return 0;
+  }
+  else if (p == q) {
+    /* Single token.
+     * For now this token should be a number.
+     * Return the value of the number.
+     */
+	return atoi(tokens[p].str);
+  }
+  else if (check_parentheses(p, q, success) == true) {
+    /* The expression is surrounded by a matched pair of parentheses.
+     * If that is the case, just throw away the parentheses.
+     */
+    return eval(p + 1, q - 1, success);
+  }
+  else {
+    uint32_t op = p; //the position of 主运算符 in the token expression;
+    for (int k = p; k <= q; k++) {
+		switch (tokens[k].type) {
+		case TK_INT: break;
+		case '(':{
+			char stack[32] = "(";
+			printf("%s\n",stack);
+			int top = 0;
+			while (top != -1) {
+				k++;
+				if (tokens[k].type == '(') {
+					top++;
+					stack[top] = '(';
+					stack[top+1] = '\0';
+				}
+				else if (tokens[k].type == ')') {
+					stack[top] = '\0';
+					top--;
+				}
+			}
+			break;
+		}
+		case '+':case '-': op = k;break;
+		case '*':case '/': if (tokens[op].type == '*' || tokens[op].type == '/') op = k;break;
+		default : assert(0);
+		}
+	}
+	uint32_t val1 = eval(p, op - 1,success);
+    uint32_t val2 = eval(op + 1, q,success);
+
+    switch (tokens[op].type) {
+      case '+': return val1 + val2;
+      case '-': return val1 - val2;
+      case '*': return val1 * val2;
+      case '/': return val1 + val2;
+      default: assert(0);
+    }
+  }
+}
+
+
+// wk
+
+
+
+
 word_t expr(char *e, bool *success) {
 	if (!make_token(e)) {
 		*success = false;
@@ -131,6 +223,8 @@ word_t expr(char *e, bool *success) {
 
 	/* TODO: Insert codes to evaluate the expression. */
 	TODO();
-
-	return 0;
+	// wk
+	return eval(0,nr_token-1 ,success);
+	// wk
 }
+
