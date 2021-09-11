@@ -126,7 +126,6 @@ static bool make_token(char *e) {
 // wk
 //
 bool check_parentheses(int p, int q, bool *success) {
-	*success = true;
 	if (tokens[p].type != '(' || tokens[q].type != ')') return false;
 	char stack[32];
 	stack[0] = '*';
@@ -207,6 +206,7 @@ uint32_t eval(int p, int q, bool* success) {
       default: assert(0);
     }
   }
+  if (!*success) return 0;
 }
 
 

@@ -85,7 +85,8 @@ static int cmd_x(char *args){
 // wk: evaluate expressions
 static int cmd_p(char *args) {
 	char *e = strtok(NULL, " ");
-	bool* success = false;
+	bool* success = (bool*)malloc(sizeof(bool));
+	*success = true;
 	uint32_t res = expr(e,success);
 	if (success) {
 		printf("%u\n", res);
@@ -93,6 +94,7 @@ static int cmd_p(char *args) {
 	else {
 		printf("表达式不合法！\n");
 	}
+	free(success);
 	return 0;
 }
 // wk: evaluate expressions
