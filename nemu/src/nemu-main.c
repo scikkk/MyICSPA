@@ -10,16 +10,14 @@ int main(int argc, char *argv[]) {
 	assert(num == 1);
 	printf("%s\n", e);
 	
-	bool* success = (bool*)malloc(2*sizeof(bool));
-	*success = true;
-	uint32_t res = expr(e,success);
-	if (*success) {
+	bool success = true; 
+	uint32_t res = expr(e, &success);
+	if (success) {
 		printf("%u\n", res);
 	}
 	else {
 		printf("表达式不合法！\n");
 	}
-	free(success);
 	
 	return 0;
 }
