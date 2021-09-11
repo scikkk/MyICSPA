@@ -219,7 +219,7 @@ uint32_t eval(int p, int q, bool* success) {
 						top--;
 					} 
 				}
-				k++;// just try
+				// just try
 				free(stack);
 				continue;
 			}
