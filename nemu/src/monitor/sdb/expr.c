@@ -66,7 +66,7 @@ void init_regex() {
 
 typedef struct token {
 	int type;
-	char str[3];
+	char str[32];
 } Token;
 
 static Token tokens[32] __attribute__((used)) = {};
@@ -126,7 +126,7 @@ static bool make_token(char *e) {
 // wk
 //
 bool check_parentheses(int p, int q, bool *success) {
-	if (tokens[p].type != '(' || tokens[q].type != ')') *success = false;
+	if (tokens[p].type != '(' || tokens[q].type != ')') return false;
 	char stack[32];
 	stack[0] = '*';
 	int top = 0;
@@ -137,17 +137,13 @@ bool check_parentheses(int p, int q, bool *success) {
 			stack[top+1] = '\0';
 		}
 		else if (tokens[k].type == ')') {
-			if (stack[top-1] != '(') *success = false;
+			if (stack[top-1] != '(') return false;
 			stack[top] = '\0';
 			top--;
 		}
 	} 
-	if (*success == false) {
-		return false;
-	}
-	else {
-		return true;
-	}
+	return true;
+	
 }
 
 uint32_t eval(int p, int q, bool* success) {
