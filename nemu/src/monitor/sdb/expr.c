@@ -226,7 +226,7 @@ uint32_t eval(int p, int q, bool* success) {
 				case TK_INT:case TK_SIGN_INT: break;
 				case '+':case '-': op = k;break;
 				case '*':case '/': if (tokens[op].type != '+' && tokens[op].type != '-') op = k;break;
-				default : assert(0);
+				default : printf("%d\n",tokens[k].type);assert(0);
 			}
 		}
 		uint32_t val1 = eval(p, op - 1,success);
