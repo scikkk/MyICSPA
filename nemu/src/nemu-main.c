@@ -16,16 +16,14 @@ int main(int argc, char *argv[]) {
 	init_monitor(argc, argv);
 #endif  
 
-	char e[65536] = "";
+	char *e = (char*)malloc(sizeof(char)*65536);
 	//int num = scanf("%s", e);
 	//assert(num == 1);
 	FILE *fpread = fopen("/src/input.txt", "r");
 	FILE *fpwrite = fopen("/src/wkres.txt", "w");
 	assert(fpread != NULL || fpwrite == NULL);
-printf("%s\n", "00000");	
 	for (int k = 0; k < 10; k++) {
-		int num = fscanf(fpread, "%s", e);
-		assert(num == 1);
+		e = fgets(e, 65536, fpread);
 		printf("%s\n", e);
 		bool success = true; 
 		uint32_t oneres = expr(e, &success);
@@ -37,9 +35,9 @@ printf("%s\n", "00000");
 			printf("表达式不合法！\n");
 			fprintf(fpwrite, "%s\n", "Invalid!\0");
 		} 
-	 }
+	}
 	fclose(fpread);
 	fclose(fpwrite);
-	
+	free(e);
 	return 0;
 }
