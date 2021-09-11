@@ -70,8 +70,8 @@ typedef struct token {
 	int type;
 	char str[32];
 } Token;
-
-static Token tokens[32] __attribute__((used)) = {};
+// wk modify len, old: 32
+static Token tokens[30000] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 // wk:  remove a token from tokens  
