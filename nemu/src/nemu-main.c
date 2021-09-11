@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 		bool success = true; 
 		uint32_t oneres = expr(e, &success);
 		if (success) {
-			fprintf(fpwrite, "my: %u\tright: %s\n", oneres, right);
+			fprintf(fpwrite, "my:    %u\nright: %s\n", oneres, right);
 		} 
 		else {
 			printf("表达式不合法！\n");
