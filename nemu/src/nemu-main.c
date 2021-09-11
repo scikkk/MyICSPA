@@ -23,9 +23,9 @@ int main(int argc, char *argv[]) {
 	FILE *fpwrite = fopen("/src/wkres.txt", "w");
 	assert(fpread != NULL || fpwrite == NULL);
 	for (int k = 0; k < 10; k++) {
-		printf("%s\n", e);
+		printf("1:%s\n", e);
 		e = fgets(e, 65536, fpread);
-		printf("%s\n", e);
+		printf("2:%s\n", e);
 		bool success = true; 
 		uint32_t oneres = expr(e, &success);
 		if (success) {
