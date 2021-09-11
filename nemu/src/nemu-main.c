@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 	FILE *fpwrite = fopen("/src/wkres.txt", "w");
 	assert(fpread != NULL || fpwrite == NULL);
 	for (int k = 0; k < 10; k++) {
-		e = fgets(e, 65536, fpread);
+		e = fgets(e, 6536, fpread);
 		printf("%s\n", e);
 		bool success = true; 
 		uint32_t oneres = expr(e, &success);
