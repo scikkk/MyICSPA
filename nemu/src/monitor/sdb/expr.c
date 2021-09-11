@@ -154,27 +154,28 @@ static bool make_token(char *e) {
 
 
 // wk
-bool check_parentheses(int p, int q, bool *success) {
-	if (tokens[p].type != '(' || tokens[q].type != ')') return false;
+bool pure_check_parenthesis(int p, int q) {
 	char stack[32];
-	stack[0] = '*';
-	int top = 0;
-	for (int k = p+1; k < q; k++) {
+	int top = -1;
+	for (int k = p; k <= q; k++) {
 		if (tokens[k].type == '(') { 
 			top++;
 			stack[top] = '(';
 			stack[top+1] = '\0';
 		}
 		else if (tokens[k].type == ')') {
-			if (stack[top] != '(') *success = false;
+			if (stack[top] != '(') return false;
 			stack[top] = '\0';
 			top--;
 		}
 	} 
-	if (top != 0) *success = false;
-	// else *success = true;
-	if (success) return true;
-	else return false;
+	if (top != -1) return false;
+	else return true;
+}
+bool check_parentheses(int p, int q, bool *success) {
+	if (tokens[p].type != '(' || tokens[q].type != ')') return false;
+	*success = pure_check_parenthesis(p+1,q-1);
+	return pure_check_parenthesis(p, q);
 }
 
 uint32_t eval(int p, int q, bool* success) {
