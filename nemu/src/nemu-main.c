@@ -25,9 +25,10 @@ int main(int argc, char *argv[]) {
 	int k = 0;
 	while (fgets(e, sizeof(e), fpread) != NULL && k < 10) {
 		k++;
-		char right[10];
+		char right[100];
 		strtok(e, " ");
 	    strcpy(right, e);
+		printf("%s\n", right);
 		int len = strlen(e);
 		for (int k = 0; k < 65535-len;k++) e[k] = e[k+len+1];
 		bool success = true; 
