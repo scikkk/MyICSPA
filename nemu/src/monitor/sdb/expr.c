@@ -171,8 +171,8 @@ uint32_t eval(int p, int q, bool* success) {
     uint32_t op = p; //the position of 主运算符 in the token expression;
     for (int k = p; k <= q; k++) {
 		if (tokens[k].type == '(') {
-			char stack[32] = "(";
-			printf("%s\n",stack);
+			char *stack =(char*)malloc(32*sizeof(char));
+		   stack[0]	= '(';
 			int top = 0;
 			while (top != -1) {
 				k++;
@@ -184,8 +184,9 @@ uint32_t eval(int p, int q, bool* success) {
 				else if (tokens[k].type == ')') {
 					stack[top] = '\0';
 					top--;
-				}
+				} 
 			}
+			free(stack);
 			continue;
 		}
 		switch (tokens[k].type) {
