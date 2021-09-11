@@ -11,12 +11,12 @@ enum {
 	/* TODO: Add more token types */
 	// wk
 	TK_INT,
-	TK_PLUS,
-	TK_MINUS,
-	TK_MULTIPLY,
-	TK_DIVIDE,
-	TK_LEFT_PARENTHESIS,
-	TK_RIGHT_PARENTHESIS,
+	TK_PLUS = '+',
+	TK_MINUS = '-',
+	TK_MULTIPLY = '*',
+	TK_DIVIDE = '/',
+	TK_LEFT_PARENTHESIS = '(',
+	TK_RIGHT_PARENTHESIS = ')',
 	// wk
 
 };
