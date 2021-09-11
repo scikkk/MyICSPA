@@ -144,7 +144,7 @@ bool check_parentheses(int p, int q, bool *success) {
 		}
 	} 
 	if (top != 0) *success = false;
-	else *success = true;
+	// else *success = true;
 	if (success) return true;
 	else return false;
 }
