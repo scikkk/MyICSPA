@@ -89,11 +89,7 @@ void remove_token(int index) {
 void find_signed_tokens(){
 	for (int k = nr_token - 1; k >= 0; k--) {
 		if (tokens[k].type == '-') {
-			if (k == 0) {
-				remove_token(0);
-				tokens[0].type = TK_SIGN_INT;
-			}
-			else if (tokens[k-1].type != ')' && tokens[k-1].type != TK_INT && tokens[k-1].type != TK_SIGN_INT) {
+			if ((k == 0)||(tokens[k-1].type != ')' && tokens[k-1].type != TK_INT && tokens[k-1].type != TK_SIGN_INT)) {
 				remove_token(k);
 				if (tokens[k].type == TK_INT) tokens[k].type = TK_SIGN_INT;
 				else if (tokens[k].type == TK_SIGN_INT) tokens[k].type = TK_INT;
