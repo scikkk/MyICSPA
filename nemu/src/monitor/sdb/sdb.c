@@ -88,7 +88,7 @@ static int cmd_p(char *args) {
 	bool* success = (bool*)malloc(sizeof(bool));
 	*success = true;
 	uint32_t res = expr(e,success);
-	if (success) {
+	if (*success) {
 		printf("%u\n", res);
 	}
 	else {
