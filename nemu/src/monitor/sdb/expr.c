@@ -174,8 +174,8 @@ bool pure_check_parenthesis(int p, int q) {
 }
 bool check_parentheses(int p, int q, bool *success) {
 	if (tokens[p].type != '(' || tokens[q].type != ')') return false;
-	*success = pure_check_parenthesis(p+1,q-1);
-	return pure_check_parenthesis(p, q);
+	*success = pure_check_parenthesis(p,q);
+	return pure_check_parenthesis(p+1, q-1);
 }
 
 uint32_t eval(int p, int q, bool* success) {
