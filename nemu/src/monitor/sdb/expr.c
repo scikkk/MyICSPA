@@ -191,7 +191,7 @@ uint32_t eval(int p, int q, bool* success) {
 		switch (tokens[k].type) {
 		case TK_INT: break;
 		case '+':case '-': op = k;break;
-		case '*':case '/': if (tokens[op].type == '*' || tokens[op].type == '/') op = k;break;
+		case '*':case '/': if (tokens[op].type != '+' && tokens[op].type != '-') op = k;break;
 		default : assert(0);
 		}
 	}
