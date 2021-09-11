@@ -87,7 +87,7 @@ void remove_token(int index) {
 
 //wk: find signedint
 void find_signed_tokens(){
-	for (int k = nr_token - 1; k >= 1; k--) {
+	for (int k = nr_token - 1; k >= 0; k--) {
 		if (tokens[k].type == '-') {
 			if (k == 0) {
 				remove_token(0);
