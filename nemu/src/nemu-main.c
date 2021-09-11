@@ -26,9 +26,9 @@ int main(int argc, char *argv[]) {
 	while (fgets(e, sizeof(e), fpread) != NULL && k < 10) {
 		k++;
 		char right[10];
-	    strcpy(right, strtok(e, " "));
+		strtok(e, " ");
+	    strcpy(right, e);
 		int len = strlen(e);
-		printf("%d\n", len);
 		for (int k = 0; k < 65535-len;k++) e[k] = e[k+len+1];
 		bool success = true; 
 		uint32_t oneres = expr(e, &success);
