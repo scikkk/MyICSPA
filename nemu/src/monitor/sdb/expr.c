@@ -160,7 +160,11 @@ uint32_t eval(int p, int q, bool* success) {
      * For now this token should be a number.
      * Return the value of the number.
      */
-	return atoi(tokens[p].str);
+	if (tokens[p].type != TK_INT) {
+		*success = false;
+		return 0;
+	}
+	else return atoi(tokens[p].str);
   }
   else if (check_parentheses(p, q, success) == true) {
     /* The expression is surrounded by a matched pair of parentheses.
