@@ -19,8 +19,8 @@ int main(int argc, char *argv[]) {
 	char e[65536] = "";
 	//int num = scanf("%s", e);
 	//assert(num == 1);
-	FILE *fpread = fopen("/input", "r");
-	FILE *fpwrite = fopen("/wkres", "w");
+	FILE *fpread = fopen("input", "r");
+	FILE *fpwrite = fopen("wkres", "w");
 	assert(fpread != NULL || fpwrite == NULL);
 	
 	for (int k = 0; k < 10; k++) {
