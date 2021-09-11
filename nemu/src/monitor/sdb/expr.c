@@ -224,9 +224,9 @@ uint32_t eval(int p, int q, bool* success) {
 				default : printf("%d: %d\n",k,tokens[k].type);assert(0);
 			}
 		}
+printf("%d: %d\n",op,tokens[op].type);
 		uint32_t val1 = eval(p, op - 1,success);
 		uint32_t val2 = eval(op + 1, q,success);
-printf("%d: %d\n",op,tokens[op].type);
 		switch (tokens[op].type) {
 			case '+': return val1 + val2;
 			case '-': return val1 - val2;
