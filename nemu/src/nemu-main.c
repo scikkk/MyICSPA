@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
 	int num = scanf("%s", e);
 	assert(num == 1);
 	printf("%s\n", e);
-	/*
+	
 	bool* success = (bool*)malloc(sizeof(bool));
 	*success = true;
 	uint32_t res = expr(e,success);
@@ -20,6 +20,6 @@ int main(int argc, char *argv[]) {
 		printf("表达式不合法！\n");
 	}
 	free(success);
-	*/
+	
 	return 0;
 }
