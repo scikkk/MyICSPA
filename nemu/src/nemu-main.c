@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 	init_monitor(argc, argv);
 #endif  
 
-	char *e = (char*)malloc(sizeof(char)*65536);
+	char e[65536];
 	//int num = scanf("%s", e);
 	strcpy(e, "44444444444444\0");
 	//assert(num == 1);
@@ -39,6 +39,5 @@ int main(int argc, char *argv[]) {
 	}
 	fclose(fpread);
 	fclose(fpwrite);
-	free(e);
 	return 0;
 }
