@@ -204,23 +204,17 @@ uint32_t eval(int p, int q, bool* success) {
 		uint32_t op = p; //the position of 主运算符 in the token expression;
 		for (int k = p; k <= q; k++) {
 			if (tokens[k].type == '(') {
-				char *stack =(char*)malloc(32*sizeof(char));
-				stack[0]	= '(';
-				int top = 0;
-				while (top != -1) {
+				int top = 1;
+				while (top != 0) {
 					k++;
 					if (tokens[k].type == '(') {
 						top++;
-						stack[top] = '(';
-						stack[top+1] = '\0';
 					}
 					else if (tokens[k].type == ')') {
-						stack[top] = '\0';
 						top--;
 					} 
 				}
 				// just try
-				free(stack);
 				continue;
 			}
 			switch (tokens[k].type) {
