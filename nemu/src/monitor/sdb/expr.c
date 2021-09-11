@@ -126,29 +126,33 @@ static bool make_token(char *e) {
 // wk
 //
 bool check_parentheses(int p, int q, bool *success) {
+	*success = true;
 	if (tokens[p].type != '(' || tokens[q].type != ')') return false;
 	char stack[32];
 	stack[0] = '*';
 	int top = 0;
 	for (int k = p+1; k < q; k++) {
-		if (tokens[k].type == '(') {
+		if (tokens[k].type == '(') { 
 			top++;
 			stack[top] = '(';
 			stack[top+1] = '\0';
 		}
 		else if (tokens[k].type == ')') {
-			if (stack[top-1] != '(') return false;
+			if (stack[top-1] != '(') *success = false;
 			stack[top] = '\0';
 			top--;
 		}
 	} 
-	return true;
-	
+	if (top != 0) *success = false;
+	else *success = true;
+	if (success) return true;
+	else return false;
 }
 
 uint32_t eval(int p, int q, bool* success) {
   if (p > q) {
     /* Bad expression */
+	*success = false;
 	return 0;
   }
   else if (p == q) {
@@ -164,7 +168,7 @@ uint32_t eval(int p, int q, bool* success) {
      */
     return eval(p + 1, q - 1, success);
   }
-  else {
+  else { 
     uint32_t op = p; //the position of 主运算符 in the token expression;
     for (int k = p; k <= q; k++) {
 		if (tokens[k].type == '(') {
