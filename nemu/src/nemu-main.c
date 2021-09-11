@@ -22,9 +22,11 @@ int main(int argc, char *argv[]) {
 	FILE *fpread = fopen("/input", "r");
 	FILE *fpwrite = fopen("/wkres", "w");
 	assert(fpread != NULL || fpwrite == NULL);
+	
 	for (int k = 0; k < 10; k++) {
 		int num = fscanf(fpread, "%s", e);
 		assert(num == 1);
+		printf("%s\n", e);
 		bool success = true; 
 		uint32_t oneres = expr(e, &success);
 		if (success) {
