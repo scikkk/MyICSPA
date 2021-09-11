@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
 	assert(num == 1);
 	printf("%s\n", e);
 	
-	bool* success = (bool*)malloc(sizeof(bool));
+	bool* success = (bool*)malloc(2*sizeof(bool));
 	*success = true;
 	uint32_t res = expr(e,success);
 	if (*success) {
