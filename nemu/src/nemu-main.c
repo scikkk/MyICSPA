@@ -28,6 +28,7 @@ int main(int argc, char *argv[]) {
 		char right[10];
 	    strcpy(right, strtok(e, " "));
 		int len = strlen(e);
+		printf("%d\n", len);
 		for (int k = 0; k < 65535-len;k++) e[k] = e[k+len+1];
 		bool success = true; 
 		uint32_t oneres = expr(e, &success);
