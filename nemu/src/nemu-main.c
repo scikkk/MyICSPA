@@ -16,20 +16,28 @@ int main(int argc, char *argv[]) {
 	init_monitor(argc, argv);
 #endif  
 
-
 	char e[65536] = "";
-	int num = scanf("%s", e);
-	assert(num == 1);
-	printf("%s\n", e);
-
-	bool success = true; 
-	uint32_t res = expr(e, &success);
-	if (success) {
-		printf("%u\n", res);
-	}
-	else {
-		printf("表达式不合法！\n");
-	}
-
+	//int num = scanf("%s", e);
+	//assert(num == 1);
+	FILE *fpread = fopen("/input", "r");
+	FILE *fpwrite = fopen("/wkres", "w");
+	assert(fpread != NULL || fpwrite == NULL);
+	for (int k = 0; k < 10; k++) {
+		int num = fscanf(fpread, "%s", e);
+		assert(num == 1);
+		bool success = true; 
+		uint32_t oneres = expr(e, &success);
+		if (success) {
+			printf("%u\n", oneres);
+			fprintf(fpwrite, "%u\n", oneres);
+		} 
+		else {
+			printf("表达式不合法！\n");
+			fprintf(fpwrite, "%s\n", "Invalid!\0");
+		} 
+	 }
+	fclose(fpread);
+	fclose(fpwrite);
+	
 	return 0;
 }
