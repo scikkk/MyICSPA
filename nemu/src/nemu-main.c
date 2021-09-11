@@ -31,11 +31,9 @@ int main(int argc, char *argv[]) {
 		int len = strlen(e);
 		for (int k = 0; k < 65535-len;k++) e[k] = e[k+len+1];
 		e[strlen(e)-1] = '\0'; //remove '\n'
-		printf("%s\n%s\n", right, e);
 		bool success = true; 
 		uint32_t oneres = expr(e, &success);
 		if (success) {
-			printf("%u\n", oneres);
 			fprintf(fpwrite, "my: %u\tright: %s\n", oneres, right);
 		} 
 		else {
