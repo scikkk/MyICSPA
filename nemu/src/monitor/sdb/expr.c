@@ -11,6 +11,7 @@ enum {
 	/* TODO: Add more token types */
 	// wk
 	TK_INT,
+	TK_SIGN_INT,
 	TK_PLUS = '+',
 	TK_MINUS = '-',
 	TK_MULTIPLY = '*',
@@ -73,6 +74,37 @@ typedef struct token {
 static Token tokens[32] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
+// wk:  remove a token from tokens  
+void remove_token(int index) {
+	for (int k = index; k < nr_token - 1; k++) {
+		tokens[k].type = tokens[k+1].type;
+		strncpy(tokens[k].str,tokens[k+1].str,32);
+	}
+	nr_token--;
+	return;
+}
+// wk: remove a token from tokens
+
+//wk: find signedint
+void find_signed_tokens(){
+	for (int k = nr_token - 1; k >= 1; k--) {
+		if (tokens[k].type == '-') {
+			if (k == 0) {
+				remove_token(0);
+				tokens[0].type = TK_SIGN_INT;
+			}
+			else if (tokens[k-1].type != ')' && tokens[k-1].type != TK_INT) {
+				remove_token(k);
+				tokens[k].type = TK_SIGN_INT;
+				k--;
+			}
+		}
+	}}
+//wk: find signedint
+
+
+
+
 static bool make_token(char *e) {
 	int position = 0;
 	int i;
@@ -125,7 +157,6 @@ static bool make_token(char *e) {
 
 
 // wk
-//
 bool check_parentheses(int p, int q, bool *success) {
 	if (tokens[p].type != '(' || tokens[q].type != ')') return false;
 	char stack[32];
@@ -150,72 +181,70 @@ bool check_parentheses(int p, int q, bool *success) {
 }
 
 uint32_t eval(int p, int q, bool* success) {
-  if (p > q) {
-    /* Bad expression */
-	*success = false;
-	return 0;
-  }
-  else if (p == q) {
-    /* Single token.
-     * For now this token should be a number.
-     * Return the value of the number.
-     */
-	if (tokens[p].type != TK_INT) {
+	if (p > q) {
+		/* Bad expression */
 		*success = false;
 		return 0;
 	}
-	else return atoi(tokens[p].str);
-  }
-  else if (check_parentheses(p, q, success) == true) {
-    /* The expression is surrounded by a matched pair of parentheses.
-     * If that is the case, just throw away the parentheses.
-     */
-    return eval(p + 1, q - 1, success);
-  }
-  else { 
-    uint32_t op = p; //the position of 主运算符 in the token expression;
-    for (int k = p; k <= q; k++) {
-		if (tokens[k].type == '(') {
-			char *stack =(char*)malloc(32*sizeof(char));
-		   stack[0]	= '(';
-			int top = 0;
-			while (top != -1) {
-				k++;
-				if (tokens[k].type == '(') {
-					top++;
-					stack[top] = '(';
-					stack[top+1] = '\0';
-				}
-				else if (tokens[k].type == ')') {
-					stack[top] = '\0';
-					top--;
-				} 
-			}
-			free(stack);
-			continue;
-		}
-		switch (tokens[k].type) {
-		case TK_INT: break;
-		case '+':case '-': op = k;break;
-		case '*':case '/': if (tokens[op].type != '+' && tokens[op].type != '-') op = k;break;
-		default : assert(0);
+	else if (p == q) {
+		/* Single token.
+		 * For now this token should be a number.
+		 * Return the value of the number.
+		 */
+		switch (tokens[p].type) {
+			case TK_INT:  return atoi(tokens[p].str);;break;
+			case TK_SIGN_INT: return -atoi(tokens[p].str);break;
+			default : *success = false; return 0;
 		}
 	}
-	uint32_t val1 = eval(p, op - 1,success);
-    uint32_t val2 = eval(op + 1, q,success);
+	else if (check_parentheses(p, q, success) == true) {
+		/* The expression is surrounded by a matched pair of parentheses.
+		 * If that is the case, just throw away the parentheses.
+		 */
+		return eval(p + 1, q - 1, success);
+	}
+	else { 
+		uint32_t op = p; //the position of 主运算符 in the token expression;
+		for (int k = p; k <= q; k++) {
+			if (tokens[k].type == '(') {
+				char *stack =(char*)malloc(32*sizeof(char));
+				stack[0]	= '(';
+				int top = 0;
+				while (top != -1) {
+					k++;
+					if (tokens[k].type == '(') {
+						top++;
+						stack[top] = '(';
+						stack[top+1] = '\0';
+					}
+					else if (tokens[k].type == ')') {
+						stack[top] = '\0';
+						top--;
+					} 
+				}
+				free(stack);
+				continue;
+			}
+			switch (tokens[k].type) {
+				case TK_INT: break;
+				case '+':case '-': op = k;break;
+				case '*':case '/': if (tokens[op].type != '+' && tokens[op].type != '-') op = k;break;
+				default : assert(0);
+			}
+		}
+		uint32_t val1 = eval(p, op - 1,success);
+		uint32_t val2 = eval(op + 1, q,success);
 
-    switch (tokens[op].type) {
-      case '+': return val1 + val2;
-      case '-': return val1 - val2;
-      case '*': return val1 * val2;
-      case '/': return val1 / val2;
-      default: assert(0);
-    }
-  }
-  if (!*success) return 0;
+		switch (tokens[op].type) {
+			case '+': return val1 + val2;
+			case '-': return val1 - val2;
+			case '*': return val1 * val2;
+			case '/': return val1 / val2;
+			default: assert(0);
+		}
+	}
+	if (!*success) return 0;
 }
-
-
 // wk
 
 
@@ -226,7 +255,7 @@ word_t expr(char *e, bool *success) {
 		*success = false;
 		return 0;
 	}
-
+find_signed_tokens();
 	/* TODO: Insert codes to evaluate the expression. */
 	// TODO();
 	// wk
