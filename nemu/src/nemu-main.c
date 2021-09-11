@@ -5,7 +5,7 @@
 word_t expr(char *e, bool *success);
 
 int main(int argc, char *argv[]) {   
-	char *e = "";
+	char e[65536] = "";
 	int num = scanf("%s", e);
 	assert(num == 1);
 	printf("%s\n", e);
