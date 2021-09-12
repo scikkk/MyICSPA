@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 	FILE *fpwrite = fopen("wkres.txt", "w");
 	assert(fpread != NULL || fpwrite == NULL);
 	int k = 0;
-	while (fgets(e, sizeof(e), fpread) != NULL && k < 20) {
+	while (fgets(e, sizeof(e), fpread) != NULL && k < 99) {
 		k++;
 		char right[100];
 		strtok(e, " ");
@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
 		} 
 		else {
 			printf("表达式不合法！\n");
-			fprintf(fpwrite, "%s\n", "Invalid!\0");
+			fprintf(fpwrite, "line %d: %s\n",k, "Invalid!\0");
 		} 
 	}
 	fclose(fpread);
