@@ -37,7 +37,6 @@ int main(int argc, char *argv[]) {
 			fprintf(fpwrite, "my:    %-10u\tright: %s\n", oneres, right);
 		} 
 		else {
-			printf("表达式不合法！\n");
 			fprintf(fpwrite, "line %d: %s\n",k, "Invalid!\0");
 		} 
 	}
