@@ -25,16 +25,17 @@ int main(int argc, char *argv[]) {
 	int k = 0;
 	while (fgets(e, sizeof(e), fpread) != NULL && k < 99) {
 		k++;
-		char right[100];
+		char right[100],oneres[100];
 		strtok(e, " ");
 		strcpy(right, e);
 		int len = strlen(e);
 		for (int k = 0; k < 65535-len;k++) e[k] = e[k+len+1];
 		e[strlen(e)-1] = '\0'; //remove '\n'
 		bool success = true; 
-		uint32_t oneres = expr(e, &success);
-		if (success) {
-			fprintf(fpwrite, "my:    %-10u\tright: %s\n", oneres, right);
+		uint32_t oneres_uint = expr(e, &success);
+		sprintf(oneres,"%u",oneres_uint);
+		if (success && strcmp(oneres, right)!=0) {
+			fprintf(fpwrite, "my:    %-10s\tright: %s\n", oneres, right);
 		} 
 		else {
 			fprintf(fpwrite, "line %d: %s\n",k, "Invalid!\0");
