@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
 		uint32_t oneres_uint = expr(e, &success);
 		sprintf(oneres,"%u",oneres_uint);
 		if (success && strcmp(oneres, right)!=0) {
-			fprintf(fpwrite, "my:    %-10s\tright: %s\n", oneres, right);
+			fprintf(fpwrite, "Line: %d   %-10s\tright: %s\n",k, oneres, right);
 		} 
 		else {
 			fprintf(fpwrite, "line %d: Invalid!\tright: %s\n",k,right);
