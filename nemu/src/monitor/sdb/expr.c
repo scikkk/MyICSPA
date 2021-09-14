@@ -207,14 +207,9 @@ uint32_t eval(int p, int q, bool* success) {
 				int top = 1;
 				while (top != 0) {
 					k++;
-					if (tokens[k].type == '(') {
-						top++;
-					}
-					else if (tokens[k].type == ')') {
-						top--;
-					} 
+					if (tokens[k].type == '(') top++;
+					else if (tokens[k].type == ')') top--;
 				}
-				// just try
 				continue;
 			}
 			switch (tokens[k].type) {
