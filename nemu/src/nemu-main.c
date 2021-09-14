@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
 			fprintf(fpwrite, "my:    %-10s\tright: %s\n", oneres, right);
 		} 
 		else {
-			fprintf(fpwrite, "line %d: %s\n",k, "Invalid!\0");
+			fprintf(fpwrite, "line %d: %s\t%s\n",k, "Invalid!\0",right);
 		} 
 	}
 	fclose(fpread);
