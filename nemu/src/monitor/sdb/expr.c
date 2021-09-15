@@ -18,6 +18,11 @@ enum {
 	TK_DIVIDE = '/',
 	TK_LEFT_PARENTHESIS = '(',
 	TK_RIGHT_PARENTHESIS = ')',
+	TK_HEX,
+	TK_REG = '$',
+	TK_NEQ,
+	TK_AND,
+	TK_POINTER,
 	// wk
 
 };
@@ -74,6 +79,11 @@ typedef struct token {
 static Token tokens[65535] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
+bool is_num(Token tk) {
+	if (tk.type=='('||tk.type == TK_INT||tk.type==TK_SIGN_INT||tk.type==TK_POINTER) 
+		return true;
+	return false;
+}
 // wk:  remove a token from tokens  
 void remove_token(int index) {
 	for (int k = index; k < nr_token - 1; k++) {
@@ -89,18 +99,30 @@ void remove_token(int index) {
 void find_signed_tokens(){
 	for (int k = nr_token - 1; k >= 0; k--) {
 		if (tokens[k].type == '-') {
-			if ((k == 0)||(tokens[k-1].type != ')' && tokens[k-1].type != TK_INT && tokens[k-1].type != TK_SIGN_INT)) {
+			if ((k == 0)||is_num(tokens[k-1])) {
 				remove_token(k);
 				if (tokens[k].type == TK_INT) tokens[k].type = TK_SIGN_INT;
 				else if (tokens[k].type == TK_SIGN_INT) tokens[k].type = TK_INT;
 				k++;
 			}
 		}
-	}}
+	}
+}
 //wk: find signedint
 
 
-
+void find_pointer_tokens(){
+	for (int k = nr_token - 1; k >= 0; k--) {
+		if (tokens[k].type == '*') {
+			if ((k == 0)||is_num(tokens[k-1])) {
+				remove_token(k);
+				tokens[k].type = TK_POINTER;
+				
+				k++;
+			}
+		}
+	}
+}
 
 static bool make_token(char *e) {
 	int position = 0;
