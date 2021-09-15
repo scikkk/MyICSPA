@@ -235,7 +235,7 @@ uint32_t eval(int p, int q, bool* success) {
 				continue;
 			}
 			switch (tokens[k].type) {
-				case TK_INT:case TK_SIGN_INT: break;
+				case TK_INT:case TK_SIGN_INT:case TK_REG: break;
 				case '+':case '-': op = k;break;
 				case '*':case '/': if (tokens[op].type != '+' && tokens[op].type != '-') op = k;break;
 				default : printf("bad do on %d: %d\n",k,tokens[k].type);assert(0);
