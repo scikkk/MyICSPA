@@ -162,7 +162,7 @@ static bool make_token(char *e) {
 								 tokens[nr_token].type = rules[i].token_type;
 							 nr_token++;
 							 break;
-			
+					default :assert(0);	
 				}
 				break;
 			}
