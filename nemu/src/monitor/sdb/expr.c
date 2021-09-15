@@ -38,7 +38,7 @@ static struct rule {
 	 */
 
 	{" +", TK_NOTYPE},    // spaces
-	{"0[x|X][0-9]+",TK_HEX}, //hexadecimal
+	{"0[x|X][0-9a-f]+",TK_HEX}, //hexadecimal
 	{"\\+", TK_PLUS},         // plus
 	{"==", TK_EQ},        // equal
 	// wk
