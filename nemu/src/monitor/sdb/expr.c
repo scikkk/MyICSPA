@@ -153,11 +153,16 @@ static bool make_token(char *e) {
 					case TK_NOTYPE: break;
 					case TK_REG : strncpy(tokens[nr_token].str,substr_start+1,substr_len);
 								 tokens[nr_token].str[substr_len] = '\0';
+								  tokens[nr_token].type = rules[i].token_type;
+							 nr_token++;
+							 break;
 
 					case TK_INT: strncpy(tokens[nr_token].str,substr_start,substr_len);
 								 tokens[nr_token].str[substr_len] = '\0';
-					default: tokens[nr_token].type = rules[i].token_type;
+								 tokens[nr_token].type = rules[i].token_type;
 							 nr_token++;
+							 break;
+			
 				}
 				break;
 			}
