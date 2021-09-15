@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 	FILE *fpwrite = fopen("wkres.txt", "w");
 	assert(fpread != NULL || fpwrite == NULL);
 	int k = 0;
-	while (fgets(e, sizeof(e), fpread) != NULL && k < 99) {
+	while (fgets(e, sizeof(e), fpread) != NULL && k < 999) {
 		k++;
 		char right[100],oneres[100];
 		strtok(e, " ");
