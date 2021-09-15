@@ -154,7 +154,7 @@ static bool make_token(char *e) {
 					case TK_NOTYPE: break;
 case TK_HEX:strncpy(tokens[nr_token].str,substr_start+2,substr_len);
 								 tokens[nr_token].str[substr_len-2] = '\0';
-								  tokens[nr_token].type = TK_REG;
+								  tokens[nr_token].type = TK_HEX;
 							 nr_token++;
 break;
 					case TK_REG : strncpy(tokens[nr_token].str,substr_start+1,substr_len);
