@@ -80,9 +80,9 @@ static Token tokens[65535] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 bool is_num(Token tk) {
-	if (tk.type=='('||tk.type == TK_INT||tk.type==TK_SIGN_INT||tk.type==TK_POINTER) 
+	if (tk.type==')'||tk.type == TK_INT||tk.type==TK_SIGN_INT||tk.type==TK_POINTER) 
 		return true;
-	return false;
+	else return false;
 }
 // wk:  remove a token from tokens  
 void remove_token(int index) {
