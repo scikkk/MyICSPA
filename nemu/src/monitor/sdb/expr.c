@@ -6,26 +6,23 @@
 #include <regex.h>
 
 enum {
-	TK_NOTYPE = 256, TK_EQ,
-
 	/* TODO: Add more token types */
-	// wk
-	
 	TK_INT,
+	TK_EQ,
+	TK_NEQ,
+	TK_AND,
+	TK_OR,
+	TK_POINTER,
 	TK_SIGN_INT,
+	TK_NOTYPE = 256, 
+	TK_DIVIDE = '/',
+	TK_MULTIPLY = '*',
 	TK_PLUS = '+',
 	TK_MINUS = '-',
-	TK_MULTIPLY = '*',
-	TK_DIVIDE = '/',
 	TK_LEFT_PARENTHESIS = '(',
 	TK_RIGHT_PARENTHESIS = ')',
 	TK_HEX = 'X',
 	TK_REG = '$',
-	TK_NEQ,
-	TK_AND,
-	TK_POINTER,
-	// wk
-
 };
 
 static struct rule {
@@ -43,6 +40,9 @@ static struct rule {
 	{"0[x|X][0-9a-fA-F]+",TK_HEX}, //hexadecimal
 	{"\\$[A-Za-z0-9]+", TK_REG},
 	{"==", TK_EQ},        // equal
+	{"&&", TK_AND},
+	{"||",TK_OR},
+	{"!=", TK_NEQ},
 	{"\\+", TK_PLUS},         // plus
 	{"-", TK_MINUS},           // minus
 	{"\\*", TK_MULTIPLY},         // multiply
@@ -51,6 +51,9 @@ static struct rule {
 	// 负号
 	// wk
 };
+
+//wk add
+
 
 #define NR_REGEX ARRLEN(rules)
 
@@ -120,8 +123,8 @@ void find_pointer_tokens(){
 				remove_token(k);
 				tokens[k].type = TK_POINTER;
 				k++;
-	 		}
-	 	}
+			}
+		}
 	} 
 }
 
@@ -151,24 +154,24 @@ static bool make_token(char *e) {
 				// wk
 				switch (rules[i].token_type) {
 					case TK_NOTYPE: break;
-case TK_HEX:strncpy(tokens[nr_token].str,substr_start+2,substr_len);
-								 tokens[nr_token].str[substr_len-2] = '\0';
-								  tokens[nr_token].type = TK_HEX;
-							 nr_token++;
-break;
+					case TK_HEX:strncpy(tokens[nr_token].str,substr_start+2,substr_len);
+								tokens[nr_token].str[substr_len-2] = '\0';
+								tokens[nr_token].type = TK_HEX;
+								nr_token++;
+								break;
 					case TK_REG : strncpy(tokens[nr_token].str,substr_start+1,substr_len);
-								 tokens[nr_token].str[substr_len-1] = '\0';
+								  tokens[nr_token].str[substr_len-1] = '\0';
 								  tokens[nr_token].type = TK_REG;
-							 nr_token++;
-							 break;
+								  nr_token++;
+								  break;
 
 					case TK_INT: strncpy(tokens[nr_token].str,substr_start,substr_len);
 								 tokens[nr_token].str[substr_len] = '\0';
 								 tokens[nr_token].type = TK_INT;
-							 nr_token++;
-							 break;
+								 nr_token++;
+								 break;
 					default :		 tokens[nr_token].type = rules[i].token_type;
-							 nr_token++;
+									 nr_token++;
 				}
 				break;
 			}
@@ -246,10 +249,23 @@ uint32_t eval(int p, int q, bool* success) {
 				}
 				continue;
 			}
+			int optype = tokens[op].type;
 			switch (tokens[k].type) {
-				case TK_INT:case TK_SIGN_INT:case TK_REG:case TK_HEX: break;
-				case TK_EQ:case '+':case '-': op = k;break;
-				case '*':case '/': if (tokens[op].type != '+' && tokens[op].type != '-') op = k;break;
+				case TK_INT:case TK_SIGN_INT:case TK_REG:case TK_HEX: 
+					break;
+				case TK_OR: op = k; break;
+				case TK_AND:if (optype != TK_OR) {op = k;}break;
+				case TK_NEQ:case TK_EQ:
+								if(optype!=TK_OR && optype!=TK_AND) {op = k;}
+								break;
+				case '+': case '-':
+								if(optype!=TK_OR && optype!=TK_AND && optype!=TK_NEQ && optype!=TK_EQ)   
+								{op = k;}
+								break;
+				case '*':case '/': 
+								if (optype!=TK_OR && optype!=TK_AND && optype!=TK_NEQ && optype!=TK_EQ && optype != '+' && tokens[op].type != '-') 
+								{op = k;}
+								break;
 				default : printf("bad do on %d: %d\n",k,tokens[k].type);assert(0);
 			}
 		}
@@ -257,11 +273,13 @@ uint32_t eval(int p, int q, bool* success) {
 		uint32_t val2 = eval(op + 1, q,success);
 		switch (tokens[op].type) {
 			case TK_EQ :return val1 == val2;
+			case TK_NEQ:return val1 != val2;
+			case TK_AND:return val1 && val2;
 			case '+': return val1 + val2;
 			case '-': return val1 - val2;
 			case '*': return val1 * val2;
 			case '/': if (val2 == 0) {*success = false; return 0;}
-					else return val1 / val2;
+						  else return val1 / val2;
 			default: printf("op=%d\ntokens[op].str=%s\n",op,tokens[op].str);assert(0);
 		}
 	}
@@ -277,8 +295,8 @@ word_t expr(char *e, bool *success) {
 		*success = false;
 		return 0;
 	}
-find_signed_tokens();
-find_pointer_tokens();
+	find_signed_tokens();
+	find_pointer_tokens();
 	/* TODO: Insert codes to evaluate the expression. */
 	// TODO();
 	// wk
