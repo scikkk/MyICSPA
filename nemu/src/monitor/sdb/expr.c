@@ -224,7 +224,7 @@ uint32_t eval(int p, int q, bool* success) {
 		switch (tokens[p].type) {
 			case TK_INT:  return atoi(tokens[p].str);;break;
 			case TK_SIGN_INT: return -atoi(tokens[p].str);break;
-			case TK_HEX: {char *rest;uint32_t res =  strtoul(tokens[p].str,&rest,16);assert(str(rest) == 0);return res;break;}
+			case TK_HEX: {char *rest;uint32_t res =  strtoul(tokens[p].str,&rest,16);assert(strlen(rest) == 0);return res;break;}
 			case TK_REG: return isa_reg_str2val(tokens[p].str,success);break;
 			default : *success = false; return 0;
 		}
