@@ -4,6 +4,11 @@
 #include <time.h>
 #include <assert.h>
 #include <string.h>
+#include<unistd.h>
+#include<errno.h>
+#include<sys/wait.h>
+#include<signal.h>
+#include<sys/types.h>
 
 // this should be enough
 static char buf[65536] = {};
@@ -11,7 +16,7 @@ static char code_buf[65536 + 128] = {}; // a little larger than `buf`
 static char *code_format =
 "#include <stdio.h>\n"
 "int main() { "
-"  unsigned result = %s; "
+"  unsigned int result = %s; "
 "  printf(\"%%u\", result); "
 "  return 0; "
 "}";
@@ -24,7 +29,7 @@ uint32_t choose(uint32_t up_bound) {
 
 // wk: add 
 void add_space() {
-	int len = choose(10);
+	int len = choose(6);
 	for (int k = 0; k < len; k++ ) strcat(buf, " \0");
 }
 void add_num() {
@@ -33,7 +38,7 @@ void add_num() {
 	strcat(buf, num);
 }
 void add_op() {
-	switch (choose(4)) {
+	switch (choose(4))  {
 		case 0:strcat(buf,"+\0"); break;
 		case 1:strcat(buf,"-\0"); break;
 		case 2:strcat(buf,"*\0"); break;
@@ -84,29 +89,37 @@ int main(int argc, char *argv[]) {
 		buf[0] = '\0';
 		// wk add
 		gen_rand_expr();
+
 		// 格式化输入到code_buf
 		sprintf(code_buf, code_format, buf);
+		
 		// 将code_buf写入文件
 		FILE *fp = fopen("/tmp/.code.c", "w");
 		assert(fp != NULL);
 		fputs(code_buf, fp);
 		fclose(fp);
+		
 		// 编译刚刚创建的C文件
-		int ret = system("gcc /tmp/.code.c -o /tmp/.expr");
+		// old: int ret = system("gcc /tmp/.code.c -o /tmp/.expr");
+		int ret = system("gcc -Wall -Werror /tmp/.code.c -o /tmp/.expr");
 		if (ret != 0) continue;
+		
 		// 运行编译后的可执行文件，获取输出
 		fp = popen("/tmp/.expr", "r");
 		assert(fp != NULL);
+		
 		// 将输出转为整数，存入result
-		int result;
+		uint32_t result;
 		// edited by wk
 		// old: fscanf(fp, "%d", &result);
-		int nums = fscanf(fp, "%d", &result);
+		int nums = fscanf(fp, "%u", &result);
 		assert(nums != 0);
-		// deited by wk
-		pclose(fp);
+		// eited by wk
+		int status = pclose(fp);
+		
 		// 打印结果
-		printf("%u %s\n", result, buf);
+		if (WIFEXITED(status)) // a line added by wk
+			printf("%u %s\n", result, buf);
 	}
 	return 0;
 }
