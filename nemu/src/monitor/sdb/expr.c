@@ -46,7 +46,7 @@ static struct rule {
 	{"\\(", TK_LEFT_PARENTHESIS},          // left parenthesis
 	{"\\)", TK_RIGHT_PARENTHESIS},          // right parenthesis
 	{"[1-9][0-9]*|0", TK_INT},   // integral
-	{"\\$[A-Za-z0-9]+$", TK_REG},
+	{"\\$[A-Za-z0-9]+", TK_REG},
 	// 负号
 	// wk
 };
