@@ -118,7 +118,6 @@ void find_pointer_tokens(){
 			if ((k == 0)||!is_num(tokens[k-1])) {
 				remove_token(k);
 				tokens[k].type = TK_POINTER;
-				
 				k++;
 	 		}
 	 	}
@@ -271,6 +270,7 @@ word_t expr(char *e, bool *success) {
 		return 0;
 	}
 find_signed_tokens();
+find_pointer_tokens();
 	/* TODO: Insert codes to evaluate the expression. */
 	// TODO();
 	// wk
