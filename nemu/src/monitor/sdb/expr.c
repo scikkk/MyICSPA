@@ -46,6 +46,7 @@ static struct rule {
 	{"\\(", TK_LEFT_PARENTHESIS},          // left parenthesis
 	{"\\)", TK_RIGHT_PARENTHESIS},          // right parenthesis
 	{"[1-9][0-9]*|0", TK_INT},   // integral
+	{"\\$[A-Za-z]+", TK_REG},
 	// 负号
 	// wk
 };
@@ -149,13 +150,10 @@ static bool make_token(char *e) {
 
 				// wk
 				switch (rules[i].token_type) {
-					//	case '+': tokens[nr_token].type = '+';break;
-					//	case '-': tokens[nr_token].type = '-';break;
-					//	case '*': tokens[nr_token].type = '*';break;
-					//	case '/': tokens[nr_token].type = '/';break;
-					//	case '(': tokens[nr_token].type = '(';break;
-					//	case ')': tokens[nr_token].type = ')';break;
 					case TK_NOTYPE: break;
+					case TK_REG : strncpy(tokens[nr_token].str,substr_start+1,substr_len);
+								 tokens[nr_token].str[substr_len] = '\0';
+
 					case TK_INT: strncpy(tokens[nr_token].str,substr_start,substr_len);
 								 tokens[nr_token].str[substr_len] = '\0';
 					default: tokens[nr_token].type = rules[i].token_type;
@@ -214,6 +212,7 @@ uint32_t eval(int p, int q, bool* success) {
 		switch (tokens[p].type) {
 			case TK_INT:  return atoi(tokens[p].str);;break;
 			case TK_SIGN_INT: return -atoi(tokens[p].str);break;
+			case TK_REG: return isa_reg_str2val(tokens[p].str,success);break;
 			default : *success = false; return 0;
 		}
 	}
