@@ -17,8 +17,13 @@ void isa_reg_display() {
 }
 
 word_t isa_reg_str2val(const char *s, bool *success) {
-  for (int k = 0; k < 32; k++){
-  if (strcmp(s,regs[k]) == 0) return gpr(k);
+	char ss[5];
+strcpy(ss,s);
+	for (int k = 0; ss[k] != '\0'; k++){
+	if(ss[k] <= 'Z') ss[k]+=32;
+	}
+  for (int k = 0; k < 32; k++) {
+  if (strcmp(ss,regs[k]) == 0) return gpr(k);
   }
   *success = false;
 	return -1;
