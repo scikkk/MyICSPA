@@ -255,7 +255,7 @@ uint32_t eval(int p, int q, bool* success) {
 			case '*': return val1 * val2;
 			case '/': if (val2 == 0) {*success = false; return 0;}
 					else return val1 / val2;
-			default: assert(0);
+			default: printf("tokens[op].str=%s\n",tokens[op].str);assert(0);
 		}
 	}
 	if (!*success) return 0;
