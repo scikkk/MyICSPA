@@ -38,17 +38,16 @@ static struct rule {
 	 */
 
 	{" +", TK_NOTYPE},    // spaces
+	{"\\(", TK_LEFT_PARENTHESIS},          // left parenthesis
+	{"\\)", TK_RIGHT_PARENTHESIS},          // right parenthesis
 	{"0[x|X][0-9a-fA-F]+",TK_HEX}, //hexadecimal
-	{"\\+", TK_PLUS},         // plus
+	{"\\$[A-Za-z0-9]+", TK_REG},
 	{"==", TK_EQ},        // equal
-	// wk
+	{"\\+", TK_PLUS},         // plus
 	{"-", TK_MINUS},           // minus
 	{"\\*", TK_MULTIPLY},         // multiply
 	{"/", TK_DIVIDE},           // divide
-	{"\\(", TK_LEFT_PARENTHESIS},          // left parenthesis
-	{"\\)", TK_RIGHT_PARENTHESIS},          // right parenthesis
 	{"[1-9][0-9]*|0", TK_INT},   // integral
-	{"\\$[A-Za-z0-9]+", TK_REG},
 	// 负号
 	// wk
 };
@@ -249,7 +248,7 @@ uint32_t eval(int p, int q, bool* success) {
 			}
 			switch (tokens[k].type) {
 				case TK_INT:case TK_SIGN_INT:case TK_REG:case TK_HEX: break;
-				case '+':case '-': op = k;break;
+				case TK_EQ:case '+':case '-': op = k;break;
 				case '*':case '/': if (tokens[op].type != '+' && tokens[op].type != '-') op = k;break;
 				default : printf("bad do on %d: %d\n",k,tokens[k].type);assert(0);
 			}
@@ -257,6 +256,7 @@ uint32_t eval(int p, int q, bool* success) {
 		uint32_t val1 = eval(p, op - 1,success);
 		uint32_t val2 = eval(op + 1, q,success);
 		switch (tokens[op].type) {
+			case TK_EQ :return val1 == val2;
 			case '+': return val1 + val2;
 			case '-': return val1 - val2;
 			case '*': return val1 * val2;
