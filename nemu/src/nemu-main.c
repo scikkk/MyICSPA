@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 	FILE *fpwrite = fopen("wkres.txt", "w");
 	assert(fpread != NULL || fpwrite == NULL);
 	int k = 0;
-	while (fgets(e, sizeof(e), fpread) != NULL && k < 999) {
+	while (fgets(e, sizeof(e), fpread) != NULL && k < 9) {
 		k++;
 		char right[100],oneres[100];
 		strtok(e, " ");
@@ -36,10 +36,10 @@ int main(int argc, char *argv[]) {
 		sprintf(oneres,"%u",oneres_uint);
 		if (success) {
 			if( strcmp(oneres, right)!=0) 
-				fprintf(fpwrite, "Line %d: %-10s\tright: %s\n",k, oneres, right);
+				fprintf(fpwrite, "Line %d: %-10s\tright: %s\tlen: %ld\n",k, oneres, right,strlen(e));
 		} 
-		else {
-			fprintf(fpwrite, "Line %d: Invalid!\tright: %s\n",k,right);
+		else { 
+			fprintf(fpwrite, "Line %d: Invalid!\tright: %s\tlen: %ld\n",k,right,strlen(e));
 		} 
 	}
 	fclose(fpread);
