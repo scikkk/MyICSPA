@@ -99,7 +99,7 @@ void remove_token(int index) {
 void find_signed_tokens(){
 	for (int k = nr_token - 1; k >= 0; k--) {
 		if (tokens[k].type == '-') {
-			if ((k == 0)||is_num(tokens[k-1])) {
+			if ((k == 0)||!is_num(tokens[k-1])) {
 				remove_token(k);
 				if (tokens[k].type == TK_INT) tokens[k].type = TK_SIGN_INT;
 				else if (tokens[k].type == TK_SIGN_INT) tokens[k].type = TK_INT;
@@ -114,14 +114,14 @@ void find_signed_tokens(){
 void find_pointer_tokens(){
 	for (int k = nr_token - 1; k >= 0; k--) {
 		if (tokens[k].type == '*') {
-			if ((k == 0)||is_num(tokens[k-1])) {
+			if ((k == 0)||!is_num(tokens[k-1])) {
 				remove_token(k);
 				tokens[k].type = TK_POINTER;
 				
 				k++;
-			}
-		}
-	}
+	 		}
+	 	}
+	} 
 }
 
 static bool make_token(char *e) {
