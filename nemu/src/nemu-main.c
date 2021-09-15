@@ -36,10 +36,10 @@ int main(int argc, char *argv[]) {
 		sprintf(oneres,"%u",oneres_uint);
 		if (success) {
 			if( strcmp(oneres, right)!=0) 
-				fprintf(fpwrite, "Line %d: %-10s\tright: %s\tlen: %ld\n",k, oneres, right,strlen(e));
+				fprintf(fpwrite, "Line %d: %-10s\tright: %-10s\tlen: %ld\n",k, oneres, right,strlen(e));
 		} 
 		else { 
-			fprintf(fpwrite, "Line %d: Invalid!\tright: %s\tlen: %ld\n",k,right,strlen(e));
+			fprintf(fpwrite, "Line %d: Invalid!\tright: %-10s\tlen: %ld\n",k,right,strlen(e));
 		} 
 	}
 	fclose(fpread);
