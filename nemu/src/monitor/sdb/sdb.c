@@ -92,7 +92,7 @@ static int cmd_p(char *args) {
 		printf("%u\n", res);
 	}
 	else {
-		printf("表达式不合法！\n");
+		printf("Invalid expression！\n");
 	}
 	free(success);
 	return 0;
