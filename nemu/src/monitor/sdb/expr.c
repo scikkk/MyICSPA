@@ -10,6 +10,7 @@ enum {
 
 	/* TODO: Add more token types */
 	// wk
+	
 	TK_INT,
 	TK_SIGN_INT,
 	TK_PLUS = '+',
@@ -18,7 +19,7 @@ enum {
 	TK_DIVIDE = '/',
 	TK_LEFT_PARENTHESIS = '(',
 	TK_RIGHT_PARENTHESIS = ')',
-	TK_HEX,
+	TK_HEX = 'X',
 	TK_REG = '$',
 	TK_NEQ,
 	TK_AND,
@@ -37,6 +38,7 @@ static struct rule {
 	 */
 
 	{" +", TK_NOTYPE},    // spaces
+	{"0[x|X]\\d+"}, //hexadecimal
 	{"\\+", TK_PLUS},         // plus
 	{"==", TK_EQ},        // equal
 	// wk
@@ -150,6 +152,11 @@ static bool make_token(char *e) {
 				// wk
 				switch (rules[i].token_type) {
 					case TK_NOTYPE: break;
+case TK_HEX:strncpy(tokens[nr_token].str,substr_start+2,substr_len);
+								 tokens[nr_token].str[substr_len-2] = '\0';
+								  tokens[nr_token].type = TK_REG;
+							 nr_token++;
+break;
 					case TK_REG : strncpy(tokens[nr_token].str,substr_start+1,substr_len);
 								 tokens[nr_token].str[substr_len-1] = '\0';
 								  tokens[nr_token].type = TK_REG;
@@ -217,6 +224,7 @@ uint32_t eval(int p, int q, bool* success) {
 		switch (tokens[p].type) {
 			case TK_INT:  return atoi(tokens[p].str);;break;
 			case TK_SIGN_INT: return -atoi(tokens[p].str);break;
+			case TK_HEX: {char *rest;uint32_t res =  strtoul(tokens[p].str,&rest,16);assert(str(rest) == 0);return res;break;}
 			case TK_REG: return isa_reg_str2val(tokens[p].str,success);break;
 			default : *success = false; return 0;
 		}
