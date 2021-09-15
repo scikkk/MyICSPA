@@ -81,7 +81,7 @@ static Token tokens[65535] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 bool is_num(Token tk) {
-	if (tk.type==')'||tk.type == TK_INT||tk.type==TK_SIGN_INT||tk.type==TK_POINTER) 
+	if (tk.type==')'||tk.type == TK_INT||tk.type==TK_SIGN_INT||tk.type==TK_POINTER||tk.type==TK_REG) 
 		return true;
 	else return false;
 }
