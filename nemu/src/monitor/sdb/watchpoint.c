@@ -3,12 +3,12 @@
 #define NR_WP 32
 
 typedef struct watchpoint {
-  int NO;
-  struct watchpoint *next;
+	int NO;
+	struct watchpoint *next;
 
-  /* TODO: Add more members if necessary */
-  char expr[32];
-  struct watchpoint *prev;
+	/* TODO: Add more members if necessary */
+	char expr[32];
+	struct watchpoint *prev;
 
 } WP;
 
@@ -16,15 +16,15 @@ static WP wp_pool[NR_WP] = {};
 static WP *head = NULL, *tail = NULL, *free_ = NULL;
 
 void init_wp_pool() {
-  int i;
-  for (i = 0; i < NR_WP; i ++) {
-    wp_pool[i].NO = i;
-    wp_pool[i].next = &wp_pool[i + 1];
-  }
-  wp_pool[NR_WP - 1].next = NULL;
+	int i;
+	for (i = 0; i < NR_WP; i ++) {
+		wp_pool[i].NO = i;
+		wp_pool[i].next = &wp_pool[i + 1];
+	}
+	wp_pool[NR_WP - 1].next = NULL;
 
-  head = NULL;
-  free_ = wp_pool;
+	head = NULL;
+	free_ = wp_pool;
 }
 
 /* TODO: Implement the functionality of watchpoint */
@@ -53,24 +53,36 @@ void new_wp(const char* expr){
 	return ;
 }
 void free_wp(int wp_no){
-if (head==NULL){printf("No watchpoint.\n");return;}
+	if (head==NULL){printf("No watchpoint.\n");return;}
 	WP *wp = head;
+	if (wp_no == -1){
+		while(wp != NULL){
+		printf("Successfully delete watchpoint number %d.\n",wp->NO);
+		wp = wp->next;
+		}
+		tail->next = free_;
+		free_->prev = tail;
+		free_ = head;
+		head = NULL;
+		tail = NULL;
+		return ;
+	}
 	while ( wp->NO != wp_no) {
 
 		wp = wp->next;
 		if (wp == NULL) {printf("No watchpoint number %d.\n",wp_no);return;}
 	}
 	if (wp->next == wp->prev){
-	head = NULL;
-	head = NULL;
+		head = NULL;
+		head = NULL;
 	}
 	else if (wp->prev==NULL){
 		head = wp->next;
 		head->prev = NULL;
 	} 
 	else if(wp->next==NULL){
-	tail = wp->prev;
-	tail->next=NULL;
+		tail = wp->prev;
+		tail->next=NULL;
 	}
 	else{
 		wp->prev->next = wp->next;
@@ -78,8 +90,8 @@ if (head==NULL){printf("No watchpoint.\n");return;}
 		wp->next=free_;
 	}
 	wp->next = free_;
-		free_->prev=wp;
-		free_=free_->prev;
-		printf("Successfully delete watchpoint number %d.\n",wp_no);
+	free_->prev=wp;
+	free_=free_->prev;
+	printf("Successfully delete watchpoint number %d.\n",wp_no);
 	return ;	
 }

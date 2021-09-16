@@ -112,8 +112,13 @@ static int cmd_w(char *args) {
 	return 0;
 }
 static int cmd_d(char *args) {
-	int N = atoi(strtok(NULL, " "));
-	free_wp(N);
+	char* num_s = strtok(NULL," ");
+	if (num_s == NULL) free_wp(-1);
+	while(num_s != NULL)  {	
+		int num = atoi(num_s);
+		free_wp(num);
+		num_s = strtok(NULL, " ");
+	}
 	return 0;
 }
 // wk: watchpointers
@@ -127,12 +132,12 @@ static struct {
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
 	/* TODO: Add more commands */
-	{ "si", "Let the program step through N instructions and then pause execution, When N is not given, it defaults to 1", cmd_si}, //wk
+	{ "si", "Let the program step through N instructions and then pause execution\nUsage: si [N] \nWhen N is not given, it defaults to 1\n", cmd_si}, //wk
 	{"info", "Print register status", cmd_info}, //wk
-	{"x", "Find the value of the expression EXPR, use the result as the starting memory address, and output N consecutive 4 bytes in hexadecimal form", cmd_x},
-	{"p", "Find the value of the expression EXPR", cmd_p},
-	{"w", "set watch point", cmd_w},
-	{"d", "delete watchpoint", cmd_d},
+	{"x", "Examine memory: x [N] ADDRESS.\n Use the ADDRESS as the starting memory address, and output N consecutive 4 bytes in hexadecimal form\n", cmd_x},
+	{"p", "Print value of expression EXPR.\nUsage: p [EXPR]\n", cmd_p},
+	{"w", "Set a watchpoint for an expression.\nUsage: watch EXPRESSION\nA watchpoint stops execution of your program whenever the value ofan expression changes.\n", cmd_w},
+	{"d", "Delete all or some watchpoints.\nUsage: delete [WATCHPOINTNUM]...\nArguments are watchpoint numbers with spaces in between.\nTo delete all watchpoints, give no argument. \n", cmd_d},
 };
 
 #define NR_CMD ARRLEN(cmd_table)
