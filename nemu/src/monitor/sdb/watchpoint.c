@@ -136,7 +136,7 @@ bool wp_change(){
 			res = expr(wp->expr,success);
 			assert(*success);
 			if (res != wp->value){
-				printf("%s %d: %-16s\n\n",wp->type,wp->NO,wp->expr);
+				printf("\n%s %d: %-16s\n\n",wp->type,wp->NO,wp->expr);
 				printf("Old value = %u\n", wp->value);
 				printf("New value = %d\n\n", res);
 				wp->value = res;
