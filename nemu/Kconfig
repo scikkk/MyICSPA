@@ -121,7 +121,7 @@ menu "Testing and Debugging"
 config DEBUG
   depends on !TARGET_SHARE && !TARGET_AM
   bool "Enable debug features inside NEMU"
-  default 0
+  default 1
   help
     Enable debug features, which include instruction tracing and watchpoint.
 
