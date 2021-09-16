@@ -49,7 +49,7 @@ void new_wp(const char* expr){
 	tail->NO = wp_no;
 	wp_no++;
 	strcpy(tail->expr,expr);
-	printf("success add watchpoint %d\n",tail->NO);
+	printf("Watchpoint %d: %s\n",tail->NO, tail->expr);
 	return ;
 }
 void free_wp(int wp_no){
