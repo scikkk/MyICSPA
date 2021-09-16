@@ -50,7 +50,11 @@ WP* new_wp(const char* expr){
 	strcpy(tail->expr,expr);
 	return tail;
 }
-void free_wp(WP *wp){
+void free_wp(int wp_no){
+	WP *wp = NULL;
+	for (wp=head;wp->NO!=wp_no;wp = wp->next){
+		if (wp == NULL) {printf("0000/n");return;}
+	}
 	if (wp->prev==NULL){
 		head = wp->next;
 		head->prev = NULL;
