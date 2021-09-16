@@ -67,11 +67,12 @@ static int cmd_si(char *args) {
 // wk: print registers
 static int cmd_info(char *args){
 	char* parameter = strtok(NULL, " ");
+	if (parameter == NULL) {printf("Bad command!\nUse \"info r\" or \"info w\"\n");return 0;}
 	if (strcmp(parameter, "r") == 0){
 		isa_reg_display();
 	}
-	else if (strcmp(parameter, "r")){
-	wp_display();
+	else if (strcmp(parameter, "w") == 0){
+		wp_display();
 	}
 	else{ printf("Bad command!\nUse \"info r\" or \"info w\"\n");}
 	return 0;
