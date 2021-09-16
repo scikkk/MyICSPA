@@ -98,14 +98,14 @@ void free_wp(int wp_no){
 }
 
 void wp_display(){
-	printf("%-5s%-12s%s", "Num\0", "Type\0", "What\0");
+	printf("%-5s%-12s%s\n", "Num", "Type", "What");
 	WP *wp = head;
 	if (wp == NULL){
 		printf("No watchpoints.\n");
 	}
 	else {
 		while(wp != NULL){
-			printf("%-5d%-12s%s",wp->NO,wp->type,wp->expr);
+			printf("%-5d%-12s%s\n",wp->NO,wp->type,wp->expr);
 			wp=wp->next;
 		}
 	}
