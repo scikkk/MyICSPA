@@ -94,14 +94,14 @@ bool is_num(Token tk) {
 	else return false;
 }
 // wk:  remove a token from tokens  
-void remove_token(int index) {
-	for (int k = index; k < nr_token - 1; k++) {
-		tokens[k].type = tokens[k+1].type;
-		strncpy(tokens[k].str,tokens[k+1].str,32);
-	}
-	nr_token--;
-	return;
-}
+// void remove_token(int index) {
+// 	for (int k = index; k < nr_token - 1; k++) {
+// 		tokens[k].type = tokens[k+1].type;
+// 		strncpy(tokens[k].str,tokens[k+1].str,32);
+// 	}
+// 	nr_token--;
+// 	return;
+// }
 // wk: remove a token from tokens
 
 //wk: find signedint
