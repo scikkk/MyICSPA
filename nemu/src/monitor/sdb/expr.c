@@ -1,5 +1,9 @@
 #include <isa.h>
 
+// wk add
+#include <memory/vaddr.h>
+// wk add
+
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
@@ -224,10 +228,21 @@ uint32_t eval(int p, int q, bool* success) {
 		 * Return the value of the number.
 		 */
 		switch (tokens[p].type) {
-			case TK_INT:  return atoi(tokens[p].str);;break;
+			case TK_INT:  return atoi(tokens[p].str);
 			case TK_SIGN_INT: return -atoi(tokens[p].str);break;
-			case TK_HEX: {char *rest;uint32_t res =  strtoul(tokens[p].str,&rest,16);assert(strlen(rest) == 0);return res;break;}
-			case TK_REG: return isa_reg_str2val(tokens[p].str,success);break;
+			case TK_HEX: {
+							 char *rest;
+							 uint32_t res =  strtoul(tokens[p].str,&rest,16);
+							 assert(strlen(rest) == 0);
+							 return res;
+						 }
+			case TK_REG: return isa_reg_str2val(tokens[p].str,success);
+			case TK_POINTER: {
+								 char *rest;
+								 uint32_t res =  vaddr_read(strtoul(tokens[p].str,&rest,10),4);
+								 assert(strlen(rest) == 0);
+								 return res;
+							}
 			default : *success = false; return 0;
 		}
 	}
