@@ -48,6 +48,7 @@ void new_wp(const char* expr){
 		tail = tail->next;
 	}
 	strcpy(tail->expr,expr);
+	printf("success add watchpoint %d\n",tail->NO);
 	return ;
 }
 void free_wp(int wp_no){
@@ -56,7 +57,7 @@ if (head==NULL){printf("no watchpoint.\n");return;}
 	while ( wp->NO != wp_no) {
 
 		wp = wp->next;
-		if (wp == NULL) {printf("sdkjsjhhv bfjkbeakjn\n");return;}
+		if (wp == NULL) {printf("no watchpoint %d\n",wp_no);return;}
 	}
 	if (wp->next == wp->prev){
 	head = NULL;
@@ -78,5 +79,6 @@ if (head==NULL){printf("no watchpoint.\n");return;}
 	wp->next = free_;
 		free_->prev=wp;
 		free_=free_->prev;
+		printf("success delete watchpoint %d\n",wp_no);
 	return ;	
 }
