@@ -80,6 +80,6 @@ if (head==NULL){printf("No watchpoint.\n");return;}
 	wp->next = free_;
 		free_->prev=wp;
 		free_=free_->prev;
-		printf("success delete watchpoint %d\n",wp_no);
+		printf("Successfully delete watchpoint number %d.\n",wp_no);
 	return ;	
 }
