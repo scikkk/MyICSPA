@@ -34,9 +34,9 @@ void init_wp_pool() {
 void new_wp(const char* expr){
 	if (free_ == NULL){printf("%s\n", "No more free space!\0");assert(0);}
 	WP *nwp = free_;
+	free_ = free_->next;
 	nwp->next = NULL;
 	nwp->prev = tail;
-	free_ = free_->next;
 	if (head == NULL){
 		head = nwp;
 		tail = nwp;
