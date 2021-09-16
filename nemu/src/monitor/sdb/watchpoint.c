@@ -32,6 +32,7 @@ void init_wp_pool() {
 
 
 void new_wp(const char* expr){
+	static int wp_no=1;
 	if (free_ == NULL){printf("%s\n", "No more free space!\0");assert(0);}
 	WP *nwp = free_;
 	free_ = free_->next;
@@ -40,13 +41,13 @@ void new_wp(const char* expr){
 	if (head == NULL){
 		head = nwp;
 		tail = nwp;
-		head->NO = 1;
 	}
 	else {
-		nwp->NO = tail->NO + 1;
 		tail->next = nwp;
 		tail = tail->next;
 	}
+	tail->NO = wp_no;
+	wp_no++;
 	strcpy(tail->expr,expr);
 	printf("success add watchpoint %d\n",tail->NO);
 	return ;
