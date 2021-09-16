@@ -14,8 +14,9 @@ void init_regex();
 void init_wp_pool();
 
 // wk add
-void new_wp(const char* expr);
+void new_wp(const char* expr,const char* type);
 void free_wp(int wp_no);
+void wp_display();
 // wk add
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
@@ -69,6 +70,10 @@ static int cmd_info(char *args){
 	if (strcmp(parameter, "r") == 0){
 		isa_reg_display();
 	}
+	else if (strcmp(parameter, "r")){
+	wp_display();
+	}
+	else{ printf("Bad command!\nUse \"info r\" or \"info w\"\n");}
 	return 0;
 }
 // wk: print registers
@@ -108,7 +113,7 @@ static int cmd_p(char *args) {
 // wk: watchpointers
 static int cmd_w(char *args) {
 	char *e = args;
-	new_wp(e);
+	new_wp(e,"Watchpoint");
 	return 0;
 }
 static int cmd_d(char *args) {

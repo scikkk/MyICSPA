@@ -9,7 +9,7 @@ typedef struct watchpoint {
 	/* TODO: Add more members if necessary */
 	char expr[32];
 	struct watchpoint *prev;
-
+	char type[12];
 } WP;
 
 static WP wp_pool[NR_WP] = {};
@@ -31,7 +31,7 @@ void init_wp_pool() {
 
 
 
-void new_wp(const char* expr){
+void new_wp(const char* expr,const char* wp_type){
 	static int wp_no=1;
 	if (free_ == NULL){printf("%s\n", "No more free space!\0");assert(0);}
 	WP *nwp = free_;
@@ -49,6 +49,7 @@ void new_wp(const char* expr){
 	tail->NO = wp_no;
 	wp_no++;
 	strcpy(tail->expr,expr);
+	strcpy(tail->type,wp_type);
 	printf("Watchpoint %d: %s\n",tail->NO, tail->expr);
 	return ;
 }
@@ -57,8 +58,8 @@ void free_wp(int wp_no){
 	WP *wp = head;
 	if (wp_no == -1){
 		while(wp != NULL){
-		printf("Successfully delete watchpoint number %d: %s.\n",wp->NO,wp->expr);
-		wp = wp->next;
+			printf("Successfully delete watchpoint number %d: %s.\n",wp->NO,wp->expr);
+			wp = wp->next;
 		}
 		tail->next = free_;
 		free_->prev = tail;
@@ -94,4 +95,19 @@ void free_wp(int wp_no){
 	free_=free_->prev;
 	printf("Successfully delete watchpoint number %d: %s.\n",wp_no,wp->expr);
 	return ;	
+}
+
+void wp_display(){
+	printf("%-5s%-12s%s", "Num\0", "Type\0", "What\0");
+	WP *wp = head;
+	if (wp == NULL){
+		printf("No watchpoints.\n");
+	}
+	else {
+		while(wp != NULL){
+			printf("%-5d%-12s%s",wp->NO,wp->type,wp->expr);
+			wp=wp->next;
+		}
+	}
+	return;
 }
