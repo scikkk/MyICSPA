@@ -285,7 +285,7 @@ uint32_t eval(int p, int q, bool* success) {
 				default : printf("bad do on %d: %d\n",k,tokens[k].type);assert(0);
 			}
 		}
-		uint32_t val1 = (op>1)?0:eval(p, op - 1,success); // op==0: type==TK_NEGATIVE||type==TK_POINTER
+		uint32_t val1 = (op==0)?0:eval(p, op - 1,success); // op==0: type==TK_NEGATIVE||type==TK_POINTER
 		uint32_t val2 = eval(op + 1, q,success);
 		switch (tokens[op].type) {
 			case TK_EQ :return val1 == val2;
