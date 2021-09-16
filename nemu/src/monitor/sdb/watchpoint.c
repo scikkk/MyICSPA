@@ -57,7 +57,7 @@ void free_wp(int wp_no){
 	WP *wp = head;
 	if (wp_no == -1){
 		while(wp != NULL){
-		printf("Successfully delete watchpoint number %d.\n",wp->NO);
+		printf("Successfully delete watchpoint number %d: %s.\n",wp->NO,wp->expr);
 		wp = wp->next;
 		}
 		tail->next = free_;
@@ -92,6 +92,6 @@ void free_wp(int wp_no){
 	wp->next = free_;
 	free_->prev=wp;
 	free_=free_->prev;
-	printf("Successfully delete watchpoint number %d.\n",wp_no);
+	printf("Successfully delete watchpoint number %d: %s.\n",wp_no,wp->expr);
 	return ;	
 }
