@@ -53,12 +53,12 @@ void new_wp(const char* expr){
 	return ;
 }
 void free_wp(int wp_no){
-if (head==NULL){printf("no watchpoint.\n");return;}
+if (head==NULL){printf("No watchpoint.\n");return;}
 	WP *wp = head;
 	while ( wp->NO != wp_no) {
 
 		wp = wp->next;
-		if (wp == NULL) {printf("no watchpoint %d\n",wp_no);return;}
+		if (wp == NULL) {printf("No watchpoint number %d.\n",wp_no);return;}
 	}
 	if (wp->next == wp->prev){
 	head = NULL;
