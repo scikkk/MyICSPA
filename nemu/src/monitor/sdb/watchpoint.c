@@ -121,3 +121,31 @@ void wp_display(){
 	}
 	return;
 }
+
+bool wp_check(){
+	bool return_value = false;
+	WP *wp = head;
+	if (wp == NULL){
+		printf("No watchpoints.\n");
+	}
+	else {
+		uint32_t res; 
+		bool* success = (bool*)malloc(sizeof(bool));
+		*success = true;
+		while(wp != NULL){
+			res = expr(wp->expr,success);
+			assert(*success);
+			if (res != wp->value){
+				printf("%s %d: %-16s\n",wp->type,wp->NO,wp->expr);
+				printf("Old value = %u\n", wp->value);
+				printf("New value = %d\n\n", res);
+				wp->value = res;
+				return_value = true;
+			}
+
+			wp=wp->next;
+		}
+	}
+	return return_value;
+
+}
