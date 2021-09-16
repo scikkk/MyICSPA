@@ -122,7 +122,7 @@ void wp_display(){
 	return;
 }
 
-bool wp_check(){
+bool wp_change(){
 	bool return_value = false;
 	WP *wp = head;
 	if (wp == NULL){
@@ -147,5 +147,4 @@ bool wp_check(){
 		}
 	}
 	return return_value;
-
 }
