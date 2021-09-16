@@ -17,7 +17,7 @@ enum {
 	TK_AND,
 	TK_OR,
 	TK_POINTER,
-	TK_SIGN_INT,
+	TK_NEGATIVE,
 	TK_NOTYPE = 256, 
 	TK_DIVIDE = '/',
 	TK_MULTIPLY = '*',
@@ -89,7 +89,7 @@ static Token tokens[65535] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 bool is_num(Token tk) {
-	if (tk.type==')'||tk.type == TK_INT||tk.type==TK_SIGN_INT||tk.type==TK_POINTER||tk.type==TK_REG||tk.type==TK_HEX) 
+	if (tk.type==')'||tk.type == TK_INT||tk.type==TK_NEGATIVE||tk.type==TK_POINTER||tk.type==TK_REG||tk.type==TK_HEX) 
 		return true;
 	else return false;
 }
@@ -110,8 +110,8 @@ void find_signed_tokens(){
 		if (tokens[k].type == '-') {
 			if ((k == 0)||!is_num(tokens[k-1])) {
 				remove_token(k);
-				if (tokens[k].type == TK_INT) tokens[k].type = TK_SIGN_INT;
-				else if (tokens[k].type == TK_SIGN_INT) tokens[k].type = TK_INT;
+				if (tokens[k].type == TK_INT) tokens[k].type = TK_NEGATIVE;
+				else if (tokens[k].type == TK_NEGATIVE) tokens[k].type = TK_INT;
 				k++;
 			}
 		}
@@ -229,7 +229,7 @@ uint32_t eval(int p, int q, bool* success) {
 		 */
 		switch (tokens[p].type) {
 			case TK_INT:  return atoi(tokens[p].str);
-			case TK_SIGN_INT: return -atoi(tokens[p].str);break;
+			case TK_NEGATIVE: return -atoi(tokens[p].str);break;
 			case TK_HEX: {
 							 char *rest;
 							 uint32_t res =  strtoul(tokens[p].str,&rest,16);
@@ -266,7 +266,7 @@ uint32_t eval(int p, int q, bool* success) {
 			}
 			int optype = tokens[op].type;
 			switch (tokens[k].type) {
-				case TK_INT:case TK_SIGN_INT:case TK_REG:case TK_HEX: 
+				case TK_INT:case TK_NEGATIVE:case TK_REG:case TK_HEX: 
 					break;
 				case TK_OR: op = k; break;
 				case TK_AND:if (optype != TK_OR) {op = k;}break;
