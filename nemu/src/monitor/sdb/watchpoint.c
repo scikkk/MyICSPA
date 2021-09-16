@@ -56,7 +56,7 @@ if (head==NULL){printf("no watchpoint.\n");return;}
 	while ( wp->NO != wp_no) {
 
 		wp = wp->next;
-		if (wp == NULL) {printf("%d/n",wp->NO);return;}
+		if (wp == NULL) {printf("sdkjsjhhv bfjkbeakjn/n");return;}
 	}
 	if (wp->next == wp->prev){
 	head = NULL;
