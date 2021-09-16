@@ -109,10 +109,7 @@ void find_signed_tokens(){
 	for (int k = nr_token - 1; k >= 0; k--) {
 		if (tokens[k].type == '-') {
 			if ((k == 0)||!is_num(tokens[k-1])) {
-				remove_token(k);
-				if (tokens[k].type == TK_INT) tokens[k].type = TK_NEGATIVE;
-				else if (tokens[k].type == TK_NEGATIVE) tokens[k].type = TK_INT;
-				k++;
+			tokens[k].type = TK_NEGATIVE;
 			}
 		}
 	}
@@ -124,9 +121,7 @@ void find_pointer_tokens(){
 	for (int k = nr_token - 1; k >= 0; k--) {
 		if (tokens[k].type == '*') {
 			if ((k == 0)||!is_num(tokens[k-1])) {
-				remove_token(k);
 				tokens[k].type = TK_POINTER;
-				k++;
 			}
 		}
 	} 
@@ -266,7 +261,7 @@ uint32_t eval(int p, int q, bool* success) {
 			}
 			int optype = tokens[op].type;
 			switch (tokens[k].type) {
-				case TK_INT:case TK_NEGATIVE:case TK_REG:case TK_HEX: 
+				case TK_INT:case TK_REG:case TK_HEX: 
 					break;
 				case TK_OR: op = k; break;
 				case TK_AND:if (optype != TK_OR) {op = k;}break;
@@ -281,10 +276,16 @@ uint32_t eval(int p, int q, bool* success) {
 								if (optype!=TK_OR && optype!=TK_AND && optype!=TK_NEQ && optype!=TK_EQ && optype != '+' && tokens[op].type != '-') 
 								{op = k;}
 								break;
+				case TK_NEGATIVE: case TK_POINTER:
+								if (optype!=TK_OR && optype!=TK_AND && optype!=TK_NEQ && optype!=TK_EQ && optype != '+' && tokens[op].type != '-'&&optype!='*'&&optype!='/') 
+								{op = k;}
+								break;
+
+
 				default : printf("bad do on %d: %d\n",k,tokens[k].type);assert(0);
 			}
 		}
-		uint32_t val1 = eval(p, op - 1,success);
+		uint32_t val1 = (op>1)?0:eval(p, op - 1,success); // op==0: type==TK_NEGATIVE||type==TK_POINTER
 		uint32_t val2 = eval(op + 1, q,success);
 		switch (tokens[op].type) {
 			case TK_EQ :return val1 == val2;
@@ -296,6 +297,8 @@ uint32_t eval(int p, int q, bool* success) {
 			case '*': return val1 * val2;
 			case '/': if (val2 == 0) {*success = false; return 0;}
 						  else return val1 / val2;
+			case TK_NEGATIVE: return -val2;
+			case TK_POINTER:return vaddr_read(val2,4);
 			default: printf("op=%d\ntokens[op].str=%s\n",op,tokens[op].str);assert(0);
 		}
 	}
