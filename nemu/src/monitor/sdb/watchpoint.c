@@ -55,7 +55,11 @@ void free_wp(int wp_no){
 	for (wp=head; wp->NO != wp_no; wp = wp->next) {
 		if (wp == NULL) {printf("0000/n");return;}
 	}
-	if (wp->prev==NULL){
+	if (wp->next == wp->prev){
+	head = NULL;
+	head = NULL;
+	}
+	else if (wp->prev==NULL){
 		head = wp->next;
 		head->prev = NULL;
 	} 
@@ -67,8 +71,9 @@ void free_wp(int wp_no){
 		wp->prev->next = wp->next;
 		wp->next->prev = wp->prev;
 		wp->next=free_;
+	}
+	wp->next = free_;
 		free_->prev=wp;
 		free_=free_->prev;
-	}
 	return ;	
 }
