@@ -33,18 +33,18 @@ void init_wp_pool() {
 
 WP* new_wp(const char* expr){
 	if (free_ == NULL){printf("%s\n", "No more free space!\0");assert(0);}
-	WP *new_w = free_;
-	new_w->next = NULL;
-	new_w->prev = tail;
+	WP *nwp = free_;
+	nwp->next = NULL;
+	nwp->prev = tail;
 	free_ = free_->next;
 	if (head == NULL){
-		head = new_w;
-		tail = new_w;
+		head = nwp;
+		tail = nwp;
 		head->NO = 1;
 	}
 	else {
-		new_w->NO = tail->NO + 1;
-		tail->next = new_w;
+		nwp->NO = tail->NO + 1;
+		tail->next = nwp;
 		tail = tail->next;
 	}
 	strcpy(tail->expr,expr);

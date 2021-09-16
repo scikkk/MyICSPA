@@ -6,6 +6,7 @@
 
 // wk
 #include <memory/vaddr.h>
+#include "watchpoint.c"
 // wk
 
 static int is_batch_mode = false;
@@ -60,7 +61,7 @@ static int cmd_si(char *args) {
 
 // wk: print registers
 static int cmd_info(char *args){
-    char* parameter = strtok(NULL, " ");
+	char* parameter = strtok(NULL, " ");
 	if (strcmp(parameter, "r") == 0){
 		isa_reg_display();
 	}
@@ -70,7 +71,7 @@ static int cmd_info(char *args){
 
 // wk: scan memory
 static int cmd_x(char *args){
-    int N = atoi(strtok(NULL, " "));
+	int N = atoi(strtok(NULL, " "));
 	char *expr = strtok(NULL, " ");
 	char* next;
 	long value_of_expr = strtol(expr, &next, 16);
@@ -100,6 +101,19 @@ static int cmd_p(char *args) {
 // wk: evaluate expressions
 
 
+// wk: watchpointers
+static int cmd_w(char *args) {
+	char *e = args;
+	new_wp(e);
+	return 0;
+}
+static int cmd_d(char *args) {
+	int N = atoi(strtok(NULL, " "));
+	free_wp(N);
+	return 0;
+}
+// wk: watchpointers
+
 static struct {
 	const char *name;
 	const char *description;
@@ -113,6 +127,8 @@ static struct {
 	{"info", "Print register status", cmd_info}, //wk
 	{"x", "Find the value of the expression EXPR, use the result as the starting memory address, and output N consecutive 4 bytes in hexadecimal form", cmd_x},
 	{"p", "Find the value of the expression EXPR", cmd_p},
+	{"w", "set watch point", cmd_w},
+	{"d", "delete watchpoint", cmd_d},
 };
 
 #define NR_CMD ARRLEN(cmd_table)
