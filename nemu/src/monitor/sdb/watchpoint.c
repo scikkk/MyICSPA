@@ -10,6 +10,7 @@ typedef struct watchpoint {
 	char expr[32];
 	struct watchpoint *prev;
 	char type[12];
+	uint32_t value;
 } WP;
 
 static WP wp_pool[NR_WP] = {};
@@ -31,7 +32,15 @@ void init_wp_pool() {
 
 
 
-void new_wp(const char* expr,const char* wp_type){
+void new_wp(char* expr_s,const char* wp_type){
+	bool* success = (bool*)malloc(sizeof(bool));
+	*success = true;
+	uint32_t res = expr(expr_s,success);
+	if (!*success) {
+		printf("Invalid expression！\n");
+		free(success);
+		return;
+	}
 	static int wp_no=1;
 	if (free_ == NULL){printf("%s\n", "No more free space!\0");assert(0);}
 	WP *nwp = free_;
@@ -48,9 +57,10 @@ void new_wp(const char* expr,const char* wp_type){
 	}
 	tail->NO = wp_no;
 	wp_no++;
-	strcpy(tail->expr,expr);
+	strcpy(tail->expr,expr_s);
 	strcpy(tail->type,wp_type);
-	printf("Watchpoint %d: %s\n",tail->NO, tail->expr);
+	tail->value = res;
+	printf("Watchpoint %d: %s(%u)\n",tail->NO, tail->expr,tail->value);
 	return ;
 }
 void free_wp(int wp_no){
@@ -103,9 +113,9 @@ void wp_display(){
 		printf("No watchpoints.\n");
 	}
 	else {
-	printf("%-9s%-16s%s\n", "Num", "Type", "What");
+		printf("%-9s%-16s%-16s%s\n", "Num", "Type", "What", "Value");
 		while(wp != NULL){
-			printf("%-9d%-16s%s\n",wp->NO,wp->type,wp->expr);
+			printf("%-9d%-16s%-16s%u\n",wp->NO,wp->type,wp->expr,wp->value);
 			wp=wp->next;
 		}
 	}
