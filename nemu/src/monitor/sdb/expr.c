@@ -109,7 +109,7 @@ void find_signed_tokens(){
 	for (int k = nr_token - 1; k >= 0; k--) {
 		if (tokens[k].type == '-') {
 			if ((k == 0)||!is_num(tokens[k-1])) {
-			tokens[k].type = TK_NEGATIVE;
+				tokens[k].type = TK_NEGATIVE;
 			}
 		}
 	}
@@ -237,7 +237,7 @@ uint32_t eval(int p, int q, bool* success) {
 								 uint32_t res =  vaddr_read(strtoul(tokens[p].str,&rest,10),4);
 								 assert(strlen(rest) == 0);
 								 return res;
-							}
+							 }
 			default : *success = false; return 0;
 		}
 	}
@@ -266,28 +266,28 @@ uint32_t eval(int p, int q, bool* success) {
 				case TK_OR: op = k; break;
 				case TK_AND:if (optype != TK_OR) {op = k;}break;
 				case TK_NEQ:case TK_EQ:
-								if(optype!=TK_OR && optype!=TK_AND) {op = k;}
-								break;
+					if(optype!=TK_OR && optype!=TK_AND) {op = k;}
+					break;
 				case '+': case '-':
-								if(optype!=TK_OR && optype!=TK_AND && optype!=TK_NEQ && optype!=TK_EQ)   
-								{op = k;}
-								break;
+					if(optype!=TK_OR && optype!=TK_AND && optype!=TK_NEQ && optype!=TK_EQ) {op = k;}
+					break;
 				case '*':case '/': 
-								if (optype!=TK_OR && optype!=TK_AND && optype!=TK_NEQ && optype!=TK_EQ && optype != '+' && tokens[op].type != '-') 
-								{op = k;}
-								break;
+					if (optype!=TK_OR && optype!=TK_AND && optype!=TK_NEQ && optype!=TK_EQ && optype != '+' && tokens[op].type != '-') 
+						{op = k;}
+					break;
 				case TK_NEGATIVE: case TK_POINTER:
-								if (optype!=TK_OR && optype!=TK_AND && optype!=TK_NEQ && optype!=TK_EQ && optype != '+' && tokens[op].type != '-'&&optype!='*'&&optype!='/') 
-								{op = k;}
-								break;
-
+					if (optype!=TK_OR && optype!=TK_AND && optype!=TK_NEQ && optype!=TK_EQ && optype != '+' && tokens[op].type != '-'&&optype!='*'&&optype!='/') 
+						{op = k;}
+					break;
 
 				default : printf("bad do on %d: %d\n",k,tokens[k].type);assert(0);
 			}
 		}
-		uint32_t val1 = (op==0)?0:eval(p, op - 1,success); // op==0: type==TK_NEGATIVE||type==TK_POINTER
+
+		int optype = tokens[op].type;
+		uint32_t val1 = (optype==TK_POINTER || optype==TK_NEGATIVE)?0:eval(p, op - 1,success); 
 		uint32_t val2 = eval(op + 1, q,success);
-		switch (tokens[op].type) {
+		switch (optype) {
 			case TK_EQ :return val1 == val2;
 			case TK_NEQ:return val1 != val2;
 			case TK_AND:return val1 && val2;
