@@ -6,13 +6,17 @@
 
 // wk
 #include <memory/vaddr.h>
-#include "watchpoint.c"
 // wk
 
 static int is_batch_mode = false;
 
 void init_regex();
 void init_wp_pool();
+
+// wk add
+void new_wp(const char* expr);
+void free_wp(int wp_no);
+// wk add
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {

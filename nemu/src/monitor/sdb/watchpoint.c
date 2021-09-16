@@ -31,7 +31,7 @@ void init_wp_pool() {
 
 
 
-WP* new_wp(const char* expr){
+void new_wp(const char* expr){
 	if (free_ == NULL){printf("%s\n", "No more free space!\0");assert(0);}
 	WP *nwp = free_;
 	nwp->next = NULL;
@@ -48,7 +48,7 @@ WP* new_wp(const char* expr){
 		tail = tail->next;
 	}
 	strcpy(tail->expr,expr);
-	return tail;
+	return ;
 }
 void free_wp(int wp_no){
 	WP *wp = NULL;
