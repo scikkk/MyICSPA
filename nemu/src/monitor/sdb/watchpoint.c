@@ -41,6 +41,7 @@ void new_wp(char* expr_s,const char* wp_type){
 		free(success);
 		return;
 	}
+	free(success);
 	static int wp_no=1;
 	if (free_ == NULL){printf("%s\n", "No more free space!\0");assert(0);}
 	WP *nwp = free_;
