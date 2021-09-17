@@ -144,6 +144,7 @@ bool wp_change(){
 			}
 			wp=wp->next;
 		}
+		free(success);
 	}
 	return return_value;
 }
