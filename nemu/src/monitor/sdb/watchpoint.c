@@ -33,6 +33,9 @@ void init_wp_pool() {
 
 
 void new_wp(char* expr_s,const char* wp_type){
+	if (strcmp(wp_type,"Breakpoint")==0){
+	sprintf(expr_s,"$pc==%s",expr_s);
+	}
 	bool* success = (bool*)malloc(sizeof(bool));
 	*success = true;
 	uint32_t res = expr(expr_s,success);
