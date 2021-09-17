@@ -20,8 +20,7 @@ CC ?= gcc
 CC := $(CC)
 LD := $(CC)
 INCLUDES = $(addprefix -I, $(INC_PATH))
-# edited by wk, add "-g"
-CFLAGS  := -O2 -MMD -g -Wall -Werror $(INCLUDES) $(CFLAGS)
+CFLAGS  := -O2 -MMD -Wall -Werror $(INCLUDES) $(CFLAGS)
 LDFLAGS := -O2 $(LDFLAGS)
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
