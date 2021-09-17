@@ -115,8 +115,6 @@ static int cmd_p(char *args) {
 static int cmd_w(char *args) {
 	char *e = args;
 	new_wp(e,"Watchpoint");
-	printf("%s\n",e);
-	assert(strlen(e) == 0);
 	return 0;
 }
 static int cmd_d(char *args) {
@@ -133,7 +131,6 @@ static int cmd_d(char *args) {
 static int cmd_b(char *args) {
 	char *e = args;
 	new_wp(e,"Breakpoint");
-	assert(strlen(e) == 0);
 	return 0;
 
 }
