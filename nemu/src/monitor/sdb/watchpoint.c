@@ -117,9 +117,9 @@ void wp_display(){
 		printf("No watchpoints.\n");
 	}
 	else {
-		printf("%-9s%-16s%-16s%s\n", "Num", "Type", "What", "Value");
+		printf("%-9s%-16s%-20s%s\n", "Num", "Type", "What", "Value");
 		while(wp != NULL){
-			printf("%-9d%-16s%-16s%u\n",wp->NO,wp->type,wp->expr,wp->value);
+			printf("%-9d%-16s%-20s%u\n",wp->NO,wp->type,wp->expr,wp->value);
 			wp=wp->next;
 		}
 	}
