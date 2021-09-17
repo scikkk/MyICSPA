@@ -61,8 +61,9 @@ void new_wp(char* expr_s,const char* wp_type){
 	strcpy(tail->expr,expr_s);
 	strcpy(tail->type,wp_type);
 	if (strcmp(wp_type,"Breakpoint")==0){
-	sprintf(tail->expr,"$pc==%s",tail->expr);
-	printf("\n%s\n",expr_s);
+	printf("\n%s\n",tail->expr);
+	sprintf(tail->expr,"$pc==%s",expr_s);
+	printf("\n%s\n",tail->expr);
 	}
 	tail->value = res;
 	printf("Watchpoint %d: %s(%u)\n",tail->NO, tail->expr,tail->value);
