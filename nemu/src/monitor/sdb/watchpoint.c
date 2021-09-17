@@ -62,8 +62,15 @@ void new_wp(char* expr_s,const char* wp_type){
 	strcpy(tail->type,wp_type);
 	if (strcmp(wp_type,"Breakpoint")==0){
 		sprintf(tail->expr,"$pc==%s",expr_s);
+		bool* success = (bool*)malloc(sizeof(bool));
+		*success = true;
+		tail->value = expr(tail->expr,success);
+		assert(*success);	
+		free(success);
 	}
-	tail->value = res;
+	else {
+		tail->value = res;
+	}
 	printf("%s %d: %s(%u)\n",tail->type, tail->NO, tail->expr,tail->value);
 	return ;
 }
