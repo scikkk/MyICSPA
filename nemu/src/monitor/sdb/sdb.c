@@ -115,6 +115,7 @@ static int cmd_p(char *args) {
 static int cmd_w(char *args) {
 	char *e = args;
 	new_wp(e,"Watchpoint");
+	assert(strlen(e) == 0);
 	return 0;
 }
 static int cmd_d(char *args) {
@@ -126,6 +127,14 @@ static int cmd_d(char *args) {
 		num_s = strtok(NULL, " ");
 	}
 	return 0;
+}
+
+static int cmd_b(char *args) {
+	char *e = args;
+	new_wp(e,"Breakpoint");
+	assert(strlen(e) == 0);
+	return 0;
+
 }
 // wk: watchpointers
 
@@ -142,8 +151,9 @@ static struct {
 	{"info", "Print register status", cmd_info}, //wk
 	{"x", "Examine memory: x [N] ADDRESS.\n Use the ADDRESS as the starting memory address, and output N consecutive 4 bytes in hexadecimal form\n", cmd_x},
 	{"p", "Print value of expression EXPR.\nUsage: p [EXPR]\n", cmd_p},
-	{"w", "Set a watchpoint for an expression.\nUsage: watch EXPRESSION\nA watchpoint stops execution of your program whenever the value ofan expression changes.\n", cmd_w},
-	{"d", "Delete all or some watchpoints.\nUsage: delete [WATCHPOINTNUM]...\nArguments are watchpoint numbers with spaces in between.\nTo delete all watchpoints, give no argument. \n", cmd_d},
+	{"w", "Set a watchpoint for an expression.\nUsage: w EXPRESSION\nA watchpoint stops execution of your program whenever the value ofan expression changes.\n", cmd_w},
+		{"b", "Set a breakpoint for an expression.\nUsage: b EXPRESSION\nA breakpoint stops execution of your program whenever the value ofan expression changes.\n", cmd_b},
+{"d", "Delete all or some watchpoints.\nUsage: delete [WATCHPOINTNUM]...\nArguments are watchpoint numbers with spaces in between.\nTo delete all watchpoints, give no argument. \n", cmd_d},
 };
 
 #define NR_CMD ARRLEN(cmd_table)
