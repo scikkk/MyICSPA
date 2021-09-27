@@ -42,7 +42,7 @@ static struct rule {
 	{"\\(", TK_LEFT_PARENTHESIS},          // left parenthesis
 	{"\\)", TK_RIGHT_PARENTHESIS},          // right parenthesis
 	{"0[x|X][0-9a-fA-F]+",TK_HEX}, //hexadecimal
-	{"\\$[A-Za-z0-9]+", TK_REG},
+	{"\\$[A-Za-z0-9]+|\\$\\$0", TK_REG},
 	{"==", TK_EQ},        // equal
 	{"&&", TK_AND},
 	{"\\|\\|",TK_OR},
