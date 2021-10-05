@@ -25,3 +25,11 @@ def_EHelper(addi) {
 	rtl_addi(s,ddest,dsrc1,id_src2->imm);
 }
 // wk 2.1
+
+
+
+// wk 2.2
+def_EHelper(add) {
+	*ddest = *dsrc1 + *dsrc2;
+}
+// wk 2.2
