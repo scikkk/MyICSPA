@@ -136,10 +136,7 @@ void wp_display(){
 bool wp_change(){
 	bool return_value = false;
 	WP *wp = head;
-	if (wp == NULL){
-		printf("No watchpoints.\n");
-	}
-	else {
+	if (wp != NULL) {
 		uint32_t res; 
 		bool* success = (bool*)malloc(sizeof(bool));
 		*success = true;
