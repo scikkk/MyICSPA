@@ -11,8 +11,8 @@ def_EHelper(auipc) {
 
 def_EHelper(jal) {
 	rtl_addi(s,ddest,&cpu.pc,0x4);
-	rtl_sext(s,&id_src1->imm,&id_src1->imm,11);
-	rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->imm);
+	//rtl_sext(s,&id_src1->imm,&id_src1->imm,11);
+	rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->simm);
 	// printf("0x%-10x\n",id_src1->imm);
 }
 
