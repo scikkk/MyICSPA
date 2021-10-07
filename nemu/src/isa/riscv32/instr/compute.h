@@ -1,5 +1,5 @@
 def_EHelper(lui) {
-  rtl_li(s, ddest, id_src1->imm);
+	rtl_li(s, ddest, id_src1->imm);
 }
 
 
@@ -30,29 +30,54 @@ def_EHelper(addi) {
 def_EHelper(add) {
 	*ddest = *dsrc1 + *dsrc2;
 }
+def_EHelper(beq) {
+	if (*dsrc1 == *dsrc2)	{
+		rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->simm);
+	}
+}
+
+def_EHelper(bne) {
+	if (*dsrc1 != *dsrc2)	{
+		rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->simm);
+	}}
+
+def_EHelper(blt) {
+	if (*dsrc1 < *dsrc2)	{
+		rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->simm);
+	}}
+
 def_EHelper(bge) {
-     if (*dsrc1 >= *dsrc2)	{
-	rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->simm);
-	// printf("0x%-10x\n",id_src1->imm);
-}
-}
+	if (*dsrc1 >= *dsrc2)	{
+		rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->simm);
+	}}
+def_EHelper(bltu) {
+	if ((unsigned)*dsrc1 < (unsigned)*dsrc2)	{
+		rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->simm);
+	}}
+
+def_EHelper(bgeu) {
+	if ((unsigned)*dsrc1 >= (unsigned)*dsrc2)	{
+		rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->simm);
+	}}
+
+
 def_EHelper(slti) {
- if (*dsrc1 < id_src2->simm){
- *ddest = 1;
- }
- else
- {
- *ddest = 0;
- }
+	if (*dsrc1 < id_src2->simm){
+		*ddest = 1;
+	}
+	else
+	{
+		*ddest = 0;
+	}
 }
 def_EHelper(sltiu) {
-	 printf("reachr\n\n");
- if (*dsrc1 < id_src2->imm){
- *ddest = 1;
- }
- else
- {
- *ddest = 0;
- }
+	printf("reachr\n\n");
+	if (*dsrc1 < id_src2->imm){
+		*ddest = 1;
+	}
+	else
+	{
+		*ddest = 0;
+	}
 }
 // wk 2.2
