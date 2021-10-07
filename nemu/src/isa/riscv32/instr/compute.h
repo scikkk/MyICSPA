@@ -38,7 +38,7 @@ def_EHelper(beq) {
 
 def_EHelper(bne) {
 	if (*dsrc1 != *dsrc2)	{
-		printf("%-10x\n%d\n",cpu.pc,*ddest);
+		printf("%-10x\n%d\n",cpu.pc,id_dest->simm);
 
 		s->dnpc = cpu.pc + *ddest;
 		/* rtl_addi(s, &(s->dnpc),&cpu.pc, *ddest); */
