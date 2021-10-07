@@ -48,4 +48,13 @@ def_EHelper(slti) {
  *ddest = 0;
  }
 }
+def_EHelper(sltiu) {
+ if (*dsrc1 < id_src2->simm){
+ *ddest = 1;
+ }
+ else
+ {
+ *ddest = 0;
+ }
+}
 // wk 2.2
