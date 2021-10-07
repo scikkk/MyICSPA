@@ -86,4 +86,22 @@ def_EHelper(sltiu) {
 		*ddest = 0;
 	}
 }
+def_EHelper(slt) {
+	if (*dsrc1 < *dsrc2){
+		*ddest = 1;
+	}
+	else
+	{
+		*ddest = 0;
+	}
+}
+def_EHelper(sltu) {
+	if ((unsigned)*dsrc1 < (unsigned)*dsrc2){
+		*ddest = 1;
+	}
+	else
+	{
+		*ddest = 0;
+	}
+}
 // wk 2.2
