@@ -11,7 +11,6 @@ def_EHelper(auipc) {
 
 def_EHelper(jal) {
 	rtl_addi(s,ddest,&cpu.pc,0x4);
-	/* rtl_sext(s,&id_src1->simm,&id_src1->imm,11); */
 	rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->simm);
 
 }
@@ -33,10 +32,8 @@ def_EHelper(add) {
 }
 def_EHelper(bge) {
      if (*dsrc1 >= *dsrc2)	{
-	rtl_sext(s,&id_src1->imm,&id_src1->imm,11);
-	rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->imm);
+	rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->simm);
 	// printf("0x%-10x\n",id_src1->imm);
-
 }
 }
 def_EHelper(slti) {
@@ -49,7 +46,7 @@ def_EHelper(slti) {
  }
 }
 def_EHelper(sltiu) {
- if (*dsrc1 < id_src2->simm){
+ if (*dsrc1 < id_src2->imm){
  *ddest = 1;
  }
  else
