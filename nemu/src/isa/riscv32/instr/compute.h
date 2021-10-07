@@ -18,7 +18,7 @@ def_EHelper(jal) {
 
 def_EHelper(jalr) {
 	rtl_addi(s, ddest,&cpu.pc, 0x4);
-	rtl_addi(s,&(s->dnpc),dsrc1,id_src2->imm);
+	rtl_addi(s,&(s->dnpc),dsrc1,id_src2->simm);
 }
 def_EHelper(addi) {
 	rtl_addi(s,ddest,dsrc1,id_src2->imm);
