@@ -7,7 +7,7 @@
    f(beq) f(bne) f(blt) f(bge) f(bltu) f(bgeu) \
     f(xor) f(or) f(and) \
    f(xori) f(ori) f(andi) \
-   f(lbu) 
+   f(lb)  f(lbu) f(lh) f(lhu) f(sb) f(sh)  
 // wk 2.1
 
 def_all_EXEC_ID();
