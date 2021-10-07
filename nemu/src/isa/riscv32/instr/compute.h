@@ -20,7 +20,7 @@ def_EHelper(jalr) {
 	rtl_addi(s,&(s->dnpc),dsrc1,id_src2->simm);
 }
 def_EHelper(addi) {
-	rtl_addi(s,ddest,dsrc1,id_src2->imm);
+	rtl_addi(s,ddest,dsrc1,id_src2->simm);
 }
 // wk 2.1
 
