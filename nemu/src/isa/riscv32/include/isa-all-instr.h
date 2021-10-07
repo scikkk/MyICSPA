@@ -5,7 +5,8 @@
    f(auipc) f(jal) f(jalr) f(addi) \
    f(add)  f(slti) f(sltiu) f(slt) f(sltu)\
    f(beq) f(bne) f(blt) f(bge) f(bltu) f(bgeu) \
-   f(xor) f(or) f(and) \
+    f(xor) f(or) f(and) \
+   f(xori) f(ori) f(andi) \
    f(lbu) 
 // wk 2.1
 
