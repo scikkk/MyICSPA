@@ -39,4 +39,13 @@ def_EHelper(bge) {
 
 }
 }
+def_EHelper(slti) {
+ if (*dsrc1 < id_src2->simm){
+ *ddest = 1;
+ }
+ else
+ {
+ *ddest = 0;
+ }
+}
 // wk 2.2
