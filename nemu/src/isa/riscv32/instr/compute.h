@@ -40,7 +40,8 @@ def_EHelper(bne) {
 	if (*dsrc1 != *dsrc2)	{
 		/* printf("%-10x\n%d\n",cpu.pc,*ddest); */
 
-		rtl_addi(s, &(s->dnpc),&cpu.pc, *ddest);
+		s->dnpc = cpu.pc + *ddest;
+		/* rtl_addi(s, &(s->dnpc),&cpu.pc, *ddest); */
 	}
 }
 
