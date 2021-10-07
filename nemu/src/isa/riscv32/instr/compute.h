@@ -38,13 +38,17 @@ def_EHelper(beq) {
 
 def_EHelper(bne) {
 	if (*dsrc1 != *dsrc2)	{
+		printf("%-10x\n",cpu.pc);
+
 		rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->simm);
-	}}
+	}
+}
 
 def_EHelper(blt) {
 	if (*dsrc1 < *dsrc2)	{
 		rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->simm);
-	}}
+	}
+}
 
 def_EHelper(bge) {
 	if (*dsrc1 >= *dsrc2)	{
@@ -53,12 +57,14 @@ def_EHelper(bge) {
 def_EHelper(bltu) {
 	if ((unsigned)*dsrc1 < (unsigned)*dsrc2)	{
 		rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->simm);
-	}}
+	}
+}
 
 def_EHelper(bgeu) {
 	if ((unsigned)*dsrc1 >= (unsigned)*dsrc2)	{
 		rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->simm);
-	}}
+	}
+}
 
 
 def_EHelper(slti) {
@@ -71,7 +77,6 @@ def_EHelper(slti) {
 	}
 }
 def_EHelper(sltiu) {
-	printf("reachr\n\n");
 	if (*dsrc1 < id_src2->imm){
 		*ddest = 1;
 	}
