@@ -46,12 +46,12 @@ def_EHelper(slti) {
  }
 }
 def_EHelper(sltiu) {
+	 printf("reachr\n\n");
  if (*dsrc1 < id_src2->imm){
  *ddest = 1;
  }
  else
  {
-	 printf("reachr\n\n");
  *ddest = 0;
  }
 }
