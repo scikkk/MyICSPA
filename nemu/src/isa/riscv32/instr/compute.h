@@ -32,4 +32,12 @@ def_EHelper(addi) {
 def_EHelper(add) {
 	*ddest = *dsrc1 + *dsrc2;
 }
+def_EHelper(bge) {
+     if (*dsrc1 >= *dsrc2)	{
+	rtl_sext(s,&id_src1->imm,&id_src1->imm,11);
+	rtl_addi(s, &(s->dnpc),&cpu.pc, id_src1->imm);
+	// printf("0x%-10x\n",id_src1->imm);
+
+}
+}
 // wk 2.2

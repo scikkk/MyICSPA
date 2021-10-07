@@ -3,7 +3,7 @@
 
 #define INSTR_LIST(f) f(lui) f(lw) f(sw) f(inv) f(nemu_trap) \
    f(auipc) f(jal) f(jalr) f(addi) \
-   f(add)
+   f(add) f(bge)
 // wk 2.1
 
 def_all_EXEC_ID();
