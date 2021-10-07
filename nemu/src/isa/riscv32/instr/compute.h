@@ -51,6 +51,7 @@ def_EHelper(sltiu) {
  }
  else
  {
+	 printf("reachr\n\n");
  *ddest = 0;
  }
 }
