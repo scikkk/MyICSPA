@@ -157,6 +157,7 @@ def_EHelper(sltu) {
 }
 
 def_EHelper(rem) {
+	printf("ddest: %d; dsrc1: %d; dsrc2: %d", *ddest, *dsrc1, *dsrc2);
 	*ddest = (*dsrc1) % (*dsrc2);
 }
 def_EHelper(remu) {
