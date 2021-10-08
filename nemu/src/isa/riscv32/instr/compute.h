@@ -161,6 +161,7 @@ def_EHelper(rem) {
 	*ddest = (*dsrc1) % (*dsrc2);
 }
 def_EHelper(remu) {
+	printf("ddest: %d; dsrc1: %d; dsrc2: %d", *ddest, *dsrc1, *dsrc2);
 	*ddest = (unsigned)(*dsrc1) % (unsigned)(*dsrc2);
 }
 // wk 2.2
