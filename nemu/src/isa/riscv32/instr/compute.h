@@ -155,4 +155,9 @@ def_EHelper(sltu) {
 		*ddest = 0;
 	}
 }
+
+def_EHelper(rem) {
+	*ddest = *dsrc1 % * dsrc2;
+}
 // wk 2.2
+
