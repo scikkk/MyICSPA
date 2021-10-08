@@ -6,7 +6,8 @@
    f(add) f(sub) f(slti) f(sltiu) f(slt) f(sltu) f(sll) f(srl) f(sra)\
    f(beq) f(bne) f(blt) f(bge) f(bltu) f(bgeu) \
     f(xor) f(or) f(and) \
-   f(xori) f(ori) f(andi) f(srai) \
+   f(xori) f(ori) f(andi)\
+  f(slli) f(srli) f(srai) \
    f(lb)  f(lbu) f(lh) f(lhu) f(sb) f(sh)  
 // wk 2.1
 

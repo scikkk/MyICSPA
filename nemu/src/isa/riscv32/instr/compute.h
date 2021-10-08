@@ -25,6 +25,14 @@ def_EHelper(addi) {
 def_EHelper(srai) {
 	rtl_srai(s,ddest,dsrc1,id_src2->simm);
 }
+def_EHelper(srli) {
+	rtl_srli(s,ddest,dsrc1,id_src2->simm);
+}
+
+def_EHelper(slli) {
+	rtl_slli(s,ddest,dsrc1,id_src2->simm);
+}
+
 
 
 def_EHelper(xori) {
