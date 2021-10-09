@@ -12,7 +12,7 @@ void isa_reg_display() {
 	// added by wk
 	printf("%-6s\t0x%-8x\t%d\n","pc", cpu.pc,cpu.pc);
 	for (int k = 0; k <32; k++){
-		printf("%-8s\t0x%-8x\t%d\n", regs[k], gpr(k), gpr(k));
+		printf("%-6s\t0x%-8x\t%d\n", regs[k], gpr(k), gpr(k));
 	}		
 	// added by wk
 }
