@@ -156,13 +156,47 @@ def_EHelper(sltu) {
 	}
 }
 
+
+// wk 2.2
+def_EHelper(mul) {
+	rtl_mulu_lo(s,ddest ,dsrc1,dsrc2);
+}
+def_EHelper(mulh) {
+	rtl_muls_hi(s,ddest ,dsrc1,dsrc2);
+}
+
+def_EHelper(mulhu) {
+	rtl_mulu_hi(s,ddest ,dsrc1,dsrc2);
+}
+def_EHelper(div) {
+	rtl_divs_q(s,ddest ,dsrc1,dsrc2);
+}
+def_EHelper(divu) {
+	rtl_divu_q(s,ddest ,dsrc1,dsrc2);
+}
 def_EHelper(rem) {
-	printf("ddest: %d; dsrc1: %d; dsrc2: %d", *ddest, *dsrc1, *dsrc2);
-	*ddest = (*dsrc1) % (*dsrc2);
+	rtl_divs_r(s,ddest ,dsrc1,dsrc2);
 }
 def_EHelper(remu) {
-	printf("ddest: %d; dsrc1: %d; dsrc2: %d", *ddest, *dsrc1, *dsrc2);
-	*ddest = (unsigned)(*dsrc1) % (unsigned)(*dsrc2);
+	rtl_divu_r(s,ddest ,dsrc1,dsrc2);
 }
-// wk 2.2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

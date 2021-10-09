@@ -9,7 +9,7 @@
    f(xori) f(ori) f(andi)\
   f(slli) f(srli) f(srai) \
    f(lb)  f(lbu) f(lh) f(lhu) f(sb) f(sh) \
-  f(rem) f(remu)
+f(mul) f(mulh) f(mulhu) f(div) f(divu)  f(rem) f(remu)
 // wk 2.1
 
 def_all_EXEC_ID();
