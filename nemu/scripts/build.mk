@@ -33,7 +33,7 @@ $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c -o $@ $<
 	# wk
-	$(CC) $(CFLAGS) -E -MF /dev/null $< | \
+	@$(CC) $(CFLAGS) -E -MF /dev/null $< | \
 		grep -ve '^#' | \
 		clang-format - > $(basename $@).i
 	# wk
