@@ -73,7 +73,7 @@ def_EHelper(slt) {
 		*ddest = 0x1;
 	}
 	else{
-		printf("*ddest=%u; *dsrc1=%u; *dsrc2=%u\n",*ddest,*dsrc1,*dsrc2);
+		printf("*ddest=%u; *dsrc1=%u; *dsrc2=%u\n",*id_dest->preg,*dsrc1,*dsrc2);
 		*ddest = 0x0;
 		printf("*ddest=%u; *dsrc1=%u; *dsrc2=%u\n",*ddest,*dsrc1,*dsrc2);
 	}
