@@ -13,19 +13,19 @@ def_EHelper(addi) {
 
 def_EHelper(slti) {
 	if (interpret_relop(RELOP_LT,*dsrc1 , id_src2->simm)){
-		*ddest = 1;
+		*ddest = 0x1;
 	}
 	else{
-		*ddest = 0;
+		*ddest = 0x0;
 	}
 }
 
 def_EHelper(sltiu) {
 	if (interpret_relop(RELOP_LTU,*dsrc1 , id_src2->imm)){
-		*ddest = 1;
+		*ddest = 0x1;
 	}
 	else{
-		*ddest = 0;
+		*ddest = 0x0;
 	}
 }
 
