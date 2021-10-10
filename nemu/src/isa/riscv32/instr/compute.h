@@ -77,7 +77,8 @@ def_EHelper(slt) {
 	}
 }
 def_EHelper(sltu) {
-	if (interpret_relop(RELOP_LTU, *dsrc1, *dsrc2)){
+	/* if (interpret_relop(RELOP_LTU, *dsrc1, *dsrc2)){ */
+	if ( *dsrc1 < *dsrc2){
 		*ddest = 1;
 	}
 	else{
