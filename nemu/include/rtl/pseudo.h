@@ -33,7 +33,7 @@ static inline def_rtl(sext, rtlreg_t* dest, const rtlreg_t* src1, int width) {
 	// dest <- signext(src1[(width * 8 - 1) .. 0])
 	// TODO();
 	rtl_slli(s, dest, src1, width);
-	rtl_srai(s, dest, src1, width);
+	rtl_srai(s, dest, ddest, width);
 	// wk 2.1
 }
 
@@ -41,7 +41,7 @@ static inline def_rtl(zext, rtlreg_t* dest, const rtlreg_t* src1, int width) {
 	// dest <- zeroext(src1[(width * 8 - 1) .. 0])
 	// TODO();
 	rtl_slli(s, dest, src1, width);
-	rtl_srli(s, dest, src1, width);
+	rtl_srli(s, dest, ddest, width);
 	// wk 2.1
 	}
 
