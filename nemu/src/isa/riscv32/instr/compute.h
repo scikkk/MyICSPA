@@ -12,7 +12,7 @@ def_EHelper(addi) {
 }
 
 def_EHelper(slti) {
-	if (interpret_relop(RELOP_LT,*dsrc1 , id_src2->simm)){
+	if (interpret_relop(RELOP_LT,*dsrc1 , *dsrc2)){
 		*ddest = 1;
 	}
 	else{
