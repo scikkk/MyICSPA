@@ -69,7 +69,7 @@ def_EHelper(sll) {
 }
 
 def_EHelper(slt) {
-	if (*dsrc1 < *dsrc2){
+	if (interpret_relop(RELOP_LT,*dsrc1 , *dsrc2)){
 		*ddest = 1;
 	}
 	else{
@@ -77,7 +77,7 @@ def_EHelper(slt) {
 	}
 }
 def_EHelper(sltu) {
-	if ((unsigned)*dsrc1 < (unsigned)*dsrc2){
+	if (interpret_relop(RELOP_LTU,*dsrc1 , *dsrc2)){
 		*ddest = 1;
 	}
 	else{
