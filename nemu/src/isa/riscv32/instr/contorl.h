@@ -41,7 +41,8 @@ def_EHelper(bge) {
 def_EHelper(bltu) {
 	if (interpret_relop(RELOP_LTU,*dsrc1,*dsrc2)){
 		rtl_addi(s,s0,ddest,cpu.pc);
-		rtl_jr(s,s0);		}
+		rtl_jr(s,s0);		
+	}
 }
 
 def_EHelper(bgeu) {
