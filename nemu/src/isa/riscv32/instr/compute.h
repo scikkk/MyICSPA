@@ -70,18 +70,18 @@ def_EHelper(sll) {
 
 def_EHelper(slt) {
 	if (interpret_relop(RELOP_LT, *dsrc1, *dsrc2)){
-		*ddest = 1;
+		*ddest = 0x1;
 	}
 	else{
-		*ddest = 0;
+		*ddest = 0x0;
 	}
 }
 def_EHelper(sltu) {
 	if (interpret_relop(RELOP_LTU, *dsrc1, *dsrc2)){
-		*ddest = 1;
+		*ddest = 0x1;
 	}
 	else{
-		*ddest = 0;
+		*ddest = 0x0;
 	}
 }
 
