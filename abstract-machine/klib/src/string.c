@@ -38,12 +38,12 @@ char *strncpy(char *dst, const char *src, size_t n) {
 char *strcat(char *dst, const char *src) {
 	/* panic("Not implemented"); */
 	assert((dst != NULL) && (src != NULL));
-	char *ret = dst;
-	while(*dst){
-		dst++;
+	char *temp = dst;
+	while(*temp){
+		temp++;
 	}
-	while((*dst++ = *src++) != '\0');
-	return ret;
+	while((*temp++ = *src++) != '\0');
+	return dst;
 }
 
 int strcmp(const char *s1, const char *s2) {
