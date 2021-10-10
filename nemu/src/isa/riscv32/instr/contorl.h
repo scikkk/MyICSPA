@@ -12,7 +12,7 @@ def_EHelper(jalr) {
 
 
 def_EHelper(beq) {
-	if (*dsrc1 == *dsrc2)	{
+if (interpret_relop(RELOP_EQ,*dsrc1,*dsrc2))	{
 		rtl_j(s, cpu.pc + id_dest->simm);
 	}
 }
