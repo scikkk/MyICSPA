@@ -25,8 +25,13 @@ char *strcpy(char *dst, const char *src) {
 char *strncpy(char *dst, const char *src, size_t n) {
 	/* panic("Not implemented"); */
 	char *temp = dst;
-	while(n--) {
-		if((*temp++ = *src++) != '\0');
+	while(n && ((*temp++ = *src++) != '\0')){
+		n--;
+	}
+	if (n){
+		while(--n){
+			*temp++ = '\0';
+		}
 	}
 	return dst;
 }
