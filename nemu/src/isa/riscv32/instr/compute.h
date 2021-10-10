@@ -21,7 +21,7 @@ def_EHelper(slti) {
 }
 
 def_EHelper(sltiu) {
-	if (interpret_relop(RELOP_LTU,*dsrc1 , id_src2->simm)){
+	if (interpret_relop(RELOP_LTU,*dsrc1 , id_src2->imm)){
 		*ddest = 1;
 	}
 	else{
