@@ -68,7 +68,7 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 	/* panic("Not implemented"); */
 	assert((s1 != NULL) && (s2 != NULL));
 	if(n == 0) return 0;
-	while(n-- && *s1 && (*s1 == *s2)){
+	while(--n && *s1 && (*s1 == *s2)){
 		s1++;
 		s2++;
 	}
