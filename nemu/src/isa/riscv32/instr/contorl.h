@@ -19,8 +19,9 @@ def_EHelper(beq) {
 
 def_EHelper(bne) {
 	if (interpret_relop(RELOP_NE,*dsrc1,*dsrc2)){
-		rtl_addi(s,s0,ddest,cpu.pc);
-		rtl_jr(s,s0);
+		/* rtl_addi(s,s0,ddest,cpu.pc); */
+		/* rtl_jr(s,s0); */
+		rtl_j(s, *ddest+cpu.pc);
 	}
 }
 
