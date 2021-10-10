@@ -73,9 +73,9 @@ def_EHelper(slt) {
 		*ddest = 0x1;
 	}
 	else{
-		printf("*ddest=%u; *dsrc1=%d; *dsrc2=%d\n",*ddest,*dsrc1,*dsrc2);
+		/* printf("*ddest=%u; *dsrc1=%d; *dsrc2=%d\n",*ddest,*dsrc1,*dsrc2); */
 		*ddest = 0x0;
-		printf("*ddest=%u; *dsrc1=%d; *dsrc2=%d\n",*ddest,*dsrc1,*dsrc2);
+		/* printf("*ddest=%u; *dsrc1=%d; *dsrc2=%d\n",*ddest,*dsrc1,*dsrc2); */
 	}
 }
 def_EHelper(sltu) {
