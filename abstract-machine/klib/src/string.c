@@ -90,12 +90,11 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 
 void *memset(void *s, int c, size_t n) {
 	/* panic("Not implemented"); */
-	if (s == NULL || n < 0){
-		return NULL;
-	}
+	assert(s != NULL && n > 0);
 	char *tmps = (char*)s;
-	while(n-- > 0){
-		*tmps++ = c;
+	const unsigned char ch = (char)c;
+	while(n--){
+		*tmps++ = ch;
 	}
 	return s;
 }
