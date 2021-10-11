@@ -8,9 +8,11 @@ size_t strlen(const char *s) {
 	/* panic("Not implemented"); */
 	assert(s != NULL);
 	int len = 0;
-	while(*s++ != '\0'){
+	while(*s != '\0'){
+		s++;
 		len++;
 	}
+	printf("strlen: input: %s; output: %d\n", *s, len);
 	return len;
 }
 
@@ -19,6 +21,7 @@ char *strcpy(char *dst, const char *src) {
 	assert(dst != NULL && src != NULL);
 	char *ret = dst;
 	while((*dst++ = *src++) != '\0');
+	printf("after strcpy: dst: %s; src: %s\n", *dst, src);
 	return ret;
 }
 
@@ -33,6 +36,7 @@ char *strncpy(char *dst, const char *src, size_t n) {
 			*temp++ = '\0';
 		}
 	}
+	printf("after strncpy:(n=%d) dst: %s; src: %s\n",n , *dst, *src);
 	return dst;
 }
 char *strcat(char *dst, const char *src) {
@@ -44,6 +48,7 @@ char *strcat(char *dst, const char *src) {
 	}
 	while((*temp++ = *src++) != '\0');
 	return dst;
+	printf("after strcat: dst: %s; src: %s\n", *dst, *src);
 }
 
 int strcmp(const char *s1, const char *s2) {
@@ -54,12 +59,15 @@ int strcmp(const char *s1, const char *s2) {
 		s2++;
 	}
 	if (*(unsigned char*)s1 > *(unsigned char*)s2){
+	printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, 1);
 		return 1;
 	}
 	else if(*(unsigned char*)s1 > *(unsigned char*)s2){
+	printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, -1);
 		return -1;
 	}
 	else {
+	printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, 0);
 		return 0;
 	}
 }
@@ -72,6 +80,7 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 		s1++;
 		s2++;
 	}
+	printf("strncmp:(n=%d) s1: %s; s2: %s; out: %d\n",n, *s1, *s2, *s1-*s2);
 	return *s1 - *s2;
 }
 
