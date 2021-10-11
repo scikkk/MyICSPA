@@ -163,7 +163,7 @@ int memcmp(const void *s1, const void *s2, size_t n) {
 	else if (*(char*)s1 < *(char*)s2){
 		return -1;
 	}
-	/* assert(n==-1); */
+	assert(n==-1);
 	assert(*(char*)s1 == *(char*)s2);
 	return 0;
 }
