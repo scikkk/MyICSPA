@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <klib.h>
 #include <klib-macros.h>
 #include <stdint.h>
@@ -13,7 +12,7 @@ size_t strlen(const char *s) {
 		s++;
 		len++;
 	}
-	printf("strlen: input: %s; output: %d\n", *s, len);
+	// printf("strlen: input: %s; output: %d\n", *s, len);
 	return len;
 }
 
@@ -22,7 +21,7 @@ char *strcpy(char *dst, const char *src) {
 	assert(dst != NULL && src != NULL);
 	char *ret = dst;
 	while((*dst++ = *src++) != '\0');
-	printf("after strcpy: dst: %s; src: %s\n", *dst, src);
+	// printf("after strcpy: dst: %s; src: %s\n", *dst, src);
 	return ret;
 }
 
@@ -37,7 +36,7 @@ char *strncpy(char *dst, const char *src, size_t n) {
 			*temp++ = '\0';
 		}
 	}
-	printf("after strncpy:(n=%d) dst: %s; src: %s\n",n , *dst, *src);
+	// printf("after strncpy:(n=%d) dst: %s; src: %s\n",n , *dst, *src);
 	return dst;
 }
 char *strcat(char *dst, const char *src) {
@@ -49,26 +48,27 @@ char *strcat(char *dst, const char *src) {
 	}
 	while((*temp++ = *src++) != '\0');
 	return dst;
-	printf("after strcat: dst: %s; src: %s\n", *dst, *src);
+	// printf("after strcat: dst: %s; src: %s\n", *dst, *src);
 }
 
 int strcmp(const char *s1, const char *s2) {
 	/* panic("Not implemented"); */
+	assert(0);
 	assert((s1 != NULL) && (s2 != NULL));
 	while((*s1) && (*s1 == *s2)){
 		s1++;
 		s2++;
 	}
 	if (*(unsigned char*)s1 > *(unsigned char*)s2){
-	printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, 1);
+	// printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, 1);
 		return 1;
 	}
 	else if(*(unsigned char*)s1 > *(unsigned char*)s2){
-	printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, -1);
+	// printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, -1);
 		return -1;
 	}
 	else {
-	printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, 0);
+	// printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, 0);
 		return 0;
 	}
 }
@@ -81,7 +81,7 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 		s1++;
 		s2++;
 	}
-	printf("strncmp:(n=%d) s1: %s; s2: %s; out: %d\n",n, *s1, *s2, *s1-*s2);
+	// printf("strncmp:(n=%d) s1: %s; s2: %s; out: %d\n",n, *s1, *s2, *s1-*s2);
 	return *s1 - *s2;
 }
 
@@ -153,7 +153,7 @@ int memcmp(const void *s1, const void *s2, size_t n) {
 		(char*)s2++;
 		n--;
 	}
-	printf("strcmp: s1: %s; s2: %s; out: %d\n", *(char*)s1, *(char*)s2, (*((unsigned char *)s1) - *((unsigned char *)s2)));
+	// printf("strcmp: s1: %s; s2: %s; out: %d\n", *(char*)s1, *(char*)s2, (*((unsigned char *)s1) - *((unsigned char *)s2)));
 	if (*(char*)s1 > *(char*)s2){
 		return 1;
 	}
