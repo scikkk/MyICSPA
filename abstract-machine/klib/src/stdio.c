@@ -16,11 +16,12 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 
 int sprintf(char *out, const char *fmt, ...) {
 	/* panic("Not implemented"); */
-	int ret = -1;
+	int ret = 0;
 	va_list ap;
 	va_start(ap, fmt);
 	while(*fmt != '\0'){
 		if(*fmt != '%'){
+			ret++;
 			*out++ = *fmt++;
 			*out = '\0';
 		}
@@ -61,12 +62,14 @@ int sprintf(char *out, const char *fmt, ...) {
 
 						 }
 				default: {
+							 ret++;
 							 *out++ = *fmt++;
 							 *out = '\0';
 						 }
 			}
 			assert(*out == '\0');
 		}
+
 	}
 	va_end(ap);
 	return ret;
