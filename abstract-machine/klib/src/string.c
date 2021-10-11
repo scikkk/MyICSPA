@@ -79,7 +79,13 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 		s2++;
 	}
 	// printf("strncmp:(n=%d) s1: %s; s2: %s; out: %d\n",n, *s1, *s2, *s1-*s2);
-	return *s1 - *s2;
+	if (*(unsigned char*)s1 > *(unsigned char*)s2){
+		return 1;
+	}
+	else if(*(unsigned char*)s1 < *(unsigned char*)s2){
+		return -1;
+	}
+	return 0;
 }
 
 void *memset(void *s, int c, size_t n) {
