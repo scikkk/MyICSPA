@@ -154,16 +154,15 @@ int memcmp(const void *s1, const void *s2, size_t n) {
 		(char*)s1++;
 		(char*)s2++;
 	}
+	assert(n==0);
 	// printf("strcmp: s1: %s; s2: %s; out: %d\n", *(char*)s1, *(char*)s2, (*((unsigned char *)s1) - *((unsigned char *)s2)));
-	if (n==0){
-		return 0;
-	}
 	if (*(char*)s1 > *(char*)s2){
 		return 1;
 	}
-	else{
+	else if (*(char*)s1 < *(char*)s2){
 		return -1;
 	}
+	return 0;
 }
 
 #endif
