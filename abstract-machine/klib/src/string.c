@@ -91,10 +91,10 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 void *memset(void *s, int c, size_t n) {
 	/* panic("Not implemented"); */
 	assert(s != NULL && n > 0);
-	char *tmps = (char*)s;
+	char *temps = (char*)s;
 	const unsigned char ch = (char)c;
 	while(n--){
-		*tmps++ = ch;
+		*temps++ = ch;
 	}
 	return s;
 }
@@ -149,19 +149,19 @@ void *memcpy(void *out, const void *in, size_t n) {
 int memcmp(const void *s1, const void *s2, size_t n) {
 	/* panic("Not implemented"); */
 	assert(s1 != NULL && s2 != NULL);
-	if(n == 0) return 0;
-	while(n > 0 && (*(char*)s1 == *(char*)s2)){
-		(char*)s1++;
-		(char*)s2++;
-		n--;
-	}
-	// printf("strcmp: s1: %s; s2: %s; out: %d\n", *(char*)s1, *(char*)s2, (*((unsigned char *)s1) - *((unsigned char *)s2)));
-	if (*(char*)s1 > *(char*)s2){
-		return 1;
-	}
-	else if(*(char*)s1 < *(char*)s2){
-		return -1;
-	}
+	/* if(n == 0) return 0; */
+	/* while(n > 0 && (*(char*)s1 == *(char*)s2)){ */
+	/* 	(char*)s1++; */
+	/* 	(char*)s2++; */
+	/* 	n--; */
+	/* } */
+	/* // printf("strcmp: s1: %s; s2: %s; out: %d\n", *(char*)s1, *(char*)s2, (*((unsigned char *)s1) - *((unsigned char *)s2))); */
+	/* if (*(char*)s1 > *(char*)s2){ */
+	/* 	return 1; */
+	/* } */
+	/* else if(*(char*)s1 < *(char*)s2){ */
+	/* 	return -1; */
+	/* } */
 	return 0;
 }
 
