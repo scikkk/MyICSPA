@@ -59,11 +59,11 @@ int strcmp(const char *s1, const char *s2) {
 		s2++;
 	}
 	if (*(unsigned char*)s1 > *(unsigned char*)s2){
-	// printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, 1);
+		// printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, 1);
 		return 1;
 	}
 	else if(*(unsigned char*)s1 < *(unsigned char*)s2){
-	// printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, -1);
+		// printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, -1);
 		return -1;
 	}
 	// printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, 0);
@@ -128,20 +128,20 @@ void *memcpy(void *out, const void *in, size_t n) {
 	if (n < 0 || out == NULL || in == NULL){
 		return NULL;
 	}
-    if(out > (in + n) || out < in){
-	char *tempout = (char*)out;
-	const char *tempin = (char*)in;
+	if(out > (in + n) || out < in){
+		char *tempout = (char*)out;
+		const char *tempin = (char*)in;
 		while(n--){
-		*tempout++ = *tempin++;
-	}
+			*tempout++ = *tempin++;
+		}
 	}
 	else{
-		
-	char *tempout = (char*)(out+n-1);
-	const char *tempin = (char*)(in+n-1);
-	while (n--){
-		*tempout-- = *tempin--;
-	}
+
+		char *tempout = (char*)(out+n-1);
+		const char *tempin = (char*)(in+n-1);
+		while (n--){
+			*tempout-- = *tempin--;
+		}
 	}
 	return out;
 }
@@ -150,19 +150,20 @@ int memcmp(const void *s1, const void *s2, size_t n) {
 	/* panic("Not implemented"); */
 	assert(s1 != NULL && s2 != NULL);
 	if(n == 0) return 0;
-	while(n > 0 && (*(char*)s1 == *(char*)s2)){
+	while(n-- && (*(char*)s1 == *(char*)s2)){
 		(char*)s1++;
 		(char*)s2++;
-		n--;
 	}
 	// printf("strcmp: s1: %s; s2: %s; out: %d\n", *(char*)s1, *(char*)s2, (*((unsigned char *)s1) - *((unsigned char *)s2)));
+	if (n==0){
+		return 0;
+	}
 	if (*(char*)s1 > *(char*)s2){
 		return 1;
 	}
-	else if(*(char*)s1 < *(char*)s2){
+	else{
 		return -1;
 	}
-	return 0;
 }
 
 #endif
