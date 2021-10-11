@@ -125,10 +125,20 @@ void *memcpy(void *out, const void *in, size_t n) {
 	if (n < 0 || out == NULL || in == NULL){
 		return NULL;
 	}
+    if(out > (in + n) || out < in){
 	char *tempout = (char*)out;
-	char *tempin = (char*)in;
-	while(n-- > 0){
+	const char *tempin = (char*)in;
+		while(n--){
 		*tempout++ = *tempin++;
+	}
+	}
+	else{
+		
+	char *tempout = (char*)(out+n-1);
+	const char *tempin = (char*)(in+n-1);
+	while (n--){
+		*tempout-- = *tempin--;
+	}
 	}
 	return out;
 }
