@@ -24,6 +24,10 @@ typedef struct Decode {
   Operand dest, src1, src2;
   ISADecodeInfo isa;
   IFDEF(CONFIG_ITRACE, char logbuf[128]);
+  // wk 2.2 iringbuf
+  char iringbuf[16][128];
+  short iringbuf_idx;
+  // wk 2.2 iringbuf
 } Decode;
 
 #define id_src1 (&s->src1)
