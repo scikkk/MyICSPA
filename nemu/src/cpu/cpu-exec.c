@@ -72,10 +72,10 @@ static void statistic() {
 void iringbuf_display(){
 	for(int k = 0; k < 16; k++){
 		if(k == iringbuf_idx){
-			printf("--> %s", iringbuf[k]);
+			printf("--> %s\n", iringbuf[k]);
 		}
 		else{
-			printf("    %s", iringbuf[k]);
+			printf("    %s\n", iringbuf[k]);
 		}
 	}
 }
