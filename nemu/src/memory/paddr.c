@@ -38,7 +38,7 @@ void init_mem() {
 }
 
 word_t paddr_read(paddr_t addr, int len) {
-	static int count = 0;
+	static int count = 1;
 	if (likely(in_pmem(addr))){
 		word_t ret = pmem_read(addr, len);
 		printf("[read ] count:%-6d begin:0x%-9x end:0x%-9x data:0x%-9x %d\n", count++, addr, addr+len, ret, ret);
@@ -50,7 +50,7 @@ word_t paddr_read(paddr_t addr, int len) {
 }
 
 void paddr_write(paddr_t addr, int len, word_t data) {
-	static int count = 0;
+	static int count = 1;
 	if (likely(in_pmem(addr))) {
 		printf("[write] count:%-6d begin:0x%-9x end:0x%-9x data:0x%-9x %d\n", count++, addr, addr+len, data, data);
 	   	pmem_write(addr, len, data); 
