@@ -38,6 +38,8 @@ void init_mem() {
 }
 
 word_t paddr_read(paddr_t addr, int len) {
+  static int count = 0;
+  printf("[read] count: %d; begin: 0x%-8x; end: 0x%-8x; res: 0x%-8x\n", count++, addr, addr+len, pmem_read(addr, len));
   if (likely(in_pmem(addr))) return pmem_read(addr, len);
   MUXDEF(CONFIG_DEVICE, return mmio_read(addr, len),
     panic("address = " FMT_PADDR " is out of bound of pmem [" FMT_PADDR ", " FMT_PADDR ") at pc = " FMT_WORD,
