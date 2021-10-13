@@ -26,7 +26,10 @@ rtlreg_t tmp_reg[4];
 void device_update();
 void fetch_decode(Decode *s, vaddr_t pc);
 
-
+// wk 2.2 iringbuf
+char iringbuf[16][128];
+short iringbuf_idx = 0;
+// wk 2.2 iringbuf
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
@@ -65,9 +68,24 @@ static void statistic() {
 	else Log("Finish running in less than 1 us and can not calculate the simulation frequency");
 }
 
+// wk 2.2 iringbuf display
+void iringbuf_display(){
+	for(int k = 0; k < 16; k++){
+		if(k == iringbuf_idx){
+			printf("--> %s", iringbuf[k]);
+		}
+		else{
+			printf("    %s", iringbuf[k]);
+		}
+	}
+}
+// wk 2.2 iringbuf display
+
 void assert_fail_msg() {
 	isa_reg_display();
-
+    // wk 2.2 iringbuf
+	iringbuf_display();
+	// wk 2.2 iringbuf
 	statistic();
 }
 
@@ -97,26 +115,14 @@ void fetch_decode(Decode *s, vaddr_t pc) {
 	disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
 			MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.instr.val, ilen);
 	// wk 2.2
-	s->iringbuf_idx++;
-	s->iringbuf_idx %= 16;
-	strcpy(s->iringbuf[s->iringbuf_idx], s->logbuf);
+	iringbuf_idx++;
+	iringbuf_idx %= 16;
+	strcpy(iringbuf[iringbuf_idx], s->logbuf);
 	// wk 2.2
 #endif
 
 }
 
-// wk 2.2 iringbuf display
-void iringbuf_display(const Decode *_this){
-	for(int k = 0; k < 16; k++){
-		if(k == _this->iringbuf_idx){
-			printf("--> %s",_this->iringbuf[k]);
-		}
-		else{
-			printf("    %s", _this->iringbuf[k]);
-		}
-	}
-}
-// wk 2.2 iringbuf display
 
 /* Simulate how the CPU works. */
 void cpu_exec(uint64_t n) {
@@ -132,7 +138,7 @@ void cpu_exec(uint64_t n) {
 
 	Decode s;
 	// wk 2.2
-	s.iringbuf_idx = 0;
+	iringbuf_idx = 0;
 	// wk 2.2
 	for (;n > 0; n --) {
 		fetch_decode_exec_updatepc(&s);
@@ -147,16 +153,11 @@ void cpu_exec(uint64_t n) {
 
 	switch (nemu_state.state) {
 		case NEMU_RUNNING: nemu_state.state = NEMU_STOP; break;
-		case NEMU_ABORT:
-						   // wk 2.2 ringbuf
-						   iringbuf_display(&s);
-						   // wk 2.2 ringbuf
-
-		case NEMU_END: 		Log("nemu: %s at pc = " FMT_WORD,
-									(nemu_state.state == NEMU_ABORT ? ASNI_FMT("ABORT", ASNI_FG_RED) :
-									 (nemu_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
-									  ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED))),
-									nemu_state.halt_pc);
+		case NEMU_END: 	case NEMU_ABORT: Log("nemu: %s at pc = " FMT_WORD,
+									        (nemu_state.state == NEMU_ABORT ? ASNI_FMT("ABORT", ASNI_FG_RED) :
+									        (nemu_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
+									        ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED))),
+									        nemu_state.halt_pc);
 							// fall through
 		case NEMU_QUIT: statistic();
 	}
