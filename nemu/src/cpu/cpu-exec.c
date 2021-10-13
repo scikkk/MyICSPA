@@ -70,6 +70,7 @@ static void statistic() {
 
 // wk 2.2 iringbuf display
 void iringbuf_display(){
+	printf("\n");
 	for(int k = 0; k < 16; k++){
 		if(k == iringbuf_idx){
 			printf("--> %s\n", iringbuf[k]);
@@ -78,6 +79,7 @@ void iringbuf_display(){
 			printf("    %s\n", iringbuf[k]);
 		}
 	}
+	printf("\n");
 }
 // wk 2.2 iringbuf display
 
