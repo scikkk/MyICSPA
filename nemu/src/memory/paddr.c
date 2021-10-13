@@ -41,7 +41,7 @@ word_t paddr_read(paddr_t addr, int len) {
 	static int count = 0;
 	if (likely(in_pmem(addr))){
 		word_t ret = pmem_read(addr, len);
-		printf("[read] count:%-4d begin:0x%-9x end:0x%-9x res:0x%-9x %d\n", count++, addr, addr+len, ret, ret);
+		printf(" [read] count:%-6d begin:0x%-9x end:0x%-9x data:0x%-9x %d\n", count++, addr, addr+len, ret, ret);
 		return ret;
 	}
 	MUXDEF(CONFIG_DEVICE, return mmio_read(addr, len),
@@ -50,7 +50,12 @@ word_t paddr_read(paddr_t addr, int len) {
 }
 
 void paddr_write(paddr_t addr, int len, word_t data) {
-	if (likely(in_pmem(addr))) { pmem_write(addr, len, data); return; }
+	static int count = 0;
+	if (likely(in_pmem(addr))) {
+		printf("[write] count:%-6d begin:0x%-9x end:0x%-9x data:0x%-9x %d\n", count++, addr, addr+len, data, data);
+	   	pmem_write(addr, len, data); 
+		return;
+   	}
 	MUXDEF(CONFIG_DEVICE, mmio_write(addr, len, data),
 			panic("address = " FMT_PADDR " is out of bound of pmem [" FMT_PADDR ", " FMT_PADDR ") at pc = " FMT_WORD,
 				addr, CONFIG_MBASE, CONFIG_MBASE + CONFIG_MSIZE, cpu.pc));
