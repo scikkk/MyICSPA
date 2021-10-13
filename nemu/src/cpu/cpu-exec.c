@@ -149,7 +149,7 @@ void cpu_exec(uint64_t n) {
 		case NEMU_RUNNING: nemu_state.state = NEMU_STOP; break;
 case NEMU_ABORT:
 // wk 2.2 ringbuf
-iringbuf_display(&s);
+/* iringbuf_display(&s); */
 // wk 2.2 ringbuf
 
 		case NEMU_END: 						   Log("nemu: %s at pc = " FMT_WORD,
