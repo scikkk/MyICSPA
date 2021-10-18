@@ -1,7 +1,6 @@
 def_EHelper(jal) {
 	rtl_addi(s,ddest,&cpu.pc,0x4);
 	rtl_j(s, cpu.pc + id_src1->simm);
-
 }
 
 def_EHelper(jalr) {
