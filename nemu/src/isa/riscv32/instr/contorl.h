@@ -11,9 +11,7 @@ def_EHelper(jalr) {
 
 
 def_EHelper(beq) {
-	if (interpret_relop(RELOP_EQ,*dsrc1,*dsrc2)){
-		rtl_j(s, cpu.pc + id_dest->simm);
-	}
+	rtl_jrelop(s, RELOP_EQ,dsrc1,dsrc2, cpu.pc + id_dest->simm);
 }
 
 def_EHelper(bne) {
