@@ -10,6 +10,9 @@ $(BINARY): compile_git
 # Some convenient rules
 
 override ARGS ?= --log=$(BUILD_DIR)/nemu-log.txt
+# wk 2.2 ftrace
+override ARGS ?= --elf=$(BUILD_DIR)/$(IMG).elf
+# wk 2.2 ftrace
 override ARGS += $(ARGS_DIFF)
 
 # Command to execute NEMU
