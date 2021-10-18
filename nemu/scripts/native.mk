@@ -11,7 +11,7 @@ $(BINARY): compile_git
 
 override ARGS ?= --log=$(BUILD_DIR)/nemu-log.txt
 # wk 2.2 ftrace
-override ARGS += --elf=$(BUILD_DIR)/$(IMAGE)-riscv32-nemu.elf
+override ARGS += --elf=$(BUILD_DIR)/$(subst $(IMG),"bin","elf")
 # wk 2.2 ftrace
 override ARGS += $(ARGS_DIFF)
 
