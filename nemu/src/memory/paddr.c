@@ -37,12 +37,20 @@ void init_mem() {
 			(paddr_t)CONFIG_MBASE, (paddr_t)CONFIG_MBASE + CONFIG_MSIZE);
 }
 
+bool mtrace_enable(paddr_t addr){
+#ifdef CONFIG_MTRACE_COND 
+  return MTRACE_COND;
+#endif
+  return true;
+}
+
 word_t paddr_read(paddr_t addr, int len) {
 	if (likely(in_pmem(addr))){
 
 		word_t ret = pmem_read(addr, len);
 #ifdef CONFIG_MTRACE
 		static int count = 1;
+		if (mtrace_enable(addr))
 		printf("[read ] count:%-6d begin:0x%-10x end:0x%-10x data:0x%-9x %-16d\n", count++, addr, addr+len, ret, ret);
 #endif
 		return ret;
@@ -57,6 +65,7 @@ void paddr_write(paddr_t addr, int len, word_t data) {
 #ifdef CONFIG_MTRACE
 		static int count = 1;
 		word_t old = pmem_read(addr, len);
+		if (mtrace_enable(addr))
 		printf("[write] count:%-6d begin:0x%-10x end:0x%-10x old :0x%-9x %-16d new :0x%-9x %d\n", count++, addr, addr+len,old,old, data, data);
 #endif 
 		pmem_write(addr, len, data); 

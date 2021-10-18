@@ -139,17 +139,21 @@ config ITRACE
   bool "Enable instruction tracer"
   default y
 
+config ITRACE_COND
+  depends on ITRACE
+  string "Only trace instructions when the condition is true"
+  default "true"
+
 # wk 2.2 mtrace
 config MTRACE
   depends on TRACE && TARGET_NATIVE_ELF && ENGINE_INTERPRETER
   bool "Enable memory tracer"
   default y
-# wk 2.2 mtrace
-
-config ITRACE_COND
-  depends on ITRACE
-  string "Only trace instructions when the condition is true"
+config MTRACE_COND
+  depends on MTRACE
+  string "Only trace memory when the condition is true"
   default "true"
+# wk 2.2 mtrace
 
 
 config DIFFTEST
