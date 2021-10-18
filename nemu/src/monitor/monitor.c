@@ -3,6 +3,9 @@
 
 void init_rand();
 void init_log(const char *log_file);
+// wk 2.2 ftrace
+void init_ftrace(const char *elf_file);
+// wk 2.2 ftrace
 void init_mem();
 void init_difftest(char *ref_so_file, long img_size, int port);
 void init_device();
@@ -107,6 +110,11 @@ void init_monitor(int argc, char *argv[]) {
 
 	/* Open the log file. */
 	init_log(log_file);
+
+	// wk 2.2 ftrace
+	/* Load the log file*/
+	init_ftrace(elf_file);
+	// wk 2.2 ftrace
 
 	/* Initialize memory. */
 	init_mem();
