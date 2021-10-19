@@ -40,9 +40,10 @@ void init_ftrace(const char *elf_file) {
 	Assert(fp, "Can not open '%s'", elf_file);
 
 	elf_fp = fp;
-	/* int file_size = ftell(fp); */
+	int file_size = ftell(fp);
+	printf("size: %i\n", file_size);
 	/* char *elf_str = (char*)malloc(sizeof(char)*file_size); */
-	int file_size = 10000;
+	file_size = 10000;
 	char elf_str[10000];
 	fseek(elf_fp, 0, SEEK_SET);
 
