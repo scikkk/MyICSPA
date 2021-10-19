@@ -44,7 +44,7 @@ void init_ftrace(const char *elf_file) {
 	char *elf_str = (char*)malloc(sizeof(char)*file_size);
 	fseek(elf_fp, 0, SEEK_SET);
 
-	file_size = 536;
+	file_size = 36;
 
 	unsigned long ret =	fread(elf_str, sizeof(char), file_size, elf_fp);
 	assert(ret == file_size);
