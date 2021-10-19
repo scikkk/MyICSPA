@@ -25,7 +25,7 @@ void tableheader(const char *pbuff)
 			for(int idx = 0; idx <ncount; idx++)
 			{
 			if(1||ELF32_R_TYPE(psym->st_info)==STT_FUNC){
-				printf("%x\t %u\t %s\n",psym->st_value, psym->st_size,(psym->st_name+pbuffstr));
+				printf("%x\t %u\t %s\t%d\n",psym->st_value, psym->st_size,(psym->st_name+pbuffstr),ELF32_R_TYPE(psym->st_info));
 			}	
 			psym++;
 			}
