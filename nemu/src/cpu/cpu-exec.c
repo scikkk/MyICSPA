@@ -132,7 +132,7 @@ void fetch_decode(Decode *s, vaddr_t pc) {
 // wk 2.2 ftrace
 #ifdef CONFIG_FTRACE
 	if ((uint8_t *)&s->isa.instr.val){
-		printf("%x\n", s->isa.instr.val);
+		printf("%x\n", s->isa.instr.val&0x7f);
 	/* func_display(); */
 	}
 #endif 
