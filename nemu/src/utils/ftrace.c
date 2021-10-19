@@ -25,7 +25,7 @@ void tableheader(const char *pbuff)
 			for(int idx = 0; idx < ncount; idx++)
 			{
 				printf("%d:\t", idx);
-				printf("%u %u %u %u %u %u",psym->st_value, psym->st_size,psym->st_info,psym->st_other,psym->st_shndx,psym->st_name);
+				printf("%u %u %u %u %u %u\n",psym->st_value, psym->st_size,psym->st_info,psym->st_other,psym->st_shndx,psym->st_name);
 			}
 			/* printf("pbuffstr: %s ncount: %d\n", pbuffstr, ncount); */ 
 			continue;
