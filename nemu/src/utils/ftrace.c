@@ -53,6 +53,7 @@ void init_ftrace(const char *elf_file) {
 
 	fclose(elf_fp);
 	tableheader(elf_str);
+	free(elf_str);
 	Log("Symbol table is loaded from %s", elf_file);
 }
 
