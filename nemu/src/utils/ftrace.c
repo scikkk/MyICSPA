@@ -20,13 +20,13 @@ void tableheader(const char *pbuff)
 		{
 			Elf32_Sym* psym = (Elf32_Sym*)(pbuff + psecheader[i].sh_offset);
 			int ncount = psecheader[i].sh_size / psecheader[i].sh_entsize;
-			char* pbuffstr = (char*)((psecheader + psecheader[i].sh_link)->sh_offset + pbuff);
+			/* char* pbuffstr = (char*)((psecheader + psecheader[i].sh_link)->sh_offset + pbuff); */
 			printf("Symbol table '%s' contains %d entries:\r\n", psecheader[i].sh_name + pshstrbuff, ncount);
-			do{
-				pbuffstr += strlen(pbuffstr);
-				pbuffstr++;
-				printf("psym->st_name: %u pbuffstr: %s \n",psym->st_name, pbuffstr); 
-			}while(strlen(pbuffstr) != 0);
+			for(int idx = 0; idx < ncount; idx++)
+			{
+				printf("%d:\t", idx);
+				printf("%u %u %u %u %u %u",psym->st_value, psym->st_size,psym->st_info,psym->st_other,psym->st_shndx,psym->st_name);
+			}
 			/* printf("pbuffstr: %s ncount: %d\n", pbuffstr, ncount); */ 
 			continue;
 		}
