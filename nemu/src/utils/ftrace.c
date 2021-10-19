@@ -5,6 +5,13 @@
 /* extern uint32_t g_nr_guest_instr; */
 FILE *elf_fp = NULL;
 
+struct func{
+	paddr_t addr;
+	uint32_t size;
+	char name[20];
+} func_table[99];
+static short func_idx=0;
+
 void tableheader(const char *pbuff)
 {
 	//从节区里面定位到偏移
@@ -24,12 +31,15 @@ void tableheader(const char *pbuff)
 			/* printf("Symbol table '%s' contains %d entries:\r\n", psecheader[i].sh_name + pshstrbuff, ncount); */
 			for(int idx = 0; idx <ncount; idx++)
 			{
-			if(ELF32_ST_TYPE(psym->st_info)==STT_FUNC){
-				printf("%-8x\t %u\t %s\n",psym->st_value, psym->st_size,(psym->st_name+pbuffstr));
-			}	
-			psym++;
+				if(ELF32_ST_TYPE(psym->st_info)==STT_FUNC){
+					/* printf("%-8x\t %u\t %s\n",psym->st_value, psym->st_size,(psym->st_name+pbuffstr)); */
+					func_table[func_idx].addr = psym->st_value;
+					func_table[func_idx].size = psym->st_size;
+					strcat(func_table[func_idx].name, psym->st_name+pbuffstr);
+					func_idx++;
+				}	
+				psym++;
 			}
-			/* printf("pbuffstr: %s ncount: %d\n", pbuffstr, ncount); */ 
 			continue;
 		}
 	}
@@ -59,6 +69,10 @@ void init_ftrace(const char *elf_file) {
 	tableheader(elf_str);
 	free(elf_str);
 	Log("Symbol table is loaded from %s", elf_file);
+
+	for(int k = 0; k < func_idx; k++){
+		printf("%-10x%-10x%s\n",func_table[k].addr,func_table[k].size,func_table[k].name);
+	}
 }
 
 /* bool ftrace_enable() { */
