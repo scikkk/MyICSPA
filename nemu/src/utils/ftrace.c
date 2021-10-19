@@ -26,6 +26,7 @@ for(int kkk = 0; kkk < 500; kkk++){
 
 			pbuffstr++;
 			printf("psym->st_name: %u pbuffstr: %s ncount: %d\n",psym->st_name, pbuffstr, ncount); 
+			pbuffstr += strlen(pbuffstr);
 }
 			/* printf("pbuffstr: %s ncount: %d\n", pbuffstr, ncount); */ 
 			continue;
