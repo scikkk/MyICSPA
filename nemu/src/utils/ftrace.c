@@ -25,7 +25,7 @@ void tableheader(const char *pbuff)
 			do{
 				pbuffstr += strlen(pbuffstr);
 				pbuffstr++;
-				printf("psym->st_name: %u pbuffstr: %s ncount: %d\n",psym->st_name, pbuffstr, ncount); 
+				printf("psym->st_name: %u pbuffstr: %s \n",psym->st_name, pbuffstr); 
 			}while(strlen(pbuffstr) != 0);
 			/* printf("pbuffstr: %s ncount: %d\n", pbuffstr, ncount); */ 
 			continue;
