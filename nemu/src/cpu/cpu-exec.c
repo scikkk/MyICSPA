@@ -5,6 +5,10 @@
 #include <locale.h>
 #include <isa-exec.h>
 
+// wk 2.2 ftrace
+void func_display();
+// wk 2.2 ftrace
+
 // wk add
 bool wp_change();
 // wk add
@@ -124,6 +128,12 @@ void fetch_decode(Decode *s, vaddr_t pc) {
 	strcpy(iringbuf[iringbuf_idx], s->logbuf);
 	// wk 2.2
 #endif
+
+// wk 2.2 ftrace
+#ifdef CONFIG_FTRACE
+	func_display();
+#endif 
+// wk 2.2 ftrace
 
 }
 
