@@ -20,7 +20,6 @@ void tableheader(const char *pbuff)
 	Elf32_Shdr* psecheader = (Elf32_Shdr*)(pbuff + pfilehead->e_shoff);
 	Elf32_Shdr* pshstr = (Elf32_Shdr*)(psecheader + eshstrndx);
 	char* pshstrbuff = (char *)(pbuff + pshstr->sh_offset);
-
 	for(int i = 0;i<pfilehead->e_shnum;++i)
 	{
 		if(!strcmp(psecheader[i].sh_name + pshstrbuff, ".dynsym") || !strcmp(psecheader[i].sh_name + pshstrbuff, ".symtab"))
@@ -61,7 +60,6 @@ void init_ftrace(const char *elf_file) {
 	char *elf_str = (char*)malloc(sizeof(char)*file_size);
 	fseek(elf_fp, 0, SEEK_SET);
 
-
 	unsigned long ret =	fread(elf_str, sizeof(char), file_size, elf_fp);
 	assert(ret == file_size);
 
@@ -70,9 +68,9 @@ void init_ftrace(const char *elf_file) {
 	free(elf_str);
 	Log("Symbol table is loaded from %s", elf_file);
 
-	for(int k = 0; k < func_idx; k++){
-		printf("%-10x%-10x%s\n",func_table[k].addr,func_table[k].size,func_table[k].name);
-	}
+//	for(int k = 0; k < func_idx; k++){
+//		printf("%-10x%-10x%s\n",func_table[k].addr,func_table[k].size,func_table[k].name);
+//	}
 }
 
 /* bool ftrace_enable() { */
