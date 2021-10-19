@@ -48,8 +48,7 @@ void init_ftrace(const char *elf_file) {
 
 
 	unsigned long ret =	fread(elf_str, sizeof(char), file_size, elf_fp);
-    printf("ret: %ld\n", ret);
-	assert(1 || ret == file_size);
+	assert(ret == file_size);
 
 	fclose(elf_fp);
 	tableheader(elf_str);
