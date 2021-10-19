@@ -26,7 +26,7 @@ void tableheader(const char *pbuff)
 			{
 				printf("%d:\t", idx);
 				
-				printf("%u %u %d %d %u %u %s\n",psym->st_value, psym->st_size,ELF32_ST_TYPE(psym->st_info),ELF32_ST_BIND(psym->st_info),psym->st_other,psym->st_shndx,(psym->st_name+pbuffstr));
+				printf("%x\t %u\t %d\t %d\t %u\t %u\t %s\n",psym->st_value, psym->st_size,ELF32_ST_TYPE(psym->st_info),ELF32_ST_BIND(psym->st_info),psym->st_other,psym->st_shndx,(psym->st_name+pbuffstr));
 			psym++;
 			}
 			/* printf("pbuffstr: %s ncount: %d\n", pbuffstr, ncount); */ 
