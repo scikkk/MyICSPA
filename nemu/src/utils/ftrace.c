@@ -18,11 +18,11 @@ void tableheader(const char *pbuff)
 	{
 		if(!strcmp(psecheader[i].sh_name + pshstrbuff, ".dynsym") || !strcmp(psecheader[i].sh_name + pshstrbuff, ".symtab"))
 		{
-			//    Elf32_Sym* psym = (Elf32_Sym*)(pbuff + psecheader[i].sh_offset);
+			Elf32_Sym* psym = (Elf32_Sym*)(pbuff + psecheader[i].sh_offset);
 			int ncount = psecheader[i].sh_size / psecheader[i].sh_entsize;
 			char* pbuffstr = (char*)((psecheader + psecheader[i].sh_link)->sh_offset + pbuff);
 			printf("Symbol table '%s' contains %d entries:\r\n", psecheader[i].sh_name + pshstrbuff, ncount);
-			/* printf("%s %s %d",*psym, *pbuffstr, ncount); */
+			printf("%us %s %d",psym->st_info, pbuffstr, ncount); 
 
 			printf(" %s %d", pbuffstr, ncount); 
 			continue;
@@ -44,8 +44,11 @@ void init_ftrace(const char *elf_file) {
 	char *elf_str = (char*)malloc(sizeof(char)*file_size);
 	fseek(elf_fp, 0, SEEK_SET);
 
+	file_size = 65536;
+
 	unsigned long ret =	fread(elf_str, sizeof(char), file_size, elf_fp);
 	assert(ret == file_size);
+
 	fclose(elf_fp);
 	tableheader(elf_str);
 	Log("Symbol table is loaded from %s", elf_file);
