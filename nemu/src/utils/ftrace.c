@@ -21,10 +21,10 @@ void tableheader(const char *pbuff)
 			Elf32_Sym* psym = (Elf32_Sym*)(pbuff + psecheader[i].sh_offset);
 			int ncount = psecheader[i].sh_size / psecheader[i].sh_entsize;
 			char* pbuffstr = (char*)((psecheader + psecheader[i].sh_link)->sh_offset + pbuff);
-			printf("Symbol table '%s' contains %d entries:\r\n", psecheader[i].sh_name + pshstrbuff, ncount);
+			/* printf("Symbol table '%s' contains %d entries:\r\n", psecheader[i].sh_name + pshstrbuff, ncount); */
 			for(int idx = 0; idx <ncount; idx++)
 			{
-			if(ELF32_R_TYPE(psym->st_info)==2){
+			if(1||ELF32_R_TYPE(psym->st_info)==STT_FUNC){
 				printf("%x\t %u\t %s\n",psym->st_value, psym->st_size,(psym->st_name+pbuffstr));
 			}	
 			psym++;
