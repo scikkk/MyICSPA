@@ -25,8 +25,10 @@ void tableheader(const char *pbuff)
 			for(int idx = 0; idx <ncount; idx++)
 			{
 				printf("%d:\t", idx);
-				
-				printf("%x\t %u\t %d\t %d\t %u\t %u\t %s\n",psym->st_value, psym->st_size,ELF32_ST_TYPE(psym->st_info),ELF32_ST_BIND(psym->st_info),psym->st_other,psym->st_shndx,(psym->st_name+pbuffstr));
+			if(ELF32_R_TYPE(psym->st_info == STT_FUNC)){
+			
+				printf("%x\t %u\t %s\n",psym->st_value, psym->st_size,(psym->st_name+pbuffstr));
+			}	
 			psym++;
 			}
 			/* printf("pbuffstr: %s ncount: %d\n", pbuffstr, ncount); */ 
