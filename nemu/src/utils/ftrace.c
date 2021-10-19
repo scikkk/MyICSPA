@@ -26,7 +26,7 @@ void tableheader(const char *pbuff)
 				pbuffstr += strlen(pbuffstr);
 				pbuffstr++;
 				printf("psym->st_name: %u pbuffstr: %s ncount: %d\n",psym->st_name, pbuffstr, ncount); 
-			}while(strcmp(pbuffstr, "_end") != 0);
+			}while(strlen(pbuffstr) != 0);
 			/* printf("pbuffstr: %s ncount: %d\n", pbuffstr, ncount); */ 
 			continue;
 		}
@@ -45,7 +45,7 @@ void init_ftrace(const char *elf_file) {
 	elf_fp = fp;
 	fseek(elf_fp, 0, SEEK_END);
 	int file_size = ftell(fp);
-	printf("size: %i\n", file_size);
+	/* printf("size: %i\n", file_size); */
 	char *elf_str = (char*)malloc(sizeof(char)*file_size);
 	fseek(elf_fp, 0, SEEK_SET);
 
