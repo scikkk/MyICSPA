@@ -41,7 +41,6 @@ void init_ftrace(const char *elf_file) {
 
 	elf_fp = fp;
 	int file_size = ftell(fp);
-	file_size = 36;
 	char *elf_str = (char*)malloc(sizeof(char)*file_size);
 	fseek(elf_fp, 0, SEEK_SET);
 
