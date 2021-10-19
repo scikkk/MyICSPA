@@ -69,7 +69,7 @@ void init_ftrace(const char *elf_file) {
 	Log("Symbol table is loaded from %s", elf_file);
 
 	for(int k = 0; k < func_idx; k++){
-		printf("%-10x%-10x%s\n",func_table[k].addr,func_table[k].size,func_table[k].name);
+		printf("%-10x%-6d%s\n",func_table[k].addr,func_table[k].size,func_table[k].name);
 	}
 }
 
