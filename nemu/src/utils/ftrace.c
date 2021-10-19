@@ -24,8 +24,8 @@ void tableheader(const char *pbuff)
 			/* printf("Symbol table '%s' contains %d entries:\r\n", psecheader[i].sh_name + pshstrbuff, ncount); */
 			for(int idx = 0; idx <ncount; idx++)
 			{
-			if(1||ELF32_R_TYPE(psym->st_info)==STT_FUNC){
-				printf("%x\t %u\t %s\t%d\n",psym->st_value, psym->st_size,(psym->st_name+pbuffstr),ELF32_R_TYPE(psym->st_info));
+			if(1||ELF32_ST_TYPE(psym->st_info)==STT_FUNC){
+				printf("%-8x\t %u\t %s\t%d\n",psym->st_value, psym->st_size,(psym->st_name+pbuffstr),ELF32_ST_TYPE(psym->st_info));
 			}	
 			psym++;
 			}
