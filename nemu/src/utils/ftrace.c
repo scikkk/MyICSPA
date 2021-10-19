@@ -74,7 +74,7 @@ void init_ftrace(const char *elf_file) {
 	tableheader(elf_str);
 	free(elf_str);
 	Log("Symbol table is loaded from %s", elf_file);
-	/* func_display(); */
+	func_display();
 }
 
 /* bool ftrace_enable() { */
