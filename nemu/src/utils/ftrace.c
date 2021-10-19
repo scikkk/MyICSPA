@@ -43,9 +43,7 @@ void init_ftrace(const char *elf_file) {
 	fseek(elf_fp, 0, SEEK_END);
 	int file_size = ftell(fp);
 	printf("size: %i\n", file_size);
-	/* char *elf_str = (char*)malloc(sizeof(char)*file_size); */
-	file_size = 10000;
-	char elf_str[10000];
+	char *elf_str = (char*)malloc(sizeof(char)*file_size);
 	fseek(elf_fp, 0, SEEK_SET);
 
 
