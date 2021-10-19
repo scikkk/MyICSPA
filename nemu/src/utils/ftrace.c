@@ -44,6 +44,11 @@ void tableheader(const char *pbuff)
 	}
 }
 
+void func_display(){
+	for(int k = 0; k < func_idx; k++){
+		printf("0x%-10x%-6d%s\n",func_table[k].addr,func_table[k].size,func_table[k].name);
+	}
+}
 
 void init_ftrace(const char *elf_file) {
 	elf_fp = stdout;
@@ -67,10 +72,7 @@ void init_ftrace(const char *elf_file) {
 	tableheader(elf_str);
 	free(elf_str);
 	Log("Symbol table is loaded from %s", elf_file);
-
-	for(int k = 0; k < func_idx; k++){
-		printf("0x%-10x%-6d%s\n",func_table[k].addr,func_table[k].size,func_table[k].name);
-	}
+func_display();
 }
 
 /* bool ftrace_enable() { */
