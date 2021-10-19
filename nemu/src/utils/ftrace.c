@@ -22,7 +22,7 @@ void tableheader(const char *pbuff)
 			int ncount = psecheader[i].sh_size / psecheader[i].sh_entsize;
 			char* pbuffstr = (char*)((psecheader + psecheader[i].sh_link)->sh_offset + pbuff);
 			printf("Symbol table '%s' contains %d entries:\r\n", psecheader[i].sh_name + pshstrbuff, ncount);
-for(int kkk = 0; kkk < 500; kkk++){
+for(int kkk = 0; kkk < 10; kkk++){
 
 			pbuffstr++;
 			printf("psym->st_name: %u pbuffstr: %s ncount: %d\n",psym->st_name, pbuffstr, ncount); 
