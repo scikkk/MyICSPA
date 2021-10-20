@@ -120,11 +120,11 @@ void ftrace_write(paddr_t src, paddr_t dst){
 		fprintf(ftrace_fp, "0x%08x: ",cur->pc);
 		if(cur->is_call){
 		   depth++;
-		   for(int _ = 0; _ < depth; _++) fprintf(ftrace_fp, "  |");
+		   for(int _ = 0; _ < depth; _++) fprintf(ftrace_fp, " |");
 			fprintf(ftrace_fp, "call [%s@0x%x]\n", func_table[cur->name_idx].name, cur->dst);
 		}
 		else{
-		   for(int _ = 0; _ < depth; _++) fprintf(ftrace_fp, "  |");
+		   for(int _ = 0; _ < depth; _++) fprintf(ftrace_fp, " |");
 		   depth--;
 			fprintf(ftrace_fp,"ret [%s]\n", func_table[cur->name_idx].name);
 		}
