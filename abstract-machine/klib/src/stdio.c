@@ -24,6 +24,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 out += strlen(valstr);
 							 ret += strlen(valstr);
 							 fmt++;
+							 assert(*out=='\0');
 							 break;
 						 }
 				case 'd':{	 int valint = va_arg(ap, int);
@@ -63,7 +64,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			}
 			assert(*out == '\0');
 		}
-
+    
 	}
 	return ret;
 }
