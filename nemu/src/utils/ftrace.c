@@ -107,6 +107,11 @@ void ftrace_write(paddr_t src, paddr_t dst){
 			return;
 		}
 	}
+#ifdef CONFIG_FTRACE_FILE_COND
+	if(FTRACE_FILE_COND){
+		printf("\n");
+	}
+#endif
 	/* assert(0); */
 }
 
