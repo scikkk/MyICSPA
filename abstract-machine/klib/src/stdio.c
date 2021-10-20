@@ -87,7 +87,7 @@ int printf(const char *fmt, ...) {
 	va_start(ap, fmt);
 	int ret = vsprintf(out, fmt, ap);
 	va_end(ap);
-	putch(out[0]);
+	/* putch(out[0]); */
     /* putstr(out); */
 	return ret;
 }
