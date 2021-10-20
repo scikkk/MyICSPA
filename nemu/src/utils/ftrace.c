@@ -16,9 +16,9 @@ static short func_idx=0;
 union FtraceOneline{
 	bool is_call;
 	paddr_t pc;
-	char name[20];
+	char name[32];
 	paddr_t dst;
-} ftrace_res[10000];
+} ftrace_res[1000];
 static unsigned ftrace_idx = 0;
 
 void tableheader(const char *pbuff)
