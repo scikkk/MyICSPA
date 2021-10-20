@@ -45,8 +45,6 @@ void tableheader(const char *pbuff)
 					func_table[func_idx].end_addr = psym->st_value+psym->st_size-4;
 					func_table[func_idx].size = psym->st_size;
 					strcpy(func_table[func_idx].name, psym->st_name+pbuffstr);
-					/* printf("wk\t%s\n", psym->st_name+pbuffstr); */
-					/* printf("wk\t%s\n", func_table[func_idx].name); */
 
 					func_idx++;
 				}	
@@ -100,7 +98,6 @@ void ftrace_write(paddr_t src, paddr_t dst){
 			cur->is_call = true;
 			cur->pc = src;
 			strcpy(ftrace_res[ftrace_idx-1].name, func_table[k].name);
-			printf("wk\t%s\n", ftrace_res[ftrace_idx-1].name);
 			cur->dst = dst;
 			return;
 		}
@@ -125,9 +122,6 @@ void ftrace_display(){
 	unsigned depth = 0;
 	for(unsigned k = 0; k < ftrace_idx; k++){
 		cur = &ftrace_res[k];
-		
-			printf("wk\t%s\n", ftrace_res[k].name);
-			printf("wk\t%s\n", ftrace_res[ftrace_idx-2].name);
 		printf("0x%8x: ",cur->pc);
 		if(cur->is_call){
 		   tab_in(depth++);
