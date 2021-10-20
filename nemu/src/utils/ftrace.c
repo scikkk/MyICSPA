@@ -34,7 +34,7 @@ void tableheader(const char *pbuff)
 				if(ELF32_ST_TYPE(psym->st_info)==STT_FUNC){
 					/* printf("%-8x\t %u\t %s\n",psym->st_value, psym->st_size,(psym->st_name+pbuffstr)); */
 					func_table[func_idx].begin_addr = psym->st_value;
-					func_table[func_idx].end_addr = psym->st_value+psym->st_size;
+					func_table[func_idx].end_addr = psym->st_value+psym->st_size-4;
 					func_table[func_idx].size = psym->st_size;
 					strcat(func_table[func_idx].name, psym->st_name+pbuffstr);
 					func_idx++;
