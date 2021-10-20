@@ -112,7 +112,7 @@ void ftrace_write(paddr_t src, paddr_t dst){
 
 void tab_in(unsigned dep){
 	for(unsigned k = 0; k < dep; k++){
-		printf("  |");
+		printf("|  ");
 	}
 }
 
