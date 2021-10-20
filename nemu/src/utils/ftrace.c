@@ -82,7 +82,7 @@ void init_ftrace(const char *elf_file) {
 	tableheader(elf_str);
 	free(elf_str);
 	Log("Symbol table is loaded from %s", elf_file);
-	func_display();
+	/* func_display(); */
 }
 
 /* bool ftrace_enable() { */
@@ -112,7 +112,7 @@ void ftrace_write(paddr_t src, paddr_t dst){
 
 static void tab_in(unsigned dep){ 
 	for(unsigned k = 0; k < dep; k++){ 
-		printf("  "); 
+		printf("   "); 
 	} 
 }
 
