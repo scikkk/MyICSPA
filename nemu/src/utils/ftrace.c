@@ -16,7 +16,7 @@ static short func_idx=0;
 union FtraceOneline{
 	bool is_call;
 	paddr_t pc;
-	char name[32];
+	unsigned name_idx;
 	paddr_t dst;
 } ftrace_res[1000];
 static unsigned ftrace_idx = 0;
@@ -96,16 +96,16 @@ void ftrace_write(paddr_t src, paddr_t dst){
 		if (dst == func_table[k].begin_addr){
 			cur->is_call = true;
 			cur->pc = src;
-			strcpy(cur->name, func_table[k].name);
+			cur->name_idx = k;
 			cur->dst = dst;
-		printf("write: %s\n", ftrace_res[ftrace_idx-1].name);
+		printf("write: %d==%d\n", ftrace_res[ftrace_idx-1].name_idx,k);
 		printf("src: %s\n", func_table[k].name);
 			return;
 		}
 		else if(src == func_table[k].end_addr){
 			cur->is_call = false;
 			cur->pc = src;
-			strcpy(ftrace_res[ftrace_idx-1].name, func_table[k].name);
+			cur->name_idx = k;
 			return;
 		}
 	}
@@ -127,11 +127,11 @@ void ftrace_display(){
 		printf("0x%8x: ",cur->pc);
 		if(cur->is_call){
 		   tab_in(depth++);
-			printf("call [%s@0x%x]\n", ftrace_res[k].name, cur->dst);
+			printf("call [%s@0x%x]\n", func_table[cur->name_idx].name, cur->dst);
 		}
 		else{
 			tab_in(depth--);
-			printf("ret [%s]\n", ftrace_res[k].name);
+			printf("ret [%s]\n", func_table[cur->name_idx].name);
 		}
 	}
 }
