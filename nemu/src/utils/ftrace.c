@@ -13,7 +13,7 @@ struct func{
 } func_table[99];
 short func_idx=0;
 
-union FtraceOneline{
+struct FtraceOneline{
 	bool is_call;
 	paddr_t pc;
 	unsigned name_idx;
@@ -91,7 +91,7 @@ void init_ftrace(const char *elf_file) {
 /* } */
 
 void ftrace_write(paddr_t src, paddr_t dst){
-	union FtraceOneline *cur = &ftrace_res[ftrace_idx++];
+	struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
     for (int k = 0; k < func_idx; k++){
 		if (dst == func_table[k].begin_addr){
 			cur->is_call = true;
@@ -118,7 +118,7 @@ void tab_in(unsigned dep){
 }
 
 void ftrace_display(){
-	union FtraceOneline *cur;
+	struct FtraceOneline *cur;
 	unsigned depth = 0;
 	ftrace_idx = 0;
 	for(unsigned k = 0; k < ftrace_idx; k++){
