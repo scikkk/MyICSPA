@@ -41,7 +41,7 @@ int sprintf(char *out, const char *fmt, ...) {
 							 int valint = va_arg(ap, int);
 							 if (valint==-2147483648){
 								 strcat(out,"-2147483648");
-								 out += 11;
+								 out += 12;
 								 fmt++;
 								 break;
 							 }
