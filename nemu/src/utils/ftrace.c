@@ -127,7 +127,7 @@ void ftrace_display(){
 		cur = &ftrace_res[k];
 		
 			printf("wk\t%s\n", ftrace_res[k].name);
-			printf("wk\t%s\n", ftrace_res[ftrace_idx-1].name);
+			printf("wk\t%s\n", ftrace_res[ftrace_idx-2].name);
 		printf("0x%8x: ",cur->pc);
 		if(cur->is_call){
 		   tab_in(depth++);
