@@ -102,7 +102,6 @@ void ftrace_write(paddr_t src, paddr_t dst){
 			strcpy(cur->name, func_table[k].name);
 			
 					printf("wk\t%s\n", func_table[func_idx].name);
-					printf("wk\t%s\n", cur->name);
 			cur->dst = dst;
 			return;
 		}
@@ -135,6 +134,7 @@ void ftrace_display(){
 		else{
 			tab_in(depth--);
 			printf("ret [%s]\n", cur->name);
+					printf("wk\t%s\n", cur->name);
 		}
 	}
 }
