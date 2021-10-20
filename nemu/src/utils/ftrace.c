@@ -124,6 +124,8 @@ void ftrace_display(){
 	unsigned depth = 0;
 	for(unsigned k = 0; k < ftrace_idx; k++){
 		cur = &ftrace_res[k];
+		
+					printf("wk\t%s\n", ftrace_res[k].name);
 		printf("0x%8x: ",cur->pc);
 		if(cur->is_call){
 		   tab_in(depth++);
