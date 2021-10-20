@@ -9,7 +9,8 @@
 extern "C" {
 #endif
 
-//#define __NATIVE_USE_KLIB__
+// wk 2.2 am/klib
+#define __NATIVE_USE_KLIB__
 
 // string.h
 void  *memset    (void *s, int c, size_t n);
