@@ -127,7 +127,7 @@ void ftrace_display(){
 			printf("call [%s@0x%x]\n", func_table[cur->name_idx].name, cur->dst);
 		}
 		else{
-			tab_in(--depth);
+			tab_in(depth--);
 			printf("ret [%s]\n", func_table[cur->name_idx].name);
 		}
 	}
