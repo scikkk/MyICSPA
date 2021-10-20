@@ -11,7 +11,7 @@ struct func{
 	uint32_t size;
 	char name[20];
 } func_table[99];
-static short func_idx=0;
+short func_idx=0;
 
 union FtraceOneline{
 	bool is_call;
@@ -19,7 +19,7 @@ union FtraceOneline{
 	unsigned name_idx;
 	paddr_t dst;
 } ftrace_res[1000];
-static unsigned ftrace_idx = 0;
+unsigned ftrace_idx = 0;
 
 void tableheader(const char *pbuff)
 {
