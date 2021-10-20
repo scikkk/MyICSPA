@@ -117,15 +117,15 @@ void ftrace_write(paddr_t src, paddr_t dst){
 	}
 #ifdef CONFIG_FTRACE_FILE_COND
 	if(FTRACE_FILE_COND){
-	static unsigned depth = -1;
+	static int depth = -1;
 		fprintf(ftrace_fp, "0x%08x: ",cur->pc);
 		if(cur->is_call){
 		   depth++;
-		   /* for(unsigned _ = 0; _ < depth; _++) fprintf(ftrace_fp, " "); */
+		   for(int _ = 0; _ < depth; _++) fprintf(ftrace_fp, " ");
 			fprintf(ftrace_fp, "call [%s@0x%x]\n", func_table[cur->name_idx].name, cur->dst);
 		}
 		else{
-		   /* for(unsigned _ = 0; _ < depth; _++) fprintf(ftrace_fp, " "); */
+		   for(int _ = 0; _ < depth; _++) fprintf(ftrace_fp, " ");
 		   depth--;
 			fprintf(ftrace_fp,"ret [%s]\n", func_table[cur->name_idx].name);
 		}
