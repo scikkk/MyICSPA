@@ -99,6 +99,8 @@ void ftrace_write(paddr_t src, paddr_t dst){
 			strcpy(ftrace_res[ftrace_idx-1].name, func_table[k].name);
 			cur->dst = dst;
 		printf("write: %s\n", ftrace_res[ftrace_idx-1].name);
+
+		printf("src: %s\n", func_table[k].name);
 			return;
 		}
 		else if(src == func_table[k].end_addr){
@@ -120,6 +122,7 @@ void tab_in(unsigned dep){
 void ftrace_display(){
 	union FtraceOneline *cur;
 	unsigned depth = 0;
+	ftrace_idx = 0;
 	for(unsigned k = 0; k < ftrace_idx; k++){
 		cur = &ftrace_res[k];
 		printf("0x%8x: ",cur->pc);
