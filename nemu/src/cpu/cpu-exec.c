@@ -74,9 +74,9 @@ static void statistic() {
 	Log("total guest instructions = " NUMBERIC_FMT, g_nr_guest_instr);
 	if (g_timer > 0) Log("simulation frequency = " NUMBERIC_FMT " instr/s", g_nr_guest_instr * 1000000 / g_timer);
 	else Log("Finish running in less than 1 us and can not calculate the simulation frequency");
-	// temp
-	ftrace_display();
-	// temp
+#ifdef CONFIG_FTRACE_COND 
+   if(!FTRACE_COND)	ftrace_display();
+#endif 
 }
 
 // wk 2.2 iringbuf display
