@@ -104,9 +104,9 @@ void ftrace_write(paddr_t src, paddr_t dst){
 			cur->is_call = false;
 			cur->pc = src;
 			strcpy(ftrace_res[ftrace_idx-1].name, func_table[k].name);
+		printf("write: %s\n", ftrace_res[ftrace_idx-1].name);
 			return;
 		}
-		printf("write: %s\n", ftrace_res[ftrace_idx-1].name);
 	}
 	/* assert(0); */
 }
