@@ -4,7 +4,7 @@
 
 /* extern uint32_t g_nr_guest_instr; */
 FILE *elf_fp = NULL;
-
+FILE *ftrace_fp = NULL;
 static struct func{
 	paddr_t begin_addr;
 	paddr_t end_addr;
@@ -83,6 +83,14 @@ void init_ftrace(const char *elf_file) {
 	free(elf_str);
 	Log("Symbol table is loaded from %s", elf_file);
 	/* func_display(); */
+#ifdef CONFIG_FTRACE_FILE_COND
+
+	if(FTRACE_FILE_COND){
+		 FILE *fp = fopen("build/ftrace-res.txt", "w");
+    Assert(fp, "Can not open '%s'", "build/ftrace-res.txt");
+    ftrace_fp = fp;
+	}
+#endif
 }
 
 /* bool ftrace_enable() { */
