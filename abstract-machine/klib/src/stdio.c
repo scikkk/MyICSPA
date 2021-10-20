@@ -41,8 +41,10 @@ int sprintf(char *out, const char *fmt, ...) {
 							 int valint = va_arg(ap, int);
 							 if (valint==-2147483648){
 								 strcat(out,"-2147483648");
+								 fmt++;
+								 break;
 							 }
-							 else if(valint < 0){
+							 if(valint < 0){
 								*out++ = '-';
 								valint = -valint;
 							 }
@@ -61,9 +63,8 @@ int sprintf(char *out, const char *fmt, ...) {
 								*p++ = *q;
 								*q-- = temp;
 							 }
-
 							 fmt++;
-
+							 break;
 						 }
 				default: {
 							 ret++;
