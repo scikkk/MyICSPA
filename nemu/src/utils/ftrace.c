@@ -110,10 +110,10 @@ void ftrace_write(paddr_t src, paddr_t dst){
 	/* assert(0); */
 }
 
-#define tab_in(dep){ \
-	for(unsigned k = 0; k < dep; k++){ \
-		printf("  "); \
-	} \
+static void tab_in(unsigned dep){ 
+	for(unsigned k = 0; k < dep; k++){ 
+		printf("  "); 
+	} 
 }
 
 void ftrace_display(){
