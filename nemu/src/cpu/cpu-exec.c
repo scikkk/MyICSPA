@@ -133,14 +133,16 @@ void fetch_decode(Decode *s, vaddr_t pc) {
 #ifdef CONFIG_FTRACE
 	// jal
 	if ((s->isa.instr.val&0x7f)==0x6f){
+		paddr_t cur = cpu.pc;
 		paddr_t dst = cpu.pc+s->src1.simm;
-		printf("jal:%x\n", dst);
+		printf("%-10x-> %x\n",cur, dst);
 	/* func_display(); */
 	}
 	// jalr
 	if ((s->isa.instr.val&0x7f)==0x67){
+		paddr_t cur = cpu.pc;
 		paddr_t dst = *(s->src1.preg) + s->src2.simm;
-		printf("jalr:%x\n", dst);
+		printf("%-10x-> %x\n",cur, dst);
 	/* func_display(); */
 	}
 #endif 
