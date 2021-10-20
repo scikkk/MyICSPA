@@ -74,8 +74,8 @@ static void statistic() {
 	Log("total guest instructions = " NUMBERIC_FMT, g_nr_guest_instr);
 	if (g_timer > 0) Log("simulation frequency = " NUMBERIC_FMT " instr/s", g_nr_guest_instr * 1000000 / g_timer);
 	else Log("Finish running in less than 1 us and can not calculate the simulation frequency");
-#ifdef CONFIG_FTRACE_FILE 
-   if(!CONFIG_FTRACE_FILE)	ftrace_display();
+#ifdef CONFIG_FTRACE_FILE_COND
+   if(!FTRACE_FILE_COND)	ftrace_display();
 #endif 
 }
 
