@@ -115,6 +115,7 @@ void ftrace_write(paddr_t src, paddr_t dst){
 			return;
 		}
 	}
+	printf("%s\n", func_table[cur->name_idx].name);
 #ifdef CONFIG_FTRACE_FILE_COND
 	if(FTRACE_FILE_COND){
 	static int depth = -1;
