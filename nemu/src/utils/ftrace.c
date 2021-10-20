@@ -130,6 +130,7 @@ void ftrace_write(paddr_t src, paddr_t dst){
 		   depth--;
 			fprintf(ftrace_fp,"ret [%s]\n", func_table[cur->name_idx].name);
 		}
+	fflush(ftrace_fp);
 	}
 #endif
 	/* assert(0); */
