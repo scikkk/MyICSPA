@@ -120,7 +120,6 @@ void tab_in(unsigned dep){
 void ftrace_display(){
 	struct FtraceOneline *cur;
 	unsigned depth = 0;
-	ftrace_idx = 0;
 	for(unsigned k = 0; k < ftrace_idx; k++){
 		cur = &ftrace_res[k];
 		printf("0x%8x: ",cur->pc);
