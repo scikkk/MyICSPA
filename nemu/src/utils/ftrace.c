@@ -97,10 +97,9 @@ void ftrace_write(paddr_t src, paddr_t dst){
 			cur->is_call = true;
 			cur->pc = src;
 			strcpy(ftrace_res[ftrace_idx-1].name, func_table[k].name);
-			cur->dst = dst;
 		printf("write: %s\n", ftrace_res[ftrace_idx-1].name);
-
 		printf("src: %s\n", func_table[k].name);
+			cur->dst = dst;
 			return;
 		}
 		else if(src == func_table[k].end_addr){
