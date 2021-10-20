@@ -13,6 +13,14 @@ struct func{
 } func_table[99];
 static short func_idx=0;
 
+union FtraceOneline{
+	bool is_call;
+	paddr_t pc;
+	char name[20];
+	paddr_t dst;
+} ftrace_res[10000];
+static unsigned ftrace_idx = 0;
+
 void tableheader(const char *pbuff)
 {
 	//从节区里面定位到偏移
@@ -82,3 +90,46 @@ void init_ftrace(const char *elf_file) {
 /*          (g_nr_guest_instr <= CONFIG_TRACE_END), false); */
 /* } */
 
+void ftrace_write(paddr_t src, paddr_t dst){
+	union FtraceOneline *cur = &ftrace_res[ftrace_idx++];
+    for (int k = 0; k < func_idx; k++){
+		if (dst == func_table[k].begin_addr){
+			cur->is_call = true;
+			cur->pc = src;
+			strcat(cur->name, func_table[k].name);
+			cur->dst = dst;
+			return;
+		}
+		else if(dst == func_table[k].end_addr){
+		
+			cur->is_call = false;
+			cur->pc = src;
+			strcat(cur->name, func_table[k].name);
+			return;
+		}
+	}
+	assert(0);
+}
+
+void tab_in(unsigned dep){
+	for(unsigned k = 0; k < dep; k++){
+		printf("\t|");
+	}
+}
+
+void ftrace_display(){
+	union FtraceOneline *cur;
+	unsigned depth = 0;
+	for(unsigned k = 0; k < ftrace_idx; k++){
+		cur = &ftrace_res[k];
+		printf("0x%8x: ",cur->pc);
+		if(cur->is_call){
+		   tab_in(depth++);
+			printf("call [%s@%0xx]", cur->name, cur->dst);
+		}
+		else{
+			tab_in(depth--);
+			printf("ret [%s]", cur->name);
+		}
+	}
+}
