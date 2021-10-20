@@ -44,7 +44,7 @@ int sprintf(char *out, const char *fmt, ...) {
 								 fmt++;
 								 break;
 							 }
-							 if(valint < 0){
+						 if(valint < 0){
 								*out++ = '-';
 								valint = -valint;
 							 }
