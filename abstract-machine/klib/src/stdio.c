@@ -28,17 +28,14 @@ int sprintf(char *out, const char *fmt, ...) {
 		else{
 			fmt++;
 			switch(*fmt){
-				case 's':{
-							 char *valstr = va_arg(ap, char*);
+				case 's':{	 char *valstr = va_arg(ap, char*);
 							 strcat(out, valstr);
 							 out += strlen(valstr);
 							 ret += strlen(valstr);
 							 fmt++;
 							 break;
 						 }
-				case 'd':{
-							 
-							 int valint = va_arg(ap, int);
+				case 'd':{	 int valint = va_arg(ap, int);
 							 if (valint==-2147483648){
 								 strcat(out,"-2147483648");
 								 out += 11;
@@ -53,8 +50,7 @@ int sprintf(char *out, const char *fmt, ...) {
 							 }
 							 char *p = out;
 							 char *q = out;
-							 do{
-								ret++;
+							 do{ret++;
 								*q++ = (char)(valint%10 + '0');
 								valint /= 10;
 							 }while(valint>0);
@@ -69,8 +65,7 @@ int sprintf(char *out, const char *fmt, ...) {
 							 fmt++;
 							 break;
 						 }
-				default: {
-							 ret++;
+				default: {	 ret++;
 							 *out++ = *fmt++;
 							 *out = '\0';
 						 }
