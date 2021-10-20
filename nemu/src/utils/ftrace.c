@@ -86,8 +86,8 @@ void init_ftrace(const char *elf_file) {
 #ifdef CONFIG_FTRACE_FILE_COND
 
 	if(FTRACE_FILE_COND){
-		 FILE *fp = fopen("/build/ftrace-res.txt", "w");
-    Assert(fp, "Can not open '%s'", "/build/ftrace-res.txt");
+		 FILE *fp = fopen("build/ftrace-res.txt", "w");
+    Assert(fp, "Can not open '%s'", "build/ftrace-res.txt");
     ftrace_fp = fp;
 	}
 #endif
