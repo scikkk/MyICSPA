@@ -119,7 +119,7 @@ void ftrace_write(paddr_t src, paddr_t dst){
 	if(FTRACE_FILE_COND){
 	struct FtraceOneline *cur;
 	static unsigned depth = -1;
-		printf("0x%08x: ",cur->pc);
+		fprintf(ftrace_fp, "0x%08x: ",cur->pc);
 		if(cur->is_call){
 		   depth++;
 		   for(unsigned _ = 0; _ < depth; _++) fprintf(ftrace_fp, " ");
