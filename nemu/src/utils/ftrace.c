@@ -113,7 +113,7 @@ void ftrace_write(paddr_t src, paddr_t dst){
 			cur->name_idx = k;
 		}
 	}
-	printf("%s\n", func_table[cur->name_idx].name);
+	/* printf("%s\n", func_table[cur->name_idx].name); */
 #ifdef CONFIG_FTRACE_FILE_COND
 	if(FTRACE_FILE_COND){
 	static int depth = -1;
