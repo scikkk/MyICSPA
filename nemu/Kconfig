@@ -163,7 +163,7 @@ config FTRACE
   default y
 config FTRACE_FILE
   depends on FTRACE
-  bool "Output result to a file when the condition is true"
+  string "Output result to a file when the condition is true"
   default "false"
 # wk 2.2 ftrace
 
