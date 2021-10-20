@@ -37,8 +37,12 @@ int sprintf(char *out, const char *fmt, ...) {
 							 break;
 						 }
 				case 'd':{
+							 
 							 int valint = va_arg(ap, int);
-							 if(valint < 0){
+							 if (valint==-2147483648){
+								 strcat(out,"-2147483648");
+							 }
+							 else if(valint < 0){
 								*out++ = '-';
 								valint = -valint;
 							 }
