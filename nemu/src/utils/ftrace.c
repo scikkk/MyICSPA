@@ -100,8 +100,7 @@ void ftrace_write(paddr_t src, paddr_t dst){
 			cur->dst = dst;
 			return;
 		}
-		else if(dst == func_table[k].end_addr){
-		
+		else if(src == func_table[k].end_addr){
 			cur->is_call = false;
 			cur->pc = src;
 			strcat(cur->name, func_table[k].name);
