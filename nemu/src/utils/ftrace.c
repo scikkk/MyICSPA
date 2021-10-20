@@ -123,11 +123,11 @@ void ftrace_display(){
 		cur = &ftrace_res[k];
 		printf("0x%08x: ",cur->pc);
 		if(cur->is_call){
-		   tab_in(depth++);
+		   tab_in(++depth);
 			printf("call [%s@0x%x]\n", func_table[cur->name_idx].name, cur->dst);
 		}
 		else{
-			tab_in(depth--);
+			tab_in(--depth);
 			printf("ret [%s]\n", func_table[cur->name_idx].name);
 		}
 	}
