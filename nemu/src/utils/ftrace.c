@@ -124,11 +124,11 @@ void ftrace_display(){
 		printf("0x%8x: ",cur->pc);
 		if(cur->is_call){
 		   tab_in(depth++);
-			printf("call [%s@%0xx]", cur->name, cur->dst);
+			printf("call [%s@%0xx]\n", cur->name, cur->dst);
 		}
 		else{
 			tab_in(depth--);
-			printf("ret [%s]", cur->name);
+			printf("ret [%s]\n", cur->name);
 		}
 	}
 }
