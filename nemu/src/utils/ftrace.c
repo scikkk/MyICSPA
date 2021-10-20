@@ -100,8 +100,6 @@ void ftrace_write(paddr_t src, paddr_t dst){
 			cur->is_call = true;
 			cur->pc = src;
 			strcpy(cur->name, func_table[k].name);
-			
-					printf("wk\t%s\n", func_table[func_idx].name);
 			cur->dst = dst;
 			return;
 		}
@@ -126,6 +124,8 @@ void ftrace_display(){
 	unsigned depth = 0;
 	for(unsigned k = 0; k < ftrace_idx; k++){
 		cur = &ftrace_res[k];
+
+					printf("wk\t%s\n", cur->name);
 		printf("0x%8x: ",cur->pc);
 		if(cur->is_call){
 		   tab_in(depth++);
@@ -134,7 +134,6 @@ void ftrace_display(){
 		else{
 			tab_in(depth--);
 			printf("ret [%s]\n", cur->name);
-					printf("wk\t%s\n", cur->name);
 		}
 	}
 }
