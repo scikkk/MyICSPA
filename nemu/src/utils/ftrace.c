@@ -5,23 +5,23 @@
 /* extern uint32_t g_nr_guest_instr; */
 FILE *elf_fp = NULL;
 
-struct func{
+static struct func{
 	paddr_t begin_addr;
 	paddr_t end_addr;
 	uint32_t size;
 	char name[20];
 } func_table[99];
-short func_idx=0;
+static short func_idx=0;
 
-struct FtraceOneline{
+static struct FtraceOneline{
 	bool is_call;
 	paddr_t pc;
 	unsigned name_idx;
 	paddr_t dst;
 } ftrace_res[1000];
-unsigned ftrace_idx = 0;
+static unsigned ftrace_idx = 0;
 
-void tableheader(const char *pbuff)
+static void tableheader(const char *pbuff)
 {
 	//从节区里面定位到偏移
 	Elf32_Ehdr* pfilehead = (Elf32_Ehdr*)pbuff;
@@ -97,7 +97,6 @@ void ftrace_write(paddr_t src, paddr_t dst){
 			cur->is_call = true;
 			cur->pc = src;
 			cur->name_idx = k;
-		printf("write: %d==%d\n", ftrace_res[ftrace_idx-1].name_idx,k);
 			cur->dst = dst;
 			return;
 		}
@@ -111,10 +110,10 @@ void ftrace_write(paddr_t src, paddr_t dst){
 	/* assert(0); */
 }
 
-void tab_in(unsigned dep){
-	for(unsigned k = 0; k < dep; k++){
-		printf("  ");
-	}
+#define tab_in(dep){ \
+	for(unsigned k = 0; k < dep; k++){ \
+		printf("  "); \
+	} \
 }
 
 void ftrace_display(){
