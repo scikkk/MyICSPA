@@ -121,7 +121,7 @@ void ftrace_display(){
 	unsigned depth = 0;
 	for(unsigned k = 0; k < ftrace_idx; k++){
 		cur = &ftrace_res[k];
-		printf("0x%8x: ",cur->pc);
+		printf("0x%08x: ",cur->pc);
 		if(cur->is_call){
 		   tab_in(depth++);
 			printf("call [%s@0x%x]\n", func_table[cur->name_idx].name, cur->dst);
