@@ -99,7 +99,7 @@ void ftrace_write(paddr_t src, paddr_t dst){
 		if (dst == func_table[k].begin_addr){
 			cur->is_call = true;
 			cur->pc = src;
-			strcpy(cur->name, func_table[k].name);
+			strcpy(ftrace_res[ftrace_idx-1].name, func_table[k].name);
 			cur->dst = dst;
 			return;
 		}
