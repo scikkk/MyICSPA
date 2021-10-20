@@ -47,6 +47,7 @@ char *strcat(char *dst, const char *src) {
 		temp++;
 	}
 	while((*temp++ = *src++) != '\0');
+	*temp = '\0';
 	return dst;
 	// printf("after strcat: dst: %s; src: %s\n", *dst, *src);
 }
