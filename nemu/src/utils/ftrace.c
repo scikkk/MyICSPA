@@ -107,7 +107,7 @@ void ftrace_write(paddr_t src, paddr_t dst){
 			return;
 		}
 	}
-	assert(0);
+	/* assert(0); */
 }
 
 void tab_in(unsigned dep){
