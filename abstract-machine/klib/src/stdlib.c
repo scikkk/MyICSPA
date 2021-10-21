@@ -30,7 +30,6 @@ int atoi(const char* nptr) {
 }
 
 
-extern char _heap_start;
 
 void *malloc(size_t size) {
 	// On native, malloc() will be called during initializaion of C runtime.
@@ -38,9 +37,9 @@ void *malloc(size_t size) {
 	//   panic() -> putchar() -> (glibc) -> malloc() -> panic()
 #if !(defined(__ISA_NATIVE__) && defined(__NATIVE_USE_KLIB__))
 	/* panic("Not implemented"); */
-	static void *addr = &_heap_start;
-	void *ret = addr;
-	addr += size;
+	static unsigned tot_size = 0;
+	void *ret = heap.start+tot_size;
+	tot_size += size;
 	return ret;
 #endif
 	return NULL;
