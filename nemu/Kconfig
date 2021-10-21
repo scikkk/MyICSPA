@@ -167,6 +167,17 @@ config FTRACE_FILE_COND
   default "false"
 # wk 2.2 ftrace
 
+# wk 2.3 dtrace
+config DTRACE
+  depends on TRACE && TARGET_NATIVE_ELF && ENGINE_INTERPRETER
+  bool "Enable device tracer"
+  default y
+config DTRACE_COND
+  depends on DTRACE
+  string "Only trace devices when the condition is true"
+  default "true"
+# wk 2.3 dtrace
+
 config DIFFTEST
   depends on TARGET_NATIVE_ELF
   bool "Enable differential testing"
