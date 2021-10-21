@@ -11,6 +11,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 
 	int ret = 0;
 	while(*fmt != '\0'){
+		*out = '\0';
 		if(*fmt != '%'){
 			ret++;
 			*out++ = *fmt++;
@@ -24,6 +25,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 out += strlen(valstr);
 							 ret += strlen(valstr);
 							 fmt++;
+							 putstr(out);
 							 assert(*out=='\0');
 							 break;
 						 }
@@ -87,8 +89,7 @@ int printf(const char *fmt, ...) {
 	va_start(ap, fmt);
 	int ret = vsprintf(out, fmt, ap);
 	va_end(ap);
-	putch(out[0]);
-    putstr("nabcjwnjmkamca\n\n");
+    putstr(out);
 	return ret;
 }
 
