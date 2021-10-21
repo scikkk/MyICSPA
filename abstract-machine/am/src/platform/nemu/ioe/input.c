@@ -4,7 +4,7 @@
 #define KEYDOWN_MASK 0x8000
 
 void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd) {
-	kbd->keydown = (bool)inw(KBD_ADDR+2)&KEYDOWN_MASK;
+	kbd->keydown = (bool)inw(KBD_ADDR)&KEYDOWN_MASK;
 	
-	kbd->keycode = (int)inw(KBD_ADDR);
+	kbd->keycode = (int)inw(KBD_ADDR+2);
 }
