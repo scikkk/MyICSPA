@@ -90,7 +90,11 @@ int printf(const char *fmt, ...) {
 	va_start(ap, fmt);
 	int ret = vsprintf(out, fmt, ap);
 	va_end(ap);
-    /* putstr(out); */
+	for(int k = 0; k < 20; k++){
+	putch(out[k]);
+	putch('\n');
+	}
+    putstr(out);
 	return ret;
 }
 
