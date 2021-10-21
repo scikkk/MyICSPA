@@ -101,9 +101,6 @@ void assert_fail_msg() {
 #ifdef CONFIG_ITRACE
 	iringbuf_display();
 #endif
-#ifdef CONFIG_FTRACE
-	ftrace_display();
-#endif 
 	// wk 2.2 iringbuf
 	statistic();
 }
