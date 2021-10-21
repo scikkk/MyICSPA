@@ -18,13 +18,14 @@ void add_pio_map(const char *name, ioaddr_t addr, void *space, uint32_t len, io_
   nr_map ++;
 }
 
-
+// wk 2.3 dtrace
 bool dtrace_enable(IOMap *map){
 #ifdef  CONFIG_DTRACE_COND
 	return DTRACE_COND;
 #endif
 	return true;
 }
+// wk 2.3 dtrace
 
 /* CPU interface */
 uint32_t pio_read(ioaddr_t addr, int len) {
