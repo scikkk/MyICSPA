@@ -134,15 +134,15 @@ void ftrace_write(paddr_t src, paddr_t dst){
 	/* assert(0); */
 }
 
-static void tab_in(unsigned dep){ 
-	for(unsigned k = 0; k < dep; k++){ 
+static void tab_in(int dep){ 
+	for(int k = 0; k < dep; k++){ 
 		printf("   "); 
 	} 
 }
 
 void ftrace_display(){
 	struct FtraceOneline *cur;
-	unsigned depth = -1;
+	int depth = -1;
 	for(unsigned k = 0; k < ftrace_idx; k++){
 		cur = &ftrace_res[k];
 		printf("0x%08x: ",cur->pc);
