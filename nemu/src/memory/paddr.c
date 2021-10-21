@@ -37,12 +37,14 @@ void init_mem() {
 			(paddr_t)CONFIG_MBASE, (paddr_t)CONFIG_MBASE + CONFIG_MSIZE);
 }
 
+// wk 2.2 mtrace
 bool mtrace_enable(paddr_t addr){
 #ifdef CONFIG_MTRACE_COND 
   return MTRACE_COND;
 #endif
   return true;
 }
+// wk 2.2 mtrace
 
 word_t paddr_read(paddr_t addr, int len) {
 	if (likely(in_pmem(addr))){
