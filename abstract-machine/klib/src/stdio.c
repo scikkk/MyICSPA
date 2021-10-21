@@ -94,7 +94,7 @@ int printf(const char *fmt, ...) {
 	putch(out[k]);
 	putch('\n');
 	}
-    putstr(out);
+    /* putstr(out); */
 	return ret;
 }
 
