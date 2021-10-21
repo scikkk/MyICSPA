@@ -91,10 +91,10 @@ int printf(const char *fmt, ...) {
 	int ret = vsprintf(out, fmt, ap);
 	va_end(ap);
 	putch('A');
-	for(int k = 0; k < 20; k++){
-	putch(out[k]);
-	putch('\n');
-	}
+	/* for(int k = 0; k < 20; k++){ */
+	/* putch(out[k]); */
+	/* putch('\n'); */
+	/* } */
     /* putstr(out); */
 	return ret;
 }
