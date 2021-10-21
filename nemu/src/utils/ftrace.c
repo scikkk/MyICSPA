@@ -142,7 +142,7 @@ static void tab_in(int dep){
 
 void ftrace_display(){
 	struct FtraceOneline *cur;
-	int depth = -1;
+	int depth = 2;
 	for(unsigned k = 0; k < ftrace_idx; k++){
 		cur = &ftrace_res[k];
 		printf("0x%08x: ",cur->pc);
