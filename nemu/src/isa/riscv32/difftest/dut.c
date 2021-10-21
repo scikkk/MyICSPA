@@ -9,8 +9,8 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
 		/* printf("%d %d\n", ref_r->gpr[k]._32,gpr(k)); */
 	}
 	/* return cpu.pc == pc; */
-	printf("%x; %x ", pc,  cpu.pc);
-	return true;
+	/* printf("%x; %x ", pc,  cpu.pc); */
+	return pc+4 == cpu.pc;
 }
 
 void isa_difftest_attach() {
