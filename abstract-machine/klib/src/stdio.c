@@ -90,7 +90,7 @@ int printf(const char *fmt, ...) {
 	va_start(ap, fmt);
 	int ret = vsprintf(out, fmt, ap);
 	va_end(ap);
-	putch('A');
+	/* putch('A'); */
 	/* for(int k = 0; k < 20; k++){ */
 	/* putch(out[k]); */
 	/* putch('\n'); */
