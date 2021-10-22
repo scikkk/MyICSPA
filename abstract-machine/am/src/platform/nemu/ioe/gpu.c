@@ -1,16 +1,14 @@
 #include <am.h>
 #include <nemu.h>
 
-/* #ifdef MODE_800x600 */
-/* # define W    800 */
-/* # define H    600 */
-/* #else */
-/* # define W    400 */
-/* # define H    300 */
-/* #endif */ 
-
+#ifdef MODE_800x600
+# define W    800
+# define H    600
+#else
 # define W    400
 # define H    300
+#endif 
+
 
 #define SYNC_ADDR (VGACTL_ADDR + 4)
 
@@ -41,7 +39,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 		}
 	}
 	if (ctl->sync) {
-		outb(SYNC_ADDR, 1);
+		outl(SYNC_ADDR, 1);
 	}
 	outb(VGACTL_ADDR, x);
 	outb(VGACTL_ADDR+2, y);
