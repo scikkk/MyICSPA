@@ -41,10 +41,10 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 	if (ctl->sync) {
 		outl(SYNC_ADDR, 1);
 	}
-	outb(VGACTL_ADDR, x);
-	outb(VGACTL_ADDR+1, y);
-	outb(VGACTL_ADDR+2, w);
-	outb(VGACTL_ADDR+3, h);
+	/* outb(VGACTL_ADDR, x); */
+	/* outb(VGACTL_ADDR+1, y); */
+	/* outb(VGACTL_ADDR+2, w); */
+	/* outb(VGACTL_ADDR+3, h); */
 }
 
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
