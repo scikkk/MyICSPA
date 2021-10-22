@@ -3,14 +3,14 @@
 #include "../local-include/reg.h"
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
-	
+    bool ret = true;	
 	for(int k = 0; k < 32; k++){
-		if (ref_r->gpr[k]._32 != gpr(k)) return false;
+		if (!difftest_check_reg(reg_name(k,1), pc, ref_r->gpr[k]._32, gpr(k))) ret = false;
 		/* printf("%d %d\n", ref_r->gpr[k]._32,gpr(k)); */
 	}
 	/* return cpu.pc == pc; */
 	/* printf("%x; %x ", pc,  cpu.pc); */
-	return true;
+	return ret;
 }
 
 void isa_difftest_attach() {
