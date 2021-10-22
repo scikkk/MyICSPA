@@ -6,8 +6,8 @@
 void __am_gpu_init() {
 	int i;
 	
-	int w = 0;  // TODO: get the correct width
-	int h = 0;  // TODO: get the correct height
+	int w = 400;  // TODO: get the correct width
+	int h = 300;  // TODO: get the correct height
     /* w = inl(VGACTL_ADDR+8); */
 	/* h = inl(VGACTL_ADDR+12); */
 
