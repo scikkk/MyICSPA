@@ -66,7 +66,7 @@ void vga_update_screen() {
 	if (mmio_read(CONFIG_VGA_CTL_MMIO+4,4)){
 		update_screen();
 		/* memset(vmem, 0, screen_size()); */
-		mmio_write(CONFIG_VGA_CTL_MMIO+4,4,0);
+		mmio_write(CONFIG_VGA_CTL_MMIO+4,1,0);
 	}
 }
 
