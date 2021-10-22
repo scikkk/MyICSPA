@@ -43,10 +43,10 @@ void __am_gpu_status(AM_GPU_STATUS_T *status) {
 	status->ready = true;
 }
 
-void __am_gpu_memcpy(AM_GPU_MEMCPY_T *cpy){
+/* void __am_gpu_memcpy(AM_GPU_MEMCPY_T *cpy){ */
 	
-}
+/* } */
 
-void __am_gpu_render(AM_GPU_RENDER_T *render){
+/* void __am_gpu_render(AM_GPU_RENDER_T *render){ */
 	
-}
+/* } */
