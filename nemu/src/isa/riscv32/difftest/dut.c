@@ -8,7 +8,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
 		if (!difftest_check_reg(reg_name(k,1), cpu.pc, ref_r->gpr[k]._32, gpr(k))) 
 			ret = false;
 	}
-	/* difftest_check_reg("pc", cpu.pc, pc, cpu.pc); */ 
+	difftest_check_reg("pc", cpu.pc, pc, cpu.pc); 
 	return ret;
 }
 
