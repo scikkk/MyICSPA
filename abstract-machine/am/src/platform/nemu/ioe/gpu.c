@@ -34,9 +34,11 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 }
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
-	if (ctl->sync) {
-		outl(SYNC_ADDR, 1);
-	}
+	/* int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h; */
+	/* if (ctl->sync) { */
+	/* 	outl(SYNC_ADDR, 1); */
+	/* } */
+	ctl->sync = inl(SYNC_ADDR);
 }
 
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
