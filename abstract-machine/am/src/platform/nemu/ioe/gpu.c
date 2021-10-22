@@ -10,7 +10,7 @@
 #endif 
 
 
-#define SYNC_ADDR (VGACTL_ADDR + 20)
+#define SYNC_ADDR (VGACTL_ADDR + 4)
 
 void __am_gpu_init() {
 	int i;
@@ -41,10 +41,10 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 	if (ctl->sync) {
 		outb(SYNC_ADDR, 1);
 	}
-	outl(VGACTL_ADDR, x);
-	outl(VGACTL_ADDR+4, y);
-	outl(VGACTL_ADDR+12, w);
-	outl(VGACTL_ADDR+16, h);
+	outb(VGACTL_ADDR, x);
+	outb(VGACTL_ADDR+2, y);
+	outb(VGACTL_ADDR+4, w);
+	outb(VGACTL_ADDR+6, h);
 }
 
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
