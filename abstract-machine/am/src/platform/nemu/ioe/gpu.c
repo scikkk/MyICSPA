@@ -1,6 +1,15 @@
 #include <am.h>
 #include <nemu.h>
 
+#ifdef MODE_800x600
+# define W    800
+# define H    600
+#else
+# define W    400
+# define H    300
+#endif 
+
+
 #define SYNC_ADDR (VGACTL_ADDR + 4)
 
 void __am_gpu_init() {
