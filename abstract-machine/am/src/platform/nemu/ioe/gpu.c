@@ -15,8 +15,8 @@
 void __am_gpu_init() {
 	int i;
 	
-	int w = 400;  // TODO: get the correct width
-	int h = 300;  // TODO: get the correct height
+	int w = W;  // TODO: get the correct width
+	int h = H;  // TODO: get the correct height
     /* w = inl(VGACTL_ADDR+8); */
 	/* h = inl(VGACTL_ADDR+12); */
 
@@ -28,7 +28,7 @@ void __am_gpu_init() {
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 	*cfg = (AM_GPU_CONFIG_T) {
 		.present = true, .has_accel = false,
-			.width = 400, .height = 300,
+			.width = W, .height = H,
 			.vmemsz = 0
 	};
 }
@@ -41,4 +41,12 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
 	status->ready = true;
+}
+
+void __am_gpu_memcpy(AM_GPU_MEMCPY_T *cpy){
+	
+}
+
+void __am_gpu_render(AM_GPU_RENDER_T *render){
+	
 }
