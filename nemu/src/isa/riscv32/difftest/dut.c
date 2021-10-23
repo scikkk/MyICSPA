@@ -3,14 +3,12 @@
 #include "../local-include/reg.h"
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
-	static 	paddr_t old_pc = 0x80000000;
 	bool ret = true;	
 	for(int k = 0; k < 32; k++){
 		if (!difftest_check_reg(reg_name(k,1), cpu.pc, ref_r->gpr[k]._32, gpr(k))) 
 			ret = false;
 	}
-	ret = difftest_check_reg("pc", cpu.pc, pc, old_pc);
-	old_pc = cpu.pc;	
+	ret = difftest_check_reg("pc", cpu.pc, ref_r->pc, pc);
 	return ret;
 }
 
