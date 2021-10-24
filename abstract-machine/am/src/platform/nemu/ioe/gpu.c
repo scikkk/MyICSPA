@@ -3,8 +3,8 @@
 
 
 #define SYNC_ADDR (VGACTL_ADDR + 4)
-#define W   inw(VGACTL_ADDR) 
-#define H   inw(VGACTL_ADDR+2)
+#define H   inw(VGACTL_ADDR) 
+#define W   inw(VGACTL_ADDR+2)
 
 void __am_gpu_init() {
 	int i;
