@@ -30,7 +30,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 	for(int r = y; r < y + h; r++, pixels+=w){
 		for(int c = x; c < x + w; c++){
 			uint32_t p = pixels[c-x];
-			outl(FB_ADDR+(c+r*W)*4, p);
+			outl(FB_ADDR+(c+r*W)*8, p);
 		}
 	}
 	if (ctl->sync) {
