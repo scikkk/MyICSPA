@@ -24,7 +24,7 @@ void __am_gpu_init() {
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 	*cfg = (AM_GPU_CONFIG_T) {
 		.present = true, .has_accel = false,
-			.width = inb(VGACTL_ADDR), .height = inb(VGACTL_ADDR+2),
+			.width = inw(VGACTL_ADDR), .height = inw(VGACTL_ADDR+2),
 			.vmemsz = W*H*32
 	};
 }
