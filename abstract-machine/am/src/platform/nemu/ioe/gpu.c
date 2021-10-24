@@ -29,7 +29,7 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 	};
 }
 
-void Wk__am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
+void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 	int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
 	uint32_t *pixels = ctl->pixels;
 	for(int r = y; r < y + h; r++, pixels+=w){
@@ -47,22 +47,6 @@ void Wk__am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 	/* outb(VGACTL_ADDR+3, h); */
 }
 
-void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
-	int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
-	uint32_t *pixels = ctl->pixels;
-	for(int r = y; r < y + h; r++){
-		for(int c = x; c < x + w; c++){
-			outl(FB_ADDR+(c+r*W)*4, *pixels++);
-		}
-	}
-	if (ctl->sync) {
-		outl(SYNC_ADDR, 1);
-	}
-	/* outb(VGACTL_ADDR, x); */
-	/* outb(VGACTL_ADDR+1, y); */
-	/* outb(VGACTL_ADDR+2, w); */
-	/* outb(VGACTL_ADDR+3, h); */
-}
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
 	status->ready = true;
 }
