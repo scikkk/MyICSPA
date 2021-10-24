@@ -1,14 +1,14 @@
 #include <am.h>
 #include <nemu.h>
 
-# define W   inw(VGACTL_ADDR) 
-# define H  inw(VGACTL_ADDR+2)
 
 #define SYNC_ADDR (VGACTL_ADDR + 4)
+#define W   inw(VGACTL_ADDR) 
+#define H   inw(VGACTL_ADDR+2)
 
 void __am_gpu_init() {
 	int i;
-	int w = W;  // TODO: get the correct width
+	int w = 0;  // TODO: get the correct width
 	int h = H;  // TODO: get the correct height
 	
 	uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
