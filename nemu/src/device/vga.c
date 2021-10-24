@@ -64,8 +64,8 @@ void vga_update_screen() {
 	// TODO: call `update_screen()` when the sync register is non-zero,
 	// then zero out the sync register
 	if (mmio_read(CONFIG_VGA_CTL_MMIO+4,4)){
-		memset(vmem, 0, screen_size());
 		update_screen();
+		memset(vmem, 0, screen_size());
 		mmio_write(CONFIG_VGA_CTL_MMIO+4,4,0x0);
 	}
 }
