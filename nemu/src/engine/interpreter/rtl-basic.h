@@ -71,7 +71,7 @@ def_rtl_compute_reg(remw)
 def_rtl_compute_reg(remuw)
 #endif
 
-static inline def_rtl(div64u_q, rtlreg_t* dest,
+ inline def_rtl(div64u_q, rtlreg_t* dest,
     const rtlreg_t* src1_hi, const rtlreg_t* src1_lo, const rtlreg_t* src2) {
   uint64_t dividend = ((uint64_t)(*src1_hi) << 32) | (*src1_lo);
   uint32_t divisor = (*src2);
