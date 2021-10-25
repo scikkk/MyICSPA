@@ -146,7 +146,7 @@ static inline def_rtl(j, vaddr_t target) {
   s->dnpc = target;
 }
 
-static inline def_rtl(jr, rtlreg_t *target) {
+ inline def_rtl(jr, rtlreg_t *target) {
   s->dnpc = *target;
 }
 
