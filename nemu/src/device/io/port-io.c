@@ -33,7 +33,7 @@ uint32_t pio_read(ioaddr_t addr, int len) {
   int mapid = find_mapid_by_addr(maps, nr_map, addr);
   assert(mapid != -1);
   word_t ret = map_read(addr, len, &maps[mapid]);
-  #ifdef CONFIG_MTRACE
+  #ifdef CONFIG_DTRACE
 		static int count = 1;
 		if (dtrace_enable(&maps[mapid]))
 		printf("[read ] count:%-6d name:%s data:0x%-9x %-16d\n", count++, maps[mapid].name, ret, ret);
@@ -45,7 +45,7 @@ void pio_write(ioaddr_t addr, int len, uint32_t data) {
   assert(addr + len - 1 < PORT_IO_SPACE_MAX);
   int mapid = find_mapid_by_addr(maps, nr_map, addr);
   assert(mapid != -1);
-  #ifdef CONFIG_MTRACE
+  #ifdef CONFIG_DTRACE
 		static int count = 1;
 		if (dtrace_enable(&maps[mapid]))
 		printf("[write] count:%-6d name:%s data:0x%-9x %-16d\n", count++, maps[mapid].name, data, data);
