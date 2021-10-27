@@ -18,15 +18,8 @@ void add_pio_map(const char *name, ioaddr_t addr, void *space, uint32_t len, io_
 	nr_map ++;
 }
 
-// wk 2.3 dtrace
-bool dtrace_enable(IOMap *map){
-#ifdef  CONFIG_DTRACE_COND
-	return DTRACE_COND;
-#endif
-	return true;
-}
-// wk 2.3 dtrace
 
+bool dtrace_enable(IOMap*);
 /* CPU interface */
 uint32_t pio_read(ioaddr_t addr, int len) {
 	assert(addr + len - 1 < PORT_IO_SPACE_MAX);
@@ -36,7 +29,7 @@ uint32_t pio_read(ioaddr_t addr, int len) {
 	#ifdef CONFIG_DTRACE
 	static int count = 1;
 	if (dtrace_enable(&maps[mapid]))
-	printf("[read ] count:%-6d name:%s data:0x%-9x %-16d\n", count++, maps[mapid].name, ret, ret);
+	printf("[read |pio] count:%-6d name:%s data:0x%-9x %-16d\n", count++, maps[mapid].name, ret, ret);
 	#endif
 	return ret;
 }
@@ -48,7 +41,7 @@ void pio_write(ioaddr_t addr, int len, uint32_t data) {
 	#ifdef CONFIG_DTRACE
 	static int count = 1;
 	if (dtrace_enable(&maps[mapid]))
-	printf("[write] count:%-6d name:%s data:0x%-9x %-16d\n", count++, maps[mapid].name, data, data);
+	printf("[write|pio] count:%-6d name:%s data:0x%-9x %-16d\n", count++, maps[mapid].name, data, data);
 	#endif
 	map_write(addr, len, data, &maps[mapid]);
 }
