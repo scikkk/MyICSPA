@@ -67,7 +67,7 @@ void map_write(paddr_t addr, int len, word_t data, IOMap *map) {
 	host_write(map->space + offset, len, data);
 #ifdef CONFIG_DTRACE
 	static int count = 1;
-	if (dtrace_enable(map))
+	if (dtrace_enable(map)&& strcmp(map->name, "serial")!=0)
 		printf("[write|map] count:%-6d name:%s data:0x%-9x %-16d\n", count++, map->name, data, data);
 #endif
 	invoke_callback(map->callback, offset, len, true);
