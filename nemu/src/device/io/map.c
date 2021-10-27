@@ -37,17 +37,37 @@ void init_map() {
   p_space = io_space;
 }
 
+// wk 2.3 dtrace
+bool dtrace_enable(IOMap *map){
+#ifdef  CONFIG_DTRACE_COND
+	return DTRACE_COND;
+#endif
+	return true;
+}
+// wk 2.3 dtrace
+
 word_t map_read(paddr_t addr, int len, IOMap *map) {
   assert(len >= 1 && len <= 8);
   check_bound(map, addr);
   paddr_t offset = addr - map->low;
   invoke_callback(map->callback, offset, len, false); // prepare data to read
   word_t ret = host_read(map->space + offset, len);
+  printf("nsjncsdmkmm c\n");
+  #ifdef CONFIG_DTRACE
+		static int count = 1;
+		if (dtrace_enable(map))
+		printf("[read ] count:%-6d name:%s data:0x%-9x %-16d\n", count++, map->name, ret, ret);
+#endif
   return ret;
 }
 
 void map_write(paddr_t addr, int len, word_t data, IOMap *map) {
   assert(len >= 1 && len <= 8);
+  #ifdef CONFIG_DTRACE
+		static int count = 1;
+		if (dtrace_enable(map))
+		printf("[write] count:%-6d name:%s data:0x%-9x %-16d\n", count++, map->name, data, data);
+#endif
   check_bound(map, addr);
   paddr_t offset = addr - map->low;
   host_write(map->space + offset, len, data);
