@@ -9,15 +9,14 @@ static void rtc_io_handler(uint32_t offset, int len, bool is_write) {
 	assert(len == 4);
 	uint64_t us = get_time();
 	if(!is_write){
-	
-	if (offset == 0) {
-		rtc_port_base[0] = (uint32_t)us;
-		/* rtc_port_base[1] = us >> 32; */
-	}
-	else if(offset == 4){
-		/* rtc_port_base[0] = (uint32_t)us; */
-		rtc_port_base[1] = us >> 32;
-	}
+		if (offset == 0) {
+			rtc_port_base[0] = (uint32_t)us;
+			/* rtc_port_base[1] = us >> 32; */
+		}
+		else if(offset == 4){
+			/* rtc_port_base[0] = (uint32_t)us; */
+			rtc_port_base[1] = us >> 32;
+		}
 	}
 }
 
