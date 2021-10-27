@@ -7,7 +7,7 @@
 
 // wk 2.2 ftrace
 #ifdef CONFIG_FTRACE 
-void ftrace_write(paddr_t, paddr_t);
+void ftrace_write(paddr_t, paddr_t, bool);
 void ftrace_display();
 void func_display();
 #endif 
@@ -143,7 +143,7 @@ void fetch_decode(Decode *s, vaddr_t pc) {
 	if ((s->isa.instr.val&0x7f)==0x6f){
 		paddr_t cur = cpu.pc;
 		paddr_t dst = cpu.pc+s->src1.simm;
-		ftrace_write(cur, dst);
+		ftrace_write(cur, dst,1);
 		/* printf("%-10x-> %x\n",cur, dst); */
 		/* func_display(); */
 	}
@@ -151,7 +151,14 @@ void fetch_decode(Decode *s, vaddr_t pc) {
 	if ((s->isa.instr.val&0x7f)==0x67){
 		paddr_t cur = cpu.pc;
 		paddr_t dst = *(s->src1.preg) + s->src2.simm;
-		ftrace_write(cur, dst);
+		if (s->isa.instr.val==0x00008067){
+		
+		ftrace_write(cur, dst,0);
+		}
+		else{
+		
+		ftrace_write(cur, dst,1);
+		}
 		/* printf("%-10x-> %x\n",cur, dst); */
 		/* func_display(); */
 	}

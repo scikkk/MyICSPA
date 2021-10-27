@@ -98,17 +98,17 @@ void init_ftrace(const char *elf_file) {
 /*          (g_nr_guest_instr <= CONFIG_TRACE_END), false); */
 /* } */
 
-void ftrace_write(paddr_t src, paddr_t dst){
+void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 	struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
     for (int k = 0; k < func_idx; k++){
 		if (dst == func_table[k].begin_addr){
-			cur->is_call = true;
+			cur->is_call = is_call;
 			cur->pc = src;
 			cur->name_idx = k;
 			cur->dst = dst;
 		}
-		else if(src == func_table[k].end_addr){
-			cur->is_call = false;
+		else if (func_table[k].begin_addr < src && func_table[k].end_addr >= src){
+			cur->is_call = is_call;
 			cur->pc = src;
 			cur->name_idx = k;
 		}
