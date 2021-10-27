@@ -120,7 +120,7 @@ void write_to_file(struct FtraceOneline *cur){
 }
 
 static bool in_func(int idx, paddr_t addr){
-	return (addr > func_table[idx].begin_addr) && (addr < func_table[idx].end_addr);    
+	return (addr >= func_table[idx].begin_addr) && (addr <= func_table[idx].end_addr);    
 }
 
 void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
