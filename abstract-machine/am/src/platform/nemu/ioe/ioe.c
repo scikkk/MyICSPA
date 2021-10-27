@@ -54,6 +54,64 @@ bool ioe_init() {
   __am_audio_init();
   return true;
 }
+// wk 2.3 dtrace
+bool dtrace_enable(int reg){
+#ifdef  CONFIG_DTRACE_COND
+	return DTRACE_COND;
+#endif
+	return true;
+}
+void mystrcpy(char *dst, char *src){
 
-void ioe_read (int reg, void *buf) { ((handler_t)lut[reg])(buf); }
-void ioe_write(int reg, void *buf) { ((handler_t)lut[reg])(buf); }
+	while(*src){
+	*dst++=*src++;
+	}
+	*dst = '\0';
+}
+void regidx2name(int reg, char* name){
+	switch (reg){
+		case 0:mystrcpy(name, "AM_TIMER_CONFIG"); break;
+		case 1:mystrcpy(name, "AM_TIMER_RTC   "); break;
+		case 2:mystrcpy(name, "AM_TIMER_UPTIME"); break;
+		case 3:mystrcpy(name, "AM_INPUT_CONFIG"); break;
+		case 4:mystrcpy(name, "AM_INPUT_KEYBRD"); break;
+		case 5:mystrcpy(name, "AM_GPU_CONFIG  "); break;
+		case 6:mystrcpy(name, "AM_GPU_FBDRAW  "); break;
+		case 7:mystrcpy(name, "AM_GPU_STATUS  "); break;
+		case 8:mystrcpy(name, "AM_UART_CONFIG "); break;
+		case 9:mystrcpy(name, "AM_AUDIO_CONFIG"); break;
+		case 10:mystrcpy(name,"AM_AUDIO_CTRL  "); break;
+		case 11:mystrcpy(name,"AM_AUDIO_STATUS"); break;
+		case 12:mystrcpy(name,"AM_AUDIO_PLAY  "); break;
+		case 13:mystrcpy(name,"AM_DISK_CONFIG "); break;
+		case 14:mystrcpy(name,"AM_DISK_STATUS "); break;
+		case 15:mystrcpy(name,"AM_DISK_BLKIO  "); break;
+		case 16:mystrcpy(name,"AM_NET_CONFIG  "); break;
+		default:mystrcpy(name,"UnKnown Device ");
+	}
+}
+// wk 2.3 dtrace
+
+
+
+void ioe_read (int reg, void *buf) {
+   	  #ifdef CONFIG_MTRACE
+		static int count = 1;
+		if (dtrace_enable(reg)){
+	char name[20];
+regidx2name(reg, name);	
+		printf("[read |ioe] count:%-6d name:%s \n", count++, name, ret, ret);
+		}
+#endif
+	((handler_t)lut[reg])(buf); 
+}
+void ioe_write(int reg, void *buf) { 
+	  #ifdef CONFIG_MTRACE
+		static int count = 1;
+		if (dtrace_enable(reg))
+	char name[20];
+regidx2name(reg, name);	
+		printf("[write|ioe] count:%-6d name:%s \n", count++, name, data, data);
+#endif
+	((handler_t)lut[reg])(buf); 
+}
