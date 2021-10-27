@@ -76,7 +76,7 @@ static void statistic() {
 	if (g_timer > 0) Log("simulation frequency = " NUMBERIC_FMT " instr/s", g_nr_guest_instr * 1000000 / g_timer);
 	else Log("Finish running in less than 1 us and can not calculate the simulation frequency");
 #ifdef CONFIG_FTRACE_FILE_COND
-   if(!FTRACE_FILE_COND)	ftrace_display();
+	if(!FTRACE_FILE_COND)	ftrace_display();
 #endif 
 }
 
@@ -152,12 +152,12 @@ void fetch_decode(Decode *s, vaddr_t pc) {
 		paddr_t cur = cpu.pc;
 		paddr_t dst = *(s->src1.preg) + s->src2.simm;
 		if (s->isa.instr.val==0x00008067){
-		
-		ftrace_write(cur, dst,0);
+
+			ftrace_write(cur, dst,0);
 		}
 		else{
-		
-		ftrace_write(cur, dst,1);
+
+			ftrace_write(cur, dst,1);
 		}
 		/* printf("%-10x-> %x\n",cur, dst); */
 		/* func_display(); */

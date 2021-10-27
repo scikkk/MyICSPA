@@ -86,9 +86,9 @@ void init_ftrace(const char *elf_file) {
 #ifdef CONFIG_FTRACE_FILE_COND
 
 	if(FTRACE_FILE_COND){
-		 FILE *fp = fopen("./build/ftrace-res.txt", "w");
-    Assert(fp, "Can not open '%s'", "./build/ftrace-res.txt");
-    ftrace_fp = fp;
+		FILE *fp = fopen("./build/ftrace-res.txt", "w");
+		Assert(fp, "Can not open '%s'", "./build/ftrace-res.txt");
+		ftrace_fp = fp;
 	}
 #endif
 }
@@ -98,39 +98,59 @@ void init_ftrace(const char *elf_file) {
 /*          (g_nr_guest_instr <= CONFIG_TRACE_END), false); */
 /* } */
 
-void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
-	struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
-    for (int k = 0; k < func_idx; k++){
-		if (dst == func_table[k].begin_addr){
-			cur->is_call = is_call;
-			cur->pc = src;
-			cur->name_idx = k;
-			cur->dst = dst;
-		}
-		else if (func_table[k].begin_addr < src && func_table[k].end_addr >= src){
-			cur->is_call = is_call;
-			cur->pc = src;
-			cur->name_idx = k;
-		}
-	}
-	/* printf("%s\n", func_table[cur->name_idx].name); */
+void write_to_file(struct FtraceOneline *cur){
 #ifdef CONFIG_FTRACE_FILE_COND
 	if(FTRACE_FILE_COND){
-	static int depth = -1;
+		static int depth = -1;
 		fprintf(ftrace_fp, "0x%08x: ",cur->pc);
 		if(cur->is_call){
-		   depth++;
-		   for(int _ = 0; _ < depth; _++) fprintf(ftrace_fp, "  |");
+			depth++;
+			for(int _ = 0; _ < depth; _++) fprintf(ftrace_fp, "  |");
 			fprintf(ftrace_fp, "call [%s@0x%x]\n", func_table[cur->name_idx].name, cur->dst);
 		}
 		else{
-		   for(int _ = 0; _ < depth; _++) fprintf(ftrace_fp, "  |");
-		   depth--;
+			for(int _ = 0; _ < depth; _++) fprintf(ftrace_fp, "  |");
+			depth--;
 			fprintf(ftrace_fp,"ret [%s]\n", func_table[cur->name_idx].name);
 		}
-	fflush(ftrace_fp);
+		fflush(ftrace_fp);
+
 	}
 #endif
+}
+
+static bool in_func(int idx, paddr_t addr){
+	return (addr > func_table[idx].begin_addr) && (addr < func_table[idx].end_addr);    
+}
+
+void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
+	// ret 
+	if (!is_call){
+		struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
+		for (int k = 0; k < func_idx; k++){
+			if (in_func(k, src)){
+				cur->is_call = 0;
+				cur->pc = src;
+				cur->name_idx = k;
+				write_to_file(cur);
+			}
+		}
+	}
+	else{
+
+		for (int k = 0; k < func_idx; k++){
+			if (dst == func_table[k].begin_addr){
+				struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
+				cur->is_call = 1;
+				cur->pc = src;
+				cur->name_idx = k;
+				cur->dst = dst;
+				write_to_file(cur);
+			}
+		}
+	}
+
+	/* printf("%s\n", func_table[cur->name_idx].name); */
 	/* assert(0); */
 }
 
@@ -147,7 +167,7 @@ void ftrace_display(){
 		cur = &ftrace_res[k];
 		printf("0x%08x: ",cur->pc);
 		if(cur->is_call){
-		   tab_in(++depth);
+			tab_in(++depth);
 			printf("call [%s@0x%x]\n", func_table[cur->name_idx].name, cur->dst);
 		}
 		else{
