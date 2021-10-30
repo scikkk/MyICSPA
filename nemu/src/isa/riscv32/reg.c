@@ -15,6 +15,10 @@ void isa_reg_display() {
 	for (int k = 0; k <32; k++){
 		printf("    %-6s\t0x%-8x\t%d\n", regs[k], gpr(k), gpr(k));
 	}		
+	printf("    %-6s\t0x%-8x\t%d\n", "mtvec", cpu.mtvec, cpu.mtvec);
+	printf("    %-6s\t0x%-8x\t%d\n", "mepc", cpu.mepc, cpu.mepc);
+	printf("    %-6s\t0x%-8x\t%d\n", "mstatus", cpu.mstatus, cpu.mstatus);
+	printf("    %-6s\t0x%-8x\t%d\n", "mcause", cpu.mcause, cpu.mcause);
 	// added by wk
 }
 
