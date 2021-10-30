@@ -17,6 +17,9 @@ def_EHelper(ecall) {
   rtl_j(s, cpu.mtvec);
 }
 
+def_EHelper(mret) {
+  rtl_j(s, cpu.mepc);
+}
 def_EHelper(csrrw) {
  *ddest = *(csr(id_src2->simm&0xfff));
  *(csr(id_src2->simm&0xfff)) = *dsrc1;
