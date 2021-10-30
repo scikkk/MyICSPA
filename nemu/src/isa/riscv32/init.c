@@ -43,9 +43,7 @@ static void restart() {
   cpu.gpr[0]._32 = 0;
 
   // wk 2.3
-  cpu.mstatus = 0x00000009;
-  cpu.mepc    = 0x00000002;
-  cpu.mcause  = 0x00000001;
+  cpu.mstatus = 0xa0001800;
   // wk 2.3
 }
 
