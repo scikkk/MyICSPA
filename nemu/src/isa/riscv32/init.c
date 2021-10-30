@@ -41,6 +41,10 @@ static void restart() {
 
   /* The zero register is always 0. */
   cpu.gpr[0]._32 = 0;
+
+  // wk 2.3
+  cpu.mstatus = 0xa0001800;
+  // wk 2.3
 }
 
 void init_isa() {
