@@ -8,7 +8,8 @@ void init_fs(void);
 void init_proc(void);
 
 int main() {
-  extern const char logo[];
+  /* extern const char logo[]; */
+	char logo[] = "wangke\n";
   printf("%s", logo);
   Log("'Hello World!' from Nanos-lite");
   Log("Build time: %s, %s", __TIME__, __DATE__);
