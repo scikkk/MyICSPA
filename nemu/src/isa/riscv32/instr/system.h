@@ -13,7 +13,7 @@ word_t* csr(int32_t number){
 	}
 }
 def_EHelper(ecall) {
-  isa_raise_intr(11 , cpu.pc);
+  isa_raise_intr(EVENT_YIELD , cpu.pc);
   rtl_j(s, cpu.mtvec);
 }
 
