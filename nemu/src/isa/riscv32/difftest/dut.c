@@ -9,6 +9,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
 	}
 	ret = ret&&difftest_check_reg("pc", pc, ref_r->pc, cpu.pc);
 	return ret;
+	isa_reg_display();
 }
 
 void isa_difftest_attach() {
