@@ -44,7 +44,8 @@ static void restart() {
 
   // wk 2.3
   cpu.mstatus = 0x00000009;
-  cpu.mepc = 0x00000002;
+  cpu.mepc    = 0x00000002;
+  cpu.mcause  = 0x00000001;
   // wk 2.3
 }
 
