@@ -9,6 +9,12 @@ typedef struct {
   } gpr[32];
 
   vaddr_t pc;
+
+  // wk 3.1
+  rtlreg_t mtvec;
+  rtlreg_t mepc, mstatus, mcause; // CSR regs
+  // wk 3.1
+
 } riscv32_CPU_state;
 
 // decode
