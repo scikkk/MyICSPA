@@ -15,7 +15,6 @@ word_t* csr(int32_t number){
 def_EHelper(ecall) {
   isa_raise_intr(1 , cpu.pc);
   rtl_j(s, cpu.mtvec);
-  cpu.mtvec = 0;
 }
 
 def_EHelper(csrrw) {
