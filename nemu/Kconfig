@@ -178,6 +178,13 @@ config DTRACE_COND
   default "true"
 # wk 2.3 dtrace
 
+# wk 3.1 etrace
+config ETRACE
+  depends on TRACE && TARGET_NATIVE_ELF && ENGINE_INTERPRETER
+  bool "Enable error tracer"
+  default y
+# wk 3.1 etrace
+
 config DIFFTEST
   depends on TARGET_NATIVE_ELF
   bool "Enable differential testing"
