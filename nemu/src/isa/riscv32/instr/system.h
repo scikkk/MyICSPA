@@ -21,3 +21,8 @@ def_EHelper(csrrw) {
  *ddest = *(csr(id_src2->simm&0xfff));
  *(csr(id_src2->simm&0xfff)) = *dsrc1;
 }
+
+def_EHelper(csrrs) {
+ *ddest = *(csr(id_src2->simm&0xfff));
+ rtl_or(s, csr(id_src2->simm&0xfff), csr(id_src2->simm&0xfff), dsrc1);
+}
