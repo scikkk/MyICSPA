@@ -5,7 +5,7 @@
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
 	bool ret = true;	
 	for(int k = 0; k < 32; k++){
-			ret = ret && difftest_check_reg(reg_name(k,0), pc, ref_r->gpr[k]._32, gpr(k));
+			ret = ret && difftest_check_reg(reg_name(k,32), pc, ref_r->gpr[k]._32, gpr(k));
 	}
 	/* difftest_check_reg("mtvec  ", pc, ref_r->mtvec, cpu.mtvec); */
     /* ret = ret && difftest_check_reg("mepc   ", pc, ref_r->mepc, cpu.mepc); */
