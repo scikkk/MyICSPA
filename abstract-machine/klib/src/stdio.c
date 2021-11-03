@@ -42,6 +42,8 @@ do{
 		ret++;
 		num /= 16;
 	}	while(num > 16);
+		*q++ = xtab[num%16];
+		ret++;
 	*q = '\0';
 	q--;
 	while(q > p){
