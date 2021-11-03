@@ -6,6 +6,7 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 int int2str(char *buf, int num){
+	putstr("wk\n");
 	if (num == -2147483648){
 		strcat(buf, "-2147483648");
 		return 11;
