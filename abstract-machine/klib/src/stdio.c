@@ -43,7 +43,7 @@ int x2str(char *buf, int num){
 		ret++;
 		num /= 16;
 		if (num < 16){
-			*q = x[num];
+			*q++ = x[num];
 			ret++;
 		}
 
