@@ -37,7 +37,7 @@ int x2str(char *buf, int num){
 	int ret = 0;
 	char *p = buf;
 	char *q = buf;
-	while(num > 16){
+do{
 		*q++ = xtab[num%16];
 		ret++;
 		num /= 16;
@@ -46,7 +46,7 @@ int x2str(char *buf, int num){
 			ret++;
 		}
 
-	}
+	}	while(num > 16);
 	*q = '\0';
 	q--;
 	while(q > p){
