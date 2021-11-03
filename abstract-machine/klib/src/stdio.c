@@ -30,7 +30,13 @@ int int2str(char *buf, int num){
 		*p++ = *q;
 		*q-- = temp;
 	}
-return ret;
+	return ret;
+}
+
+int str2str(char *buf, char *src){
+
+	strcat(buf, src);
+	return strlen(src);
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
@@ -52,7 +58,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 out += strlen(valstr);
 							 ret += strlen(valstr);
 							 fmt++;
-							 putstr(out);
+							 /* putstr(out); */
 							 assert(*out=='\0');
 							 break;
 						 }
@@ -60,32 +66,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 int sub_ret = int2str(out, valint);
 							 ret += sub_ret;
 							 out += sub_ret;
-							 /* if (valint==-2147483648){ */
-								 /* strcat(out,"-2147483648"); */
-								 /* out += 11; */
-								 /* ret += 11; */
-								 /* fmt++; */
-								 /* break; */
-							 /* } */
-							 /* if(valint < 0){ */
-								 /* *out++ = '-'; */
-								 /* ret++; */
-								 /* valint = -valint; */
-							 /* } */
-							 /* char *p = out; */
-							 /* char *q = out; */
-							 /* do{ret++; */
-								 /* *q++ = (char)(valint%10 + '0'); */
-								 /* valint /= 10; */
-							 /* }while(valint>0); */
-							 /* *q = '\0'; */
-							 /* out = q; */
-							 /* q--; */
-							 /* while(q > p){ */
-								 /* char temp = *p; */
-								 /* *p++ = *q; */
-								 /* *q-- = temp; */
-							 /* } */
 							 fmt++;
 							 break;
 						 }
