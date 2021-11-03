@@ -47,7 +47,9 @@ int float2str(char *buf, double flt, int len){
 	}
 	int flt_int = (int)flt;
 	double flt_frac = flt - flt_int;
-	ret += int2str(buf, flt_int);
+	int tmp_ret = int2str(buf, flt_int);
+	ret += tmp_ret;
+	buf += tmp_ret;
 	ret ++;
 	*buf++ = '.';
 	while(len--){
@@ -93,7 +95,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 ret += sub_ret;
 							 out += sub_ret;
 							 fmt++;
-							 *out = '\0';
+							 /* *out = '\0'; */
 							 break;
 						 }
 				default: {	 ret++;
