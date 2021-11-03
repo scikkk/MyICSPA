@@ -53,7 +53,7 @@ int float2str(char *buf, double flt, int len){
 	while(len--){
 		flt_frac *= 10;
 	}
-	int flt_frac_int = flt_frac;
+	int flt_frac_int = (int)flt_frac;
 	ret += int2str(buf, flt_frac_int);
 	return ret;
 
@@ -93,6 +93,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 ret += sub_ret;
 							 out += sub_ret;
 							 fmt++;
+							 *out = '\0';
 							 break;
 						 }
 				default: {	 ret++;
