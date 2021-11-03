@@ -39,6 +39,26 @@ int str2str(char *buf, char *src){
 	return strlen(src);
 }
 
+int float2str(char *buf, double flt, int len){
+	int ret = 0;
+	if ((int)flt < 0){
+		ret++;
+		*buf++ = '-';
+	}
+	int flt_int = (int)flt;
+	double flt_frac = flt - flt_int;
+	ret += int2str(buf, flt_int);
+	ret ++;
+	*buf++ = '.';
+	while(len--){
+		flt_frac *= 10;
+	}
+	int flt_frac_int = flt_frac;
+	ret += int2str(buf, flt_frac_int);
+	return ret;
+
+}
+
 int vsprintf(char *out, const char *fmt, va_list ap) {
 	/* panic("Not implemented"); */
 
@@ -68,6 +88,13 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 fmt++;
 							 break;
 						 }
+				/* case 'f':{	 double valflt  = va_arg(ap, double); */
+				/* 			 int sub_ret = float2str(out, valflt, 6); */
+				/* 			 ret += sub_ret; */
+				/* 			 out += sub_ret; */
+				/* 			 fmt++; */
+				/* 			 break; */
+				/* 		 } */
 				default: {	 ret++;
 							 *out++ = *fmt++;
 							 *out = '\0';
