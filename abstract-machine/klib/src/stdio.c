@@ -60,14 +60,14 @@ int str2str(char *buf, char *src){
 	return strlen(src);
 }
 
-int float2str(char *buf, int flt, int len){
+int float2str(char *buf, float flt, int len){
 	int ret = 0;
-	if ((int)flt < 0){
+	if (flt < 0){
 		ret++;
 		*buf++ = '-';
 	}
 	int flt_int = (int)flt;
-	int flt_frac = flt - flt_int;
+	float flt_frac = flt - flt_int;
 	int tmp_ret = int2str(buf, flt_int);
 	ret += tmp_ret;
 	buf += tmp_ret;
@@ -112,15 +112,15 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 fmt++;
 							 break;
 						 }
-				case 'f':{	 
-							 double valflt  = va_arg(ap ,int);
-							 int sub_ret = float2str(out, valflt, 6);
-							 ret += sub_ret;
-							 out += sub_ret;
-							 fmt++;
-							 /* *out = '\0'; */
-							 break;
-						 }
+				/* case 'f':{ */	 
+				/* 			 float valflt  = va_arg(ap, double); */
+				/* 			 int sub_ret = float2str(out, valflt, 6); */
+				/* 			 ret += sub_ret; */
+				/* 			 out += sub_ret; */
+				/* 			 fmt++; */
+				/* 			 /1* *out = '\0'; *1/ */
+				/* 			 break; */
+				/* 		 } */
 				case 'x':{	 
 							 int val  = va_arg(ap , int);
 							 int sub_ret = x2str(out, val);
