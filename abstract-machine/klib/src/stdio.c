@@ -5,6 +5,33 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
+int int2str(char *buf, int num){
+	if (num == -2147483648){
+		strcat(buf, "-2147483648");
+		return 11;
+	}	
+	int ret = 0;
+	if(num < 0){
+		*buf++ = '-';
+		ret++;
+		num = -num;
+	}
+	char *p = buf;
+	char *q = buf;
+	do{ret++;
+		*q++ = (char)(num%10 + '0');
+		num /= 10;
+	}while(num>0);
+	*q = '\0';
+	buf = q;
+	q--;
+	while(q > p){
+		char temp = *p;
+		*p++ = *q;
+		*q-- = temp;
+	}
+return ret;
+}
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
 	/* panic("Not implemented"); */
@@ -30,32 +57,35 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 break;
 						 }
 				case 'd':{	 int valint = va_arg(ap, int);
-							 if (valint==-2147483648){
-								 strcat(out,"-2147483648");
-								 out += 11;
-								 ret += 11;
-								 fmt++;
-								 break;
-							 }
-						 if(valint < 0){
-								*out++ = '-';
-								ret++;
-								valint = -valint;
-							 }
-							 char *p = out;
-							 char *q = out;
-							 do{ret++;
-								*q++ = (char)(valint%10 + '0');
-								valint /= 10;
-							 }while(valint>0);
-							 *q = '\0';
-							 out = q;
-							 q--;
-							 while(q > p){
-								char temp = *p;
-								*p++ = *q;
-								*q-- = temp;
-							 }
+							 int sub_ret = int2str(out, valint);
+							 ret += sub_ret;
+							 out += sub_ret;
+							 /* if (valint==-2147483648){ */
+								 /* strcat(out,"-2147483648"); */
+								 /* out += 11; */
+								 /* ret += 11; */
+								 /* fmt++; */
+								 /* break; */
+							 /* } */
+							 /* if(valint < 0){ */
+								 /* *out++ = '-'; */
+								 /* ret++; */
+								 /* valint = -valint; */
+							 /* } */
+							 /* char *p = out; */
+							 /* char *q = out; */
+							 /* do{ret++; */
+								 /* *q++ = (char)(valint%10 + '0'); */
+								 /* valint /= 10; */
+							 /* }while(valint>0); */
+							 /* *q = '\0'; */
+							 /* out = q; */
+							 /* q--; */
+							 /* while(q > p){ */
+								 /* char temp = *p; */
+								 /* *p++ = *q; */
+								 /* *q-- = temp; */
+							 /* } */
 							 fmt++;
 							 break;
 						 }
@@ -65,10 +95,10 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 						 }
 			}
 		}
-    
-			assert(*out == '\0');
+
+		assert(*out == '\0');
 	}
-			assert(*out == '\0');
+	assert(*out == '\0');
 	return ret;
 }
 
@@ -95,7 +125,7 @@ int printf(const char *fmt, ...) {
 	/* putch(out[k]); */
 	/* putch('\n'); */
 	/* } */
-    putstr(out);
+	putstr(out);
 	return ret;
 }
 
