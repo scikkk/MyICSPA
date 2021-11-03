@@ -37,12 +37,12 @@ int x2str(char *buf, int num){
 	int ret = 0;
 	char *p = buf;
 	char *q = buf;
-do{
+while(num > 15)
+{
 		*q++ = xtab[num%16];
 		ret++;
 		num /= 16;
-	}	while(num > 16);
-		*q++ = xtab[num%16];
+	}			*q++ = xtab[num%16];
 		ret++;
 	*q = '\0';
 	q--;
