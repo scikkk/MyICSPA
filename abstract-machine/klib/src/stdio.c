@@ -54,11 +54,10 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			fmt++;
 			switch(*fmt){
 				case 's':{	 char *valstr = va_arg(ap, char*);
-							 strcat(out, valstr);
-							 out += strlen(valstr);
-							 ret += strlen(valstr);
+							 int sub_ret = str2str(out, valstr);
+							 ret += sub_ret;
+							 out += sub_ret;
 							 fmt++;
-							 /* putstr(out); */
 							 assert(*out=='\0');
 							 break;
 						 }
