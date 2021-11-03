@@ -23,7 +23,6 @@ int int2str(char *buf, int num){
 		num /= 10;
 	}while(num>0);
 	*q = '\0';
-	buf = q;
 	q--;
 	while(q > p){
 		char temp = *p;
@@ -34,23 +33,21 @@ int int2str(char *buf, int num){
 }
 
 int x2str(char *buf, int num){
-	char x[] = "0123456789abcdef";
+	char xtab[] = "0123456789abcdef";
 	int ret = 0;
 	char *p = buf;
 	char *q = buf;
 	while(num > 16){
-		*q++ = x[num%16];
+		*q++ = xtab[num%16];
 		ret++;
 		num /= 16;
 		if (num < 16){
-			*q++ = x[num];
+			*q++ = xtab[num];
 			ret++;
 		}
 
 	}
 	*q = '\0';
-	ret++;
-	buf = q;
 	q--;
 	while(q > p){
 		char temp = *p;
