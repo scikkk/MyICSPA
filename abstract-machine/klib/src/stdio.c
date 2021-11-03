@@ -88,13 +88,13 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 fmt++;
 							 break;
 						 }
-				/* case 'f':{	 double valflt  = va_arg(ap, double); */
-				/* 			 int sub_ret = float2str(out, valflt, 6); */
-				/* 			 ret += sub_ret; */
-				/* 			 out += sub_ret; */
-				/* 			 fmt++; */
-				/* 			 break; */
-				/* 		 } */
+				case 'f':{	 double valflt  = 3.6155;
+							 int sub_ret = float2str(out, valflt, 6);
+							 ret += sub_ret;
+							 out += sub_ret;
+							 fmt++;
+							 break;
+						 }
 				default: {	 ret++;
 							 *out++ = *fmt++;
 							 *out = '\0';
