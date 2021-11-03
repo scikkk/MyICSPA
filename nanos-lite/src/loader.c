@@ -28,7 +28,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	ramdisk_read(&header,0,52);
 	Elf_Phdr ph;
 	for(int k = 0; k < header.e_phnum; k++){
-		ramdisk_read(&ph, header.e_phoff, header.e_phentsize);
+		ramdisk_read(&ph, header.e_phoff+header.e_phentsize*k, header.e_phentsize);
 		if(ph.p_type == PT_LOAD){
 			char seg[65536];
 			ramdisk_read(seg, ph.p_offset, ph.p_filesz);
