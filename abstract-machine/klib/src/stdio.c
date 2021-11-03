@@ -113,7 +113,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 break;
 						 }
 				case 'f':{	 
-							 int valflt  = va_arg(ap ,int);
+							 double valflt  = va_arg(ap ,int);
 							 int sub_ret = float2str(out, valflt, 6);
 							 ret += sub_ret;
 							 out += sub_ret;
