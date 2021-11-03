@@ -18,11 +18,11 @@ int int2str(char *buf, int num){
 	}
 	char *p = buf;
 	char *q = buf;
-	do{ret++;
+	while(num>15)
+{ret++;
 		*q++ = (char)(num%10 + '0');
 		num /= 10;
-	}while(num>0);
-	*q = '\0';
+	}	*q = '\0';
 	q--;
 	while(q > p){
 		char temp = *p;
