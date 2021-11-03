@@ -39,7 +39,7 @@ int str2str(char *buf, char *src){
 	return strlen(src);
 }
 
-int float2str(char *buf, double flt, int len){
+int double2str(char *buf, double flt, int len){
 	int ret = 0;
 	if ((int)flt < 0){
 		ret++;
@@ -90,8 +90,10 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 fmt++;
 							 break;
 						 }
-				case 'f':{	 double valflt  = 3.6155;
-							 int sub_ret = float2str(out, valflt, 6);
+				case 'f':{	 
+							 // double valflt  = va_arg(ap ,double);
+							 double valflt = 41626.0959;
+							 int sub_ret = double2str(out, valflt, 6);
 							 ret += sub_ret;
 							 out += sub_ret;
 							 fmt++;
