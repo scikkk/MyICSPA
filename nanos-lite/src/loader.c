@@ -30,11 +30,13 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	for(int k = 0; k < header.e_phnum; k++){
 		ramdisk_read(&ph, header.e_phoff, header.e_phentsize);
 		if(ph.p_type == PT_LOAD){
-		char seg[65536];
-		ramdisk_read(seg, ph.p_offset, ph.p_filesz);
-		printf("ncjncjn%d\n%d\n",ph.p_filesz,  ph.p_memsz);
-		memcpy((void*)ph.p_vaddr, seg, ph.p_filesz);
-		memset((void*)(ph.p_vaddr+ph.p_filesz), 0, ph.p_memsz-ph.p_filesz);
+			char seg[65536];
+			ramdisk_read(seg, ph.p_offset, ph.p_filesz);
+			memcpy((void*)ph.p_vaddr, seg, ph.p_filesz);
+			if(ph.p_memsz > ph.p_filesz){
+
+				memset((void*)(ph.p_vaddr+ph.p_filesz), 0, ph.p_memsz-ph.p_filesz);
+			}
 		}
 	}
 
