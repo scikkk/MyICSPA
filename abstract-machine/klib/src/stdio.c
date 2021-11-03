@@ -33,6 +33,33 @@ int int2str(char *buf, int num){
 	return ret;
 }
 
+int x2str(char *buf, int num){
+	char x[] = "0123456789abcdef";
+	int ret = 0;
+	char *p = buf;
+	char *q = buf;
+	while(num > 16){
+		*q++ = x[num%16];
+		ret++;
+		num /= 16;
+		if (num < 16){
+			*q = x[num];
+			ret++;
+		}
+
+	}
+	*q = '\0';
+	ret++;
+	buf = q;
+	q--;
+	while(q > p){
+		char temp = *p;
+		*p++ = *q;
+		*q-- = temp;
+	}
+	return ret;
+}
+
 int str2str(char *buf, char *src){
 
 	strcat(buf, src);
@@ -60,6 +87,7 @@ int double2str(char *buf, double flt, int len){
 	return ret;
 
 }
+
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
 	/* panic("Not implemented"); */
@@ -90,10 +118,18 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 fmt++;
 							 break;
 						 }
-				case 'f':{	 
-							 // double valflt  = va_arg(ap ,double);
-							 double valflt = 41626.0959;
-							 int sub_ret = double2str(out, valflt, 6);
+						 /* case 'f':{ */	 
+						 /* 			 double valflt  = va_arg(ap ,double); */
+						 /* 			 int sub_ret = double2str(out, valflt, 6); */
+						 /* 			 ret += sub_ret; */
+						 /* 			 out += sub_ret; */
+						 /* 			 fmt++; */
+						 /* 			 /1* *out = '\0'; *1/ */
+						 /* 			 break; */
+						 /* 		 } */
+				case 'x':{	 
+							 int val  = va_arg(ap , int);
+							 int sub_ret = x2str(out, val);
 							 ret += sub_ret;
 							 out += sub_ret;
 							 fmt++;
