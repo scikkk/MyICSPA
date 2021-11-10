@@ -26,7 +26,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	/* size_t size = get_ramdisk_size(); */
 	Elf_Ehdr header;
 	ramdisk_read(&header,0,52);
-	assert(*header.e_ident == 0xBadC0de);
+	assert(*(uint32_t *)header.e_ident == 0x7f454c46);
 	Elf_Phdr ph;
 	unsigned off = header.e_phoff;
 	for(int k = 0; k < header.e_phnum; k++){
