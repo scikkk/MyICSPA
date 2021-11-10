@@ -16,7 +16,7 @@ typedef struct {
   
 
 
-    rtlreg_t _32 csr[32];
+    rtlreg_t  csr[32];
 
   // wk 3.1
 
