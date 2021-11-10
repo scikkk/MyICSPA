@@ -4,7 +4,6 @@
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
 	bool ret = true;	
-	printf("mstatus:0x%x\n", ref_r->mstatus);
 	for(int k = 0; k < 32; k++){
 			ret = ret && difftest_check_reg(reg_name(k,0), pc, ref_r->gpr[k]._32, gpr(k));
 	}
@@ -15,7 +14,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
 	ret = ret && difftest_check_reg("pc", pc, ref_r->pc, cpu.pc);
 
 	isa_reg_display();
-	return ret||1;
+	return ret;
 
 }
 
