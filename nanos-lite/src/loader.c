@@ -42,8 +42,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	ramdisk_read(&header,0,52);
 	/* printf("moshu:%x\n", *(uint32_t *)header.e_ident); */
 	assert(*(uint32_t *)header.e_ident == 0x464c457f);
-	assert(header.e_machine == EXPECT_TYPE);
 	printf("type:%d\n", header.e_machine);
+	assert(header.e_machine == EXPECT_TYPE);
 	Elf_Phdr ph;
 	unsigned off = header.e_phoff;
 	for(int k = 0; k < header.e_phnum; k++){
