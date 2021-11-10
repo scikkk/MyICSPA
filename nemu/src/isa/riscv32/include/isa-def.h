@@ -15,9 +15,8 @@ typedef struct {
   rtlreg_t mepc, mstatus, mcause; // CSR regs
   
 
-  struct {
-    rtlreg_t _32;
-  } csr[32];
+
+    rtlreg_t _32 csr[32];
 
   // wk 3.1
 
