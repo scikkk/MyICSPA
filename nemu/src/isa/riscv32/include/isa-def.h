@@ -13,6 +13,12 @@ typedef struct {
   // wk 3.1
   rtlreg_t mtvec;
   rtlreg_t mepc, mstatus, mcause; // CSR regs
+  
+
+  struct {
+    rtlreg_t _32;
+  } csr[32];
+
   // wk 3.1
 
 } riscv32_CPU_state;
