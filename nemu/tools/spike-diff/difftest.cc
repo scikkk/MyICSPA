@@ -49,10 +49,10 @@ void sim_t::diff_get_regs(void* diff_context) {
   }
   ctx->pc = state->pc;
   // wk 3.1
-  ctx->tvec = state->tvec;
-  ctx->epc = state->epc;
-  ctx->status = state->status;
-  ctx->cause = state->cause;
+  ctx->mtvec = state->mtvec;
+  ctx->mepc = state->mepc;
+  ctx->mstatus = state->mstatus;
+  ctx->mcause = state->mcause;
   // wk 3.1
 }
 
@@ -63,10 +63,10 @@ void sim_t::diff_set_regs(void* diff_context) {
   }
   state->pc = ctx->pc;
   // wk 3.1
-  state->tvec = ctx->tvec;
-  state->epc = ctx->epc;
-  state->status = ctx->status;
-  state->cause = ctx->cause;
+  state->mtvec = ctx->mtvec;
+  state->mepc = ctx->mepc;
+  state->mstatus = ctx->mstatus;
+  state->mcause = ctx->mcause;
   // wk 3.1
 }
 
