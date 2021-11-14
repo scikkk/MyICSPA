@@ -11,6 +11,7 @@ int main() {
 	extern const char logo[];
 	/* char logo[] = "WANGKE\n"; */
 	printf("%s\n", logo);
+	printf("wangjcnjsvmksmvl,vl,\n");
 	Log("'Hello World!' from Nanos-lite");
 	Log("Build time: %s, %s", __TIME__, __DATE__);
 
