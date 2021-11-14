@@ -227,4 +227,9 @@ void init_sdb() {
 
 	/* Initialize the watchpoint pool. */
 	init_wp_pool();
+
+
+	// wk add for debug
+	new_wp("pc", "Watchpoint");
+	// wk 3
 }
