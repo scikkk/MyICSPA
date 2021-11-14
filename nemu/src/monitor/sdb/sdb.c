@@ -230,6 +230,6 @@ void init_sdb() {
 
 
 	// wk add for debug
-	new_wp("$pc", "Breakpoint");
+	new_wp("$pc", "Watchpoint");
 	// wk 3
 }
