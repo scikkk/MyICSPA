@@ -146,8 +146,8 @@ bool wp_change(){
 			assert(*success);
 			if (res != wp->value){
 				printf("\n%s %d: %-16s\n\n",wp->type,wp->NO,wp->expr);
-				printf("Old value = %-9d\t0x%x\n", wp->value, wp->value);
-				printf("New value = %-9d\t0x%x\n\n", res, res);
+				printf("Old value = %-12d\t0x%x\n", wp->value, wp->value);
+				printf("New value = %-12d\t0x%x\n\n", res, res);
 				wp->value = res;
 				return_value = true;
 			}
