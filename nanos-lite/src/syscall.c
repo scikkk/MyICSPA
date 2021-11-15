@@ -13,7 +13,7 @@ void do_syscall(Context *c) {
 		  sys_yield();
 		  break;
 	  case SYS_exit:
-		  sys_exit(a[1]);
+		  sys_exit(a[2]);
 		  break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
