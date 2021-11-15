@@ -69,7 +69,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			}
 		}
 	}
-
 	return ph.p_vaddr;
 }
 
