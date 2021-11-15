@@ -70,13 +70,12 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		}
 	}
 
-	return 0;
-	return ph.p_offset;
+	return ph.p_vaddr;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
 	uintptr_t entry = loader(pcb, filename);
 	Log("Jump to entry = %p", entry);
-	/* ((void(*)())entry) (); */
+	((void(*)())entry) ();
 }
 
