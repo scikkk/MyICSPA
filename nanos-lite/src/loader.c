@@ -57,6 +57,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			printf("\n");
 			for(int k = 0; k < 1000; k++){printf("%c", seg[k]);}
 			printf("\n");
+			printf("\n");
 
 
 			memcpy((void*)ph.p_vaddr, seg, ph.p_filesz);
