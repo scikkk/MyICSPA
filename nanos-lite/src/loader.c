@@ -46,15 +46,15 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	assert(header.e_machine == EXPECT_TYPE);
 	Elf_Phdr ph;
 	unsigned off = header.e_phoff;
-	/* uint32_t vaddrs[20]; */
-	/* uint8_t vaddr_idx = 0; */
+	uint32_t vaddrs[20];
+	uint8_t vaddr_idx = 0;
 	for(int k = 0; k < header.e_phnum; k++){
 		ramdisk_read(&ph, off, header.e_phentsize);
 		off += header.e_phentsize;
 		if(ph.p_type == PT_LOAD){
 			/* char seg[65536]; */
 			ramdisk_read((void*)ph.p_vaddr, ph.p_offset, ph.p_filesz);
-			/* vaddrs[vaddr_idx++] = ph.p_vaddr; */
+			vaddrs[vaddr_idx++] = ph.p_vaddr;
 			printf("%p\n",ph.p_vaddr);
 			
 
@@ -72,6 +72,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			}
 		}
 	}
+	return vaddrs[0];
 	return 0x83000094;
 }
 
