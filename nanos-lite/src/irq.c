@@ -4,7 +4,7 @@ void do_syscall(Context *c);
 static Context* do_event(Event e, Context* c) {
 	switch (e.event) {
 		case EVENT_NULL:
-			Log("\nUnhandled EVENT_YILED!\n");
+			Log("\nUnhandled EVENT_NULL!\n");
 			break;
 		case EVENT_YIELD: 
 			Log("\nUnhandled EVENT_YIELD!\n");
