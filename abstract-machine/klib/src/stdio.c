@@ -42,7 +42,8 @@ int x2str(char *buf, int num){
 		*q++ = xtab[num%16];
 		ret++;
 		num /= 16;
-	}			*q++ = xtab[num%16];
+	}			
+	*q++ = xtab[num%16];
 	ret++;
 	*q = '\0';
 	q--;
