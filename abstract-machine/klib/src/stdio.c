@@ -156,7 +156,7 @@ int sprintf(char *out, const char *fmt, ...) {
 
 int printf(const char *fmt, ...) {
 	/* panic("Not implemented"); */
-	char out[999];
+	char out[10000];
 	va_list ap;
 	va_start(ap, fmt);
 	int ret = vsprintf(out, fmt, ap);
