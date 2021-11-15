@@ -1,16 +1,16 @@
 word_t* csr(int32_t number){
 	switch(number){
 		case 0x300:
-			printf("mstatus\n");
+			/* printf("mstatus\n"); */
 			return &cpu.mstatus;
 		case 0x305:
-			printf("mtvec");
+			/* printf("mtvec\n"); */
 			return &cpu.mtvec;
 		case 0x341:
-			printf("mepc");
+			/* printf("mepc\n"); */
 			return &cpu.mepc;
 		case 0x342:
-			printf("mcause");
+			/* printf("mcause\n"); */
 			return &cpu.mcause;
 		default: assert(0);
 
