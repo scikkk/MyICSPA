@@ -137,11 +137,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 int val  = va_arg(ap , int);
 							 char addr[9];
 							 int sub_ret = x2str(addr, val);
-							 for(int k = sub_ret; k < 8; k++){	
-							 *out++ = '0';
-							 *out = '\0';
-							 }
-							 sub_ret = str2str(out, addr);
+							 strcat(out, "00000000");
+							 out += 8-sub_ret;
+							 strcpy(out, addr);
 							 ret += 8;
 							 out += sub_ret;
 							 fmt++;
