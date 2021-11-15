@@ -17,7 +17,12 @@ word_t* csr(int32_t number){
 	}
 }
 def_EHelper(ecall) {
-  isa_raise_intr(11 , cpu.pc);
+	if (gpr(17) == -1){
+	
+  isa_raise_intr(1 , cpu.pc);
+	}else{
+	isa_raise_intr(2, cpi.pc);
+	}
   rtl_j(s, cpu.mtvec);
 }
 
