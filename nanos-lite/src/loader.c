@@ -53,6 +53,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			char seg[65536];
 			ramdisk_read(seg, ph.p_offset, ph.p_filesz);
 			memcpy((void*)ph.p_vaddr, seg, ph.p_filesz);
+	Log("Jump to entry = ]\n\n");
 			/* Log("file:%x\tmem:%x\toff:%x\n", ph.p_filesz,ph.p_memsz,ph.p_offset); */
 			if(ph.p_memsz > ph.p_filesz){
 
