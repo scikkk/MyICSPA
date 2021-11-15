@@ -7,6 +7,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   printf("ERROR: NO:%d;\tepc:0x%08x\n", NO, epc);
   cpu.mepc = epc;
   cpu.mcause = NO;
+  isa_reg_display();
   return cpu.mtvec;
 }
 
