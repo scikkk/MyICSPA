@@ -40,7 +40,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	/* size_t size = get_ramdisk_size(); */
 	Elf_Ehdr header;
 	ramdisk_read(&header,0,52);
-	/* printf("moshu:%x\n", *(uint32_t *)header.e_ident); */
+	printf("moshu:%x\n", *(uint32_t *)header.e_ident);
 	assert(*(uint32_t *)header.e_ident == 0x464c457f);
 	/* printf("type:%d\n", header.e_machine); */
 	assert(header.e_machine == EXPECT_TYPE);
@@ -53,7 +53,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			char seg[65536];
 			ramdisk_read(seg, ph.p_offset, ph.p_filesz);
 			memcpy((void*)ph.p_vaddr, seg, ph.p_filesz);
-	Log("Jump to entry = ]\n\n");
 			/* Log("file:%x\tmem:%x\toff:%x\n", ph.p_filesz,ph.p_memsz,ph.p_offset); */
 			if(ph.p_memsz > ph.p_filesz){
 
