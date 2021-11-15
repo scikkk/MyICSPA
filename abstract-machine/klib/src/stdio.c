@@ -140,10 +140,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 for(int k = sub_ret; k < 8; k++){	
 							 *out++ = '0';
 							 }
-							 for(int k = 0; k < sub_ret; k++){
-								*out++ = addr[k];
-							 }
+							 sub_ret = str2str(out, addr);
 							 ret += 8;
+							 out += sub_ret;
 							 fmt++;
 							 /* *out = '\0'; */
 							 break;
