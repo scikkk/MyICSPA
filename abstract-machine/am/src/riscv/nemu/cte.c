@@ -15,7 +15,7 @@ Context* __am_irq_handle(Context *c) {
 			case EVENT_ERROR:ev.event=EVENT_ERROR;break;
 			case EVENT_IRQ_TIMER :ev.event=EVENT_IRQ_TIMER;break;
 			case EVENT_IRQ_IODEV:ev.event=EVENT_IRQ_IODEV;break;
-			default: assert(0);
+			default: printf("Unkonwn error num:%d\n", c->mcause); assert(0);
 		}
 		/* printf("x0:%d\n",c->gpr[0]); */
 		/* printf("mstatus:%d\nmepc:%d\nmcause:%d\n", c->mstatus,c->mepc,c->mcause); */
