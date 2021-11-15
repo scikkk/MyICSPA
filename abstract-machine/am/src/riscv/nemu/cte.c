@@ -7,16 +7,17 @@ static Context* (*user_handler)(Event, Context*) = NULL;
 Context* __am_irq_handle(Context *c) {
 	if (user_handler) {
 		Event ev = {0};
-		switch (c->mcause) {
-			case EVENT_NULL: ev.event = EVENT_NULL;break;
-			case EVENT_YIELD: ev.event = EVENT_YIELD; break;
-			case EVENT_SYSCALL:ev.event = EVENT_SYSCALL; break;
-			case EVENT_PAGEFAULT:ev.event = EVENT_PAGEFAULT;break;
-			case EVENT_ERROR:ev.event=EVENT_ERROR;break;
-			case EVENT_IRQ_TIMER :ev.event=EVENT_IRQ_TIMER;break;
-			case EVENT_IRQ_IODEV:ev.event=EVENT_IRQ_IODEV;break;
-			default: printf("Unkonwn error num:%d\n", c->mcause); assert(0);
-		}
+		ev.event = c->mcause;
+		/* switch (c->mcause) { */
+		/* 	case EVENT_NULL: ev.event = EVENT_NULL;break; */
+		/* 	case EVENT_YIELD: ev.event = EVENT_YIELD; break; */
+		/* 	case EVENT_SYSCALL:ev.event = EVENT_SYSCALL; break; */
+		/* 	case EVENT_PAGEFAULT:ev.event = EVENT_PAGEFAULT;break; */
+		/* 	case EVENT_ERROR:ev.event=EVENT_ERROR;break; */
+		/* 	case EVENT_IRQ_TIMER :ev.event=EVENT_IRQ_TIMER;break; */
+		/* 	case EVENT_IRQ_IODEV:ev.event=EVENT_IRQ_IODEV;break; */
+		/* 	default: printf("Unkonwn error num:%d\n", c->mcause); assert(0); */
+		/* } */
 		/* printf("x0:%d\n",c->gpr[0]); */
 		/* printf("mstatus:%d\nmepc:%d\nmcause:%d\n", c->mstatus,c->mepc,c->mcause); */
 		c = user_handler(ev, c);
