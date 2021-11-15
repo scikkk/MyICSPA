@@ -55,7 +55,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			/* char seg[65536]; */
 			ramdisk_read((void*)ph.p_vaddr, ph.p_offset, ph.p_filesz);
 			/* vaddrs[vaddr_idx++] = ph.p_vaddr; */
-			printf("%p\n",ph.p_vaddr);
+			/* printf("%p\n",ph.p_vaddr); */
 			
 
 			/* printf("\n"); */
