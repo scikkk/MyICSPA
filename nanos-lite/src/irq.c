@@ -1,4 +1,5 @@
 #include <common.h>
+#include "syscall.h"
 
 static Context* do_event(Event e, Context* c) {
 	switch (e.event) {
@@ -10,6 +11,7 @@ static Context* do_event(Event e, Context* c) {
 			break;
 		case EVENT_SYSCALL: 
 			Log("Unhandled EVENT_SYSCALL!\n");
+			do_syscall(c);
 			break;
 		case EVENT_PAGEFAULT: 
 			Log("Unhandled EVENT_PAGEFAULT!\n");
