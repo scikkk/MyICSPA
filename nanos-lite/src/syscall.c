@@ -13,8 +13,9 @@ void do_syscall(Context *c) {
 		  sys_yield();
 		  break;
 	  case SYS_exit:
-		  halt(0);
+		  printf("%d\t%d\t%d\t%d\n\n", a[0],a[1],a[2],a[3]);
 		  sys_exit(a[1]);
+		  
 		  break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
