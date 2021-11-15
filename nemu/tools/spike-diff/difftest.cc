@@ -26,12 +26,12 @@ static debug_module_config_t difftest_dm_config = {
 struct diff_context_t {
   word_t gpr[32];
   word_t pc;
-  // wk 3.1
-  word_t mtvec;
-  word_t mepc;
-  word_t mstatus;
-  word_t mcause;
-  // wk 3.1
+  /* // wk 3.1 */
+  /* word_t mtvec; */
+  /* word_t mepc; */
+  /* word_t mstatus; */
+  /* word_t mcause; */
+  /* // wk 3.1 */
 };
 
 static sim_t* s = NULL;
@@ -54,12 +54,12 @@ void sim_t::diff_get_regs(void* diff_context) {
     ctx->gpr[i] = state->XPR[i];
   }
   ctx->pc = state->pc;
-  // wk 3.1
-  ctx->mtvec = state->mtvec;
-  ctx->mepc = state->mepc;
-  ctx->mstatus = state->mstatus;
-  ctx->mcause = state->mcause;
-  // wk 3.1
+  /* // wk 3.1 */
+  /* ctx->mtvec = state->mtvec; */
+  /* ctx->mepc = state->mepc; */
+  /* ctx->mstatus = state->mstatus; */
+  /* ctx->mcause = state->mcause; */
+  /* // wk 3.1 */
 }
 
 void sim_t::diff_set_regs(void* diff_context) {
@@ -68,12 +68,12 @@ void sim_t::diff_set_regs(void* diff_context) {
     state->XPR.write(i, (sword_t)ctx->gpr[i]);
   }
   state->pc = ctx->pc;
-  // wk 3.1
-  state->mtvec = ctx->mtvec;
-  state->mepc = ctx->mepc;
-  state->mstatus = ctx->mstatus;
-  state->mcause = ctx->mcause;
-  // wk 3.1
+  /* // wk 3.1 */
+  /* state->mtvec = ctx->mtvec; */
+  /* state->mepc = ctx->mepc; */
+  /* state->mstatus = ctx->mstatus; */
+  /* state->mcause = ctx->mcause; */
+  /* // wk 3.1 */
 }
 
 void sim_t::diff_memcpy(reg_t dest, void* src, size_t n) {
