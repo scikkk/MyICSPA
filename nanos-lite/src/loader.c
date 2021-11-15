@@ -52,7 +52,13 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		if(ph.p_type == PT_LOAD){
 			char seg[65536];
 			ramdisk_read(seg, ph.p_offset, ph.p_filesz);
-			printf("%d\n", strlen(seg));
+			
+
+			printf("\n");
+			for(int k = 0; k < 1000; k++){printf("%s", seg[k]);}
+			printf("\n");
+
+
 			memcpy((void*)ph.p_vaddr, seg, ph.p_filesz);
 			/* Log("file:%x\tmem:%x\toff:%x\n", ph.p_filesz,ph.p_memsz,ph.p_offset); */
 			if(ph.p_memsz > ph.p_filesz){
