@@ -134,6 +134,10 @@ void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 		struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
 		for (int k = 0; k < func_idx; k++){
 			if (in_func(k, src)){
+				if (strcmp(func_table[k].name, "putch") == 0){
+					ftrace_idx--;
+					return;
+				}
 				cur->is_call = 0;
 				cur->pc = src;
 				cur->name_idx = k;
@@ -142,9 +146,11 @@ void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 		}
 	}
 	else{
-
 		for (int k = 0; k < func_idx; k++){
 			if (dst == func_table[k].begin_addr){
+				if (strcmp(func_table[k].name, "putch") == 0){
+					return;
+				}
 				struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
 				cur->is_call = 1;
 				cur->pc = src;
