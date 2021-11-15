@@ -130,6 +130,13 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 /* *out = '\0'; */
 							 break;
 						 }
+				case 'c':{
+							char val = va_arg(ap, int);
+							ret++;
+							*out++ = val;
+							fmt++;
+							break;
+						 }
 				default: {	 ret++;
 							 *out++ = *fmt++;
 							 *out = '\0';
