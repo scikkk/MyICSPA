@@ -61,7 +61,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		}
 	}
 
-	return 0x1;
+	return 0;
 	return ph.p_offset;
 }
 
