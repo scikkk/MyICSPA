@@ -88,7 +88,7 @@ void init_ftrace(const char *elf_file) {
 	if(FTRACE_FILE_COND){
 		char tmp[100];
 		strcpy(tmp, elf_file);
-		char* path_a = strstr(elf_file, "build/");
+		char* path_a = strstr(tmp, "build/");
 		char path_b[] = "build/ftrace_res.txt";
 		for(int k = 0; path_b[k] != '\0'; k++){
 			*path_a++ = path_b[k];
