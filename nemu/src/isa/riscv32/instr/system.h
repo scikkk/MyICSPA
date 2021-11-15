@@ -15,7 +15,6 @@ word_t* csr(int32_t number){
 def_EHelper(ecall) {
   isa_raise_intr(11 , cpu.pc);
   rtl_j(s, cpu.mtvec);
-  printf("ERROR: epc:0x%08x\n",  cpu.mepc);
 }
 
 def_EHelper(mret) {
