@@ -4,6 +4,7 @@ def_EHelper(lui) {
 }
 
 def_EHelper(auipc) {
+	printf("%0x\n", cpu.pc);
 	rtl_addi(s, ddest, &cpu.pc, id_src1->imm);
 }
 
