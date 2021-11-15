@@ -121,11 +121,29 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				/* 			 /1* *out = '\0'; *1/ */
 				/* 			 break; */
 				/* 		 } */
-				case 'p': case 'x':{	 
+				case 'x':{	 
 							 int val  = va_arg(ap , int);
 							 int sub_ret = x2str(out, val);
 							 ret += sub_ret;
 							 out += sub_ret;
+							 fmt++;
+							 /* *out = '\0'; */
+							 break;
+						 }
+				case 'p':{	 
+							 ret += 2;
+							 *out++ = '0';
+							 *out++ = 'x';
+							 int val  = va_arg(ap , int);
+							 char addr[9];
+							 int sub_ret = x2str(addr, val);
+							 for(int k = sub_ret; k < 8; k++){	
+							 *out++ = '0';
+							 }
+							 for(int k = 0; k < sub_ret; k++){
+								*out++ = addr[k];
+							 }
+							 ret += 8;
 							 fmt++;
 							 /* *out = '\0'; */
 							 break;
