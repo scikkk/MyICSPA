@@ -32,7 +32,7 @@ int int2str(char *buf, int num){
 	return ret;
 }
 
-int x2str(char *buf, int num){
+int x2str(char *buf, unsigned num){
 	char xtab[] = "0123456789abcdef";
 	int ret = 0;
 	char *p = buf;
