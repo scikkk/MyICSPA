@@ -55,7 +55,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			
 
 			printf("\n");
-			for(int k = 0; k < 3; k++){printf("%s", seg[k]);}
+			for(int k = 0; k < 3; k++){printf("%c", seg[k]);}
 			printf("\n");
 
 
