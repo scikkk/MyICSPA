@@ -1,12 +1,16 @@
 word_t* csr(int32_t number){
 	switch(number){
 		case 0x300:
+			printf("mstatus\n");
 			return &cpu.mstatus;
 		case 0x305:
+			printf("mtvec");
 			return &cpu.mtvec;
 		case 0x341:
+			printf("mepc");
 			return &cpu.mepc;
 		case 0x342:
+			printf("mcause");
 			return &cpu.mcause;
 		default: assert(0);
 
@@ -21,12 +25,12 @@ def_EHelper(mret) {
   rtl_j(s, cpu.mepc+4);
 }
 def_EHelper(csrrw) {
- *ddest = *(csr(id_src2->simm&0xfff));
- *(csr(id_src2->simm&0xfff)) = *dsrc1;
+ *ddest = *(csr(id_src2->simm));
+ *(csr(id_src2->simm)) = *dsrc1;
 }
 
 def_EHelper(csrrs) {
- *ddest = *(csr(id_src2->simm&0xfff));
- rtl_or(s, csr(id_src2->simm&0xfff), csr(id_src2->simm&0xfff), dsrc1);
+ *ddest = *(csr(id_src2->simm));
+ rtl_or(s, csr(id_src2->simm), csr(id_src2->simm), dsrc1);
 /* *(csr(id_src2->simm&0xfff)) |= *dsrc1; */
 }
