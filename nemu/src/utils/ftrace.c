@@ -90,14 +90,9 @@ void init_ftrace(const char *elf_file) {
 		strcpy(tmp, elf_file);
 		char* path_a = strstr(tmp, "build/");
 		strcpy(path_a, "build/ftrace-res.txt");
-		/* char path_b[] = "build/ftrace_res.txt"; */
-		/* for(int k = 0; path_b[k] != '\0'; k++){ */
-		/* 	*path_a++ = path_b[k]; */
-		/* } */
-		/* *path_a = '\0'; */
-		printf("%s\n\n\n", tmp);
-		FILE *fp = fopen("./build/ftrace-res.txt", "w");
-		Assert(fp, "Can not open '%s'", "./build/ftrace-res.txt");
+		/* printf("%s\n\n\n", tmp); */
+		FILE *fp = fopen(tmp, "w");
+		Assert(fp, "Can not open '%s'", tmp);
 		ftrace_fp = fp;
 	}
 #endif
