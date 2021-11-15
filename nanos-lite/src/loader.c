@@ -54,9 +54,9 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			ramdisk_read(seg, ph.p_offset, ph.p_filesz);
 			
 
-			/* printf("\n"); */
+			printf("\n");
 			/* for(int k = 0; k < 3; k++){printf("%s", seg[k]);} */
-			/* printf("\n"); */
+			printf("\n");
 
 
 			memcpy((void*)ph.p_vaddr, seg, ph.p_filesz);
