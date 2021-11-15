@@ -105,7 +105,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 							 assert(*out=='\0');
 							 break;
 						 }
-				case 'p': case 'd':{	 int valint = va_arg(ap, int);
+				case 'd':{	 int valint = va_arg(ap, int);
 							 int sub_ret = int2str(out, valint);
 							 ret += sub_ret;
 							 out += sub_ret;
@@ -121,7 +121,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				/* 			 /1* *out = '\0'; *1/ */
 				/* 			 break; */
 				/* 		 } */
-				case 'x':{	 
+				case 'p': case 'x':{	 
 							 int val  = va_arg(ap , int);
 							 int sub_ret = x2str(out, val);
 							 ret += sub_ret;
