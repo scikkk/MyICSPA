@@ -71,6 +71,9 @@ void do_syscall(Context *c) {
 			/* printf("%d\t%d\t%d\t%d\n\n", a[0],a[1],a[2],a[3]); */
 			sys_exit(a[1]);
 			break;
+		case SYS_write:
+			sys_write(a[1], (void*)a[2], a[3]);
+			break;
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
 }
