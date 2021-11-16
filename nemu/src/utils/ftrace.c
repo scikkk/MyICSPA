@@ -65,6 +65,7 @@ void init_ftrace(const char *elf_file) {
 
 	/* printf("elf_file: %s\n", elf_file); */
 
+	// open elf
 	FILE *fp = fopen(elf_file, "r");
 	Assert(fp, "Can not open '%s'", elf_file);
 
@@ -82,9 +83,8 @@ void init_ftrace(const char *elf_file) {
 	tableheader(elf_str);
 	free(elf_str);
 	Log("Symbol table is loaded from %s", elf_file);
-	/* func_display(); */
-#ifdef CONFIG_FTRACE_FILE_COND
 
+#ifdef CONFIG_FTRACE_FILE_COND
 	if(FTRACE_FILE_COND){
 		char tmp[100];
 		strcpy(tmp, elf_file);
@@ -96,6 +96,29 @@ void init_ftrace(const char *elf_file) {
 		ftrace_fp = fp;
 	}
 #endif
+	// wk 3.2 ---------------------------------------------------------
+
+	strcpy(elf_file, "~/ics2021/nanos-lite/build/ramdisk.img")
+	fp = fopen(elf_file, "r");
+	Assert(fp, "Can not open '%s'", elf_file);
+
+	elf_fp = fp;
+	fseek(elf_fp, 0, SEEK_END);
+	file_size = ftell(fp);
+	/* printf("size: %i\n", file_size); */
+	elf_str = (char*)malloc(sizeof(char)*file_size);
+	fseek(elf_fp, 0, SEEK_SET);
+
+	ret =	fread(elf_str, sizeof(char), file_size, elf_fp);
+	assert(ret == file_size);
+
+	fclose(elf_fp);
+	tableheader(elf_str);
+	free(elf_str);
+	Log("Symbol table is loaded from %s", elf_file);
+	// wk 3.2 ---------------------------------------------------------
+
+	/* func_display(); */
 }
 
 /* bool ftrace_enable() { */

@@ -164,7 +164,7 @@ config FTRACE
 config FTRACE_FILE_COND
   depends on FTRACE
   string "Output result to a file when the condition is true"
-  default "false"
+  default "true"
 # wk 2.2 ftrace
 
 # wk 2.3 dtrace
