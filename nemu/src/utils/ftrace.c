@@ -158,15 +158,13 @@ void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 	// ret 
 #ifdef CONFIG_FTRACE_FILE_COND
 	if (!is_call){
-		if(!CONFIG_FTRACE_FILE_COND){
-			struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
-		}
 		for (int k = 0; k < func_idx; k++){
 			if (in_func(k, src)){
 
 
 				if(!CONFIG_FTRACE_FILE_COND){
 
+			struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
 					if (strcmp(func_table[k].name, "putch") == 0){
 						ftrace_idx--;
 						return;
@@ -179,6 +177,7 @@ void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 					write_to_file(cur);
 
 				}
+				return ;
 			}
 		}
 	}
@@ -201,6 +200,7 @@ void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 
 				}
 			}
+			return ;
 		}
 
 		/* printf("%s\n", func_table[cur->name_idx].name); */
