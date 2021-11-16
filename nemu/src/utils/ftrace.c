@@ -21,7 +21,7 @@ static struct FtraceOneline{
 	paddr_t pc;
 	unsigned name_idx;
 	paddr_t dst;
-} ftrace_res[1024];
+} ftrace_res[65535];
 static unsigned ftrace_idx = 0;
 
 static void tableheader(const char *pbuff)
