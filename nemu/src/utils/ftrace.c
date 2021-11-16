@@ -98,7 +98,7 @@ void init_ftrace(const char *elf_file) {
 #endif
 	// wk 3.2 ---------------------------------------------------------
 
-	strcpy(elf_file, "~/ics2021/nanos-lite/build/ramdisk.img")
+	strcpy(elf_file, "~/ics2021/nanos-lite/build/ramdisk.img");
 	fp = fopen(elf_file, "r");
 	Assert(fp, "Can not open '%s'", elf_file);
 
