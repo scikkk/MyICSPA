@@ -73,7 +73,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		}
 	}
 	/* return vaddrs[0]; */
-	return 0x830003dc;
+	return header.e_entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
