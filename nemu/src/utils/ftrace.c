@@ -98,21 +98,21 @@ void init_ftrace(const char *elf_file) {
 #endif
 	// wk 3.2 ---------------------------------------------------------
 
-	strcpy(elf_file, "~/ics2021/nanos-lite/build/ramdisk.img");
-	fp = fopen(elf_file, "r");
-	Assert(fp, "Can not open '%s'", elf_file);
+	char ramdisk_file[] =  "~/ics2021/nanos-lite/build/ramdisk.img";
+	fp = fopen(ramdisk_file, "r");
+	Assert(fp, "Can not open '%s'", ramdisk_file);
 
-	elf_fp = fp;
-	fseek(elf_fp, 0, SEEK_END);
+	FILE *ramdisk_fp = fp;
+	fseek(ramdisk_fp, 0, SEEK_END);
 	file_size = ftell(fp);
 	/* printf("size: %i\n", file_size); */
 	elf_str = (char*)malloc(sizeof(char)*file_size);
-	fseek(elf_fp, 0, SEEK_SET);
+	fseek(ramdisk_fp, 0, SEEK_SET);
 
-	ret =	fread(elf_str, sizeof(char), file_size, elf_fp);
+	ret =	fread(elf_str, sizeof(char), file_size, ramdisk_fp);
 	assert(ret == file_size);
 
-	fclose(elf_fp);
+	fclose(ramdisk_fp);
 	tableheader(elf_str);
 	free(elf_str);
 	Log("Symbol table is loaded from %s", elf_file);
