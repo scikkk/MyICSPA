@@ -156,6 +156,7 @@ static bool in_func(int idx, paddr_t addr){
 
 void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 	// ret 
+#ifdef CONFIG_FTRACE_FILE_COND
 	if (!is_call){
 		if(!CONFIG_FTRACE_FILE_COND){
 			struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
@@ -205,6 +206,7 @@ void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 		/* printf("%s\n", func_table[cur->name_idx].name); */
 		/* assert(0); */
 	}
+#endif
 }
 static void tab_in(int dep){ 
 	for(int k = 0; k < dep; k++){ 
