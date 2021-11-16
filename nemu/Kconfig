@@ -186,12 +186,12 @@ config ETRACE
 # wk 3.1 etrace
 
 
-# wk 3.2 strace
-config STRACE
-  depends on TRACE 
-  bool "Enable system tracer"
-  default y
-# wk 3.2 strace
+# # wk 3.2 strace
+# config STRACE
+#   depends on TRACE 
+#   bool "Enable system tracer"
+#   default y
+# # wk 3.2 strace
 
 config DIFFTEST
   depends on TARGET_NATIVE_ELF
