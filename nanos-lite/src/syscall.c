@@ -74,7 +74,7 @@ void do_syscall(Context *c) {
 			break;
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
-#ifdef CONFIG_STRACE 
+#ifdef CONFIG_ETRACE 
 	strace(c);
 #endif
 }
