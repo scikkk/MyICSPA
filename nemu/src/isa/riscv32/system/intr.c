@@ -6,7 +6,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
 	 */
 #ifdef CONFIG_ETRACE
 	printf("0x%08x:ERROR: NO(cause):%d;\tmtvec:0x%08x\tepc:0x%08xmstatus:0x%08x\n", cpu.pc, NO, epc, cpu.mtvec, cpu.mstatus);
-	isa_reg_display();
+	/* isa_reg_display(); */
 #endif
 	cpu.mepc = epc;
 	cpu.mcause = NO;
