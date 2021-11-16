@@ -1,4 +1,3 @@
-#ifdef CONFIG_FTRACE
 
 #include <common.h>
 #include <elf.h>
@@ -231,4 +230,3 @@ void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 	}
 
 
-#endif 
