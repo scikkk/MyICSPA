@@ -53,6 +53,7 @@ void strace(Context *c) {
     case SYS_execve:
         strcpy(type, "SYS_execve");
     }
+	printf("typt:%s(%p),a0:%p,a1:%p,a2%p", type, a[0],a[1],a[2],a[3]);
 }
 
 void do_syscall(Context *c) {
