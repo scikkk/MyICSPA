@@ -168,11 +168,11 @@ void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 		}
 #endif 
 		for (int k = 0; k < func_idx; k++){
+			if (in_func(k, src)){
 			if (strcmp(func_table[k].name, "putch") == 0){
 				ftrace_idx--;
 				return;
 			}
-			if (in_func(k, src)){
 				cur->is_call = 0;
 				cur->pc = src;
 				cur->name_idx = k;
