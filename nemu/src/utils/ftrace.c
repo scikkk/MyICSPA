@@ -47,9 +47,7 @@ static void tableheader(const char *pbuff)
 					func_table[func_idx].begin_addr = psym->st_value;
 					func_table[func_idx].end_addr = psym->st_value+psym->st_size-4;
 					func_table[func_idx].size = psym->st_size;
-					Log("%d\n", func_idx);
 					strcpy(func_table[func_idx].name, psym->st_name+pbuffstr);
-					Log("%d\n", func_idx);
 					func_idx++;
 				}	
 				psym++;
@@ -77,7 +75,7 @@ void init_ftrace(const char *elf_file) {
 	elf_fp = fp;
 	fseek(elf_fp, 0, SEEK_END);
 	int file_size = ftell(fp);
-	printf("size: %i\n", file_size);
+	/* printf("size: %i\n", file_size); */
 	char *elf_str = (char*)malloc(sizeof(char)*file_size);
 	fseek(elf_fp, 0, SEEK_SET);
 
@@ -99,23 +97,16 @@ void init_ftrace(const char *elf_file) {
 	FILE *ramdisk_fp = fp;
 	fseek(ramdisk_fp, 0, SEEK_END);
 	file_size = ftell(fp);
-	printf("size: %i\n", file_size);
+	/* printf("size: %i\n", file_size); */
 	elf_str = (char*)malloc(sizeof(char)*file_size);
-	printf("size: %i\n", file_size);
 
-	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	fseek(ramdisk_fp, 0, SEEK_SET);
 
-	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	ret =	fread(elf_str, sizeof(char), file_size, ramdisk_fp);
-	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	assert(ret == file_size);
 
-	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	fclose(ramdisk_fp);
-	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	tableheader(elf_str);
-	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	free(elf_str);
 	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	// wk 3.2 ---------------------------------------------------------
