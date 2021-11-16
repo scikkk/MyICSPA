@@ -1,7 +1,7 @@
 #include <common.h>
 #include "syscall.h"
 
-#ifdef CONFIG_STRACE 
+#ifdef CONFIG_ETRACE 
 void strace(Context *c) {
 	char type[20];
 	uintptr_t a[4];
