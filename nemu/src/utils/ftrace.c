@@ -205,28 +205,28 @@ void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 		/* printf("%s\n", func_table[cur->name_idx].name); */
 		/* assert(0); */
 	}
+}
+static void tab_in(int dep){ 
+	for(int k = 0; k < dep; k++){ 
+		printf("   "); 
+	} 
+}
 
-	static void tab_in(int dep){ 
-		for(int k = 0; k < dep; k++){ 
-			printf("   "); 
-		} 
-	}
-
-	void ftrace_display(){
-		struct FtraceOneline *cur;
-		int depth = 0;
-		for(unsigned k = 0; k < ftrace_idx; k++){
-			cur = &ftrace_res[k];
-			printf("0x%08x: ",cur->pc);
-			if(cur->is_call){
-				tab_in(++depth);
-				printf("call [%s@0x%x]\n", func_table[cur->name_idx].name, cur->dst);
-			}
-			else{
-				tab_in(depth--);
-				printf("ret [%s]\n", func_table[cur->name_idx].name);
-			}
+void ftrace_display(){
+	struct FtraceOneline *cur;
+	int depth = 0;
+	for(unsigned k = 0; k < ftrace_idx; k++){
+		cur = &ftrace_res[k];
+		printf("0x%08x: ",cur->pc);
+		if(cur->is_call){
+			tab_in(++depth);
+			printf("call [%s@0x%x]\n", func_table[cur->name_idx].name, cur->dst);
+		}
+		else{
+			tab_in(depth--);
+			printf("ret [%s]\n", func_table[cur->name_idx].name);
 		}
 	}
+}
 
 
