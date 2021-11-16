@@ -108,7 +108,7 @@ void init_ftrace(const char *elf_file) {
 	FILE *ramdisk_fp = fp;
 	fseek(ramdisk_fp, 0, SEEK_END);
 	file_size = ftell(fp);
-	/* printf("size: %i\n", file_size); */
+	printf("size: %i\n", file_size);
 	elf_str = (char*)malloc(sizeof(char)*file_size);
 	fseek(ramdisk_fp, 0, SEEK_SET);
 
