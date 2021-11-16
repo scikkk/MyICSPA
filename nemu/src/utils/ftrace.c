@@ -11,7 +11,7 @@ static struct func{
 	paddr_t end_addr;
 	uint32_t size;
 	char name[100];
-} func_table[65535];
+} func_table[1024];
 static short func_idx=0;
 
 
@@ -86,7 +86,7 @@ void init_ftrace(const char *elf_file) {
 	tableheader(elf_str);
 	free(elf_str);
 	Log("Symbol table is loaded from %s", elf_file);
-	func_display();
+	/* func_display(); */
 
 	// wk 3.2 ---------------------------------------------------------
 
@@ -111,7 +111,7 @@ void init_ftrace(const char *elf_file) {
 	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	// wk 3.2 ---------------------------------------------------------
 
-	func_display();
+	/* func_display(); */
 #ifdef CONFIG_FTRACE_FILE_COND
 	if(FTRACE_FILE_COND){
 		char tmp[100];
