@@ -1,7 +1,6 @@
 #include <common.h>
 #include "syscall.h"
 
-#ifdef CONFIG_ETRACE 
 void strace(Context *c) {
 	char type[20];
 	uintptr_t a[4];
@@ -55,7 +54,6 @@ void strace(Context *c) {
 	}
 	printf("TYPE: %s(%p)\ta0:%p\ta1:%p\ta2:%p\n", type, a[0],a[1],a[2],a[3]);
 }
-#endif 
 void do_syscall(Context *c) {
 	uintptr_t a[4];
 	a[0] = c->GPR1;
@@ -74,7 +72,5 @@ void do_syscall(Context *c) {
 			break;
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
-#ifdef CONFIG_ETRACE 
 	strace(c);
-#endif
 }
