@@ -154,60 +154,52 @@ static bool in_func(int idx, paddr_t addr){
 	return (addr >= func_table[idx].begin_addr) && (addr <= func_table[idx].end_addr);    
 }
 
+
 void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 	// ret 
-#ifdef CONFIG_FTRACE_FILE_COND
 	if (!is_call){
+		struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
+#ifdef CONFIG_FTRACE_FILE_COND
+		if(FTRACE_FILE_COND){
+			ftrace_idx = 6;
+		}
+#endif 
 		for (int k = 0; k < func_idx; k++){
-			if (in_func(k, src)){
-
-
-				if(!CONFIG_FTRACE_FILE_COND){
-
-			struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
 					if (strcmp(func_table[k].name, "putch") == 0){
 						ftrace_idx--;
 						return;
 					}
-					cur->is_call = 0;
-					cur->pc = src;
-					cur->name_idx = k;
-				}
-				else{
-					write_to_file(cur);
-
-				}
-				return ;
+			if (in_func(k, src)){
+				cur->is_call = 0;
+				cur->pc = src;
+				cur->name_idx = k;
+				write_to_file(cur);
 			}
 		}
 	}
 	else{
+
 		for (int k = 0; k < func_idx; k++){
 			if (dst == func_table[k].begin_addr){
-				if (strcmp(func_table[k].name, "putch") == 0){
-					return;
+				struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
+#ifdef CONFIG_FTRACE_FILE_COND
+				if(FTRACE_FILE_COND){
+					ftrace_idx = 6;
 				}
-				if(!CONFIG_FTRACE_FILE_COND){
-					struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
-					cur->is_call = 1;
-					cur->pc = src;
-					cur->name_idx = k;
-					cur->dst = dst;
-				}
-				else{
-					write_to_file(cur);
-
-
-				}
+#endif 
+				cur->is_call = 1;
+				cur->pc = src;
+				cur->name_idx = k;
+				cur->dst = dst;
+				write_to_file(cur);
 			}
-			return ;
 		}
-
-		/* printf("%s\n", func_table[cur->name_idx].name); */
-		/* assert(0); */
 	}
-#endif
+
+	/* printf("%s\n", func_table[cur->name_idx].name); */
+	/* assert(0); */
 }
+
 static void tab_in(int dep){ 
 	for(int k = 0; k < dep; k++){ 
 		printf("   "); 
