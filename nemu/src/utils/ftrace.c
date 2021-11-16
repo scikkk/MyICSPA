@@ -1,3 +1,5 @@
+#ifdef CONFIG_FTRACE
+
 #include <common.h>
 #include <elf.h>
 
@@ -13,12 +15,14 @@ static struct func{
 } func_table[1024];
 static short func_idx=0;
 
+
+
 static struct FtraceOneline{
 	bool is_call;
 	paddr_t pc;
 	unsigned name_idx;
 	paddr_t dst;
-} ftrace_res[65535];
+} ftrace_res[1024];
 static unsigned ftrace_idx = 0;
 
 static void tableheader(const char *pbuff)
@@ -154,17 +158,27 @@ static bool in_func(int idx, paddr_t addr){
 void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 	// ret 
 	if (!is_call){
-		struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
+		if(!CONFIG_FTRACE_FILE_COND){
+			struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
+		}
 		for (int k = 0; k < func_idx; k++){
 			if (in_func(k, src)){
-				if (strcmp(func_table[k].name, "putch") == 0){
-					ftrace_idx--;
-					return;
+
+
+				if(!CONFIG_FTRACE_FILE_COND){
+
+					if (strcmp(func_table[k].name, "putch") == 0){
+						ftrace_idx--;
+						return;
+					}
+					cur->is_call = 0;
+					cur->pc = src;
+					cur->name_idx = k;
 				}
-				cur->is_call = 0;
-				cur->pc = src;
-				cur->name_idx = k;
-				write_to_file(cur);
+				else{
+					write_to_file(cur);
+
+				}
 			}
 		}
 	}
@@ -174,39 +188,47 @@ void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 				if (strcmp(func_table[k].name, "putch") == 0){
 					return;
 				}
-				struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
-				cur->is_call = 1;
-				cur->pc = src;
-				cur->name_idx = k;
-				cur->dst = dst;
-				write_to_file(cur);
+				if(!CONFIG_FTRACE_FILE_COND){
+					struct FtraceOneline *cur = &ftrace_res[ftrace_idx++];
+					cur->is_call = 1;
+					cur->pc = src;
+					cur->name_idx = k;
+					cur->dst = dst;
+				}
+				else{
+					write_to_file(cur);
+
+
+				}
+			}
+		}
+
+		/* printf("%s\n", func_table[cur->name_idx].name); */
+		/* assert(0); */
+	}
+
+	static void tab_in(int dep){ 
+		for(int k = 0; k < dep; k++){ 
+			printf("   "); 
+		} 
+	}
+
+	void ftrace_display(){
+		struct FtraceOneline *cur;
+		int depth = 0;
+		for(unsigned k = 0; k < ftrace_idx; k++){
+			cur = &ftrace_res[k];
+			printf("0x%08x: ",cur->pc);
+			if(cur->is_call){
+				tab_in(++depth);
+				printf("call [%s@0x%x]\n", func_table[cur->name_idx].name, cur->dst);
+			}
+			else{
+				tab_in(depth--);
+				printf("ret [%s]\n", func_table[cur->name_idx].name);
 			}
 		}
 	}
 
-	/* printf("%s\n", func_table[cur->name_idx].name); */
-	/* assert(0); */
-}
 
-static void tab_in(int dep){ 
-	for(int k = 0; k < dep; k++){ 
-		printf("   "); 
-	} 
-}
-
-void ftrace_display(){
-	struct FtraceOneline *cur;
-	int depth = 0;
-	for(unsigned k = 0; k < ftrace_idx; k++){
-		cur = &ftrace_res[k];
-		printf("0x%08x: ",cur->pc);
-		if(cur->is_call){
-			tab_in(++depth);
-			printf("call [%s@0x%x]\n", func_table[cur->name_idx].name, cur->dst);
-		}
-		else{
-			tab_in(depth--);
-			printf("ret [%s]\n", func_table[cur->name_idx].name);
-		}
-	}
-}
+#endif 
