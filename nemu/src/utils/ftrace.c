@@ -190,6 +190,9 @@ void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 					ftrace_idx = 6;
 				}
 #endif 
+					if (strcmp(func_table[k].name, "putch") == 0){
+						ftrace_idx--;
+						return;
 				cur->is_call = 1;
 				cur->pc = src;
 				cur->name_idx = k;
