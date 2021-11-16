@@ -52,7 +52,7 @@ void strace(Context *c) {
 		case SYS_execve:
 			strcpy(type, "SYS_execve");
 	}
-	printf("TYPE: %s(%p)\ta0:%p\ta1:%p\ta2:%p\n", type, a[0],a[1],a[2],a[3]);
+	printf("[STRACE] TYPE: %s(%p)\ta0:%p\ta1:%p\ta2:%p\n", type, a[0],a[1],a[2],a[3]);
 }
 void do_syscall(Context *c) {
 	uintptr_t a[4];
