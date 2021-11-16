@@ -87,18 +87,6 @@ void init_ftrace(const char *elf_file) {
 	free(elf_str);
 	Log("Symbol table is loaded from %s", elf_file);
 
-#ifdef CONFIG_FTRACE_FILE_COND
-	if(FTRACE_FILE_COND){
-		char tmp[100];
-		strcpy(tmp, elf_file);
-		char* path_a = strstr(tmp, "build/");
-		strcpy(path_a, "build/ftrace-res.txt");
-		/* printf("%s\n\n\n", tmp); */
-		FILE *fp = fopen(tmp, "w");
-		Assert(fp, "Can not open '%s'", tmp);
-		ftrace_fp = fp;
-	}
-#endif
 	// wk 3.2 ---------------------------------------------------------
 
 	char ramdisk_file[] =  "/home/wk/ics2021/nanos-lite/build/ramdisk.img";
@@ -122,6 +110,18 @@ void init_ftrace(const char *elf_file) {
 	// wk 3.2 ---------------------------------------------------------
 
 	/* func_display(); */
+#ifdef CONFIG_FTRACE_FILE_COND
+	if(FTRACE_FILE_COND){
+		char tmp[100];
+		strcpy(tmp, elf_file);
+		char* path_a = strstr(tmp, "build/");
+		strcpy(path_a, "build/ftrace-res.txt");
+		/* printf("%s\n\n\n", tmp); */
+		FILE *fp = fopen(tmp, "w");
+		Assert(fp, "Can not open '%s'", tmp);
+		ftrace_fp = fp;
+	}
+#endif
 }
 
 /* bool ftrace_enable() { */
