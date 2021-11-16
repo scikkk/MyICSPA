@@ -4,7 +4,7 @@ enum {
 	EVENT_NULL = 0,
 	EVENT_YIELD, EVENT_SYSCALL, EVENT_PAGEFAULT, EVENT_ERROR,
 	EVENT_IRQ_TIMER, EVENT_IRQ_IODEV,
-}
+};
 
 word_t isa_raise_intr(word_t NO, vaddr_t epc) {
 	/* TODO: Trigger an interrupt/exception with ``NO''.
