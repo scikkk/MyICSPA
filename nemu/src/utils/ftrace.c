@@ -101,13 +101,19 @@ void init_ftrace(const char *elf_file) {
 	elf_str = (char*)malloc(sizeof(char)*file_size);
 	printf("size: %i\n", file_size);
 
+	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	fseek(ramdisk_fp, 0, SEEK_SET);
 
+	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	ret =	fread(elf_str, sizeof(char), file_size, ramdisk_fp);
+	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	assert(ret == file_size);
 
+	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	fclose(ramdisk_fp);
+	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	tableheader(elf_str);
+	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	free(elf_str);
 	Log("Symbol table is loaded from %s", "/home/wk/ics2021/nanos-lite/build/ramdisk.img");
 	// wk 3.2 ---------------------------------------------------------
