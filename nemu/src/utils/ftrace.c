@@ -10,7 +10,7 @@ static struct func{
 	paddr_t end_addr;
 	uint32_t size;
 	char name[20];
-} func_table[99];
+} func_table[256];
 static short func_idx=0;
 
 static struct FtraceOneline{
