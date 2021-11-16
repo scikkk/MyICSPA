@@ -122,6 +122,7 @@ void init_ftrace(const char *elf_file) {
 		FILE *fp = fopen(tmp, "w");
 		Assert(fp, "Can not open '%s'", tmp);
 		ftrace_fp = fp;
+		Log("Log is written to %s\n", tmp);
 	}
 #endif
 }
