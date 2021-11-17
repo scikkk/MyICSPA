@@ -52,7 +52,7 @@ int sys_brk(int32_t addr){
 
 
 
-void strace(Context *c) {
+void strace(Context *c, int ret) {
 	char oneline[20];
 	uintptr_t a[4];
 	a[0] = c->GPR1;
@@ -104,7 +104,7 @@ void strace(Context *c) {
 			strcpy(oneline, "sys_execve");
 	}
 	static int no = 1;
-	printf("[STRACE] %d %s\n", no++, oneline);
+	printf("[STRACE] %d %s = %d\n", no++, oneline, ret);
 }
 
 
@@ -115,22 +115,22 @@ void do_syscall(Context *c) {
 	a[2] = c->GPR3;
 	a[3] = c->GPR4;
 
-	strace(c);
-
+int ret = 0;
 	switch (a[0]) {
 		case SYS_yield:
-			sys_yield();
+			 ret = sys_yield();
 			break;
 		case SYS_exit:
 			/* printf("%d\t%d\t%d\t%d\n\n", a[0],a[1],a[2],a[3]); */
-			sys_exit(a[1]);
+			 sys_exit(a[1]);
 			break;
 		case SYS_write:
-			sys_write(a[1], (void*)a[2], a[3]);
+			 ret = sys_write(a[1], (void*)a[2], a[3]);
 			break;
 		case SYS_brk:
-			sys_brk(a[1]);
+			 ret = sys_brk(a[1]);
 			break;
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
+	strace(c, ret);
 }
