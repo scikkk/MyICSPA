@@ -79,7 +79,7 @@ static Finfo file_table[] __attribute__((used)) = {
 };
 
 void strace(Context *c, char* ret) {
-	char  oneline[128];
+	char  oneline[1280];
 	uintptr_t a[4];
 	a[0] = c->GPR1;
 	a[1] = c->GPR2;
@@ -95,7 +95,7 @@ void strace(Context *c, char* ret) {
 			strcpy(oneline, "sys_yield()");
 			break;
 		case SYS_open:
-			sprintf(oneline, "sys_open(%d(%s), %d, %d)", (int)a[1], file_table[a[1]+10].name, (int)a[2], (int)a[3]);
+			sprintf(oneline, "sys_open(%d(%s), %d, %d)", (int)a[1], file_table[a[1]].name, (int)a[2], (int)a[3]);
 			break;
 		case SYS_read:
 			strcpy(oneline, "sys_read");
