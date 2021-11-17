@@ -160,7 +160,7 @@ static bool in_func(int idx, paddr_t addr){
 
 bool in_ban_funcs(char *src_name){
 	char ban_list[10][20] = {"putch", "\0"};
-	for(int k = 0, strlen(&ban_list[k]) > 0; k++){
+	for(int k = 0; strlen(ban_list[k]) > 0; k++){
 		if (strcmp(ban_list[k], src_name) == 0){
 			return true;
 		}
