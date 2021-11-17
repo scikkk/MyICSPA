@@ -89,7 +89,7 @@ void strace(Context *c) {
 			strcpy(oneline, "sys_lseek");
 			break;
 		case SYS_brk:
-			sprintf(oneline, "sys_brk(%x)", a[1]);
+			sprintf(oneline, "sys_brk(%p)", a[1]);
 			break;
 		case SYS_fstat:
 			strcpy(oneline, "sys_fstat");
