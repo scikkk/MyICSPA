@@ -90,7 +90,7 @@ void init_ftrace(const char *elf_file) {
 
 	// wk 3.2 ---------------------------------------------------------
 
-	char ramdisk_file[] =  "/home/wk/ics2021/navy-apps/build/ramdisk.img",
+	char ramdisk_file[] =  "/home/wk/ics2021/navy-apps/build/ramdisk.img";
 	fp = fopen(ramdisk_file, "r");
 	Assert(fp, "Can not open '%s'", ramdisk_file);
 
