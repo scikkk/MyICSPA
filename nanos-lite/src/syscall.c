@@ -116,7 +116,7 @@ void strace(Context *c, char* ret) {
 			strcpy(oneline, "sys_close");
 			break;
 		case SYS_lseek:
-			strcpy(oneline, "sys_lseek");
+			sprintf(oneline, "sys_lseek(%d(%s), %p, %d)", (int)a[1], file_table[a[1]].name, a[2], (int)a[3]);
 			break;
 		case SYS_brk:
 			sprintf(oneline, "sys_brk(%p)", (int)a[1]);
