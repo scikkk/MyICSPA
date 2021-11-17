@@ -48,8 +48,12 @@ int sys_brk(int32_t addr){
 	return 0;
 }
 
+
+
+
+
 void strace(Context *c) {
-	char type[20];
+	char oneline[20];
 	uintptr_t a[4];
 	a[0] = c->GPR1;
 	a[1] = c->GPR2;
@@ -58,49 +62,52 @@ void strace(Context *c) {
 
 	switch (a[0]) {
 		case SYS_exit:
-			strcpy(type, "SYS_exit");
+			sprintf(oneline, "sys_exit(%d)", a[1]);
 			break;
 		case SYS_yield:
-			strcpy(type, "SYS_yield");
+			strcpy(oneline, "sys_yield()");
 			break;
 		case SYS_open:
-			strcpy(type, "SYS_open");
+			strcpy(oneline, "sys_open");
 			break;
 		case SYS_read:
-			strcpy(type, "SYS_read");
+			strcpy(oneline, "sys_read");
 			break;
 		case SYS_write:
-			strcpy(type, "SYS_write");
+			sprintf(oneline, "sys_write(%d, %s, %d)", a[1], (char*)a[2], a[3]);
 			break;
 		case SYS_kill:
-			strcpy(type, "SYS_kill");
+			strcpy(oneline, "sys_kill");
 			break;
 		case SYS_getpid:
-			strcpy(type, "SYS_getpid");
+			strcpy(oneline, "sys_getpid");
 			break;
 		case SYS_close:
-			strcpy(type, "SYS_close");
+			strcpy(oneline, "sys_close");
 			break;
 		case SYS_lseek:
-			strcpy(type, "SYS_lseek");
+			strcpy(oneline, "sys_lseek");
 			break;
 		case SYS_brk:
-			strcpy(type, "SYS_brk");
+			sprintf(oneline, "sys_brk(%p)", a[1]);
 			break;
 		case SYS_fstat:
-			strcpy(type, "SYS_fstat");
+			strcpy(oneline, "sys_fstat");
 			break;
 		case SYS_time:
-			strcpy(type, "SYS_time");
+			strcpy(oneline, "sys_time");
 			break;
 		case SYS_signal:
-			strcpy(type, "SYS_signal");
+			strcpy(oneline, "sys_signal");
 			break;
 		case SYS_execve:
-			strcpy(type, "SYS_execve");
+			strcpy(oneline, "sys_execve");
 	}
-	printf("[STRACE] TYPE: %s(%p)\ta0:%p\ta1:%p\ta2:%p\n", type, a[0],a[1],a[2],a[3]);
+	static int no = 1;
+	printf("[STRACE] %-6d %s", no++, oneline);
 }
+
+
 void do_syscall(Context *c) {
 	uintptr_t a[4];
 	a[0] = c->GPR1;
@@ -108,7 +115,7 @@ void do_syscall(Context *c) {
 	a[2] = c->GPR3;
 	a[3] = c->GPR4;
 
-	/* strace(c); */
+	strace(c);
 
 	switch (a[0]) {
 		case SYS_yield:
