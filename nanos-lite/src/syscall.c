@@ -62,7 +62,7 @@ void strace(Context *c) {
 
 	switch (a[0]) {
 		case SYS_exit:
-			sprintf(oneline, "sys_exit(%d)", a[1]);
+			sprintf(oneline, "sys_exit(%d)", (int)a[1]);
 			break;
 		case SYS_yield:
 			strcpy(oneline, "sys_yield()");
@@ -74,7 +74,7 @@ void strace(Context *c) {
 			strcpy(oneline, "sys_read");
 			break;
 		case SYS_write:
-			sprintf(oneline, "sys_write(%d, %s, %d)", a[1], (char*)a[2], a[3]);
+			sprintf(oneline, "sys_write(%d, %s, %d)", (int)a[1], (char*)a[2], (int)a[3]);
 			break;
 		case SYS_kill:
 			strcpy(oneline, "sys_kill");
@@ -89,7 +89,7 @@ void strace(Context *c) {
 			strcpy(oneline, "sys_lseek");
 			break;
 		case SYS_brk:
-			sprintf(oneline, "sys_brk(%p)", a[1]);
+			sprintf(oneline, "sys_brk(%p)", (void*)a[1]);
 			break;
 		case SYS_fstat:
 			strcpy(oneline, "sys_fstat");
