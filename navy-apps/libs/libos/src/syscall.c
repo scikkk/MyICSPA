@@ -69,6 +69,7 @@ int _write(int fd, void *buf, size_t count) {
 
 extern char end;
 void *_sbrk(intptr_t increment) {
+	write(1,"asdfghjkl",9);
   static intptr_t cur = &end;
   intptr_t ret = cur;
   cur += increment;
