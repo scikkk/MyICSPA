@@ -89,7 +89,7 @@ void strace(Context *c, int ret) {
 			strcpy(oneline, "sys_lseek");
 			break;
 		case SYS_brk:
-			sprintf(oneline, "sys_brk(%p)", a[1]);
+			sprintf(oneline, "sys_brk(%p)", (int)a[1]);
 			break;
 		case SYS_fstat:
 			strcpy(oneline, "sys_fstat");
@@ -132,6 +132,6 @@ int ret = 0;
 			break;
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
-	printf("%d\n", ret);
-	/* strace(c, ret); */
+	/* printf("%d\n", ret); */
+	strace(c, ret);
 }
