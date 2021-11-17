@@ -104,7 +104,7 @@ void strace(Context *c) {
 			strcpy(oneline, "sys_execve");
 	}
 	static int no = 1;
-	printf("[STRACE] %-6d %s\n", no++, oneline);
+	printf("[STRACE] %-6d \n", no++);
 }
 
 
