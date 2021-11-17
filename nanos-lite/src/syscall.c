@@ -115,7 +115,6 @@ void do_syscall(Context *c) {
 	a[2] = c->GPR3;
 	a[3] = c->GPR4;
 
-	strace(c);
 
 	switch (a[0]) {
 		case SYS_yield:
@@ -133,4 +132,5 @@ void do_syscall(Context *c) {
 			break;
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
+	strace(c);
 }
