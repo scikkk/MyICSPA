@@ -60,7 +60,7 @@ void strace(Context *c, char* ret) {
 	a[2] = c->GPR3;
 	a[3] = c->GPR4;
 
-			char tmp[10];
+			char tmp[20];
 	switch (a[0]) {
 		case SYS_exit:
 			sprintf(oneline, "sys_exit(%d)", (int)a[1]);
