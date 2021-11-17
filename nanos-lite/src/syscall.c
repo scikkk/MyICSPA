@@ -74,6 +74,9 @@ void do_syscall(Context *c) {
 		case SYS_write:
 			sys_write(a[1], (void*)a[2], a[3]);
 			break;
+		case SYS_brk:
+			sys_brk(a[2]);
+			break;
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
 }

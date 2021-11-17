@@ -67,7 +67,16 @@ int _write(int fd, void *buf, size_t count) {
 }
 
 void *_sbrk(intptr_t increment) {
+  static intptr_t cur = _end;
+  intptr_t ret = cur;
+  cur += increment;
+  if (cur < _end){
+  
   return (void *)-1;
+  }
+  else{
+  return ret;
+  }
 }
 
 int _read(int fd, void *buf, size_t count) {
