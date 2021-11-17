@@ -158,6 +158,17 @@ static bool in_func(int idx, paddr_t addr){
 }
 
 
+bool in_ban_funcs(char *src_name){
+	char ban_list[10][20] = {"putch", "\0"};
+	for(int k = 0, strlen(&ban_list[k]) > 0; k++){
+		if (strcmp(ban_list[k], src_name) == 0){
+			return true;
+		}
+	}
+	return false;
+
+}
+
 void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 	// ret 
 	if (!is_call){
@@ -169,10 +180,10 @@ void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 #endif 
 		for (int k = 0; k < func_idx; k++){
 			if (in_func(k, src)){
-			if (strcmp(func_table[k].name, "putch") == 0){
-				ftrace_idx--;
-				return;
-			}
+				if (strcmp(func_table[k].name, "putch") == 0){
+					ftrace_idx--;
+					return;
+				}
 				cur->is_call = 0;
 				cur->pc = src;
 				cur->name_idx = k;
@@ -190,7 +201,8 @@ void ftrace_write(paddr_t src, paddr_t dst, bool is_call){
 					ftrace_idx = 6;
 				}
 #endif 
-				if (strcmp(func_table[k].name, "putch") == 0){
+				/* if (strcmp(func_table[k].name, "putch") == 0){ */
+				if (in_ban_funcs(func_table[k].name)) {
 					ftrace_idx--;
 					return;
 				}
