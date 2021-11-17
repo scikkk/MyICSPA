@@ -62,7 +62,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		if(ph.p_type == PT_LOAD){
 			fs_lseek(fd, ph.p_offset, SEEK_SET);
 			fs_read(fd, (void*)ph.p_vaddr, ph.p_filesz);
-			Log("file:%x\tmem:%x\toff:%x\n", ph.p_filesz,ph.p_memsz,ph.p_offset);
 			if(ph.p_memsz > ph.p_filesz){
 
 				memset((void*)(ph.p_vaddr+ph.p_filesz), 0, ph.p_memsz-ph.p_filesz);
