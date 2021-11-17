@@ -51,6 +51,13 @@ int sys_open(const char *path, int flags, int mode) {
 	return ret;
 }
 
+
+int fs_lseek(int fd, int offset, int whence);
+int sys_lseek(int fd, size_t offset, int whence) {
+	int ret = fs_lseek(fd, offset, whence);
+	return ret;
+}
+
 int sys_brk(int32_t addr){
 	/* printf("brk_addr:%p\n", addr); */
 	return 0;
@@ -154,6 +161,9 @@ char sret[20];
 			break;
 		case SYS_write:
 			 ret = sys_write(a[1], (void*)a[2], a[3]);
+			break;
+		case SYS_lseek:
+			 ret = sys_lseek(a[1], a[2], a[3]);
 			break;
 		case SYS_brk:
 			 ret = sys_brk(a[1]);
