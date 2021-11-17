@@ -66,11 +66,13 @@ int _write(int fd, void *buf, size_t count) {
   return 0;
 }
 
+
+extern char end;
 void *_sbrk(intptr_t increment) {
-  static intptr_t cur = edata;
+  static intptr_t cur = &end;
   intptr_t ret = cur;
   cur += increment;
-  if (cur < edata){
+  if (cur < &end){
   
   return (void *)-1;
   }
