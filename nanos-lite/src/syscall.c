@@ -74,7 +74,7 @@ void strace(Context *c, int ret) {
 			strcpy(oneline, "sys_read");
 			break;
 		case SYS_write:
-			sprintf(oneline, "sys_write(%d, *(char*)%p, %d)", (int)a[1], (int)a[2], (int)a[3]);
+			sprintf(oneline, "sys_write(%d, (char*)%p, %d)", (int)a[1], a[2], (int)a[3]);
 			break;
 		case SYS_kill:
 			strcpy(oneline, "sys_kill");
