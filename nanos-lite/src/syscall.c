@@ -60,6 +60,7 @@ void strace(Context *c, char* ret) {
 	a[2] = c->GPR3;
 	a[3] = c->GPR4;
 
+			char tmp[10];
 	switch (a[0]) {
 		case SYS_exit:
 			sprintf(oneline, "sys_exit(%d)", (int)a[1]);
@@ -74,7 +75,8 @@ void strace(Context *c, char* ret) {
 			strcpy(oneline, "sys_read");
 			break;
 		case SYS_write:
-			sprintf(oneline, "sys_write(%d, (char*)%p, %d)", (int)a[1], a[2], (int)a[3]);
+			strncpy(tmp, (char*)a[2], 9);
+			sprintf(oneline, "sys_write(%d, %s..., %d)", (int)a[1], tmp, (int)a[3]);
 			break;
 		case SYS_kill:
 			strcpy(oneline, "sys_kill");
