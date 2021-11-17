@@ -1,5 +1,7 @@
 #include <common.h>
 
+
+
 enum {
 	SYS_exit,
 	SYS_yield,
@@ -50,10 +52,21 @@ int sys_brk(int32_t addr){
 
 
 
+typedef struct {
+	char *name;
+	size_t size;
+	size_t disk_offset;
+} Finfo;
 
+static Finfo file_table[] __attribute__((used)) = {
+	[0]  = {"stdin", 0, 0},
+	[1] = {"stdout", 0, 0},
+	[2] = {"stderr", 0, 0},
+#include "files.h"
+};
 
 void strace(Context *c, char* ret) {
-	char oneline[128];
+	char  oneline[128];
 	uintptr_t a[4];
 	a[0] = c->GPR1;
 	a[1] = c->GPR2;
@@ -75,10 +88,10 @@ void strace(Context *c, char* ret) {
 			strcpy(oneline, "sys_read");
 			break;
 		case SYS_write:
-			strncpy(tmp, (char*)a[2], 9);
+		 	strncpy(tmp, (char*)a[2], 9);
 			tmp[9] = '\0';
 			
-			sprintf(oneline, "sys_write(%d, %s..., %d)", (int)a[1], tmp, (int)a[3]);
+			sprintf(oneline, "sys_write(%d(%s), %s..., %d)", (int)a[1], file_table[a[1]].name, tmp, (int)a[3]);
 			break;
 		case SYS_kill:
 			strcpy(oneline, "sys_kill");
