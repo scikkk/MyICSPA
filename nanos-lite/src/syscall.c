@@ -1,5 +1,52 @@
 #include <common.h>
-#include "syscall.h"
+
+enum {
+	SYS_exit,
+	SYS_yield,
+	SYS_open,
+	SYS_read,
+	SYS_write,
+	SYS_kill,
+	SYS_getpid,
+	SYS_close,
+	SYS_lseek,
+	SYS_brk,
+	SYS_fstat,
+	SYS_time,
+	SYS_signal,
+	SYS_execve,
+	SYS_fork,
+	SYS_link,
+	SYS_unlink,
+	SYS_wait,
+	SYS_times,
+	SYS_gettimeofday
+};
+
+int sys_yield(){
+	yield();
+	return 0;
+}
+
+void sys_exit(int code){
+	halt(code);
+}
+
+int sys_write(int fd, const void *buf, int count){
+	/* count = 200; */
+	if (fd == 1 || fd == 2){
+		for(int k = 0; k < count; k++){
+			putch(*(((char*)buf)+k));
+		} 
+		return count;
+	}
+	return -1;
+}
+
+int sys_brk(int32_t addr){
+	/* printf("brk_addr:%p\n", addr); */
+	return 0;
+}
 
 void strace(Context *c) {
 	char type[20];
