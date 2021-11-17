@@ -72,7 +72,7 @@ void *_sbrk(intptr_t increment) {
   static intptr_t cur = &end;
   intptr_t ret = cur;
   cur += increment;
-  if (cur < &end){
+  if (cur < &end&&0){
   
   return (void *)-1;
   }
