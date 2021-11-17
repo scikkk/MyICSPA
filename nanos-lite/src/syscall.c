@@ -76,6 +76,7 @@ void strace(Context *c, char* ret) {
 			break;
 		case SYS_write:
 			strncpy(tmp, (char*)a[2], 9);
+			printf("vdvs\n");
 			sprintf(oneline, "sys_write(%d, %s..., %d)", (int)a[1], tmp, (int)a[3]);
 			break;
 		case SYS_kill:
