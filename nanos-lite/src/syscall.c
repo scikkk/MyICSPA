@@ -53,7 +53,7 @@ int sys_brk(int32_t addr){
 
 
 void strace(Context *c, int ret) {
-	char oneline[20];
+	char oneline[128];
 	uintptr_t a[4];
 	a[0] = c->GPR1;
 	a[1] = c->GPR2;
