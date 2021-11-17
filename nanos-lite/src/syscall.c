@@ -45,6 +45,12 @@ int sys_write(int fd, const void *buf, int count){
 	return -1;
 }
 
+int fs_open(const char *pathname, int flags, int mode);
+int sys_open(const char *path, int flags, int mode) {
+	int ret = fs_open(path, flags, mode);
+	return ret;
+}
+
 int sys_brk(int32_t addr){
 	/* printf("brk_addr:%p\n", addr); */
 	return 0;
@@ -135,13 +141,16 @@ void do_syscall(Context *c) {
 int ret = 0;
 char sret[20];
 	switch (a[0]) {
-		case SYS_yield:
-			 ret = sys_yield();
-			break;
 		case SYS_exit:
 			/* printf("%d\t%d\t%d\t%d\n\n", a[0],a[1],a[2],a[3]); */
 	strace(c, "void");
 			 sys_exit(a[1]);
+			break;
+		case SYS_yield:
+			 ret = sys_yield();
+			break;
+		case SYS_open:
+			 ret = sys_open((char*)a[1], a[2], a[3]);
 			break;
 		case SYS_write:
 			 ret = sys_write(a[1], (void*)a[2], a[3]);
