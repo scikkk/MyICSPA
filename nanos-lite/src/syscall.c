@@ -146,7 +146,8 @@ void do_syscall(Context *c) {
 	a[3] = c->GPR4;
 
 int ret = 0;
-char sret[20];
+char sret[20]="ret";
+	strace(c, sret);
 	switch (a[0]) {
 		case SYS_exit:
 			/* printf("%d\t%d\t%d\t%d\n\n", a[0],a[1],a[2],a[3]); */
@@ -172,5 +173,4 @@ char sret[20];
 	}
 	/* printf("%d\n", ret); */
 	sprintf(sret, "%d", ret);
-	strace(c, sret);
 }
