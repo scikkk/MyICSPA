@@ -67,10 +67,10 @@ int _write(int fd, void *buf, size_t count) {
 }
 
 void *_sbrk(intptr_t increment) {
-  static intptr_t cur = _end;
+  static intptr_t cur = edata;
   intptr_t ret = cur;
   cur += increment;
-  if (cur < _end){
+  if (cur < edata){
   
   return (void *)-1;
   }
