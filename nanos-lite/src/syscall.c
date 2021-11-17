@@ -122,6 +122,7 @@ int ret = 0;
 			break;
 		case SYS_exit:
 			/* printf("%d\t%d\t%d\t%d\n\n", a[0],a[1],a[2],a[3]); */
+	strace(c, ret);
 			 sys_exit(a[1]);
 			break;
 		case SYS_write:
