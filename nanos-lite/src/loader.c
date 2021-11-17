@@ -48,48 +48,27 @@ enum {SEEK_SET, SEEK_CUR, SEEK_END};
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
 	/* TODO(); */
-	/* size_t size = get_ramdisk_size(); */
 	int fd = fs_open(filename, 0, 0);
 	Elf_Ehdr header;
-	//	ramdisk_read(&header,0,52);
 	fs_read(fd, &header, 52);	
-	/* printf("moshu:%x\n", *(uint32_t *)header.e_ident); */
 	assert(*(uint32_t *)header.e_ident == 0x464c457f);
-	/* printf("type:%d\n", header.e_machine); */
 	assert(header.e_machine == EXPECT_TYPE);
 	Elf_Phdr ph;
 	unsigned off = header.e_phoff;
-	/* uint32_t vaddrs[20]; */
-	/* uint8_t vaddr_idx = 0; */
 	for(int k = 0; k < header.e_phnum; k++){
-		//		ramdisk_read(&ph, off, header.e_phentsize);
 		fs_lseek(fd, off, SEEK_SET);
 		fs_read(fd, &ph, header.e_phentsize);
 		off += header.e_phentsize;
 		if(ph.p_type == PT_LOAD){
-			/* char seg[65536]; */
-			//			ramdisk_read((void*)ph.p_vaddr, ph.p_offset, ph.p_filesz);
 			fs_lseek(fd, ph.p_offset, SEEK_SET);
 			fs_read(fd, (void*)ph.p_vaddr, ph.p_filesz);
-			/* vaddrs[vaddr_idx++] = ph.p_vaddr; */
-			/* printf("%p\n",ph.p_vaddr); */
-
-
-			/* printf("\n"); */
-			/* for(int k = 0; k < 1000; k++){printf("%c", seg[k]);} */
-			/* printf("\n"); */
-			/* printf("\n"); */
-
-
-			/* memcpy((void*)ph.p_vaddr, seg, ph.p_filesz); */
-			/* Log("file:%x\tmem:%x\toff:%x\n", ph.p_filesz,ph.p_memsz,ph.p_offset); */
+			Log("file:%x\tmem:%x\toff:%x\n", ph.p_filesz,ph.p_memsz,ph.p_offset);
 			if(ph.p_memsz > ph.p_filesz){
 
 				memset((void*)(ph.p_vaddr+ph.p_filesz), 0, ph.p_memsz-ph.p_filesz);
 			}
 		} 
 	}
-	/* return vaddrs[0]; */
 	return header.e_entry;
 }
 
