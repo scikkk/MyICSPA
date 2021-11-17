@@ -72,14 +72,14 @@ void *_sbrk(intptr_t increment) {
   static intptr_t cur = &end;
   intptr_t ret = cur;
   cur += increment;
-  if (cur < &end&&0){
+  /* if (cur < &end&&0){ */
   
-  return (void *)-1;
-  }
-  else{
+  /* return (void *)-1; */
+  /* } */
+  /* else{ */
   _syscall_(SYS_brk, cur, 0, 0);
   return ret;
-  }
+  /* } */
 }
 
 int _read(int fd, void *buf, size_t count) {
