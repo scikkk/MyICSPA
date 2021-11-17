@@ -132,5 +132,6 @@ int ret = 0;
 			break;
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
-	strace(c, ret);
+	printf("%d\n", ret);
+	/* strace(c, ret); */
 }
