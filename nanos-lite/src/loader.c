@@ -51,16 +51,18 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	int fd = fs_open(filename, 0, 0);
 	Elf_Ehdr header;
 	fs_read(fd, &header, 52);	
-	printf("line%d fd:%d\n", __LINE__, fd);
+	printf("line:%d fd:%d\n", __LINE__, fd);
 	assert(*(uint32_t *)header.e_ident == 0x464c457f);
 	assert(header.e_machine == EXPECT_TYPE);
 	Elf_Phdr ph;
 	unsigned off = header.e_phoff;
 	for(int k = 0; k < header.e_phnum; k++){
+		printf("line:%d fd:%d\n", __LINE__, fd);
 		fs_lseek(fd, off, SEEK_SET);
 		fs_read(fd, &ph, header.e_phentsize);
 		off += header.e_phentsize;
 		if(ph.p_type == PT_LOAD){
+			printf("line:%d fd:%d\n", __LINE__, fd);
 			fs_lseek(fd, ph.p_offset, SEEK_SET);
 			fs_read(fd, (void*)ph.p_vaddr, ph.p_filesz);
 			if(ph.p_memsz > ph.p_filesz){
