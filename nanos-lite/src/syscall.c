@@ -144,7 +144,8 @@ void strace(Context *c, char* ret) {
 			strcpy(oneline, "sys_execve");
 	}
 	static int no = 1;
-	printf("\n[STRACE] %d %s = %s\n", no++, oneline, ret);
+	Log("\n[STRACE] %d %s = %s\n", no++, oneline, ret);
+	/* printf("\n[STRACE] %d %s = %s\n", no++, oneline, ret); */
 }
 
 
