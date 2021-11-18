@@ -88,6 +88,7 @@ static Finfo file_table[] __attribute__((used)) = {
 
 void strace(Context *c, char* ret) {
 	char  oneline[1280];
+	char whence[3][20] = {"SEEK_SET", "SEEK_CUR", "SEEK_END"};
 	uintptr_t a[4];
 	a[0] = c->GPR1;
 	a[1] = c->GPR2;
@@ -96,7 +97,7 @@ void strace(Context *c, char* ret) {
 
 	char tmp[20];
 	switch (a[0]) {
-		case SYS_exit:
+		case SYS_exit: 
 			sprintf(oneline, "sys_exit(%d)", (int)a[1]);
 			break;
 		case SYS_yield:
@@ -124,8 +125,8 @@ void strace(Context *c, char* ret) {
 			strcpy(oneline, "sys_close");
 			break;
 		case SYS_lseek:
-			sprintf(oneline, "sys_lseek(%d(%s), %p, %d)", (int)a[1], file_table[a[1]].name, a[2], (int)a[3]);
-			break;
+			sprintf(oneline, "sys_lseek(%d(%s), %p, %s)", (int)a[1], file_table[a[1]].name, a[2], whence[(int)a[3]]);
+			break; 
 		case SYS_brk:
 			sprintf(oneline, "sys_brk(%p)", (int)a[1]);
 			break;
