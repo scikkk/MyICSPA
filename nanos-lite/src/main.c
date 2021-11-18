@@ -13,7 +13,7 @@ int main() {
 	printf("%s\n", logo);
 	Log("'Hello World!' from Nanos-lite");
 	Log("Build time: %s, %s", __TIME__, __DATE__);
-	Log("%08x", 1);
+	/* Log("%08x", 1); */
 
 	init_mm();
 
