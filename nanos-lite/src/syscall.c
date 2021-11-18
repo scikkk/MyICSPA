@@ -173,7 +173,7 @@ char sret[20]="ret";
 			 ret = sys_write(a[1], (void*)a[2], a[3]);
 			break;
 		case SYS_lseek:
-			printf("%d\t%d\t%d\t%d\n\n", a[0],a[1],a[2],a[3]);
+			/* printf("%d\t%d\t%d\t%d\n\n", a[0],a[1],a[2],a[3]); */
 			 ret = sys_lseek(a[1], a[2], a[3]);
 			break;
 		case SYS_brk:
