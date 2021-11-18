@@ -34,16 +34,24 @@ void sys_exit(int code){
 	halt(code);
 }
 
+int fs_write(int fd, const void *buf, int len);
 int sys_write(int fd, const void *buf, int count){
 	/* count = 200; */
-	if (fd == 1 || fd == 2){
-		for(int k = 0; k < count; k++){
-			putch(*(((char*)buf)+k));
-		} 
-		return count;
-	}
-	return -1;
+	/* if (fd == 1 || fd == 2){ */
+	/* 	for(int k = 0; k < count; k++){ */
+	/* 		putch(*(((char*)buf)+k)); */
+	/* 	} */ 
+	/* 	 return count; */
+	/* } */
+
+	return fs_write(fd, buf, count);
 }
+
+int fs_read(int fd, void *buf, int len);
+int sys_read(int fd, void *buf, int len){
+	return fs_read(fd, buf, len);
+}
+
 
 int fs_open(const char *pathname, int flags, int mode);
 int sys_open(const char *path, int flags, int mode) {
@@ -138,6 +146,7 @@ void strace(Context *c, char* ret) {
 }
 
 
+
 void do_syscall(Context *c) {
 	uintptr_t a[4];
 	a[0] = c->GPR1;
@@ -159,6 +168,8 @@ char sret[20]="ret";
 		case SYS_open:
 			 ret = sys_open((char*)a[1], a[2], a[3]);
 			break;
+		case SYS_read:
+			 ret = sys_read(a[1], (void*)a[2], a[3]);
 		case SYS_write:
 			 ret = sys_write(a[1], (void*)a[2], a[3]);
 			break;
