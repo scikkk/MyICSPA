@@ -103,7 +103,6 @@ void strace(Context *c, char* ret) {
 			strcpy(oneline, "sys_yield()");
 			break;
 		case SYS_open:
-			printf("fd:%d\n", a[1]);
 			sprintf(oneline, "sys_open(%s, %d, %d)", (char*)a[1], (int)a[2], (int)a[3]);
 			break;
 		case SYS_read:
