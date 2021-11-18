@@ -51,7 +51,7 @@ size_t get_ramdisk_size();
 
 // wk 3.2
 #define FILE_NUM 128
-static int open_offset[FILE_NUM];
+static int open_offset[FILE_NUM] = {0,0,0};
 
 int fs_open(const char *pathname, int flags, int mode){
 	int ret = -1;
