@@ -37,13 +37,12 @@ void sys_exit(int code){
 int fs_write(int fd, const void *buf, int len);
 int sys_write(int fd, const void *buf, int count){
 	/* count = 200; */
-	/* if (fd == 1 || fd == 2){ */
-	/* 	for(int k = 0; k < count; k++){ */
-	/* 		putch(*(((char*)buf)+k)); */
-	/* 	} */ 
-	/* 	 return count; */
-	/* } */
-
+	if (fd == 1 || fd == 2){
+		for(int k = 0; k < count; k++){
+			putch(*(((char*)buf)+k));
+		} 
+		 return count;
+	}
 	return fs_write(fd, buf, count);
 }
 
