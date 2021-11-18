@@ -103,8 +103,9 @@ void strace(Context *c, char* ret) {
 			strcpy(oneline, "sys_yield()");
 			break;
 		case SYS_open:
-			/* sprintf(oneline, "sys_open(%d(%s), %d, %d)", (int)a[1], file_table[a[1]].name, (int)a[2], (int)a[3]); */
-			/* break; */
+			printf("fd:%d\n", a[1]);
+			sprintf(oneline, "sys_open(%d(%s), %d, %d)", (int)a[1], file_table[a[1]].name, (int)a[2], (int)a[3]);
+			break;
 		case SYS_read:
 			sprintf(oneline, "sys_read(%d(%s), %d, %d)", (int)a[1], file_table[a[1]].name, (int)a[2], (int)a[3]);
 			break;
