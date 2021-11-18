@@ -41,7 +41,7 @@ int sys_write(int fd, const void *buf, int count){
 		for(int k = 0; k < count; k++){
 			putch(*(((char*)buf)+k));
 		} 
-		 return count;
+		return count;
 	}
 	return fs_write(fd, buf, count);
 }
@@ -94,7 +94,7 @@ void strace(Context *c, char* ret) {
 	a[2] = c->GPR3;
 	a[3] = c->GPR4;
 
-			char tmp[20];
+	char tmp[20];
 	switch (a[0]) {
 		case SYS_exit:
 			sprintf(oneline, "sys_exit(%d)", (int)a[1]);
@@ -109,9 +109,9 @@ void strace(Context *c, char* ret) {
 			sprintf(oneline, "sys_read(%d(%s), %d, %d)", (int)a[1], file_table[a[1]].name, (int)a[2], (int)a[3]);
 			break;
 		case SYS_write:
-		 	strncpy(tmp, (char*)a[2], 9);
+			strncpy(tmp, (char*)a[2], 9);
 			tmp[9] = '\0';
-			
+
 			sprintf(oneline, "sys_write(%d(%s), %s..., %d)", (int)a[1], file_table[a[1]].name, tmp, (int)a[3]);
 			break;
 		case SYS_kill:
@@ -154,30 +154,30 @@ void do_syscall(Context *c) {
 	a[2] = c->GPR3;
 	a[3] = c->GPR4;
 
-int ret = 0;
-char sret[20]="ret";
+	int ret = 0;
+	char sret[20]="ret";
 	switch (a[0]) {
 		case SYS_exit:
-	strace(c, "void");
-			printf("%d\t%d\t%d\t%d\n\n", a[0],a[1],a[2],a[3]);
-			 sys_exit(a[1]);
+			strace(c, "void");
+			/* printf("%d\t%d\t%d\t%d\n\n", a[0],a[1],a[2],a[3]); */
+			sys_exit(a[1]);
 			break;
 		case SYS_yield:
-			 ret = sys_yield();
+			ret = sys_yield();
 			break;
 		case SYS_open:
-			 ret = sys_open((char*)a[1], a[2], a[3]);
+			ret = sys_open((char*)a[1], a[2], a[3]);
 			break;
 		case SYS_read:
-			 ret = sys_read(a[1], (void*)a[2], a[3]);
+			ret = sys_read(a[1], (void*)a[2], a[3]);
 		case SYS_write:
-			 ret = sys_write(a[1], (void*)a[2], a[3]);
+			ret = sys_write(a[1], (void*)a[2], a[3]);
 			break;
 		case SYS_lseek:
-			 ret = sys_lseek(a[1], a[2], a[3]);
+			ret = sys_lseek(a[1], a[2], a[3]);
 			break;
 		case SYS_brk:
-			 ret = sys_brk(a[1]);
+			ret = sys_brk(a[1]);
 			break;
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
