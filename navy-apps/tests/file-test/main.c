@@ -26,9 +26,9 @@ int main() {
   }
 
   
-  fseek(fp, 500 * 5, SEEK_SET);
-   int size = ftell(fp); 
-   printf("size: %d\n", size); 
+  /* fseek(fp, 500 * 5, SEEK_SET); */
+  /*  int size = ftell(fp); */ 
+  /*  printf("size: %d\n", size); */ 
   for (i = 500; i < 502; i ++) { // 1000
     fscanf(fp, "%d", &n);
 	printf("i=%d\tn=%d\n", i, n);
