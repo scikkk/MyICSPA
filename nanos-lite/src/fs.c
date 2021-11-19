@@ -101,12 +101,12 @@ size_t fs_lseek(int fd, size_t offset, int whence){
 		case SEEK_END:
 			open_offset[fd] = file_table[fd].size + offset - 1;
 			break;
-		default: assert(0);
+ 		default: assert(0);
 	}
 	/* printf("%d\t%d\t%d\n",fd, offset, whence); */
 	assert(open_offset[fd] <= file_table[fd].size);
 
-	return open_offset[fd];
+	return open_offset[fd] + 1;
 }
 int fs_close(int fd){
 	/* assert(fd > 2); */
