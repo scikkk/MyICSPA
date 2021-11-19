@@ -24,7 +24,7 @@ int main() {
   }
 
   
-  for (i = 500; i < 550; i ++) { // 1000
+  for (i = 500; i < 510; i ++) { // 1000
     fscanf(fp, "%d", &n);
 	/* printf("i=%d\tn=%d\n", i, n); */
     /* assert(n == i + 1); */
