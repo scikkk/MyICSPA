@@ -118,6 +118,7 @@ void strace(Context *c, char* ret) {
 		case SYS_write:
 			strncpy(tmp, (char*)a[2], 9);
 			tmp[strlen((char*)a[2])] = '\0';
+			tmp[9] = '\0';
 			if(strlen((char*)a[2]) > 9){
 				strcat(tmp, "...");
 			}
