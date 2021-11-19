@@ -43,6 +43,7 @@ int sys_write(int fd, const void *buf, int count){
 		} 
 		return count;
 	}
+	printf("count: %d\n", count);
 	return fs_write(fd, buf, count);
 }
 
