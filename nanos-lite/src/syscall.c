@@ -67,8 +67,7 @@ int sys_close(int fd) {
 
 int fs_lseek(int fd, int offset, int whence);
 int sys_lseek(int fd, size_t offset, int whence) {
-	assert(fd != 1 );
-	assert(fd != 2);
+	assert(fd > 2 );
 	return fs_lseek(fd, offset, whence);
 }
 
