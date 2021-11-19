@@ -93,10 +93,10 @@ size_t fs_lseek(int fd, size_t offset, int whence){
 	/* assert(fd > 2); */	
 	switch (whence){
  		case SEEK_SET:  
-			open_offset[fd] = offset;
+			open_offset[fd] = offset-1;
 			break;
 		case SEEK_CUR:
-			open_offset[fd] += offset;
+			open_offset[fd] += offset-1;
 			break;
 		case SEEK_END:
 			open_offset[fd] = file_table[fd].size + offset - 1;
