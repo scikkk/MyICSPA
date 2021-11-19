@@ -69,7 +69,7 @@ assert(fd > 2);
 	ramdisk_read(buf, file_table[fd].disk_offset+open_offset[fd], len);
 
 	printf("openoff: %d; size: %d", open_offset[fd], file_table[fd].size);
-	open_offset[fd] += len;
+	open_offset[fd] += len + 1;
 	assert(open_offset[fd] <= file_table[fd].size);
 	printf("openoff: %d; size: %d", open_offset[fd], file_table[fd].size);
 	printf("len: %d\n", len);
