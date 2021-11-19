@@ -9,6 +9,7 @@ typedef struct {
 	size_t disk_offset;
 	ReadFn read;
 	WriteFn write;
+	size_t open_offset;
 } Finfo;
 
 enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB};
@@ -29,9 +30,9 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
 
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
-	[FD_STDIN]  = {"stdin", 0, 0, invalid_read, invalid_write},
-	[FD_STDOUT] = {"stdout", 0, 0, invalid_read, invalid_write},
-	[FD_STDERR] = {"stderr", 0, 0, invalid_read, invalid_write},
+	[FD_STDIN]  = {"stdin", 0, 0, invalid_read, invalid_write, 0},
+	[FD_STDOUT] = {"stdout", 0, 0, invalid_read, invalid_write, 0},
+	[FD_STDERR] = {"stderr", 0, 0, invalid_read, invalid_write, 0},
 #include "files.h"
 };
 
@@ -63,36 +64,51 @@ int fs_open(const char *pathname, int flags, int mode){
 }
 
 size_t fs_read(int fd, void *buf, size_t len){
-	assert(fd > 2);
-	printf("%d: offset: %d\n", __LINE__, open_offset[fd]);
-	size_t max_len = file_table[fd].size - open_offset[fd];
-	len = (len>max_len)?max_len:len;
-	ramdisk_read(buf, file_table[fd].disk_offset+open_offset[fd], len);
+	/*	assert(fd > 2);
+		printf("%d: offset: %d\n", __LINE__, open_offset[fd]);
+		size_t max_len = file_table[fd].size - open_offset[fd];
+		len = (len>max_len)?max_len:len;
+		ramdisk_read(buf, file_table[fd].disk_offset+open_offset[fd], len);
 
-	/* printf("openoff: %d; size: %\", open_offset[fd], file_table[fd].size); */
+	// printf("openoff: %d; size: %\", open_offset[fd], file_table[fd].size); 
 	open_offset[fd] += len;
 	assert(open_offset[fd] <= file_table[fd].size);
-	/* printf("openoff: %d; size: %d", open_offset[fd], file_table[fd].size); */
-	/* printf("len: %d\n", len); */
+	//	 printf("openoff: %d; size: %d", open_offset[fd], file_table[fd].size); 
+	//	 printf("len: %d\n", len); 
 	assert(len);
 	printf("%d: offset: %d\n", __LINE__, open_offset[fd]);
+
+*/ 
+	if(file_table[fd].open_offset >= file_table[fd].size || len == 0)
+		return 0;
+	if(file_table[fd].open_offset + len > file_table[fd].size)
+		len = file_table[fd].size - file_table[fd].open_offset;
+	ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
+	file_table[fd].open_offset += len;
 	return len;
 }
 size_t fs_write(int fd, const void *buf, size_t len){
 	assert(fd > 2);
-
-	printf("%d: offset: %d\n", __LINE__, open_offset[fd]);
-	size_t max_len = file_table[fd].size - open_offset[fd];
-	/* printf("maxlen: %d\t len: %d\n", max_len, len); */
+	/*
+	   printf("%d: offset: %d\n", __LINE__, open_offset[fd]);
+	   size_t max_len = file_table[fd].size - open_offset[fd];
+	//	 printf("maxlen: %d\t len: %d\n", max_len, len); 
 	len = (len>max_len)?max_len:len;
 	int buf_len = strlen((char*)buf);
 	len = (buf_len < len)?buf_len:len;
 	printf("buf_len: %d\n", buf_len);
-	/* printf("write:%d\t%d\t%d\n",open_offset[fd], len, open_offset[fd]+len); */
+	//	 printf("write:%d\t%d\t%d\n",open_offset[fd], len, open_offset[fd]+len); 
 	ramdisk_write(buf, file_table[fd].disk_offset+open_offset[fd], len);
 	open_offset[fd] += len;
 	assert(open_offset[fd] <= file_table[fd].size);
 	printf("%d: offset: %d\n", __LINE__, open_offset[fd]);
+	*/
+	if(file_table[fd].open_offset >= file_table[fd].size)
+		return 0;
+	if(file_table[fd].open_offset + len > file_table[fd].size)
+		len = file_table[fd].size - file_table[fd].open_offset;
+	ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
+	file_table[fd].open_offset += len;
 	return len; 
 }
 
