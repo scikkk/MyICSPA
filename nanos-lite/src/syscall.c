@@ -173,17 +173,18 @@ void do_syscall(Context *c) {
 			break;
 		case SYS_read:
 			strace_ret = sys_read(a[1], (void*)a[2], a[3]);
-	c->GPRx = strace_ret;
+			c->GPRx = strace_ret;
 		case SYS_write:
 			strace_ret = sys_write(a[1], (void*)a[2], a[3]);
-	c->GPRx = strace_ret;
+			c->GPRx = strace_ret;
 			break;
 		case SYS_lseek:
 			strace_ret = sys_lseek(a[1], a[2], a[3]);
-	c->GPRx = strace_ret;
+			c->GPRx = strace_ret;
 			break;
 		case SYS_brk:
 			strace_ret = sys_brk(a[1]);
+			c->GPRx = strace_ret;
 			break;
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
