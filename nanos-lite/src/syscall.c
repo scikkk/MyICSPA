@@ -158,7 +158,7 @@ void strace(Context *c, char* ret) {
 		default: assert(0);
 	}
 	static int no = 1;
-	printf("\n[STRACE] %d %s = %s\n", no++, oneline, ret);
+	printf("[STRACE] %d %s = %s\n", no++, oneline, ret);
 }
 
 
