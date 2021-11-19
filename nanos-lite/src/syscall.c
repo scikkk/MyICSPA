@@ -170,26 +170,22 @@ void do_syscall(Context *c) {
 			break;
 		case SYS_open:
 			strace_ret = sys_open((char*)a[1], a[2], a[3]);
-			c->gpr[10] = strace_ret;
 			break;
 		case SYS_read:
 			strace_ret = sys_read(a[1], (void*)a[2], a[3]);
-			c->GPRx = strace_ret;
 		case SYS_write:
 			strace_ret = sys_write(a[1], (void*)a[2], a[3]);
-			c->GPRx = strace_ret;
 			break;
 		case SYS_lseek:
 			strace_ret = sys_lseek(a[1], a[2], a[3]);
-			c->GPRx = strace_ret;
 			break;
 		case SYS_brk:
 			strace_ret = sys_brk(a[1]);
-			c->GPRx = strace_ret;
 			break;
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
 	/* printf("%d\n", strace_ret); */
 	sprintf(sret, "%d", strace_ret);
 	strace(c, sret);
+	c->GPRx = strace_ret;
 }
