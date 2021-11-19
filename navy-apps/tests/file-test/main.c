@@ -23,10 +23,11 @@ int main() {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
 
-  for (i = 500; i < 1000; i ++) {
+  
+  for (i = 500; i < 550; i ++) { // 1000
     fscanf(fp, "%d", &n);
 	printf("i=%d\tn=%d\n", i, n);
-    assert(n == i + 1);
+    /* assert(n == i + 1); */
   }
 
   /* fseek(fp, 0, SEEK_SET); */
