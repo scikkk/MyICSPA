@@ -64,7 +64,7 @@ int fs_open(const char *pathname, int flags, int mode){
 
 size_t fs_read(int fd, void *buf, size_t len){
 assert(fd > 2);
-	size_t max_len = file_table[fd].size - open_offset[fd] + 1;
+	size_t max_len = file_table[fd].size - open_offset[fd];
 	len = (len>max_len)?max_len:len;
 	ramdisk_read(buf, file_table[fd].disk_offset+open_offset[fd], len);
 
@@ -78,7 +78,7 @@ assert(fd > 2);
 }
 size_t fs_write(int fd, const void *buf, size_t len){
 	assert(fd > 2);
-	size_t max_len = file_table[fd].size - open_offset[fd]+1;
+	size_t max_len = file_table[fd].size - open_offset[fd];
 	len = (len>max_len)?max_len:len;
 	printf("write:%d\t%d\t%d\n",open_offset[fd], len, open_offset[fd]+len);
 	ramdisk_write(buf, file_table[fd].disk_offset+open_offset[fd], len);
