@@ -33,11 +33,11 @@ int main() {
   printf("hxbvjsdxvb xjm\n");
   fseek(fp, 0, SEEK_SET);
   printf("hxbvjsdxvb xjm\n");
-  for (i = 0; i < 500; i ++) {
-    fscanf(fp, "%d", &n);
-	printf("i=%d\tn=%d\n", i, n);
-    assert(n == i + 1 + 1000);
-  }
+  /* for (i = 0; i < 500; i ++) { */
+  /*   fscanf(fp, "%d", &n); */
+	/* printf("i=%d\tn=%d\n", i, n); */
+  /*   assert(n == i + 1 + 1000); */
+  /* } */
 
   fclose(fp);
 
