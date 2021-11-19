@@ -98,7 +98,7 @@ size_t fs_lseek(int fd, size_t offset, int whence){
 	return open_offset[fd];
 }
 int fs_close(int fd){
-	assert(fd > 2);
+	/* assert(fd > 2); */
 	return 0;
 }
 // wk 3.3--------------------------------------------------
