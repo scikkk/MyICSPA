@@ -50,6 +50,7 @@ int fs_read(int fd, void *buf, int len);
 int sys_read(int fd, void *buf, int len){
 	int ret =  fs_read(fd, buf, len);
 	assert(ret);
+	printf("ret=%d\n", ret);
 	return ret;
 }
 
