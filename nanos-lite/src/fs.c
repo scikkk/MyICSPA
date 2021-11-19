@@ -69,7 +69,7 @@ assert(fd > 2);
 	ramdisk_read(buf, file_table[fd].disk_offset+open_offset[fd], len);
 
 	printf("openoff: %d; size: %d", open_offset[fd], file_table[fd].size);
-	open_offset[fd] += len + 1;
+	open_offset[fd] += len;
 	assert(open_offset[fd] <= file_table[fd].size);
 	printf("openoff: %d; size: %d", open_offset[fd], file_table[fd].size);
 	printf("len: %d\n", len);
@@ -83,7 +83,7 @@ size_t fs_write(int fd, const void *buf, size_t len){
 	len = (len>max_len)?max_len:len;
 	printf("write:%d\t%d\t%d\n",open_offset[fd], len, open_offset[fd]+len);
 	ramdisk_write(buf, file_table[fd].disk_offset+open_offset[fd], len);
-	open_offset[fd] += len + 1;
+	open_offset[fd] += len;
 	assert(open_offset[fd] <= file_table[fd].size);
 	return len; 
 }
@@ -99,7 +99,7 @@ size_t fs_lseek(int fd, size_t offset, int whence){
 			open_offset[fd] += offset;
 			break;
 		case SEEK_END:
-			open_offset[fd] = file_table[fd].size + offset;
+			open_offset[fd] = file_table[fd].size + offset - 1;
 			break;
 		default: assert(0);
 	}
