@@ -185,6 +185,7 @@ void do_syscall(Context *c) {
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
 	/* printf("%d\n", strace_ret); */
+	c->GPRx = strace_ret;
 	sprintf(sret, "%d", strace_ret);
 	strace(c, sret);
 }
