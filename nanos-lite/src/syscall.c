@@ -48,8 +48,9 @@ int sys_write(int fd, const void *buf, int count){
 
 int fs_read(int fd, void *buf, int len);
 int sys_read(int fd, void *buf, int len){
-	return 452;
-	return fs_read(fd, buf, len);
+	int ret =  fs_read(fd, buf, len);
+	assert(ret);
+	return ret;
 }
 
 
