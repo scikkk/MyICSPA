@@ -63,7 +63,7 @@ int fs_open(const char *pathname, int flags, int mode){
 }
 
 size_t fs_read(int fd, void *buf, size_t len){
-assert(fd > 2);
+	assert(fd > 2);
 	size_t max_len = file_table[fd].size - open_offset[fd];
 	len = (len>max_len)?max_len:len;
 	ramdisk_read(buf, file_table[fd].disk_offset+open_offset[fd], len);
@@ -92,21 +92,21 @@ size_t fs_write(int fd, const void *buf, size_t len){
 size_t fs_lseek(int fd, size_t offset, int whence){
 	/* assert(fd > 2); */	
 	switch (whence){
- 		case SEEK_SET:  
+		case SEEK_SET:  
 			open_offset[fd] = offset;
 			break; 
 		case SEEK_CUR:
 			open_offset[fd] += offset;
 			break; 
 		case SEEK_END:
-			open_offset[fd] = file_table[fd].size + offset - 1;
+			open_offset[fd] = file_table[fd].size + offset;
 			break;
-  		default: assert(0);
+		default: assert(0);
 	}
 	/* printf("%d\t%d\t%d\n",fd, offset, whence); */
 	assert(open_offset[fd] <= file_table[fd].size);
 
-	return open_offset[fd] + 1;
+	return open_offset[fd];
 }
 int fs_close(int fd){
 	/* assert(fd > 2); */
