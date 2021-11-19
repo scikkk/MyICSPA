@@ -5,10 +5,10 @@ int main() {
   FILE *fp = fopen("/share/files/num", "r+");
   assert(fp);
 
-  /* fseek(fp, 0, SEEK_END); */
-  /* long size = ftell(fp); */
-  /* printf("%d\n", size); */
-  /* assert(size == 5000); */
+  fseek(fp, 0, SEEK_END);
+  long size = ftell(fp);
+  printf("%d\n", size);
+  assert(size == 5000);
 
   fseek(fp, 500 * 5, SEEK_SET);
   int i, n;
