@@ -83,7 +83,7 @@ size_t fs_write(int fd, const void *buf, size_t len){
 	len = (len>max_len)?max_len:len;
 	printf("write:%d\t%d\t%d\n",open_offset[fd], len, open_offset[fd]+len);
 	ramdisk_write(buf, file_table[fd].disk_offset+open_offset[fd], len);
-	open_offset[fd] += len;
+	open_offset[fd] += len + 1;
 	assert(open_offset[fd] <= file_table[fd].size);
 	return len; 
 }
