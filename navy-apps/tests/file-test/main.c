@@ -18,7 +18,7 @@ int main() {
     /* assert(n == i + 1); */
   /* } */
 
-  fseek(fp, 0, SEEK_SET);
+  /* fseek(fp, 0, SEEK_SET); */
   for (i = 0; i < 500; i ++) {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
@@ -30,7 +30,7 @@ int main() {
     /* assert(n == i + 1); */
   /* } */
 
-  /* fseek(fp, 0, SEEK_SET); */
+  fseek(fp, 0, SEEK_SET);
   for (i = 0; i < 500; i ++) {
     fscanf(fp, "%d", &n);
 	/* printf("i=%d\tn=%d\n", i, n); */
