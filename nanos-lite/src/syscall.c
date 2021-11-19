@@ -170,6 +170,7 @@ void do_syscall(Context *c) {
 			break;
 		case SYS_open:
 			strace_ret = sys_open((char*)a[1], a[2], a[3]);
+			c->GPRx = strace_ret;
 			break;
 		case SYS_read:
 			strace_ret = sys_read(a[1], (void*)a[2], a[3]);
