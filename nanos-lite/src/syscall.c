@@ -43,7 +43,7 @@ int sys_write(int fd, const void *buf, int count){
 		} 
 		return count;
 	}
-	printf("count: %d\n", count);
+	/* printf("count: %d\n", count); */
 	return fs_write(fd, buf, count);
 }
 
@@ -51,7 +51,7 @@ int fs_read(int fd, void *buf, int len);
 int sys_read(int fd, void *buf, int len){
 	int ret =  fs_read(fd, buf, len);
 	assert(ret);
-	printf("ret=%d\n", ret);
+	/* printf("ret=%d\n", ret); */
 	return ret;
 }
 
@@ -204,9 +204,9 @@ void do_syscall(Context *c) {
 			break;
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
-	printf("strace_ret=%d\n", strace_ret);
+	/* printf("strace_ret=%d\n", strace_ret); */
 	sprintf(sret, "%d", strace_ret);
 	strace(c, sret);
 	c->GPRx = strace_ret;
-	printf("GPRx:%d\n", c->GPRx);
+	/* printf("GPRx:%d\n", c->GPRx); */
 }
