@@ -59,6 +59,12 @@ int sys_open(const char *path, int flags, int mode) {
 }
 
 
+int fs_close(int fd);
+int sys_close(int fd) {
+	int ret = fs_close(fd);
+	return ret;
+}
+
 int fs_lseek(int fd, int offset, int whence);
 int sys_lseek(int fd, size_t offset, int whence) {
 	assert(fd != 1 );
@@ -124,7 +130,7 @@ void strace(Context *c, char* ret) {
 			strcpy(oneline, "sys_getpid");
 			break;
 		case SYS_close:
-			strcpy(oneline, "sys_close");
+			sprintf(oneline, "sys_close(%d(%s))", (int)a[1], file_table[a[1]].name);
 			break;
 		case SYS_lseek:
 			sprintf(oneline, "sys_lseek(%d(%s), %d, %s)", (int)a[1], file_table[a[1]].name, (int)a[2], whence[(int)a[3]]);
@@ -175,6 +181,9 @@ void do_syscall(Context *c) {
 			strace_ret = sys_read(a[1], (void*)a[2], a[3]);
 		case SYS_write:
 			strace_ret = sys_write(a[1], (void*)a[2], a[3]);
+			break;
+		case SYS_close:
+			strace_ret = sys_close(a[1]);
 			break;
 		case SYS_lseek:
 			strace_ret = sys_lseek(a[1], a[2], a[3]);
