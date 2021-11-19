@@ -111,10 +111,11 @@ void strace(Context *c, char* ret) {
 			break;
 		case SYS_write:
 			strncpy(tmp, (char*)a[2], 9);
+			tmp[9] = '\0';
 			if(strlen((char*)a[2]) > 9){
 				strcat(tmp, "...");
 			}
-			sprintf(oneline, "sys_write(%d(%s), %s, %d)", (int)a[1], file_table[a[1]].name, tmp, (int)a[3]);
+			sprintf(oneline, "sys_write(%d(%s), \"%s\", %d)", (int)a[1], file_table[a[1]].name, tmp, (int)a[3]);
 			break;
 		case SYS_kill:
 			strcpy(oneline, "sys_kill");
