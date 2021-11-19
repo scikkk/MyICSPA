@@ -73,6 +73,7 @@ assert(fd > 2);
 	assert(open_offset[fd] <= file_table[fd].size);
 	printf("openoff: %d; size: %d", open_offset[fd], file_table[fd].size);
 	printf("len: %d\n", len);
+	assert(len);
 	return len;
 }
 size_t fs_write(int fd, const void *buf, size_t len){
