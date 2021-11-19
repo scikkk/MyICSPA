@@ -189,7 +189,9 @@ void do_syscall(Context *c) {
 			printf("strace_ret=%d\n", strace_ret);
 			break;
 		case SYS_write:
+			printf("write_a[3]:%d\n", a[3]);
 			strace_ret = sys_write(a[1], (void*)a[2], a[3]);
+			
 			break;
 		case SYS_close:
 			strace_ret = sys_close(a[1]);
