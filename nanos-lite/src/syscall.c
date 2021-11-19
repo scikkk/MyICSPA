@@ -153,6 +153,8 @@ void strace(Context *c, char* ret) {
 			break;
 		case SYS_execve:
 			strcpy(oneline, "sys_execve");
+			break;
+		default: assert(0);
 	}
 	static int no = 1;
 	printf("\n[STRACE] %d %s = %s\n", no++, oneline, ret);
