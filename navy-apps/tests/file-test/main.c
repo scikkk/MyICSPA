@@ -6,7 +6,7 @@ int main() {
   assert(fp);
 
   /* fseek(fp, 0, SEEK_END); */
-  /* long size = ftell(fp); */
+  long size = ftell(fp);
   /* printf("%d\n", size); */
   /* assert(size == 5000); */
 
@@ -18,7 +18,9 @@ int main() {
     /* assert(n == i + 1); */
   /* } */
 
-  /* fseek(fp, 0, SEEK_SET); */
+  fseek(fp, 0, SEEK_SET);
+  size = ftell(fp);
+  printf("%d\n", size);
   for (i = 0; i < 500; i ++) {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
@@ -31,6 +33,8 @@ int main() {
   /* } */
 
   fseek(fp, 0, SEEK_SET);
+  size = ftell(fp);
+  printf("%d\n", size);
   for (i = 0; i < 500; i ++) {
     fscanf(fp, "%d", &n);
 	/* printf("i=%d\tn=%d\n", i, n); */
