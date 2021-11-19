@@ -198,5 +198,5 @@ void do_syscall(Context *c) {
 	sprintf(sret, "%d", strace_ret);
 	strace(c, sret);
 	c->GPRx = strace_ret;
-	/* printf("GPRx:%d\n", c->GPRx); */
+	printf("GPRx:%d\n", c->GPRx);
 }
