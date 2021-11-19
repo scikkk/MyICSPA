@@ -95,7 +95,7 @@ size_t fs_lseek(int fd, size_t offset, int whence){
 			break;
 		default: assert(0);
 	}
-	printf("%d\t%d\t%d\n",fd, offset, whence);
+	/* printf("%d\t%d\t%d\n",fd, offset, whence); */
 	assert(open_offset[fd] <= file_table[fd].size);
 	
 	return open_offset[fd];
