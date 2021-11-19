@@ -21,6 +21,7 @@ int main() {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
 
+  fseek(fp, 500 * 5, SEEK_SET); // wk add
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
 	printf("%d: n=%d i=%d", __LINE__, n, i);
