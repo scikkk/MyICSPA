@@ -156,7 +156,7 @@ void do_syscall(Context *c) {
 	a[2] = c->GPR3;
 	a[3] = c->GPR4;
 
-	int ret = 0;
+	int strace_ret = 0;
 	char sret[20]="ret";
 	switch (a[0]) {
 		case SYS_exit:
@@ -165,25 +165,25 @@ void do_syscall(Context *c) {
 			sys_exit(a[1]);
 			break;
 		case SYS_yield:
-			ret = sys_yield();
+			strace_ret = sys_yield();
 			break;
 		case SYS_open:
-			ret = sys_open((char*)a[1], a[2], a[3]);
+			strace_ret = sys_open((char*)a[1], a[2], a[3]);
 			break;
 		case SYS_read:
-			ret = sys_read(a[1], (void*)a[2], a[3]);
+			strace_ret = sys_read(a[1], (void*)a[2], a[3]);
 		case SYS_write:
-			ret = sys_write(a[1], (void*)a[2], a[3]);
+			strace_ret = sys_write(a[1], (void*)a[2], a[3]);
 			break;
 		case SYS_lseek:
-			ret = sys_lseek(a[1], a[2], a[3]);
+			strace_ret = sys_lseek(a[1], a[2], a[3]);
 			break;
 		case SYS_brk:
-			ret = sys_brk(a[1]);
+			strace_ret = sys_brk(a[1]);
 			break;
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
-	/* printf("%d\n", ret); */
-	sprintf(sret, "%d", ret);
+	/* printf("%d\n", strace_ret); */
+	sprintf(sret, "%d", strace_ret);
 	strace(c, sret);
 }
