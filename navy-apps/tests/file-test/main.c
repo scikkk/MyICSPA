@@ -10,13 +10,13 @@ int main() {
   /* printf("%d\n", size); */
   assert(size == 5000);
 
-  fseek(fp, 500 * 5, SEEK_SET);
+  /* fseek(fp, 500 * 5, SEEK_SET); */
   int i, n;
-  for (i = 500; i < 1000; i ++) {
-    fscanf(fp, "%d", &n);
+  /* for (i = 500; i < 1000; i ++) { */
+  /*   fscanf(fp, "%d", &n); */
 	/* printf("i=%d\tn=%d\n", i, n); */
-    assert(n == i + 1);
-  }
+    /* assert(n == i + 1); */
+  /* } */
 
   fseek(fp, 0, SEEK_SET);
   for (i = 0; i < 500; i ++) {
