@@ -113,7 +113,7 @@ void strace(Context *c, char* ret) {
 			sprintf(oneline, "sys_open(%s, %d, %d)", (char*)a[1], (int)a[2], (int)a[3]);
 			break;
 		case SYS_read:
-			sprintf(oneline, "sys_read(%d(%s), %d, %d)", (int)a[1], file_table[a[1]].name, (int)a[2], (int)a[3]);
+			sprintf(oneline, "sys_read(%d(%s), %p, %d)", (int)a[1], file_table[a[1]].name, (void*)a[2], (int)a[3]);
 			break;
 		case SYS_write:
 			strncpy(tmp, (char*)a[2], 9);
