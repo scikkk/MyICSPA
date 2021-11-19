@@ -68,10 +68,10 @@ assert(fd > 2);
 	len = (len>max_len)?max_len:len;
 	ramdisk_read(buf, file_table[fd].disk_offset+open_offset[fd], len);
 
-	printf("openoff: %d; size: %d", open_offset[fd], file_table[fd].size);
+	/* printf("openoff: %d; size: %d", open_offset[fd], file_table[fd].size); */
 	open_offset[fd] += len;
 	assert(open_offset[fd] <= file_table[fd].size);
-printf("openoff: %d; size: %d", open_offset[fd], file_table[fd].size);
+/* printf("openoff: %d; size: %d", open_offset[fd], file_table[fd].size); */
 	return len;
 }
 size_t fs_write(int fd, const void *buf, size_t len){
