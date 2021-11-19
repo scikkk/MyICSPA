@@ -116,8 +116,7 @@ void strace(Context *c, char* ret) {
 			sprintf(oneline, "sys_read(%d(%s), %d, %d)", (int)a[1], file_table[a[1]].name, (int)a[2], (int)a[3]);
 			break;
 		case SYS_write:
-			strncpy(tmp, (char*)a[2], 9);
-			tmp[9] = '\0';
+			strcpy(tmp, (char*)a[2]);
 			if(strlen((char*)a[2]) > 9){
 				strcat(tmp, "...");
 			}
