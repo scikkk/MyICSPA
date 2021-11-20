@@ -12,5 +12,7 @@ int main() {
   /*     j = 0; */
   /*   } */
   /* } */
+
+  printf("wk\nwk\n");
   return 0;
 }
