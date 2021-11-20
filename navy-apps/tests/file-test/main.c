@@ -23,6 +23,7 @@ int main() {
   }
 
   fseek(fp, 500 * 5, SEEK_SET); // wk add
+  printf("\n kw add \n");
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
 	/* printf("%d: n=%d i=%d\n", __LINE__, n, i); */
