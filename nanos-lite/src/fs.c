@@ -25,14 +25,16 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
 }
 
 
-
+// wk 3.3
+size_t serial_write(const void *buf, size_t offset, size_t len);
+// wk 3.3
 
 
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
 	[FD_STDIN]  = {"stdin", 0, 0, invalid_read, invalid_write, 0},
-	[FD_STDOUT] = {"stdout", 0, 0, invalid_read, invalid_write, 0},
-	[FD_STDERR] = {"stderr", 0, 0, invalid_read, invalid_write, 0},
+	[FD_STDOUT] = {"stdout", 0, 0, invalid_read, serial_write, 0},
+	[FD_STDERR] = {"stderr", 0, 0, invalid_read, serial_write, 0},
 #include "files.h"
 };
 
@@ -75,6 +77,9 @@ size_t fs_read(int fd, void *buf, size_t len){
 	return len;
 }
 size_t fs_write(int fd, const void *buf, size_t len){
+	if(file_table[fd].write != NULL){
+		return file_table[fd].write(buf, 0, len);
+	}
 	assert(fd > 2);
 	printf("%d: offset: %d\n", __LINE__, file_table[fd].open_offset);
 	if(file_table[fd].open_offset >= file_table[fd].size)
