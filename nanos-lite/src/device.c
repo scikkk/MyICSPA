@@ -34,7 +34,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 	char whole_buf[100];
-	sprintf(whole_buf, "WIDTH : %d\nHEIGHT:%d", io_read(AM_GPU_CONFIG).width, io_read(AM_GPU_CONFIG).height);
+	sprintf(whole_buf, "WIDTH:%d\nHEIGHT:%d", io_read(AM_GPU_CONFIG).width, io_read(AM_GPU_CONFIG).height);
 	strncpy(buf, whole_buf, len);
 	printf("len:%d\twhole_buf_len:%d\n%s", len, strlen(whole_buf), buf);
 	return strlen(buf);
