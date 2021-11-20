@@ -33,7 +33,15 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-	return 0;
+	char tmp[50];
+	char whole_buf[100];
+	sprintf(buf, "WIDTH : %d\n", io_read(AM_GPU_CONFIG).width);
+	sprintf(tmp, "HEIGHT:%d", io_read(AM_GPU_CONFIG).height);
+	strcat(whole_buf, tmp);
+	strncpy(buf, whole_buf, len);
+	printf("len:%d\twhole_buf_len:%d\n", len, strlen(whole_buf));
+	return strlen(buf);
+	/* return 0; */
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {

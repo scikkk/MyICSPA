@@ -70,6 +70,12 @@ int NDL_Init(uint32_t flags) {
 	if (getenv("NWM_APP")) {
 		evtdev = 3;
 	}
+
+	FILE *fp = fopen("/proc/dispinfo", "r");
+	fscanf(fp, "WIDTH : %d\nHEIGHT:%d", &screen_w, &screen_w);
+	printf("W:%d\tH:%d\n", screen_w, screen_h);
+	fclose(fp);
+
 	return 0;
 }
 
