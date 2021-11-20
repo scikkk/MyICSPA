@@ -76,7 +76,7 @@ int fs_open(const char *pathname, int flags, int mode){
 
 size_t fs_read(int fd, void *buf, size_t len){
 	assert(fd > 2);
-	if(file_table[fd].open_offset >= file_table[fd].size || len == 0)
+	if(fd >= FD_NORMAL && (file_table[fd].open_offset >= file_table[fd].size || len == 0))
 		return 0;
 	if(file_table[fd].open_offset + len > file_table[fd].size)
 		len = file_table[fd].size - file_table[fd].open_offset;
@@ -88,7 +88,7 @@ size_t fs_read(int fd, void *buf, size_t len){
 size_t fs_write(int fd, const void *buf, size_t len){
 	/* assert(fd > 2); */
 	/* printf("%d: offset: %d\n", __LINE__, file_table[fd].open_offset); */
-	if(file_table[fd].open_offset >= file_table[fd].size)
+	if(fd >= FD_NORMAL && file_table[fd].open_offset >= file_table[fd].size)
 		return 0;
 	if(file_table[fd].open_offset + len > file_table[fd].size)
 		len = file_table[fd].size - file_table[fd].open_offset;
