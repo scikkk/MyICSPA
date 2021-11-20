@@ -58,6 +58,7 @@ int fs_open(const char *pathname, int flags, int mode){
 	int ret = -1;
 	while(ret < FILE_NUM && strcmp(file_table[++ret].name, pathname) != 0);
 	open_offset[ret] = 0;
+	file_table[ret].open_offset = 0;
 	assert(ret < FILE_NUM);
 	/* Log("fd: %d\n", ret); */
 	return ret;
