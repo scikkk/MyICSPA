@@ -55,6 +55,10 @@ void NDL_OpenCanvas(int *w, int *h) {
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	int offset = 0;
+	// wk center
+	x = (screen_w - w)/2;
+	y = (screen_h - h)/2;
+	// wk center
 	FILE *fp = fopen("/dev/fb", "w");
 	for(int cur_y = y; cur_y < y + h; cur_y++){
 		offset = (screen_w*cur_y + x)*4;
