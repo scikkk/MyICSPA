@@ -81,12 +81,20 @@ int sys_brk(int32_t addr){
 	return 0;
 }
 
-#include<sys/time.h>
-#include <unistd.h>
+/* #include <unistd.h> */
+#include <sys/time.h>
+/* #include<time.h> */
+/* int gettimeofday(struct timeval *tv, struct timezone *tz); */
+
 int sys_gettimeofday(struct timeval *tv, struct timezone *tz) {
 	/* return gettimeofday(tv, tz); */
-	tv->tv_sec = 0;
-	tv->tv_usec = 0;
+	if(tv == NULL){
+		return -1;
+	}
+	tv->tv_usec = io_read(AM_TIMER_UPTIME).us;
+	tv->tv_sec = tv->tv_usec / 1000000;
+	tv->tv_usec %= 1000000;
+
 	return 0;
 }
 
@@ -202,7 +210,7 @@ void do_syscall(Context *c) {
 		case SYS_write:
 			/* printf("write_a[3]:%d\n", a[3]); */
 			strace_ret = sys_write(a[1], (void*)a[2], a[3]);
-			
+
 			break;
 		case SYS_close:
 			strace_ret = sys_close(a[1]);
