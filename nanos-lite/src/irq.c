@@ -2,15 +2,6 @@
 void do_syscall(Context *c);
 
 static Context* do_event(Event e, Context* c) {
-	// wk pc+4
-	uint32_t tmp = 0;
-	asm volatile("csrr  %0, mepc;"
-			"addi %0, %0, 4;"
-			"csrw mepc, %0"	   
-
-			: 
-			: "r"(tmp));	
-	// wk pc+4
 	switch (e.event) {
 		case EVENT_NULL:
 			Log("Unhandled EVENT_NULL!\n");
