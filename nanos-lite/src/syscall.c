@@ -163,6 +163,9 @@ void strace(Context *c, char* ret) {
 		case SYS_execve:
 			strcpy(oneline, "sys_execve");
 			break;
+		case SYS_gettimeofday:
+			strcpy(oneline, "sys_gettimeofday");
+			break;
 		default: assert(0);
 	}
 	static int no = 1;
