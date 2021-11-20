@@ -21,7 +21,7 @@ def_EHelper(ecall) {
 	
   isa_raise_intr(1 , cpu.pc);
 	}else{
-	isa_raise_intr(2, cpu.pc);
+	isa_raise_intr(11, cpu.pc);
 	}
   rtl_j(s, cpu.mtvec);
 }
