@@ -52,12 +52,10 @@ size_t get_ramdisk_size();
 
 // wk 3.2
 #define FILE_NUM 128
-static int open_offset[FILE_NUM] = {0,0,0,0,0,0,0,0,0};
 
 int fs_open(const char *pathname, int flags, int mode){
 	int ret = -1;
 	while(ret < FILE_NUM && strcmp(file_table[++ret].name, pathname) != 0);
-	open_offset[ret] = 0;
 	file_table[ret].open_offset = 0;
 	assert(ret < FILE_NUM);
 	/* Log("fd: %d\n", ret); */
@@ -115,24 +113,24 @@ size_t fs_write(int fd, const void *buf, size_t len){
 
 size_t fs_lseek(int fd, size_t offset, int whence){
 	/* assert(fd > 2); */	
-	printf("%d: offset: %d\n", __LINE__, open_offset[fd]);
+	printf("%d: offset: %d\n", __LINE__, file_table[fd].open_offset);
 	switch (whence){
 		case SEEK_SET:  
-			open_offset[fd] = offset;
+			file_table[fd].open_offset = offset;
 			break; 
 		case SEEK_CUR:
-			open_offset[fd] += offset;
+			file_table[fd].open_offset += offset;
 			break; 
 		case SEEK_END:
-			open_offset[fd] = file_table[fd].size + offset;
+			file_table[fd].open_offset = file_table[fd].size + offset;
 			break;
 		default: assert(0);
 	}
 	/* printf("%d\t%d\t%d\n",fd, offset, whence); */
-	assert(open_offset[fd] <= file_table[fd].size);
-	printf("%d: offset: %d\n", __LINE__, open_offset[fd]);
+	assert(file_table[fd].open_offset <= file_table[fd].size);
+	printf("%d: offset: %d\n", __LINE__, file_table[fd].open_offset);
 
-	return open_offset[fd];
+	return file_table[fd].open_offset;
 }
 int fs_close(int fd){
 	/* assert(fd > 2); */
