@@ -45,8 +45,8 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
 	size_t x,y, W;
 	W = io_read(AM_GPU_CONFIG).width;
 	offset /= 4;
-	x = offset % W;
 	y = offset / W;
+	x = offset - W*y;
 	printf("x=%x\ty=%d\tlen=%d\n", x, y, len);
 	io_write(AM_GPU_FBDRAW, x, y, (void*)buf, len, 1, true);
 	return len;
