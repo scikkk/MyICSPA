@@ -27,14 +27,14 @@ void init_proc() {
   Log("Initializing processes...");
 
   // load program here
-  /* naive_uload(NULL, "/bin/dummy"); */
+  naive_uload(NULL, "/bin/dummy");
   /* naive_uload(NULL, "/bin/hello"); */
   /* naive_uload(NULL, "/bin/file-test"); */
   /* naive_uload(NULL, "/bin/exec-test"); */
   /* naive_uload(NULL, "/bin/event-test"); */
   /* naive_uload(NULL, "/bin/timer-test"); */
   /* naive_uload(NULL, "/bin/cpp-test"); */
-  naive_uload(NULL, "/bin/bmp-test");
+  /* naive_uload(NULL, "/bin/bmp-test"); */
 
 }
 
