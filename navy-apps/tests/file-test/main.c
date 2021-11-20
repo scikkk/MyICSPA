@@ -22,17 +22,15 @@ int main() {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
 
-  printf("%4dwk\n add \n", 12);
-  fseek(fp, 500 * 5, SEEK_SET); // wk add
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
-	/* printf("%d: n=%d i=%d\n", __LINE__, n, i); */
     assert(n == i + 1);
   }
 
   fseek(fp, 0, SEEK_SET);
   for (i = 0; i < 500; i ++) {
     fscanf(fp, "%d", &n);
+	/* printf("%d: n=%d i=%d\n", __LINE__, n, i); */
     assert(n == i + 1 + 1000);
   }
 
