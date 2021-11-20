@@ -81,6 +81,14 @@ int sys_brk(int32_t addr){
 	return 0;
 }
 
+#include<sys/time.h>
+#include <unistd.h>
+int sys_gettimeofday(struct timeval *tv, struct timezone *tz) {
+	/* return gettimeofday(tv, tz); */
+	tv->tv_sec = 0;
+	tv->tv_usec = 0;
+	return 0;
+}
 
 
 typedef struct {
@@ -202,6 +210,10 @@ void do_syscall(Context *c) {
 		case SYS_brk:
 			strace_ret = sys_brk(a[1]);
 			break;
+		case SYS_gettimeofday:
+			strace_ret = sys_gettimeofday((struct timeval*)a[1], (struct timezone*)a[2]);
+			break;
+
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
 	/* printf("strace_ret=%d\n", strace_ret); */
