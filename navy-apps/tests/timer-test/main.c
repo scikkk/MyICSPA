@@ -17,7 +17,8 @@ void hello_world(void)
 int main(void)
 {
 
-	struct  timeval   tv_begin,tv_end, tv_cur;
+	struct  timeval   tv_begin,tv_end;
+   /* struct timeval	tv_cur; */
 
 	//        gettimeofday(&tv_begin,NULL);
 	_syscall_(SYS_gettimeofday, (unsigned long)&tv_begin, 0, 0);
@@ -39,15 +40,18 @@ int main(void)
 
 
 
-	int sec = 1;
+	unsigned sec = 1;
+	uint32_t ms;
 	while (sec<6) {
 		while(1){
-		
-	_syscall_(SYS_gettimeofday, (unsigned long)&tv_cur, 0, 0);
-	if(tv_cur.tv_sec > sec) break;
+		ms = NDL_GetTicks();
+
+	/* _syscall_(SYS_gettimeofday, (unsigned long)&tv_cur, 0, 0); */
+	if(ms/1000 > sec) break;
 		} 
 		
-		printf("(sec.usec): %lu.%lu\n",tv_cur.tv_sec, tv_cur.tv_usec);
+		/* printf("(sec.usec): %lu.%lu\n",tv_cur.tv_sec, tv_cur.tv_usec); */
+		printf("ms:%u\n",ms);
 		if (sec == 1) {
 			printf("%d second).\n", sec);
 		} else {
