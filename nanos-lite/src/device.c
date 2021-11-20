@@ -44,8 +44,9 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 size_t fb_write(const void *buf, size_t offset, size_t len) {
 	size_t x,y, W;
 	W = io_read(AM_GPU_CONFIG).width;
-	x = offset / 4 % W;
-	y = offset / 4 / W;
+	offset /= 4;
+	x = offset % W;
+	y = offset / W;
 	io_write(AM_GPU_FBDRAW, x, y, (void*)buf, len, 1, true);
 	return len;
 	/* return 0; */
