@@ -3,7 +3,7 @@
 #include<sys/time.h>
 #include<unistd.h>
 
-
+#include<NDL.h>
 #define SYS_gettimeofday 19
 extern int _syscall_(int, uintptr_t, uintptr_t, uintptr_t);
 
