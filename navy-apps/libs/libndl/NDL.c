@@ -54,10 +54,14 @@ void NDL_OpenCanvas(int *w, int *h) {
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
-	int offset = (screen_w*y + x)*4;
+	int offset = 0;
 	FILE *fp = fopen("/dev/fb", "w");
-	fseek(fp, offset, SEEK_SET);
-	fwrite(pixels, 4, w*h, fp);
+	for(int cur_y = y; cur_y < y + h; cur_y++){
+		offset = (screen_w*cur_y + x)*4;
+		fseek(fp, offset, SEEK_SET);
+		fwrite(pixels, 4, w, fp);
+		pixels += w;
+	}
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {
