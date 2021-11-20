@@ -22,7 +22,7 @@ int main() {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
 
-  printf("\n kw add \n");
+  printf("w add \n");
   fseek(fp, 500 * 5, SEEK_SET); // wk add
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
