@@ -41,24 +41,22 @@ int main(void)
 
 
 	NDL_Init(0);
-	unsigned sec = 1;
+	unsigned msec = 0;
 	uint32_t ms;
-	while (sec<6) {
+	while (msec<6000) {
 		while(1){
-		ms = NDL_GetTicks();
+		ms  = NDL_GetTicks();
 
 	/* _syscall_(SYS_gettimeofday, (unsigned long)&tv_cur, 0, 0); */
-	if(ms/1000 > sec) break;
+	if(ms > msec) break;
 		} 
 		
 		/* printf("(sec.usec): %lu.%lu\n",tv_cur.tv_sec, tv_cur.tv_usec); */
 		printf("ms:%u\n",ms);
-		if (sec == 1) {
-			printf("%d second).\n", sec);
-		} else {
-			printf("%d seconds).\n", sec);
-		}
-		sec ++;
+		
+			printf("%d mseconds).\n", msec);
+		
+		msec += 500;
 	}
 	return 0;
 
