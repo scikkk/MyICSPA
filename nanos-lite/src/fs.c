@@ -86,7 +86,7 @@ size_t fs_read(int fd, void *buf, size_t len){
 	return len;
 }
 size_t fs_write(int fd, const void *buf, size_t len){
-	assert(fd > 2);
+	/* assert(fd > 2); */
 	/* printf("%d: offset: %d\n", __LINE__, file_table[fd].open_offset); */
 	if(file_table[fd].open_offset >= file_table[fd].size)
 		return 0;
