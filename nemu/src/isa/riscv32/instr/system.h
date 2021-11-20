@@ -17,12 +17,12 @@ word_t* csr(int32_t number){
 	}
 }
 def_EHelper(ecall) {
-	if (gpr(17) == -1){
+	/* if (gpr(17) == -1){ */
 	
-  isa_raise_intr(11 , cpu.pc);
-	}else{
+  /* isa_raise_intr(1 , cpu.pc); */
+	/* }else{ */
 	isa_raise_intr(11, cpu.pc);
-	}
+	/* } */
   rtl_j(s, cpu.mtvec);
 }
 
