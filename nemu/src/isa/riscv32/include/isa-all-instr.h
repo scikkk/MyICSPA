@@ -10,8 +10,7 @@
   f(slli) f(srli) f(srai) \
    f(lb)  f(lbu) f(lh) f(lhu) f(sb) f(sh) \
 f(mul) f(mulh) f(mulhu) f(div) f(divu)  f(rem) f(remu) \
-f(ecall) f(mret) f(csrrw) f(csrrs) \
-f(sret)
+f(ecall) f(mret) f(csrrw) f(csrrs) 
 // wk 2.1
 
 def_all_EXEC_ID();
