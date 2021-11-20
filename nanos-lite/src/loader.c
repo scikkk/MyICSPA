@@ -53,7 +53,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	fs_read(fd, &header, 52);	
 	/* printf("line:%d fd:%d\n", __LINE__, fd); */
 	assert(*(uint32_t *)header.e_ident == 0x464c457f);
-	printf("%d\n%d\n", header.e_machine, EXPECT_TYPE);
+	/* printf("%d\n%d\n", header.e_machine, EXPECT_TYPE); */
 	assert(header.e_machine == EXPECT_TYPE);
 	Elf_Phdr ph;
 	unsigned off = header.e_phoff;
