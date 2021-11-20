@@ -76,6 +76,9 @@ int fs_open(const char *pathname, int flags, int mode){
 
 size_t fs_read(int fd, void *buf, size_t len){
 	assert(fd > 2);
+	if (fd == FD_EVENTS){
+		return file_table[fd].read(buf, 0, len);
+	}
 	if(fd >= FD_NORMAL && (file_table[fd].open_offset >= file_table[fd].size || len == 0))
 		return 0;
 	if((fd >= FD_NORMAL) && file_table[fd].open_offset + len > file_table[fd].size)
