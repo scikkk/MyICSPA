@@ -20,9 +20,12 @@ struct timeval tv;
 }
 
 int NDL_PollEvent(char *buf, int len) {
-  int fp = open("/dev/events", 0);
-  assert(fp);
-  return read(fp, buf, len);
+  /* int fp = open("/dev/events", 0); */
+  /* assert(fp); */
+  /* return read(fp, buf, len); */
+	FILE *fp = fopen("/dev/events", "r");
+	assert(fp);
+	return fread(buf, 1, len, fp);
 
   /* return 0; */
 }
