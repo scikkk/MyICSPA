@@ -8,6 +8,9 @@ static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
 
+// wk 3.3
+#define SYS_gettimeofday 19
+// wk 3.3
 uint32_t NDL_GetTicks() {
 struct timeval tv;
 	_syscall_(SYS_gettimeofday, (unsigned long)&tv, 0, 0);
