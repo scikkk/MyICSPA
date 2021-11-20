@@ -11,7 +11,7 @@ static int screen_w = 0, screen_h = 0;
 uint32_t NDL_GetTicks() {
 struct timeval tv;
 	_syscall_(SYS_gettimeofday, (unsigned long)&tv, 0, 0);
-	return tv.sec*1000+tv.usec/1000;
+	return tv.tv_sec*1000+tv.tv_usec/1000;
 
   return 0;
 }
