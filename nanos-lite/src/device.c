@@ -39,7 +39,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 	sprintf(tmp, "HEIGHT:%d", io_read(AM_GPU_CONFIG).height);
 	strcat(whole_buf, tmp);
 	strncpy(buf, whole_buf, len);
-	printf("len:%d\twhole_buf_len:%d\n", len, strlen(whole_buf));
+	printf("len:%d\twhole_buf_len:%d\n%s", len, strlen(whole_buf), buf);
 	return strlen(buf);
 	/* return 0; */
 }
