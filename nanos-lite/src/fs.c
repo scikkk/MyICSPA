@@ -66,8 +66,8 @@ int fs_open(const char *pathname, int flags, int mode){
 	while(ret < FILE_NUM && strcmp(file_table[++ret].name, pathname) != 0);
 	file_table[ret].open_offset = 0;
 	if(ret >= FD_NORMAL){
-		file_table[ret].read = NULL;
-		file_table[ret].write = NULL;
+		file_table[ret].read = ramdisk_read;
+ 		file_table[ret].write = ramdisk_write;
 	}
 	assert(ret < FILE_NUM);
 	/* Log("fd: %d\n", ret); */
@@ -77,29 +77,29 @@ int fs_open(const char *pathname, int flags, int mode){
 size_t fs_read(int fd, void *buf, size_t len){
 	assert(fd > 2);
 	/* printf("%d: offset: %d\n", __LINE__, file_table[fd].open_offset); */
-	if(file_table[fd].read != NULL){
-		return file_table[fd].read(buf, file_table[fd].open_offset, len);
-	}
+//	if(file_table[fd].read != NULL){
+//		return file_table[fd].read(buf, file_table[fd].open_offset, len);
+//	}
 	if(file_table[fd].open_offset >= file_table[fd].size || len == 0)
 		return 0;
 	if(file_table[fd].open_offset + len > file_table[fd].size)
 		len = file_table[fd].size - file_table[fd].open_offset;
-	ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
+	file_table[fd].read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
 	file_table[fd].open_offset += len;
 	/* printf("%d: offset: %d\n", __LINE__, file_table[fd].open_offset); */
 	return len;
 }
 size_t fs_write(int fd, const void *buf, size_t len){
-	if(file_table[fd].write != NULL){
-		return file_table[fd].write(buf, file_table[fd].open_offset, len);
-	}
+//	if(file_table[fd].write != NULL){
+//		return file_table[fd].write(buf, file_table[fd].open_offset, len);
+//	}
 	assert(fd > 2);
 	/* printf("%d: offset: %d\n", __LINE__, file_table[fd].open_offset); */
 	if(file_table[fd].open_offset >= file_table[fd].size)
 		return 0;
 	if(file_table[fd].open_offset + len > file_table[fd].size)
 		len = file_table[fd].size - file_table[fd].open_offset;
-	ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
+	file_table[fd].write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
 	file_table[fd].open_offset += len;
 	/* printf("%d: offset: %d\n", __LINE__, file_table[fd].open_offset); */
 	return len; 
