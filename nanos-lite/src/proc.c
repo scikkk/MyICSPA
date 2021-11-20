@@ -34,7 +34,7 @@ void init_proc() {
   /* naive_uload(NULL, "/bin/event-test"); */
   /* naive_uload(NULL, "/bin/timer-test"); */
   /* naive_uload(NULL, "/bin/cpp-test"); */
-  naive_uload(NULL, "/bin/bmp-test");
+  /* naive_uload(NULL, "/bin/bmp-test"); */
 
 }
 
