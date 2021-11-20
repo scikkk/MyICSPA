@@ -72,7 +72,8 @@ int NDL_Init(uint32_t flags) {
 	}
 
 	FILE *fp = fopen("/proc/dispinfo", "r");
-	fscanf(fp, "WIDTH%[^ ]:%[^ ]%d\nHEIGHT%[^ ]:%[^ ]%d", &screen_w, &screen_h);
+	char junk[20]
+	fscanf(fp, "%[A-Za-z ]%d\n%[A-Za-z ]%d", junk, &screen_w, junk, &screen_h);
 	printf("W:%d\tH:%d\n", screen_w, screen_h);
 	fclose(fp);
 
