@@ -1,5 +1,4 @@
 #include "../local-include/reg.h"
-:a
 #include <cpu/ifetch.h>
 #include <isa-all-instr.h>
 
