@@ -40,6 +40,7 @@ int main(void)
 
 
 
+	NDL_Init(0);
 	unsigned sec = 1;
 	uint32_t ms;
 	while (sec<6) {
