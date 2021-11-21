@@ -20,21 +20,21 @@ int main(void)
 	struct  timeval   tv_begin,tv_end;
    /* struct timeval	tv_cur; */
 
-	//        gettimeofday(&tv_begin,NULL);
-	_syscall_(SYS_gettimeofday, (unsigned long)&tv_begin, 0, 0);
+	/* //        gettimeofday(&tv_begin,NULL); */
+	/* _syscall_(SYS_gettimeofday, (unsigned long)&tv_begin, 0, 0); */
 
-	hello_world();
+	/* hello_world(); */
 
-	//        gettimeofday(&tv_end,NULL);
-	_syscall_(SYS_gettimeofday, (unsigned long)&tv_begin, 0, 0);
+	/* //        gettimeofday(&tv_end,NULL); */
+	/* _syscall_(SYS_gettimeofday, (unsigned long)&tv_begin, 0, 0); */
 
-	printf("tv_begin_sec:%ld\n",tv_begin.tv_sec);
+	/* printf("tv_begin_sec:%ld\n",tv_begin.tv_sec); */
 
-	printf("tv_begin_usec:%ld\n",tv_begin.tv_usec);
+	/* printf("tv_begin_usec:%ld\n",tv_begin.tv_usec); */
 
-	printf("tv_end_sec:%ld\n",tv_end.tv_sec);
+	/* printf("tv_end_sec:%ld\n",tv_end.tv_sec); */
 
-	printf("tv_end_usec:%ld\n",tv_end.tv_usec);
+	/* printf("tv_end_usec:%ld\n",tv_end.tv_usec); */
 
 
 
