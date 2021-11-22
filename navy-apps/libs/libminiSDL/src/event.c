@@ -24,6 +24,11 @@ int SDL_WaitEvent(SDL_Event *event) {
     char buf[64];
     if (NDL_PollEvent(buf, sizeof(buf))) {
       printf("receive event: %s\n", buf);
+	  char type[3], name[20];
+	  sscanf(buf, "%s %s\n", type, name);
+	  printf("%s\n", type);
+	  printf("%s\n", name);
+
 	  return 1;
     }
   }
