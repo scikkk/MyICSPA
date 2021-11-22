@@ -4,9 +4,9 @@
 /* #include <unistd.h> */
 /* #include <sys/stat.h> */
 /* #include <setjmp.h> */
-#include <sys/time.h>
+/* #include <sys/time.h> */
 /* #include <assert.h> */
-#include <time.h>
+/* #include <time.h> */
 #include "syscall.h"
 // wk
 
@@ -90,8 +90,12 @@ int sys_brk(int32_t addr){
 	return 0;
 }
 
+struct timeval{
+	int32_t tv_sec;
+	int32_t tv_usec;
+};
 
-int sys_gettimeofday(struct timeval *tv, struct timezone *tz) {
+int sys_gettimeofday(struct timeval *tv, void *tz) {
 	/* return gettimeofday(tv, tz); */
 	printf("enter sys,%d\n", sizeof(tv->tv_usec));
 	printf("sys_usec: %d\n", (int)tv->tv_usec);
@@ -240,7 +244,7 @@ void do_syscall(Context *c) {
 			strace_ret = sys_brk(a[1]);
 			break;
 		case SYS_gettimeofday:
-			strace_ret = sys_gettimeofday((struct timeval*)a[1], (struct timezone*)a[2]);
+			strace_ret = sys_gettimeofday((struct timeval*)a[1], (void*)a[2]);
 			break;
 
 		default: panic("Unhandled syscall ID = %d", a[0]);
