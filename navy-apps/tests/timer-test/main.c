@@ -43,7 +43,7 @@ int main(void)
 	NDL_Init(0);
 	unsigned msec = 0;
 	uint32_t ms;
-	while (msec<1000) {
+	while (msec<10000) {
 		while(1){ 
 			ms  = NDL_GetTicks();
 			/* _syscall_(SYS_gettimeofday, (unsigned long)&tv_cur, 0, 0); */
@@ -53,7 +53,7 @@ int main(void)
 		/* printf("(sec.usec): %lu.%lu\n",tv_cur.tv_sec, tv_cur.tv_usec); */
 		/* printf("ms:%u\n",ms); */
 
-		/* printf("%d mseconds).\n", msec); */
+		printf("%d mseconds).\n", msec);
 		msec += 500;
 	}
 	return 0;

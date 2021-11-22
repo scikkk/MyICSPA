@@ -18,19 +18,19 @@ static int screen_w = 0, screen_h = 0;
 #include "syscall.h"
 // wk 3.3
 uint32_t NDL_GetTicks() {
-	printf("enter NDL\n");
+	/* printf("enter NDL\n"); */
 	struct timeval tv = {2,6};
-	printf("NDL_usec: %ld\n", tv.tv_usec);
+	/* printf("NDL_usec: %ld\n", tv.tv_usec); */
 	/* _syscall_(SYS_gettimeofday, (unsigned long)&tv, 0, 0); */
 	gettimeofday(&tv, NULL);
-	printf("tv:%p\n", &tv);
+	/* printf("tv:%p\n", &tv); */
 	/* printf("hit there\n"); */
 	uint32_t ret = tv.tv_sec*1000+tv.tv_usec/1000;
 
 	/* printf("NDL_sec: %ld\n", tv.tv_sec); */
-	printf("NDL_usec: %ld\n", tv.tv_usec);
+	/* printf("NDL_usec: %ld\n", tv.tv_usec); */
 	/* printf("NDL_ms: %d\n", ret); */
-	printf("exit NDL\n");
+	/* printf("exit NDL\n"); */
 	return ret;
 
 	/* return 0; */

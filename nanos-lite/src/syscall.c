@@ -11,29 +11,6 @@
 // wk
 
 
-/* enum { */
-/* 	SYS_exit, */
-/* 	SYS_yield, */
-/* 	SYS_open, */
-/* 	SYS_read, */
-/* 	SYS_write, */
-/* 	SYS_kill, */
-/* 	SYS_getpid, */
-/* 	SYS_close, */
-/* 	SYS_lseek, */
-/* 	SYS_brk, */
-/* 	SYS_fstat, */
-/* 	SYS_time, */
-/* 	SYS_signal, */
-/* 	SYS_execve, */
-/* 	SYS_fork, */
-/* 	SYS_link, */
-/* 	SYS_unlink, */
-/* 	SYS_wait, */
-/* 	SYS_times, */
-/* 	SYS_gettimeofday */
-/* }; */
-
 int sys_yield(){
 	yield();
 	return 0;
@@ -97,22 +74,21 @@ struct timeval{
 
 int sys_gettimeofday(struct timeval *tv, void *tz) {
 	/* return gettimeofday(tv, tz); */
-	printf("enter sys,%d\n", sizeof(tv->tv_usec));
-	printf("sys_usec: %d\n", (int)tv->tv_usec);
+	/* printf("enter sys,%d\n", sizeof(tv->tv_usec)); */
+	/* printf("sys_usec: %d\n", (int)tv->tv_usec); */
 	/* printf("tv:%p\ttz:%p\n", tv, tz); */
 	assert(tz == NULL);
 	if(tv == NULL){
-
 		return -1;
 	}
 	uint64_t us = io_read(AM_TIMER_UPTIME).us;
 	tv->tv_usec = (long)us % 1000000;
-	printf("sys_usec: %d\n", (int)tv->tv_usec);
+	/* printf("sys_usec: %d\n", (int)tv->tv_usec); */
 	/* tv->tv_usec = 520; */
 	/* printf("sys_usec: %d\n", (int)tv->tv_usec); */
 	tv->tv_sec = us / 1000000;
 	/* printf("sys_sec: %d\n", (int)tv->tv_sec); */
-	printf("exit sys\n");
+	/* printf("exit sys\n"); */
 	/* printf("%d\t%d\n", tv->tv_sec, tv->tv_usec); */
 	return 0;
 }
