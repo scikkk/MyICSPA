@@ -94,9 +94,9 @@ int sys_gettimeofday(struct timeval *tv, struct timezone *tz) {
 	}
 	uint64_t us = io_read(AM_TIMER_UPTIME).us;
 	tv->tv_sec = (int)us / 1000000;
-	printf("us2: %d\n", (int)tv->tv_sec);
+	/* printf("us2: %d\n", (int)tv->tv_sec); */
 	tv->tv_usec = (int)us % 1000000;
-	printf("us3: %d\n", (int)tv->tv_usec);
+	/* printf("us3: %d\n", (int)tv->tv_usec); */
 
 	/* printf("%d\t%d\n", tv->tv_sec, tv->tv_usec); */
 	return 0;
