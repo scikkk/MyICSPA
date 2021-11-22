@@ -27,8 +27,8 @@ void init_proc() {
   Log("Initializing processes...");
 
   // load program here
-  /* naive_uload(NULL, "/bin/exec-test"); */
-  naive_uload(NULL, "/bin/cpp-test");
+  naive_uload(NULL, "/bin/exec-test");
+  /* naive_uload(NULL, "/bin/cpp-test"); */
   
   // PASSED!
   /* naive_uload(NULL, "/bin/bmp-test"); */
