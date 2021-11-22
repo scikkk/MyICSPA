@@ -52,9 +52,9 @@ int main() {
 
   while(1){
   // wk add 
+  render();
   }
 
-  render();
   while (1) {
     SDL_Event e;
     SDL_WaitEvent(&e);
