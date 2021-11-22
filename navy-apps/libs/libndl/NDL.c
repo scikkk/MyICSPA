@@ -10,6 +10,7 @@ static int screen_w = 0, screen_h = 0;
 
 // wk 3.3
 /* #define SYS_gettimeofday 19 */
+#include <sys/time.h>
 extern int gettimeofday(struct timeval *ptimeval, void *ptimezone);
 // wk 3.3
 uint32_t NDL_GetTicks() {
