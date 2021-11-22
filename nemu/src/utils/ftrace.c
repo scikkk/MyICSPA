@@ -48,6 +48,7 @@ static void tableheader(const char *pbuff)
 					func_table[func_idx].end_addr = psym->st_value+psym->st_size-4;
 					func_table[func_idx].size = psym->st_size;
 					strcpy(func_table[func_idx].name, psym->st_name+pbuffstr);
+					printf("%d\n", func_idx);
 					func_idx++;
 				}	
 				psym++;
