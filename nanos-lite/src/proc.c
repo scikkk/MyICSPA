@@ -27,7 +27,9 @@ void init_proc() {
   Log("Initializing processes...");
 
   // load program here
-  naive_uload(NULL, "/bin/exec-test");
+
+  // TEST
+  /* naive_uload(NULL, "/bin/exec-test"); */
   /* naive_uload(NULL, "/bin/cpp-test"); */
   
   // PASSED!
@@ -38,8 +40,8 @@ void init_proc() {
   /* naive_uload(NULL, "/bin/hello"); */
   /* naive_uload(NULL, "/bin/timer-test"); */
 
-  // App
-  /* naive_uload(NULL, "/bin/nslider"); */
+  // APP
+  naive_uload(NULL, "/bin/nslider");
 
 }
 
