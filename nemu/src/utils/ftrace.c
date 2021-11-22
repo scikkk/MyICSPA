@@ -51,10 +51,10 @@ static void tableheader(const char *pbuff)
 					func_idx++;
 				}	
 				psym++;
-					printf("%d\n", func_idx);
 			}
 			continue;
 		}
+					printf("%d\n", func_idx);
 	}
 }
 
