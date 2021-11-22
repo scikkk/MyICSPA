@@ -97,6 +97,7 @@ int sys_brk(int32_t addr){
 
 int sys_gettimeofday(struct timeval *tv, struct timezone *tz) {
 	/* return gettimeofday(tv, tz); */
+	printf("enter sys\n");
 	printf("tv:%p\ttz:%p\n", tv, tz);
 	assert(tz == NULL);
 	if(tv == NULL){
@@ -111,7 +112,7 @@ int sys_gettimeofday(struct timeval *tv, struct timezone *tz) {
 	printf("sys_usec: %d\n", (int)tv->tv_usec);
 	tv->tv_sec = us / 1000000;
 	printf("sys_sec: %d\n", (int)tv->tv_sec);
-
+	printf("exit sys\n");
 	/* printf("%d\t%d\n", tv->tv_sec, tv->tv_usec); */
 	return 0;
 }

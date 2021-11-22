@@ -18,6 +18,7 @@ static int screen_w = 0, screen_h = 0;
 #include "syscall.h"
 // wk 3.3
 uint32_t NDL_GetTicks() {
+	printf("enter NDL\n");
 	struct timeval tv;
 	/* _syscall_(SYS_gettimeofday, (unsigned long)&tv, 0, 0); */
 	gettimeofday(&tv, NULL);
@@ -28,6 +29,7 @@ uint32_t NDL_GetTicks() {
 	printf("NDL_sec: %ld\n", tv.tv_sec);
 	printf("NDL_usec: %ld\n", tv.tv_usec);
 	printf("NDL_ms: %d\n", ret);
+	printf("exit NDL\n");
 	return ret;
 
 	/* return 0; */
