@@ -45,59 +45,59 @@ int SDL_WaitEvent(SDL_Event *event) {
 
 				event->key.keysym.sym = SDLK_0;
 			}
-			else if(!stramp(name, "1")){
+			else if(!strcmp(name, "1")){
 				printf("%d\n", __LINE__);
 				event->key.keysym.sym = SDLK_1; 
 			}
-			else if(!stramp(name, "2")){
+			else if(!strcmp(name, "2")){
 				printf("%d\n", __LINE__);
 				event->key.keysym.sym = SDLK_2; 
 			}
-			else if(!stramp(name, "3")){
+			else if(!strcmp(name, "3")){
 				printf("%d\n", __LINE__);
 				event->key.keysym.sym = SDLK_3; 
 			}
-			else if(!stramp(name, "4")){
+			else if(!strcmp(name, "4")){
 				printf("%d\n", __LINE__);
 				event->key.keysym.sym = SDLK_4; 
 			}
-			else if(!stramp(name, "5")){
+			else if(!strcmp(name, "5")){
 				printf("%d\n", __LINE__);
 				event->key.keysym.sym = SDLK_5; 
 			}
-			else if(!stramp(name, "6")){
+			else if(!strcmp(name, "6")){
 				printf("%d\n", __LINE__);
 				event->key.keysym.sym = SDLK_6;
 			}
-			else if(!stramp(name, "7")){
+			else if(!strcmp(name, "7")){
 				printf("%d\n", __LINE__);
 				event->key.keysym.sym = SDLK_7; 
 			}
-			else if(!stramp(name, "8")){
+			else if(!strcmp(name, "8")){
 				printf("%d\n", __LINE__);
 				event->key.keysym.sym = SDLK_8;
 			}
-			else if(!stramp(name, "9")){
+			else if(!strcmp(name, "9")){
 				printf("%d\n", __LINE__);
 				event->key.keysym.sym = SDLK_9; 
 			}
-			else if(!stramp(name, "J")){
+			else if(!strcmp(name, "J")){
 				printf("%d\n", __LINE__);
 				event->key.keysym.sym = SDLK_J; 
 			}
-			else if(!stramp(name, "DOWN")){
+			else if(!strcmp(name, "DOWN")){
 				printf("%d\n", __LINE__);
 				event->key.keysym.sym = SDLK_DOWN; 
 			}
-			else if(!stramp(name, "K")){
+			else if(!strcmp(name, "K")){
 				printf("%d\n", __LINE__);
 				event->key.keysym.sym = SDLK_K; 
 			}
-			else if(!stramp(name, "UP")){
+			else if(!strcmp(name, "UP")){
 				printf("%d\n", __LINE__);
 				event->key.keysym.sym = SDLK_UP; 
 			}
-			else if(!stramp(name, "G")){
+			else if(!strcmp(name, "G")){
 				printf("%d\n", __LINE__);
 				event->key.keysym.sym = SDLK_G; 
 			}
