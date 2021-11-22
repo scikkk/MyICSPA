@@ -20,7 +20,14 @@ int SDL_PollEvent(SDL_Event *ev) {
 
 int SDL_WaitEvent(SDL_Event *event) {
 	printf("\n\nevent.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
-  return 1;
+	  while (1) {
+    char buf[64];
+    if (NDL_PollEvent(buf, sizeof(buf))) {
+      printf("receive event: %s\n", buf);
+	  return 1;
+    }
+  }
+  return 0;
 }
 
 int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
