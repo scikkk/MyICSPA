@@ -17,13 +17,13 @@ uint32_t NDL_GetTicks() {
 	struct timeval tv;
 	/* _syscall_(SYS_gettimeofday, (unsigned long)&tv, 0, 0); */
 	gettimeofday(&tv, NULL);
-	/* printf("tv:%p\n", &tv); */
-	/* printf("hit there\n"); */
+	printf("tv:%p\n", &tv);
+	printf("hit there\n");
 	uint32_t ret = tv.tv_sec*1000+tv.tv_usec/1000;
 
-	/* printf("NDL_sec: %ld\n", tv.tv_sec); */
-	/* printf("NDL_usec: %ld\n", tv.tv_usec); */
-	/* printf("NDL_ms: %d\n", ret); */
+	printf("NDL_sec: %ld\n", tv.tv_sec);
+	printf("NDL_usec: %ld\n", tv.tv_usec);
+	printf("NDL_ms: %d\n", ret);
 	return ret;
 
 	/* return 0; */
