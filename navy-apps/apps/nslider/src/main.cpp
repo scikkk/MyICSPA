@@ -50,9 +50,9 @@ int main() {
 
   int rep = 0, g = 0;
 
+  render();
   while(1){
   // wk add 
-  render();
   }
 
   while (1) {
