@@ -108,8 +108,8 @@ int sys_gettimeofday(struct timeval *tv, struct timezone *tz) {
 	printf("sys_usec: %d\n", (int)tv->tv_usec);
 	tv->tv_usec = (long)us % 1000000;
 	printf("sys_usec: %d\n", (int)tv->tv_usec);
-	tv->tv_usec = 520;
-	printf("sys_usec: %d\n", (int)tv->tv_usec);
+	/* tv->tv_usec = 520; */
+	/* printf("sys_usec: %d\n", (int)tv->tv_usec); */
 	tv->tv_sec = us / 1000000;
 	/* printf("sys_sec: %d\n", (int)tv->tv_sec); */
 	printf("exit sys\n");
