@@ -90,10 +90,6 @@ int sys_brk(int32_t addr){
 	return 0;
 }
 
-/* #include <unistd.h> */
-#include <sys/time.h>
-/* #include<time.h> */
-/* int gettimeofday(struct timeval *tv, struct timezone *tz); */
 
 int sys_gettimeofday(struct timeval *tv, struct timezone *tz) {
 	/* return gettimeofday(tv, tz); */
