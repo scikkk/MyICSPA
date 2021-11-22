@@ -18,8 +18,10 @@ uint32_t NDL_GetTicks() {
 	gettimeofday(&tv, NULL);
 	printf("hit there\n");
 	uint32_t ret = tv.tv_sec*1000+(uint32_t)tv.tv_usec/1000;
-	printf("us:%d\n", (int)tv.tv_usec);
-	printf("%d\n", (int)ret);
+
+	printf("NDL_sec: %d\n", (int)tv.tv_sec);
+	printf("NDL_usec: %d\n", (int)tv.tv_usec);
+	printf("NDL_ms: %d\n", (int)ret);
 	return ret;
 
 	return 0;
