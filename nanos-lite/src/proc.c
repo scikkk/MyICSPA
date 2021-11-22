@@ -37,7 +37,7 @@ void init_proc() {
   /* naive_uload(NULL, "/bin/bmp-test"); */
 
 
-  naive_uload(NULL, "/bin/slider");
+  naive_uload(NULL, "/bin/nslider");
 
 }
 
