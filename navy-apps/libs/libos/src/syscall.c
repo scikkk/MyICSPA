@@ -103,7 +103,7 @@ off_t _lseek(int fd, off_t offset, int whence) {
 
 int _gettimeofday(struct timeval *tv, struct timezone *tz) {
 	/* _exit(SYS_gettimeofday); */
-	printf("enter lib\n");
+	printf("enter lib,%d\n", sizeof(*tv));
 	printf("tv:%p\tusec:%p\n", tv, tv->tv_usec);
 	int ret =  _syscall_(SYS_gettimeofday, tv, tz, 0);
 	printf("tv:%p\tusec:%p\n", tv, tv->tv_usec);
