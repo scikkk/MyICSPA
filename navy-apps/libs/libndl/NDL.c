@@ -20,7 +20,8 @@ static int screen_w = 0, screen_h = 0;
 uint32_t NDL_GetTicks() {
 	struct timeval tv;
 	/* _syscall_(SYS_gettimeofday, (unsigned long)&tv, 0, 0); */
-	gettimeofday(&tv, NULL);
+	int kk = 0;
+	gettimeofday(&tv, kk);
 	printf("tv:%p\n", &tv);
 	printf("hit there\n");
 	uint32_t ret = tv.tv_sec*1000+tv.tv_usec/1000;
