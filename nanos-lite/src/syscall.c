@@ -98,14 +98,14 @@ int sys_brk(int32_t addr){
 int sys_gettimeofday(struct timeval *tv, struct timezone *tz) {
 	/* return gettimeofday(tv, tz); */
 	printf("enter sys\n");
-	printf("tv:%p\ttz:%p\n", tv, tz);
+	printf("sys_usec: %d\n", (int)tv->tv_usec);
+	/* printf("tv:%p\ttz:%p\n", tv, tz); */
 	assert(tz == NULL);
 	if(tv == NULL){
 
 		return -1;
 	}
 	uint64_t us = io_read(AM_TIMER_UPTIME).us;
-	printf("sys_usec: %d\n", (int)tv->tv_usec);
 	tv->tv_usec = (long)us % 1000000;
 	printf("sys_usec: %d\n", (int)tv->tv_usec);
 	/* tv->tv_usec = 520; */
