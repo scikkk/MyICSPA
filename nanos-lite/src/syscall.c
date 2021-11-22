@@ -185,7 +185,7 @@ void strace(Context *c, char* ret) {
 			strcpy(oneline, "sys_fstat");
 			break;
 		case SYS_time:
-			strcpy(oneline, "sys_time");
+			sprintf(oneline, "sys_time(%p, %p)", (void*)a[1], (void*)a[2]);
 			break;
 		case SYS_signal:
 			strcpy(oneline, "sys_signal");
@@ -251,7 +251,7 @@ void do_syscall(Context *c) {
 	}
 	/* printf("strace_ret=%d\n", strace_ret); */
 	sprintf(sret, "%d", strace_ret);
-	/* strace(c, sret); */
+	strace(c, sret);
 	c->GPRx = strace_ret;
 	/* printf("GPRx:%d\n", c->GPRx); */
 }
