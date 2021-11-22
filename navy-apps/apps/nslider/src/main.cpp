@@ -20,72 +20,73 @@ static SDL_Surface *slide = NULL;
 static int cur = 0;
 
 void render() {
-  if (slide) {
-    SDL_FreeSurface(slide);
-  }
-  char fname[256];
-  sprintf(fname, path, cur);
-  slide = SDL_LoadBMP(fname);
-  assert(slide);
-  SDL_UpdateRect(slide, 0, 0, 0, 0);
+	if (slide) {
+		SDL_FreeSurface(slide);
+	}
+	char fname[256];
+	sprintf(fname, path, cur);
+	slide = SDL_LoadBMP(fname);
+	assert(slide);
+	SDL_UpdateRect(slide, 0, 0, 0, 0);
 }
 
 void prev(int rep) {
-  if (rep == 0) rep = 1;
-  cur -= rep;
-  if (cur < 0) cur = 0;
-  render();
+	if (rep == 0) rep = 1;
+	cur -= rep;
+	if (cur < 0) cur = 0;
+	render();
 }
 
 void next(int rep) {
-  if (rep == 0) rep = 1;
-  cur += rep;
-  if (cur >= N) cur = N - 1;
-  render();
+	if (rep == 0) rep = 1;
+	cur += rep;
+	if (cur >= N) cur = N - 1;
+	render();
 }
 
 int main() {
-  SDL_Init(0);
-  SDL_Surface *screen = SDL_SetVideoMode(W, H, 32, SDL_HWSURFACE);
+	SDL_Init(0);
+	SDL_Surface *screen = SDL_SetVideoMode(W, H, 32, SDL_HWSURFACE);
 
-  int rep = 0, g = 0;
+	int rep = 0, g = 0;
 
-  render();
-  /* while(1){ */
-  /* // wk add */ 
-  /* } */
+	render();
+	/* while(1){ */
+	/* // wk add */ 
+	/* } */
 
-  while (1) {
-    SDL_Event e;
-    SDL_WaitEvent(&e);
+	while (1) {
+		SDL_Event e;
+		SDL_WaitEvent(&e);
 
-    if (e.type == SDL_KEYDOWN) {
-		printf("WWWWWWWWWWWWWWWWWWW\n");
-      switch(e.key.keysym.sym) {
-        case SDLK_0: rep = rep * 10 + 0; break;
-        case SDLK_1: rep = rep * 10 + 1; break;
-        case SDLK_2: rep = rep * 10 + 2; break;
-        case SDLK_3: rep = rep * 10 + 3; break;
-        case SDLK_4: rep = rep * 10 + 4; break;
-        case SDLK_5: rep = rep * 10 + 5; break;
-        case SDLK_6: rep = rep * 10 + 6; break;
-        case SDLK_7: rep = rep * 10 + 7; break;
-        case SDLK_8: rep = rep * 10 + 8; break;
-        case SDLK_9: rep = rep * 10 + 9; break;
-        case SDLK_J:
-        case SDLK_DOWN: printf("wwwwwwwwwwwwwwwDOWD\n");next(rep); rep = 0; g = 0; break;
-        case SDLK_K:
-        case SDLK_UP: printf("wwwwwwwwwwwwwwUP\n"); prev(rep); rep = 0; g = 0; break;
-        case SDLK_G:
-          g ++;
-          if (g > 1) {
-            prev(100000);
-            rep = 0; g = 0;
-          }
-          break;
-      }
-    }
-  }
+		if (e.type == SDL_KEYDOWN) {
+			printf("WWWWWWWWWWWWWWWWWWW\n");
+			switch(e.key.keysym.sym) {
+				case SDLK_0: rep = rep * 10 + 0; break;
+				case SDLK_1: rep = rep * 10 + 1; break;
+				case SDLK_2: rep = rep * 10 + 2; break;
+				case SDLK_3: rep = rep * 10 + 3; break;
+				case SDLK_4: rep = rep * 10 + 4; break;
+				case SDLK_5: rep = rep * 10 + 5; break;
+				case SDLK_6: rep = rep * 10 + 6; break;
+				case SDLK_7: rep = rep * 10 + 7; break;
+				case SDLK_8: rep = rep * 10 + 8; break;
+				case SDLK_9: rep = rep * 10 + 9; break;
+				case SDLK_J:
+				case SDLK_DOWN: printf("wwwwwwwwwwwwwwwDOWD\n");next(rep); rep = 0; g = 0; break;
+				case SDLK_K:
+				case SDLK_UP: printf("wwwwwwwwwwwwwwUP\n"); prev(rep); rep = 0; g = 0; break;
+				case SDLK_G:
+							  g ++;
+							  if (g > 1) {
+								  prev(100000);
+								  rep = 0; g = 0;
+							  }
+							  break;
+				default : printf("DDDDDDDDDDDDDDDDDD\n");
+			}
+		}
+	}
 
-  return 0;
+	return 0;
 }
