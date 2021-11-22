@@ -185,7 +185,7 @@ void strace(Context *c, char* ret) {
 			strcpy(oneline, "sys_fstat");
 			break;
 		case SYS_time:
-			sprintf(oneline, "sys_time(%p, %p)", (void*)a[1], (void*)a[2]);
+			strcpy(oneline, "time");
 			break;
 		case SYS_signal:
 			strcpy(oneline, "sys_signal");
@@ -194,7 +194,7 @@ void strace(Context *c, char* ret) {
 			strcpy(oneline, "sys_execve");
 			break;
 		case SYS_gettimeofday:
-			strcpy(oneline, "sys_gettimeofday");
+			sprintf(oneline, "sys_gettimeofday(%p, %p)", (void*)a[1], (void*)a[2]);
 			break;
 		default: assert(0);
 	}
