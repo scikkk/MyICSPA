@@ -35,12 +35,18 @@ static int (*glibc_execve)(const char *filename, char *const argv[], char *const
 static SDL_Window *window = NULL;
 static SDL_Renderer *renderer = NULL;
 static SDL_Texture *texture = NULL;
-static int dummy_fd = -1;
-static int dispinfo_fd = -1;
-static int fb_memfd = -1;
-static int evt_fd = -1;
-static int sb_fifo[2] = {-1, -1};
-static int sbctl_fd = -1;
+/* static int dummy_fd = -1; */
+/* static int dispinfo_fd = -1; */
+/* static int fb_memfd = -1; */
+/* static int evt_fd = -1; */
+/* static int sb_fifo[2] = {-1, -1}; */
+/* static int sbctl_fd = -1; */
+static int dummy_fd = 1;
+static int dispinfo_fd = 2;
+static int fb_memfd = 3;
+static int evt_fd = 4;
+static int sb_fifo[2] = {5, 6};
+static int sbctl_fd = 7;
 static uint32_t *fb = NULL;
 static char fsimg_path[512] = "";
 
@@ -253,16 +259,19 @@ struct Init {
     assert(dummy_fd != -1);
     dispinfo_fd = dummy_fd;
 
-    char *navyhome = getenv("NAVY_HOME");
+    /* char *navyhome = getenv("NAVY_HOME"); */
+    char *navyhome = getenv("/home/wk/ics2021/navy-apps");
     assert(navyhome);
     sprintf(fsimg_path, "%s/fsimg", navyhome);
 
     char newpath[512];
     get_fsimg_path(newpath, "/bin");
-    setenv("PATH", newpath, 1); // overwrite the current PATH
+    /* setenv("PATH", newpath, 1); // overwrite the current PATH */
+    setenv("/home/wk/ics2021/navy-apps/libs/libos/src", newpath, 1); // overwrite the current PATH
 
     SDL_Init(0);
     if (!getenv("NWM_APP")) {
+    /* if (!getenv("bmp-test")) { */
       open_display();
       open_event();
     }
