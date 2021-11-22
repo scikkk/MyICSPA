@@ -43,8 +43,8 @@ int main(void)
 	NDL_Init(0);
 	unsigned msec = 0;
 	uint32_t ms;
-	while (msec<1) {
-		while(1){
+	while (msec<1000) {
+		while(1){ 
 			ms  = NDL_GetTicks();
 			/* _syscall_(SYS_gettimeofday, (unsigned long)&tv_cur, 0, 0); */
 			if(ms > msec) break;
