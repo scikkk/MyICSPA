@@ -88,6 +88,7 @@ int sys_brk(int32_t addr){
 
 int sys_gettimeofday(struct timeval *tv, struct timezone *tz) {
 	/* return gettimeofday(tv, tz); */
+	assert(tz == NULL);
 	if(tv == NULL){
 
 		return -1;
