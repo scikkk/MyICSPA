@@ -10,8 +10,8 @@ static struct func{
 	paddr_t begin_addr;
 	paddr_t end_addr;
 	uint32_t size;
-	char name[64];
-} func_table[2560];
+	char name[100];
+} func_table[1024];
 static short func_idx=0;
 
 
@@ -32,7 +32,7 @@ static void tableheader(const char *pbuff)
 	Elf32_Shdr* psecheader = (Elf32_Shdr*)(pbuff + pfilehead->e_shoff);
 	Elf32_Shdr* pshstr = (Elf32_Shdr*)(psecheader + eshstrndx);
 	char* pshstrbuff = (char *)(pbuff + pshstr->sh_offset);
-	for(int i = 0; i < pfilehead->e_shnum; i++)
+	for(int i = 0;i<pfilehead->e_shnum;++i)
 	{
 		if(!strcmp(psecheader[i].sh_name + pshstrbuff, ".dynsym") || !strcmp(psecheader[i].sh_name + pshstrbuff, ".symtab"))
 		{
