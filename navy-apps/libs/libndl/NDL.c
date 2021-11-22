@@ -14,7 +14,6 @@ static int screen_w = 0, screen_h = 0;
 #include <sys/time.h>
 #include <time.h>
 #include "syscall.h"
-extern int gettimeofday(struct timeval *ptimeval, void *ptimezone);
 // wk 3.3
 uint32_t NDL_GetTicks() {
 	struct timeval tv;
