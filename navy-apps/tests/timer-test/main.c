@@ -43,7 +43,7 @@ int main(void)
 	NDL_Init(0);
 	unsigned msec = 0;
 	uint32_t ms;
-	while (msec<6000) {
+	while (msec<1000) {
 		while(1){
 		ms  = NDL_GetTicks();
 
