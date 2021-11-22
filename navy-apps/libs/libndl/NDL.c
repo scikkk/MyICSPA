@@ -71,6 +71,7 @@ void NDL_OpenCanvas(int *w, int *h) {
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	int offset = 0;
+	printf("%d\t%d\t%d\t\n", x, y, w, h);
 	// wk center
 	x = (screen_w - w)/2;
 	y = (screen_h - h)/2;
@@ -79,7 +80,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	for(int cur_y = y; cur_y < y + h; cur_y++){
 		offset = (screen_w*cur_y + x)*4;
 		fseek(fp, offset, SEEK_SET);
-		printf("x=%d\ty=%d\toffset=%d\n", x, cur_y, offset);
+		/* printf("x=%d\ty=%d\toffset=%d\n", x, cur_y, offset); */
 		fwrite(pixels, 4, w, fp);
 		pixels += w;
 	}
