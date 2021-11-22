@@ -11,7 +11,7 @@ static struct func{
 	paddr_t end_addr;
 	uint32_t size;
 	char name[64];
-} func_table[256];
+} func_table[2560];
 static short func_idx=0;
 
 
@@ -21,7 +21,7 @@ static struct FtraceOneline{
 	paddr_t pc;
 	unsigned name_idx;
 	paddr_t dst;
-} ftrace_res[2000];
+} ftrace_res[65535];
 static unsigned ftrace_idx = 0;
 
 static void tableheader(const char *pbuff)
