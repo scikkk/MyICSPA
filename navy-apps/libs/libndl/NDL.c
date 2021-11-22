@@ -19,7 +19,7 @@ static int screen_w = 0, screen_h = 0;
 // wk 3.3
 uint32_t NDL_GetTicks() {
 	printf("enter NDL\n");
-	struct timeval tv = {0,0};
+	struct timeval tv = {2,6};
 	/* _syscall_(SYS_gettimeofday, (unsigned long)&tv, 0, 0); */
 	gettimeofday(&tv, NULL);
 	printf("tv:%p\n", &tv);
