@@ -54,7 +54,7 @@ int main(void)
 		/* printf("ms:%u\n",ms); */
 
 		printf("%d mseconds).\n", msec);
-		msec += 500;
+		msec += 100;
 	}
 	return 0;
 
