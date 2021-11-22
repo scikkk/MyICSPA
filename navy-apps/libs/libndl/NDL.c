@@ -17,7 +17,8 @@ uint32_t NDL_GetTicks() {
 	/* _syscall_(SYS_gettimeofday, (unsigned long)&tv, 0, 0); */
 	gettimeofday(&tv, NULL);
 	printf("hit there\n");
-	uint32_t ret = tv.tv_sec*1000+tv.tv_usec/1000;
+	uint32_t ret = tv.tv_sec*1000+(uint32_t)tv.tv_usec/1000;
+	printf("us:%d\n", (int)tv.tv_usec);
 	printf("%d\n", (int)ret);
 	return ret;
 
