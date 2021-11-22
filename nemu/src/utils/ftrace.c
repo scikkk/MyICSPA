@@ -10,8 +10,8 @@ static struct func{
 	paddr_t begin_addr;
 	paddr_t end_addr;
 	uint32_t size;
-	char name[100];
-} func_table[1024];
+	char name[256];
+} func_table[10240];
 static short func_idx=0;
 
 
