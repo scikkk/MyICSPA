@@ -9,9 +9,11 @@ static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
 
 // wk 3.3
-/* #define SYS_gettimeofday 19 */
+#include <unistd.h>
 #include <sys/stat.h>
+#include <setjmp.h>
 #include <sys/time.h>
+#include <assert.h>
 #include <time.h>
 #include "syscall.h"
 // wk 3.3
