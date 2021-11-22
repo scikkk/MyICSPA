@@ -83,7 +83,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	for(int cur_y = y; cur_y < y + h; cur_y++){
 		offset = (screen_w*cur_y + x)*4;
 		fseek(fp, offset, SEEK_SET);
-		printf("NDL:x=%d\ty=%d\toffset=%d\n", x, cur_y, offset);
+		printf("NDL:x=%d y=%d offset=%d\n", x, cur_y, offset);
 		fwrite(pixels, 4, w, fp);
 		pixels += w;
 	}
