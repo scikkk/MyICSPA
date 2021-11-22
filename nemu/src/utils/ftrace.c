@@ -32,7 +32,7 @@ static void tableheader(const char *pbuff)
 	Elf32_Shdr* psecheader = (Elf32_Shdr*)(pbuff + pfilehead->e_shoff);
 	Elf32_Shdr* pshstr = (Elf32_Shdr*)(psecheader + eshstrndx);
 	char* pshstrbuff = (char *)(pbuff + pshstr->sh_offset);
-	for(int i = 0;i<pfilehead->e_shnum;++i)
+	for(int i = 0; i < pfilehead->e_shnum; i++)
 	{
 		if(!strcmp(psecheader[i].sh_name + pshstrbuff, ".dynsym") || !strcmp(psecheader[i].sh_name + pshstrbuff, ".symtab"))
 		{
@@ -54,7 +54,6 @@ static void tableheader(const char *pbuff)
 			}
 			continue;
 		}
-					printf("%d\n", func_idx);
 	}
 }
 
