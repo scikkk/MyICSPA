@@ -105,6 +105,7 @@ int _gettimeofday(struct timeval *tv, struct timezone *tz) {
 	/* _exit(SYS_gettimeofday); */
 	printf("enter lib\n");
 	tv->tv_usec = 1314;
+	printf("tv:%p\ttz:%p\tsec:%ld\tusec:%ld\n", tv, tz, tv->tv_sec, tv->tv_usec);
 	int ret =  _syscall_(SYS_gettimeofday, tv, tz, 0);
 	printf("tv:%p\ttz:%p\tsec:%ld\tusec:%ld\n", tv, tz, tv->tv_sec, tv->tv_usec);
 	printf("exit lib\n");

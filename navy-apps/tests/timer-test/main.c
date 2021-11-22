@@ -51,9 +51,9 @@ int main(void)
 		} 
 
 		/* printf("(sec.usec): %lu.%lu\n",tv_cur.tv_sec, tv_cur.tv_usec); */
-		printf("ms:%u\n",ms);
+		/* printf("ms:%u\n",ms); */
 
-		printf("%d mseconds).\n", msec);
+		/* printf("%d mseconds).\n", msec); */
 		msec += 500;
 	}
 	return 0;
