@@ -78,8 +78,8 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	}
 	int offset = 0;
 	// wk center
-	/* x = (screen_w - w)/2; */
-	/* y = (screen_h - h)/2; */
+	x = (screen_w - w)/2;
+	y = (screen_h - h)/2;
 	// wk center
 	FILE *fp = fopen("/dev/fb", "w");
 	for(int cur_y = y; cur_y < y + h; cur_y++){
@@ -114,7 +114,7 @@ int NDL_Init(uint32_t flags) {
 	printf("NDL.c: %d: fp=%p\n", __LINE__, fp);
 	
 	fscanf(fp, "WIDTH : %d\nHEIGHT : %d", &screen_w, &screen_h);
-	printf("W:%d\tH:%d\n", screen_w, screen_h);
+	/* printf("W:%d\tH:%d\n", screen_w, screen_h); */
 	fclose(fp);
 
 	return 0;
