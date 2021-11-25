@@ -88,6 +88,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 		fseek(fp, offset, SEEK_SET);
 		printf("NDL:x=%d y=%d offset=%d len=%d\n", x, cur_y, offset, w*4);
 		fwrite(pixels, 1, w*4, fp);
+		printf("wk\n");
 
 		pixels += w;
 	}
