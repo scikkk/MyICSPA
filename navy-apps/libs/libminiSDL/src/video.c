@@ -10,14 +10,14 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
-	printf("\n\nvideoo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
+	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
 }
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 	
 	NDL_DrawRect(s, x, y, w, h);
 	
-	printf("\n\nvideoo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
+	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
 }
 
 // APIs below are already implemented.
@@ -198,10 +198,10 @@ uint32_t SDL_MapRGBA(SDL_PixelFormat *fmt, uint8_t r, uint8_t g, uint8_t b, uint
 }
 
 int SDL_LockSurface(SDL_Surface *s) {
-	printf("\n\nvideoo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
+	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
   return 0;
 }
 
 void SDL_UnlockSurface(SDL_Surface *s) {
-	printf("\n\nvideoo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
+	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
 }
