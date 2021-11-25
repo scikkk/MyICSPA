@@ -114,7 +114,7 @@ int NDL_Init(uint32_t flags) {
 	printf("NDL.c: %d: fp=%p\n", __LINE__, fp);
 	
 	fscanf(fp, "WIDTH : %d\nHEIGHT : %d", &screen_w, &screen_h);
-	/* printf("W:%d\tH:%d\n", screen_w, screen_h); */
+	printf("W:%d\tH:%d\n", screen_w, screen_h);
 	fclose(fp);
 
 	return 0;
