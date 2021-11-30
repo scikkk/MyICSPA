@@ -41,7 +41,8 @@ void init_proc() {
   /* naive_uload(NULL, "/bin/timer-test"); */
 
   // APP
-  naive_uload(NULL, "/bin/nslider");
+  /* naive_uload(NULL, "/bin/nslider"); */
+  naive_uload(NULL, "/bin/menu");
 
 }
 
