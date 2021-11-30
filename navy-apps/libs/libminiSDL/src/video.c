@@ -10,13 +10,13 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
-	int x,y,w,h;
+	int x,y,w,h,offset=0;
 	x = dstrect->x;
 	y = dstrect->y;
 	w = dstrect->w;
 	h = dstrect->h;
 	for(int cur_y = y; cur_y < y + h; cur_y++){
-	 	offset = (screen_w*cur_y + x)*4;
+	 	offset = (w*cur_y + x)*4;
 		uint32_t *pixels = dst->pixels + offset;
 		memset(pixels, color, w);
 		
