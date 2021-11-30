@@ -23,17 +23,17 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 		w = dstrect->w;
 		h = dstrect->h;
 	}
-	printf("x=%d; y=%d\n", x, y);
+	/* printf("x=%d; y=%d\n", x, y); */
 	for(int cur_y = y; cur_y < y + h; cur_y++){
 		offset = w*cur_y + x;
-		printf("x=%d; y=%d\n", x, cur_y);
+		/* printf("x=%d; y=%d\n", x, cur_y); */
 		uint32_t *pixels = (uint32_t*)dst->pixels + offset;
 		for(int k = 0; k < w; k++){
 			*((uint32_t*)pixels+k) = color;
 		}
 
 	}
-	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
+	/* printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
 }
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
