@@ -10,21 +10,21 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
-	printf("%p\n", dst);
-	int x,y,w,h,offset=0;
-	x = dstrect->x;
-	y = dstrect->y;
-	w = dstrect->w;
-	h = dstrect->h;
-		printf("x=%d; y=%d\n", x, cur_y);
-	for(int cur_y = y; cur_y < y + h; cur_y++){
-	 	offset = w*cur_y + x;
-		printf("x=%d; y=%d\n", x, cur_y);
-		uint32_t *pixels = dst->pixels + offset;
-		memset(pixels, color, w);
+	/* printf("%p\n", dst); */
+	/* int x,y,w,h,offset=0; */
+	/* x = dstrect->x; */
+	/* y = dstrect->y; */
+	/* w = dstrect->w; */
+	/* h = dstrect->h; */
+	/* 	printf("x=%d; y=%d\n", x, cur_y); */
+	/* for(int cur_y = y; cur_y < y + h; cur_y++){ */
+	/*  	offset = w*cur_y + x; */
+	/* 	printf("x=%d; y=%d\n", x, cur_y); */
+	/* 	uint32_t *pixels = dst->pixels + offset; */
+	/* 	memset(pixels, color, w); */
 		
-		pixels += w;
-	}
+	/* 	pixels += w; */
+	/* } */
 	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
 }
 
