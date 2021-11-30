@@ -86,7 +86,7 @@ int SDL_WaitEvent(SDL_Event *event) {
 				event->key.keysym.sym = SDLK_J; 
 			}
 			else if(!strcmp(name, "DOWN")){
-				printf("DOWN:%d\n", __LINE__);
+				printf("DOWN:%d\n", SDLK_DOWN);
 				event->key.keysym.sym = SDLK_DOWN; 
 			}
 			else if(!strcmp(name, "K")){
