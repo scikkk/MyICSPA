@@ -15,6 +15,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 	y = dstrect->y;
 	w = dstrect->w;
 	h = dstrect->h;
+		printf("x=%d; y=%d\n", x, cur_y);
 	for(int cur_y = y; cur_y < y + h; cur_y++){
 	 	offset = w*cur_y + x;
 		printf("x=%d; y=%d\n", x, cur_y);
