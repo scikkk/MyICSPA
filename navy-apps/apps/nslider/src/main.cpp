@@ -53,6 +53,7 @@ int main() {
 
 	int rep = 0, g = 0;
 
+	cur = 1;
 	render();
 	/* while(1){ */
 	/* // wk add */ 
