@@ -88,11 +88,11 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 		fseek(fp, offset, SEEK_SET);
 		/* printf("NDL:x=%d y=%d offset=%d len=%d\n", x, cur_y, offset, w*4); */
 		fwrite(pixels, 4, w, fp);
-		fflush(fp);
 		/* printf("wk\n"); */
 
 		pixels += w;
 	}
+	fflush(fp);
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {
@@ -116,7 +116,7 @@ int NDL_Init(uint32_t flags) {
 
 	FILE *fp = fopen("/proc/dispinfo", "r");
 	printf("NDL.c: %d: fp=%p\n", __LINE__, fp);
-	
+
 	fscanf(fp, "WIDTH : %d\nHEIGHT : %d", &screen_w, &screen_h);
 	/* printf("W:%d\tH:%d\n", screen_w, screen_h); */
 	fclose(fp);
