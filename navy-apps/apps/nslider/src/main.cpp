@@ -28,7 +28,7 @@ void render() {
 	printf("%s\n", fname);
 	slide = SDL_LoadBMP(fname);
 	assert(slide);
-	SDL_UpdateRect(slide, 0, 0,400 , 300);
+	SDL_UpdateRect(slide, 0, 0,0 , 0);
 }
 
 void prev(int rep) {
