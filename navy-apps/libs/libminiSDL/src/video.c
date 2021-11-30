@@ -13,7 +13,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 	if(dstrect == NULL){
 	 int size = (dst->w)*(dst->h);
 		for(int k = 0; k < size; k++){
-			*(dst->pixels+k) = color;
+			*((uint32_t*)dst->pixels+k) = color;
 		}
 		return;
 	}
