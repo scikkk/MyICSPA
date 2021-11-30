@@ -10,6 +10,18 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
+	int x,y,w,h;
+	x = dstrect->x;
+	y = dstrect->y;
+	w = dstrect->w;
+	h = dstrect->h;
+	for(int cur_y = y; cur_y < y + h; cur_y++){
+	 	offset = (screen_w*cur_y + x)*4;
+		uint32_t *pixels = dst->pixels + offset;
+		memset(pixels, color, w);
+		
+		pixels += w;
+	}
 	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
 }
 
@@ -17,7 +29,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 	
 	NDL_DrawRect(s->pixels, x, y, w, h);
 	
-	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
+	/* printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
 }
 
 // APIs below are already implemented.
