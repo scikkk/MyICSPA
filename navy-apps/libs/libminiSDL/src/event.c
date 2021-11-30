@@ -24,16 +24,14 @@ int SDL_WaitEvent(SDL_Event *event) {
 		char buf[64];
 		if (NDL_PollEvent(buf, sizeof(buf))) {
 			printf("receive event: %s\n", buf);
-				printf("%d\n", __LINE__);
 			char type[3], name[20];
 			sscanf(buf, "%s %s\n", type, name);
-				printf("%d\n", __LINE__);
 			if(strcmp(type, "ku") == 0){
-				printf("%d\n", __LINE__);
+				printf("ku%d\n", __LINE__);
 				event->type = SDL_KEYUP;
 			}
 			else if(strcmp(type, "kd")){
-				printf("%d\n", __LINE__);
+				printf("kd%d\n", __LINE__);
 				event->type = SDL_KEYDOWN;
 			}
 			else{
