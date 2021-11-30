@@ -55,9 +55,9 @@ int main() {
 
 	cur = 1;
 	render();
-	/* while(1){ */
-	/* // wk add */ 
-	/* } */
+	while(1){
+	// wk add 
+	}
 
 	/* while (1) { */
 	/* 	SDL_Event e; */
