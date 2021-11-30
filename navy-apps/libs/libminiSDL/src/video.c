@@ -35,10 +35,10 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	for(int cur_h = 0; cur_h < h; cur_h++){
 		srcoffset = w*(sy + cur_h) + sx;
 	printf("asdf%p\n", src);
-		*srcpixels = (uint32_t*)src->pixels + srcoffset;
+		*srcpixels = (uint32_t*)(src->pixels) + srcoffset;
 	printf("asdf\n");
 		dstoffset = w*(dy + cur_h) + dx;
-		*srcpixels = (uint32_t*)dst->pixels + dstoffset;
+		*srcpixels = (uint32_t*)(dst->pixels) + dstoffset;
 		for(int k = 0; k < w; k++){
 			*((uint32_t*)dstpixels+k) = *((uint32_t*)srcpixels+k);
 		}
@@ -64,10 +64,10 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 	for(int cur_y = y; cur_y < y + h; cur_y++){
 		offset = w*cur_y + x;
 		/* printf("x=%d; y=%d\n", x, cur_y); */
-		uint32_t *pixels = (uint32_t*)dst->pixels + offset;
+		uint32_t *pixels = (uint32_t*)(dst->pixels) + offset;
 		for(int k = 0; k < w; k++){
 			*((uint32_t*)pixels+k) = color;
-		}
+		} 
 
 	}
 	/* printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
