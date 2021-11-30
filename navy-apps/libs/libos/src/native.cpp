@@ -178,6 +178,7 @@ int open(const char *path, int flags, ...) {
 }
 
 ssize_t read(int fd, void *buf, size_t count) {
+	  printf("read fd:%d\n",fd);;
   if (fd == dispinfo_fd) {
     return snprintf((char *)buf, count, "WIDTH: %d\nHEIGHT: %d\n", disp_w, disp_h);
   } else if (fd == evt_fd) {
@@ -212,6 +213,7 @@ ssize_t read(int fd, void *buf, size_t count) {
 }
 
 ssize_t write(int fd, const void *buf, size_t count) {
+	  printf("write fd:%d\n",fd);;
   if (fd == sbctl_fd) {
     // open audio
     const int *args = (const int *)buf;
@@ -254,18 +256,15 @@ struct Init {
     dispinfo_fd = dummy_fd;
 
     char *navyhome = getenv("NAVY_HOME");
-    /* char *navyhome = getenv("/home/wk/ics2021/navy-apps"); */
     assert(navyhome);
     sprintf(fsimg_path, "%s/fsimg", navyhome);
 
     char newpath[512];
     get_fsimg_path(newpath, "/bin");
     setenv("PATH", newpath, 1); // overwrite the current PATH
-    /* setenv("/home/wk/ics2021/navy-apps/libs/libos/src", newpath, 0); // overwrite the current PATH */
 
     SDL_Init(0);
     if (!getenv("NWM_APP")) {
-    /* if (!getenv("bmp-test")) { */
       open_display();
       open_event();
     }

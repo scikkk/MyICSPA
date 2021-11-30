@@ -81,13 +81,14 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 	x = (screen_w - w)/2;
 	y = (screen_h - h)/2;
 	// wk center
-	FILE *fp = fopen("/dev/fb", "w");
+	FILE* fp = fopen("/dev/fb", "w");
 	/* for(int cur_y = y; cur_y < y + 1; cur_y++){ */
 	for(int cur_y = y; cur_y < y + h; cur_y++){
 		offset = (screen_w*cur_y + x)*4;
 		fseek(fp, offset, SEEK_SET);
 		/* printf("NDL:x=%d y=%d offset=%d len=%d\n", x, cur_y, offset, w*4); */
 		fwrite(pixels, 4, w, fp);
+	/* write(fp,pixels,w*4); */
 		/* printf("wk\n"); */
 		pixels += w;
 	}
@@ -113,12 +114,13 @@ int NDL_Init(uint32_t flags) {
 		evtdev = 3;
 	}
 
-	FILE *fp = fopen("/proc/dispinfo", "r");
+	int fp = open("/proc/dispinfo", "r");
 	printf("NDL.c: %d: fp=%p\n", __LINE__, fp);
-
-	fscanf(fp, "WIDTH : %d\nHEIGHT : %d", &screen_w, &screen_h);
+	char info[50];
+	read(fp, info, sizeof(info));
+	sscanf(info, "WIDTH : %d\nHEIGHT : %d", &screen_w, &screen_h);
 	/* printf("W:%d\tH:%d\n", screen_w, screen_h); */
-	fclose(fp);
+	close(fp);
 
 	return 0;
 }
