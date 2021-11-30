@@ -16,7 +16,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 	w = dstrect->w;
 	h = dstrect->h;
 	for(int cur_y = y; cur_y < y + h; cur_y++){
-	 	offset = (w*cur_y + x)*4;
+	 	offset = w*cur_y + x;
 		uint32_t *pixels = dst->pixels + offset;
 		memset(pixels, color, w);
 		
