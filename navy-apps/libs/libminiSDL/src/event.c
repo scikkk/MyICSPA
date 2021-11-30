@@ -70,15 +70,22 @@ int SDL_WaitEvent(SDL_Event *event) {
 			else if(!strcmp(name, "J")){
 				event->key.keysym.sym = SDLK_J; 
 			}
+			else if(!strcmp(name, "UP")){
+				event->key.keysym.sym = SDLK_UP; 
+			}
 			else if(!strcmp(name, "DOWN")){
 				event->key.keysym.sym = SDLK_DOWN; 
+			}
+			else if(!strcmp(name, "LEFT")){
+				event->key.keysym.sym = SDLK_LEFT; 
+			}
+			else if(!strcmp(name, "RIGHT")){
+				event->key.keysym.sym = SDLK_RIGHT; 
 			}
 			else if(!strcmp(name, "K")){
 				event->key.keysym.sym = SDLK_K; 
 			}
-			else if(!strcmp(name, "UP")){
-				event->key.keysym.sym = SDLK_UP; 
-			}
+
 			else if(!strcmp(name, "G")){
 				event->key.keysym.sym = SDLK_G; 
 			}
@@ -93,7 +100,7 @@ int SDL_WaitEvent(SDL_Event *event) {
 			return 1;
 		}
 	}
-				printf("\n\n!!!!!!!!!Error:event.c:%d\n\n", __LINE__);
+	printf("\n\n!!!!!!!!!Error:event.c:%d\n\n", __LINE__);
 	return 0;
 }
 
