@@ -60,7 +60,6 @@ int main() {
 		SDL_WaitEvent(&e);
 
 		if (e.type == SDL_KEYDOWN) {
-			printf("WWWWWWWWWWWWWWWWWW%d\n", e.key.keysym.sym);
 			switch(e.key.keysym.sym) {
 				case SDLK_0: rep = rep * 10 + 0; break;
 				case SDLK_1: rep = rep * 10 + 1; break;
@@ -73,9 +72,9 @@ int main() {
 				case SDLK_8: rep = rep * 10 + 8; break;
 				case SDLK_9: rep = rep * 10 + 9; break;
 				case SDLK_J:
-				case SDLK_DOWN: printf("wwwwwwwwwwwwwwwDOWD\n");next(rep); rep = 0; g = 0; break;
+				case SDLK_DOWN: next(rep); rep = 0; g = 0; break;
 				case SDLK_K:
-				case SDLK_UP: printf("wwwwwwwwwwwwwwUP\n"); prev(rep); rep = 0; g = 0; break;
+				case SDLK_UP: prev(rep); rep = 0; g = 0; break;
 				case SDLK_G:
 							  g ++;
 							  if (g > 1) {
@@ -83,7 +82,7 @@ int main() {
 								  rep = 0; g = 0;
 							  }
 							  break;
-				default : printf("DDDDDDDDDDDDDDDDDD\n");
+				default : printf("UNKNOWN KEY !!!\n");
 			}
 		}
 	}
