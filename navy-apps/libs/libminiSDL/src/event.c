@@ -30,12 +30,12 @@ int SDL_WaitEvent(SDL_Event *event) {
 				printf("ku%d\n", __LINE__);
 				event->type = SDL_KEYUP;
 			}
-			else if(strcmp(type, "kd")){
+			else if(strcmp(type, "kd") == 0){
 				printf("kd%d\n", __LINE__);
 				event->type = SDL_KEYDOWN;
 			}
 			else{
-				printf("%d\n", __LINE__);
+				printf("!!!!!!!!!Error:%d\n", __LINE__);
 				return 0;
 			}
 			if(!strcmp(name, "0")){
