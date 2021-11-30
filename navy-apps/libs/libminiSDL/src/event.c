@@ -23,7 +23,7 @@ int SDL_WaitEvent(SDL_Event *event) {
 	while (1) {
 		char buf[64];
 		if (NDL_PollEvent(buf, sizeof(buf))) {
-			printf("receive event: %s\n", buf);
+			/* printf("receive event: %s\n", buf); */
 			char type[3], name[20];
 			sscanf(buf, "%s %s\n", type, name);
 			if(strcmp(type, "ku") == 0){
@@ -71,7 +71,6 @@ int SDL_WaitEvent(SDL_Event *event) {
 				event->key.keysym.sym = SDLK_J; 
 			}
 			else if(!strcmp(name, "DOWN")){
-				printf("DOWN:%d\n", SDLK_DOWN);
 				event->key.keysym.sym = SDLK_DOWN; 
 			}
 			else if(!strcmp(name, "K")){
