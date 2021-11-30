@@ -45,7 +45,7 @@ int sys_read(int fd, void *buf, int len){
 int fs_open(const char *pathname, int flags, int mode);
 int sys_open(const char *path, int flags, int mode) {
 	int ret = fs_open(path, flags, mode);
-	printf("open:%s\n", path);
+	/* printf("open:%s\n", path); */
 	return ret;
 }
 
