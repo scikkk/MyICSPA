@@ -25,13 +25,13 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	dx = dstrect->x;
 	dy = dstrect->y;
 	uint32_t *srcpixels, *dstpixels, srcoffset, dstoffset;
-	printf("asdf\n");
 	for(int cur_h = 0; cur_h < h; cur_h++){
 		srcoffset = w*(sy + cur_h) + sx;
 		*srcpixels = (uint32_t*)src->pixels + srcoffset;
 		dstoffset = w*(dy + cur_h) + dx;
 		*srcpixels = (uint32_t*)dst->pixels + dstoffset;
 		for(int k = 0; k < w; k++){
+	printf("asdf\n");
 			*((uint32_t*)dstpixels+k) = *((uint32_t*)srcpixels+k);
 		}
 
