@@ -9,12 +9,11 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
 	assert(dst->format->BytesPerPixel == src->format->BytesPerPixel);
 	assert(dst->format->BitsPerPixel / dst->format->BytesPerPixel == 8);
-	assert(dst->format->BitsPerPixel == 32);
-	int bytes_num = src->format->BytesPerPixel;
+	int bytes_num = src->format->BytessPerPixel;
+	assert(bytes_num == 8 || bytes_num == 32);
 	/* printf("Bytes num:%d\n", bytes_num); */
 	int dx,dy;
 	int sx,sy,w,h;
-
 	if(srcrect == NULL){
 		sx = 0;
 		sy = 0;
@@ -39,23 +38,22 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	}
 	assert(dx >= 0 && dy >= 0);
 	assert(src->w && dst->w);
+
 	/* printf("w=%d\th=%d\tsw=%d\tsh=%d\tdw=%d\tdh=%d\n", w, h, src->w, src->h, dst->w, dst->h); */
-	uint32_t *srcpixels, *dstpixels, srcoffset, dstoffset;
+	uint8_t *srcpixels, *dstpixels, srcoffset, dstoffset;
 	for(int cur_h = 0; cur_h < h; cur_h++){
 		/* printf("sx=%d\tsy=%d\n", sx, sy+cur_h); */
 		/* printf("dx=%d\tdy=%d\n", dx, dy+cur_h); */
-
 		srcoffset = (src->w)*(sy + cur_h) + sx;
-		srcpixels = (uint32_t*)src->pixels + srcoffset;
+		srcpixels = (uint8_t*)src->pixels + srcoffset*bytes_num;
 		dstoffset = (dst->w)*(dy + cur_h) + dx;
-		dstpixels = (uint32_t*)dst->pixels + dstoffset;
+		dstpixels = (uint8_t*)dst->pixels + dstoffset*bytes_num;
 		/* printf("dx=%d,dy=%d\n", dx, dy+cur_h); */
 		/* printf("sx=%d,sy=%d\n", sx, sy+cur_h); */
 		/* printf("soff:%d\tdoff:%d\n", srcoffset, dstoffset); */
-		for(int k = 0; k < w; k++){
+		for(int k = 0; k < w*bytes_num; k++){
 			dstpixels[k] = srcpixels[k];
 		}
-
 	}
 }
 
