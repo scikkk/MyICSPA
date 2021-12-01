@@ -144,7 +144,6 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 	NDL_DrawRect(pixels, x, y, w, h);
 	free(pixels);
 	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
-	while(1);
 }
 
 // APIs below are already implemented.
