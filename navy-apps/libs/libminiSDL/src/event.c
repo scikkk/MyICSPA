@@ -14,8 +14,6 @@ int SDL_PushEvent(SDL_Event *ev) {
 }
 
 int SDL_PollEvent(SDL_Event *event) {
-	printf("\n\nevent.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
-
 	char buf[64];
 	if (NDL_PollEvent(buf, sizeof(buf))) {
 		/* printf("receive event: %s\n", buf); */
