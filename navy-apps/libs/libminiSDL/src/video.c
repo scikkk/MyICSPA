@@ -122,7 +122,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 	int size = s->w*s->h;
 	pixels = (uint32_t*)malloc(size*4);
 	for(int k = 0; k < size; k++){
-		pixels[k] = s->format->palette[s->pixels[k]].colors->val;
+		pixels[k] = s->format->palette->colors[s->pixels[k]].val;
 	}
 	}
 
