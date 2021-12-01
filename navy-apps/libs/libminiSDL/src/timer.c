@@ -19,4 +19,6 @@ uint32_t SDL_GetTicks() {
 
 void SDL_Delay(uint32_t ms) {
 	printf("\n\ntimer.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
+	uint32_t begin = SDL_GetTicks();
+	while(SDL_GetTicks() - begin < ms);
 }
