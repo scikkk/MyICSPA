@@ -8,8 +8,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	assert(dst && src);
 	assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
 	assert(dst->format->BytesPerPixel == src->format->BytesPerPixel);
-
-	assert(dst->format->BytesPerPixel == 4);
+	assert(dst->format->BitsPerPixel / dst->format->BytesPerPixel == 8);
+	
 	int dx,dy;
 	int sx,sy,w,h;
 
