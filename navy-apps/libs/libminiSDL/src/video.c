@@ -78,7 +78,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 	int bytes_num = dst->format->BytesPerPixel; 
-	assert(bytes_num == 4);
+	assert(bytes_num == 8);
 	int x,y,w,h,offset=0;
 	if(dstrect == NULL){
 		x = 0;
@@ -116,16 +116,16 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 	}
 	uint32_t *pixels = NULL;
 	if (bytes_num == 4){
-	
-	pixels = (uint32_t*)s->pixels;
+
+		pixels = (uint32_t*)s->pixels;
 	}
 	else{
-	uint8_t pixels_8 = s->pixels;
-	int size = s->w*s->h;
-	pixels = (uint32_t*)malloc(size*4);
-	for(int k = 0; k < size; k++){
-		pixels[k] = s->format->palette->colors[s->pixels[k]].val;
-	}
+		uint8_t pixels_8 = s->pixels;
+		int size = s->w*s->h;
+		pixels = (uint32_t*)malloc(size*4);
+		for(int k = 0; k < size; k++){
+			pixels[k] = s->format->palette->colors[s->pixels[k]].val;
+		}
 	}
 
 	NDL_DrawRect(pixels, x, y, w, h);
