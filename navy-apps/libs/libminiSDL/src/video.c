@@ -107,6 +107,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 
+	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
 
 	int bytes_num = s->format->BytesPerPixel; 
 	assert(bytes_num == 1 || bytes_num == 4);
