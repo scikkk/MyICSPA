@@ -270,11 +270,11 @@ int SDL_PollEvent(SDL_Event *event) {
 		else if(!strcmp(name, "RSHIFT")){
 			event->key.keysym.sym = SDLK_RSHIFT; 
 		}
-		else if(!strcmp(name, "LCTR")){
-			event->key.keysym.sym = SDLK_LCTR; 
+		else if(!strcmp(name, "LCTRL")){
+			event->key.keysym.sym = SDLK_LCTRL; 
 		}
-		else if(!strcmp(name, "RCTR")){
-			event->key.keysym.sym = SDLK_RCTR; 
+		else if(!strcmp(name, "RCTRL")){
+			event->key.keysym.sym = SDLK_RCTRL; 
 		}
 		else if(!strcmp(name, "LALT")){
 			event->key.keysym.sym = SDLK_LALT; 
