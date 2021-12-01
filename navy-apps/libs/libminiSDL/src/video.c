@@ -9,7 +9,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
 	assert(dst->format->BytesPerPixel == src->format->BytesPerPixel);
 	assert(dst->format->BitsPerPixel / dst->format->BytesPerPixel == 8);
-	assert(dst->format->BitsPerPixel = 32);
+	assert(dst->format->BitsPerPixel == 32);
 	int bytes_num = src->format->BytesPerPixel;
 	/* printf("Bytes num:%d\n", bytes_num); */
 	int dx,dy;
