@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
-	if (!dst && !src) return;
+	if (!dst || !src) return;
 	assert(dst && src);
 	assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
 	assert(dst->format->BytesPerPixel == src->format->BytesPerPixel);
