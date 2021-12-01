@@ -113,18 +113,18 @@ int NDL_Init(uint32_t flags) {
 		evtdev = 3;
 	}
 
-	FILE *fp = fopen("/proc/dispinfo", "r");
-	fscanf(fp, "WIDTH : %d\nHEIGHT : %d", &screen_w, &screen_h);
-	fclose(fp);
+	/* FILE *fp = fopen("/proc/dispinfo", "r"); */
+	/* fscanf(fp, "WIDTH : %d\nHEIGHT : %d", &screen_w, &screen_h); */
+	/* fclose(fp); */
 
 
-	/* int fp = open("/proc/dispinfo", "r"); */
-	/* printf("NDL.c: %d: fp=%p\n", __LINE__, fp); */
-	/* char info[50]; */
-	/* read(fp, info, sizeof(info)); */
-	/* sscanf(info, "WIDTH : %d\nHEIGHT : %d", &screen_w, &screen_h); */
-	/* /1* printf("W:%d\tH:%d\n", screen_w, screen_h); *1/ */
-	/* close(fp); */
+	int fp = open("/proc/dispinfo", "r");
+	printf("NDL.c: %d: fp=%p\n", __LINE__, fp);
+	char info[50];
+	read(fp, info, sizeof(info));
+	sscanf(info, "WIDTH : %d\nHEIGHT : %d", &screen_w, &screen_h);
+	/* printf("W:%d\tH:%d\n", screen_w, screen_h); */
+	close(fp);
 
 	return 0;
 }
