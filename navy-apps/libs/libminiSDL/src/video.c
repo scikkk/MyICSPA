@@ -38,17 +38,17 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	}
 	assert(dx >= 0 && dy >= 0);
 	assert(src->w && dst->w);
-	uint8_t *srcpixels, *dstpixels, srcoffset, dstoffset;
+	uint32_t *srcpixels, *dstpixels, srcoffset, dstoffset;
 	for(int cur_h = 0; cur_h < h; cur_h++){
 		/* printf("sx=%d\tsy=%d\n", sx, sy+cur_h); */
 		/* printf("dx=%d\tdy=%d\n", dx, dy+cur_h); */
 
 		srcoffset = (src->w)*(sy + cur_h) + sx;
-		srcpixels = (char*)src->pixels + srcoffset*bytes_num;
+		srcpixels = (uint32_t*)src->pixels + srcoffset;
 		dstoffset = (dst->w)*(dy + cur_h) + dx;
-		dstpixels = (char*)dst->pixels + dstoffset*bytes_num;
+		dstpixels = (uint32_t*)dst->pixels + dstoffset;
 		printf("soff:%d\tdoff:%d\n", srcoffset, dstoffset);
-		for(int k = 0; k < w*bytes_num; k++){
+		for(int k = 0; k < w; k++){
 			dstpixels[k] = srcpixels[k];
 		}
 
