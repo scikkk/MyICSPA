@@ -90,25 +90,25 @@ void init_ftrace(const char *elf_file) {
 
 	// wk 3.2 ---------------------------------------------------------
 
-/* 	char ramdisk_file[] =  "/home/wk/ics2021/navy-apps/build/ramdisk.img"; */
-/* 	fp = fopen(ramdisk_file, "r"); */
-/* 	Assert(fp, "Can not open '%s'", ramdisk_file); */
+	char ramdisk_file[] =  "/home/wk/ics2021/navy-apps/fsimg/bin/pal";
+	fp = fopen(ramdisk_file, "r");
+	Assert(fp, "Can not open '%s'", ramdisk_file);
 
-/* 	FILE *ramdisk_fp = fp; */
-/* 	fseek(ramdisk_fp, 0, SEEK_END); */
-/* 	file_size = ftell(fp); */
-/* 	/1* printf("size: %i\n", file_size); *1/ */
-/* 	elf_str = (char*)malloc(sizeof(char)*file_size); */
+	FILE *ramdisk_fp = fp;
+	fseek(ramdisk_fp, 0, SEEK_END);
+	file_size = ftell(fp);
+	/* printf("size: %i\n", file_size); */
+	elf_str = (char*)malloc(sizeof(char)*file_size);
 
-/* 	fseek(ramdisk_fp, 0, SEEK_SET); */
+	fseek(ramdisk_fp, 0, SEEK_SET);
 
-/* 	ret =	fread(elf_str, sizeof(char), file_size, ramdisk_fp); */
-/* 	assert(ret == file_size); */
+	ret =	fread(elf_str, sizeof(char), file_size, ramdisk_fp);
+	assert(ret == file_size);
 
-/* 	fclose(ramdisk_fp); */
-/* 	tableheader(elf_str); */
-/* 	free(elf_str); */
-/* 	Log("Symbol table is loaded from %s", ramdisk_file); */
+	fclose(ramdisk_fp);
+	tableheader(elf_str);
+	free(elf_str);
+	Log("Symbol table is loaded from %s", ramdisk_file);
 	// wk 3.2 ---------------------------------------------------------
 
 	/* func_display(); */
