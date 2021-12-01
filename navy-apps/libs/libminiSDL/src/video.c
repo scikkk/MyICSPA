@@ -144,7 +144,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 	}
 
 	NDL_DrawRect(pixels, x, y, w, h);
-	free(pixels);
+	if(bytes_num == 1) free(pixels);
 	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
 }
 
