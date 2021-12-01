@@ -44,12 +44,12 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 		/* printf("dx=%d\tdy=%d\n", dx, dy+cur_h); */
 
 		srcoffset = (src->w)*(sy + cur_h) + sx;
-		srcpixels = src->pixels + srcoffset*bytes_num;
+		srcpixels = (char*)src->pixels + srcoffset*bytes_num;
 		dstoffset = (dst->w)*(dy + cur_h) + dx;
-		dstpixels = dst->pixels + dstoffset*bytes_num;
+		dstpixels = (char*)dst->pixels + dstoffset*bytes_num;
 		/* printf("soff:%d\tdoff:%d\n", srcoffset, dstoffset); */
 		for(int k = 0; k < w*bytes_num; k++){
-			dstpixels[k] = srcpixels[k];
+			(char*)dstpixels[k] = (char*)srcpixels[k];
 		}
 
 	}
