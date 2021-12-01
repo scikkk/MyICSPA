@@ -123,10 +123,10 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 		uint8_t *pixels_8 = s->pixels;
 		SDL_Color *colors = s->format->palette->colors; 
 		int ncolors = s->format->palette->ncolors;
-		for(int k = 0; k < ncolors; k++){
-			SDL_Color *curcolor = &colors[k];
-			printf("%p==%p\n", curcolor->val, curcolor->a<<24 | curcolor->r<<16 | curcolor->g<<8 | curcolor->b);
-		}
+		/* for(int k = 0; k < ncolors; k++){ */
+		/* 	SDL_Color *curcolor = &colors[k]; */
+		/* 	printf("%p==%p\n", curcolor->val, curcolor->a<<24 | curcolor->r<<16 | curcolor->g<<8 | curcolor->b); */
+		/* } */
 		int size = s->w*s->h;
 		pixels = (uint32_t*)malloc(size*4);
 		for(int k = 0; k < size; k++){
