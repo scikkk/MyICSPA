@@ -30,6 +30,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	else{
 	dx = dstrect->x;
 	dy = dstrect->y;
+	dstrect->w = w;
+	dstrect->h = h;
 	}
 	assert(dx >= 0 && dy >= 0);
 	assert(src->w && dst->w);
