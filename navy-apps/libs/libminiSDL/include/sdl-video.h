@@ -21,7 +21,7 @@ typedef struct {
 
 typedef union {
   struct {
-    uint8_t a, r, g, b;
+    uint8_t b,g,r,a;
   };
   uint32_t val;
 } SDL_Color;
