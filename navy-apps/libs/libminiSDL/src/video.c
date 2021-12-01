@@ -107,7 +107,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 
 
 	int bytes_num = s->format->BytesPerPixel; 
-	assert(bytes_num == 4 || bytes_num == 8);
+	assert(bytes_num == 1 || bytes_num == 8);
 	if (x == 0 && y == 0 && w == 0 && h == 0){
 		w = s->w; 
 		h = s->h;
