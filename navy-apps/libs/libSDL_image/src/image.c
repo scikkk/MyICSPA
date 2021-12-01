@@ -12,13 +12,13 @@ SDL_Surface* IMG_Load_RW(SDL_RWops *src, int freesrc) {
 }
 
 SDL_Surface* IMG_Load(const char *filename) {
-	FILE *fp = fopen(elf_file, "r");
+	FILE *fp = fopen(filename, "r");
 	assert(fp);
 	fseek(fp, 0, SEEK_END);
 	int file_size = ftell(fp);
 	char *buf = (char*)malloc(sizeof(char)*file_size);
 	fseek(fp, 0, SEEK_SET);
-	unsigned long buf_size = fread(buf, sizeof(char), file_size, elf_fp);
+	unsigned long buf_size = fread(buf, sizeof(char), file_size, fp);
 	assert(buf_size == file_size);
 	fclose(fp);
 	SDL_Surface *ret = STBIMG_LoadFromMemory(buf, file_size);
