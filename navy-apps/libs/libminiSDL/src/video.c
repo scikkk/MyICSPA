@@ -110,6 +110,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
 
 	int bytes_num = s->format->BytesPerPixel; 
+	printf("BytesPerPixel=%d\n", bytes_num);
 	assert(bytes_num == 1 || bytes_num == 4);
 	if (x == 0 && y == 0 && w == 0 && h == 0){
 		w = s->w; 
