@@ -124,7 +124,8 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 		SDL_Color *colors = s->format->palette->colors; 
 		int ncolors = s->format->palette->ncolors;
 		for(int k = 0; k < ncolors; k++){
-			printf("%p\n", colors[k]);
+			SDL_Color *curcolor = &colors[k];
+			printf("%p==%p\n", curcolor->val, curcolor->a<<24 | curcolor->r<<16 | curcolor->g<<8 | curcolor->b);
 		}
 		int size = s->w*s->h;
 		pixels = (uint32_t*)malloc(size*4);
