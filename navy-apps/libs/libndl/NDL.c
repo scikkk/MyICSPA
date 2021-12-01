@@ -72,10 +72,6 @@ void NDL_OpenCanvas(int *w, int *h) {
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
-	if (x == 0 && y == 0 && w == 0 && h == 0){
-		w = 336;
-		h = 208;
-	}
 	int offset = 0;
 	// wk center
 	x = (screen_w - w)/2;
