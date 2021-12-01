@@ -10,7 +10,6 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	assert(dst->format->BytesPerPixel == src->format->BytesPerPixel);
 
 	assert(dst->format->BytesPerPixel == 4);
-	assert(0);
 	int dx,dy;
 	int sx,sy,w,h;
 
