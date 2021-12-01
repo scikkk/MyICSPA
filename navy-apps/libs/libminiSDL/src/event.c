@@ -13,7 +13,7 @@ int SDL_PushEvent(SDL_Event *ev) {
 	return 0;
 }
 
-int SDL_PollEvent(SDL_Event *ev) {
+int SDL_PollEvent(SDL_Event *event) {
 	printf("\n\nevent.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
 
 		char buf[64];
