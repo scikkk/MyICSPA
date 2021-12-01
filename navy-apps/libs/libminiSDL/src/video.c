@@ -132,7 +132,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 		for(int k = 0; k < size; k++){
 			assert(pixels_8[k] < ncolors);
 
-			SDL_Color *curcolor = &colors[k];
+			SDL_Color *curcolor = &colors[pixels_8[k]];
 			pixels[k] = curcolor->a<<24 | curcolor->r<<16 | curcolor->g<<8 | curcolor->b;	
 			/* pixels[k] = colors[pixels_8[k]].val; */
 			/* printf("k=%d:dx=%p:color=%p\n", k, pixels_8[k], pixels[k]); */ 
