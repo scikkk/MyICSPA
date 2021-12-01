@@ -106,13 +106,27 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 
 
-	assert(s->format->BytesPerPixel == 4);
+	int bytes_num = s->format->BytesPerPixel; 
+	assert(bytes_num == 4 || bytes_num == 8);
 	if (x == 0 && y == 0 && w == 0 && h == 0){
-		w = s->w;
+		w = s->w; 
 		h = s->h;
 	}
-	NDL_DrawRect((uint32_t*)s->pixels, x, y, w, h);
+	uint32_t *pixels = NULL;
+	if (bytes_num == 4){
+	
+	pixels = (uint32_t*)s->pixels;
+	}
+	else{
+	uint8_t pixels_8 = s->pixels;
+	int size = s->w*s->h;
+	pixels = (uint32_t*)malloc(size*4);
+	for(int k = 0; k < size; k++){
+		pixels[k] = s->format->palette[s->pixels[k]].colors->val;
+	}
+	}
 
+	NDL_DrawRect(pixels, x, y, w, h);
 	/* printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
 }
 
