@@ -14,8 +14,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	if(srcrect == NULL){
 		sx = 0;
 		sy = 0;
-		w = dstrect->w;
-		h = dstrect->h;
+		w = dst->w;
+		h = dst->h;
 	}
 	else{
 		sx = srcrect->x;
