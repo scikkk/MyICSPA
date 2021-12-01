@@ -9,7 +9,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
 	assert(dst->format->BytesPerPixel == src->format->BytesPerPixel);
 	assert(dst->format->BitsPerPixel / dst->format->BytesPerPixel == 8);
-	
+	int bytes_num = src->format->BytesPerPixel;
+	printf("Bytes num:%d\n", bytes_num);
 	int dx,dy;
 	int sx,sy,w,h;
 
@@ -47,8 +48,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 		dstoffset = (dst->w)*(dy + cur_h) + dx;
 		dstpixels = (uint32_t*)(dst->pixels) + dstoffset;
 		/* printf("soff:%d\tdoff:%d\n", srcoffset, dstoffset); */
-		for(int k = 0; k < w; k++){
-			*((uint32_t*)dstpixels+k) = *((uint32_t*)srcpixels+k);
+		for(int k = 0; k < w*bytes_num; k++){
+			*(dstpixels+k) = *(srcpixels+k);
 		}
 
 	}
