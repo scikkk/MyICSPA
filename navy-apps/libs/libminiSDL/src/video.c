@@ -121,14 +121,16 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 	}
 	else{
 		uint8_t pixels_8 = s->pixels;
+		SDL_Color *colors = s->format->palette->colors; 
 		int size = s->w*s->h;
 		pixels = (uint32_t*)malloc(size*4);
 		for(int k = 0; k < size; k++){
-			pixels[k] = s->format->palette->colors[s->pixels[k]].val;
+			pixels[k] = colors[pixels_8[k]].val;
 		}
 	}
 
 	NDL_DrawRect(pixels, x, y, w, h);
+	free(pixels);
 	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
 }
 
