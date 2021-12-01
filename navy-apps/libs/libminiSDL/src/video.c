@@ -130,8 +130,8 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 			/* pixels[k] = colors[pixels_8[k]].val; */
 			/* pixels[k] = 0xff000000; */ 
 			/* pixels[k] = 0x00ff0000; */ 
-			/* pixels[k] = 0x0000ff00; */ 
-			pixels[k] = 0x000000ff; 
+			pixels[k] = 0x0000ff00; 
+			/* pixels[k] = 0x000000ff; */ 
 		}
 	}
 
