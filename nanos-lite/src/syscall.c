@@ -10,6 +10,15 @@
 #include "syscall.h"
 // wk
 
+int sys_execve(const char *pathname, char *const argv[], char *const envp[]);
+int sys_brk(int32_t addr);
+int sys_lseek(int fd, size_t offset, int whence);
+int sys_close(int fd) ;
+int sys_open(const char *path, int flags, int mode);
+int sys_read(int fd, void *buf, int len);
+void sys_exit(int code);
+int sys_yield();
+int sys_write(int fd, const void *buf, int count);
 
 int sys_yield(){
 	yield();
