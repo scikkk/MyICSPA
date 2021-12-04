@@ -38,9 +38,10 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	}
 	assert(dx >= 0 && dy >= 0);
 	assert(src->w && dst->w);
+	uint64_t 	srcoffset, dstoffset;
 	if (bytes_num == 4){
 		/* printf("w=%d\th=%d\tsw=%d\tsh=%d\tdw=%d\tdh=%d\n", w, h, src->w, src->h, dst->w, dst->h); */
-		uint32_t *srcpixels, *dstpixels, srcoffset, dstoffset;
+		uint32_t *srcpixels, *dstpixels;
 		for(int cur_h = 0; cur_h < h; cur_h++){
 			/* printf("sx=%d\tsy=%d\n", sx, sy+cur_h); */
 			/* printf("dx=%d\tdy=%d\n", dx, dy+cur_h); */
@@ -58,7 +59,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 	}
 	else{
 		/* printf("w=%d\th=%d\tsw=%d\tsh=%d\tdw=%d\tdh=%d\n", w, h, src->w, src->h, dst->w, dst->h); */
-		uint8_t *srcpixels, *dstpixels, srcoffset, dstoffset;
+		uint8_t *srcpixels, *dstpixels;
 		for(int cur_h = 0; cur_h < h; cur_h++){
 			/* printf("sx=%d\tsy=%d\n", sx, sy+cur_h); */
 			/* printf("dx=%d\tdy=%d\n", dx, dy+cur_h); */
@@ -106,7 +107,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 }
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
-	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
+	/* printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
 	int bytes_num = s->format->BytesPerPixel; 
 	assert(bytes_num == 1 || bytes_num == 4);
 	if (x == 0 && y == 0 && w == 0 && h == 0){
@@ -131,12 +132,9 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 			}
 		}
 	}
-	static int count = 0;
-	printf("%dx=%d\ty=%d\tw=%d\th=%d\tsize=%d\n", count++ ,x,y, w, h, w*h);
 	assert(begin == pixels-w*h);
 	NDL_DrawRect(begin, x, y, w, h);
 	free(begin);
-	while(count > 400);
 	/* printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
 }
 
