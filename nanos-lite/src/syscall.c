@@ -68,6 +68,13 @@ int sys_brk(int32_t addr){
 	return 0;
 }
 
+#include <proc.h>
+extern void naive_uload(PCB *pcb, const char *filename);
+int sys_execve(const char *pathname, char *const argv[], char *const envp[]){
+	naive_uload(NULL, pathname);
+	/* printf("pathname:%s\n", pathname); */
+	return -1;
+}
 struct timeval{
 	int32_t tv_sec;
 	int32_t tv_usec;
@@ -219,6 +226,10 @@ void do_syscall(Context *c) {
 			break;
 		case SYS_brk:
 			strace_ret = sys_brk(a[1]);
+			break;
+		case SYS_execve:
+
+			strace_ret = sys_execve((char*)a[1], (char*const*)a[2], (char*const*)a[3]);
 			break;
 		case SYS_gettimeofday:
 			strace_ret = sys_gettimeofday((struct timeval*)a[1], (void*)a[2]);
