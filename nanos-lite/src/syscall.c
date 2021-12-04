@@ -26,6 +26,8 @@ int sys_yield(){
 }
 
 void sys_exit(int code){
+
+    sys_execve("bin/nemu", NULL, NULL);
 	halt(code);
 }
 
