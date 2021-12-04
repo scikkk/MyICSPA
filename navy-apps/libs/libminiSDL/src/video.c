@@ -126,14 +126,17 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 			else{
 				SDL_Color *curcolor = &s->format->palette->colors[*pixels_8++];
 				uint32_t a=curcolor->a,r=curcolor->r,g=curcolor->g,b=curcolor->b;
-				*pixels++ =  a << 24 | r << 16 | g << 8| b;	
+				*pixels =  a << 24 | r << 16 | g << 8 | b;	
+				pixels += 1;
 			}
 		}
 	}
-	printf("x=%d\ty=%d\tw=%d\th=%d\tsize=%d\n",x,y, w, h, w*h);
+	static int count = 0;
+	printf("%dx=%d\ty=%d\tw=%d\th=%d\tsize=%d\n", count++ ,x,y, w, h, w*h);
 	assert(begin == pixels-w*h);
 	NDL_DrawRect(begin, x, y, w, h);
 	free(begin);
+	while(count > 400);
 	/* printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
 }
 
