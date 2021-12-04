@@ -27,7 +27,13 @@ static void sh_handle_cmd(const char *cmd) {
 		sh_printf("%s", &cmd[4]);
 	}
 	else {
-		execvp(cmd, NULL);	
+
+        char buf[256] = {};
+		char *p = buf;
+		while(*cmd) *p++ = *cmd++;
+		*p = '\0';
+		if(*(--p) == '\n') *p = '\0';
+		execvp(buf, NULL);	
 	}
 }
 
