@@ -107,7 +107,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 
-	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
+	/* printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
 
 	int bytes_num = s->format->BytesPerPixel; 
 	printf("BytesPerPixel=%d\n", bytes_num);
@@ -145,7 +145,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
 
 	NDL_DrawRect(pixels, x, y, w, h);
 	if(bytes_num == 1) free(pixels);
-	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
+	/* printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
 }
 
 // APIs below are already implemented.
