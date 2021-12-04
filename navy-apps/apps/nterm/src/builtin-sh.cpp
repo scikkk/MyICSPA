@@ -23,6 +23,12 @@ static void sh_prompt() {
 }
 
 static void sh_handle_cmd(const char *cmd) {
+	if(cmd[0] == '/'){
+		execve(cmd, NULL, NULL);	
+	}
+	if (cmd[0] == 'e' && cmd[1] == 'c' && cmd[2] == 'h' && cmd[3] == 'o'){
+		sh_printf("%s", &cmd[4]);
+	}
 }
 
 void builtin_sh_run() {
