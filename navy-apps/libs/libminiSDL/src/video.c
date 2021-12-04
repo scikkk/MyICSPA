@@ -106,37 +106,34 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 }
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
-
 	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
-
 	int bytes_num = s->format->BytesPerPixel; 
-	/* printf("BytesPerPixel=%d\n", bytes_num); */
 	assert(bytes_num == 1 || bytes_num == 4);
 	if (x == 0 && y == 0 && w == 0 && h == 0){
 		w = s->w; 
 		h = s->h;
 	}
-	uint32_t *pixels = NULL;
-	if (bytes_num == 4){
-
-		pixels = (uint32_t*)s->pixels;
-	}
-	else{
-		SDL_Color *colors = s->format->palette->colors; 
-		pixels = (uint32_t*)malloc(w*h*4);
-		for(int cur_y = y; cur_y < y + h; cur_y++){
-			int offset = (s->w*cur_y + x);
-			uint8_t *pixels_8 = s->pixels+offset;
-			for(int k = 0; k < w; k++){
-				SDL_Color *curcolor = &colors[*pixels_8++];
-				*pixels++ =  curcolor->a << 24 | curcolor->r << 16 | curcolor->g << 8| curcolor->b;	
+	uint32_t *pixels = (uint32_t*)malloc(w*h*4);
+	uint32_t *begin = pixels;
+	for(int cur_y = y; cur_y < y + h; cur_y++){
+		int offset = (s->w*cur_y + x)*bytes_num;
+		uint8_t *pixels_8 = s->pixels+offset;
+		for(int k = 0; k < w; k++){
+			if(bytes_num == 4){
+				*pixels++ = *(uint32_t*)pixels_8;
+				pixels_8 += 4;
+			}
+			else{
+				SDL_Color *curcolor = &s->format->palette->colors[*pixels_8++];
+				uint32_t a=curcolor->a,r=curcolor->r,g=curcolor->g,b=curcolor->b;
+				*pixels++ =  a << 24 | r << 16 | g << 8| b;	
 			}
 		}
-		printf("x=%d\ty=%d\tw=%d\th=%d\tsize=%d\n",x,y, w, s->h, w*h);
 	}
-
-	NDL_DrawRect(pixels, x, y, w, h);
-	if(bytes_num == 1) free(pixels-w*h);
+	printf("x=%d\ty=%d\tw=%d\th=%d\tsize=%d\n",x,y, w, h, w*h);
+	assert(begin == pixels-w*h);
+	NDL_DrawRect(begin, x, y, w, h);
+	free(begin);
 	/* printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
 }
 
