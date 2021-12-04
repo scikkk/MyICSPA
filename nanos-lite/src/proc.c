@@ -43,9 +43,9 @@ void init_proc() {
   // APP
   /* naive_uload(NULL, "/bin/nslider"); */
   /* naive_uload(NULL, "/bin/menu"); */
-  naive_uload(NULL, "/bin/nterm");
+  /* naive_uload(NULL, "/bin/nterm"); */
   /* naive_uload(NULL, "/bin/bird"); */
-  /* naive_uload(NULL, "/bin/pal"); */
+  naive_uload(NULL, "/bin/pal");
 
 }
 
