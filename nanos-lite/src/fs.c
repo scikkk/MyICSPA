@@ -64,7 +64,8 @@ size_t get_ramdisk_size();
 int fs_open(const char *pathname, int flags, int mode){
 	if(strcmp("/dev/events", pathname)&&strcmp("/dev/fb", pathname)) printf("fs.c:open %s\n", pathname);
 	int ret = -1;
-	while(ret < FILE_NUM && strcmp(file_table[++ret].name, pathname) != 0);
+	while(ret < FILE_NUM && strcmp(file_table[++ret].name, pathname) != 0)
+		if(strcmp("/dev/events", pathname)&&strcmp("/dev/fb", pathname)) printf("fs.c:open %s\n", file_table[ret].name);
 	file_table[ret].open_offset = 0;
 	if(ret >= FD_NORMAL){
 		file_table[ret].read = ramdisk_read;
