@@ -207,10 +207,10 @@ void do_syscall(Context *c) {
 	a[3] = c->GPR4;
 
 	int strace_ret = 0;
-	char sret[20]="ret";
+	/* char sret[20]="ret"; */
 	switch (a[0]) {
 		case SYS_exit:
-			strace(c, "void");
+			/* strace(c, "void"); */
 			/* printf("%d\t%d\t%d\t%d\n\n", a[0],a[1],a[2],a[3]); */
 			sys_exit(a[1]);
 			break;
@@ -249,7 +249,7 @@ void do_syscall(Context *c) {
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
 	/* printf("strace_ret=%d\n", strace_ret); */
-	sprintf(sret, "%d", strace_ret);
+	/* sprintf(sret, "%d", strace_ret); */
 	/* strace(c, sret); */
 	c->GPRx = strace_ret;
 	/* printf("GPRx:%d\n", c->GPRx); */
