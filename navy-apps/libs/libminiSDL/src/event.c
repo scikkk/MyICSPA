@@ -31,7 +31,6 @@ int SDL_PollEvent(SDL_Event *event) {
 		}
 
 		if(!strcmp(name, "0")){
-
 			event->key.keysym.sym = SDLK_0;
 		}
 		else if(!strcmp(name, "1")){
@@ -64,7 +63,6 @@ int SDL_PollEvent(SDL_Event *event) {
 		else if(!strcmp(name, "A")){
 			event->key.keysym.sym = SDLK_A; 
 		}
-
 		else if(!strcmp(name, "B")){
 			event->key.keysym.sym = SDLK_B; 
 		}
@@ -140,7 +138,6 @@ int SDL_PollEvent(SDL_Event *event) {
 		else if(!strcmp(name, "Z")){
 			event->key.keysym.sym = SDLK_Z; 
 		}
-
 		else if(!strcmp(name, "LEFTBRACKET")){
 			event->key.keysym.sym = SDLK_LEFTBRACKET; 
 		}
@@ -153,7 +150,6 @@ int SDL_PollEvent(SDL_Event *event) {
 		else if(!strcmp(name, "PERIOD")){
 			event->key.keysym.sym = SDLK_PERIOD; 
 		}
-
 		else if(!strcmp(name, "SEMICOLON")){
 			event->key.keysym.sym = SDLK_SEMICOLON; 
 		}
@@ -163,7 +159,6 @@ int SDL_PollEvent(SDL_Event *event) {
 		else if(!strcmp(name, "SPACE")){
 			event->key.keysym.sym = SDLK_SPACE; 
 		}
-
 		else if(!strcmp(name, "SLASH")){
 			event->key.keysym.sym = SDLK_SLASH; 
 		}
@@ -188,7 +183,6 @@ int SDL_PollEvent(SDL_Event *event) {
 		else if(!strcmp(name, "DELETE")){
 			event->key.keysym.sym = SDLK_DELETE; 
 		}
-
 		else if(!strcmp(name, "RETURN")){
 			event->key.keysym.sym = SDLK_RETURN; 
 		}
@@ -198,7 +192,6 @@ int SDL_PollEvent(SDL_Event *event) {
 		else if(!strcmp(name, "EQUALS")){
 			event->key.keysym.sym = SDLK_EQUALS; 
 		}
-
 		else if(!strcmp(name, "INSERT")){
 			event->key.keysym.sym = SDLK_INSERT; 
 		}
@@ -208,7 +201,6 @@ int SDL_PollEvent(SDL_Event *event) {
 		else if(!strcmp(name, "END")){
 			event->key.keysym.sym = SDLK_END; 
 		}
-
 		else if(!strcmp(name, "PAGEUP")){
 			event->key.keysym.sym = SDLK_PAGEUP; 
 		}
@@ -260,7 +252,6 @@ int SDL_PollEvent(SDL_Event *event) {
 		else if(!strcmp(name, "GRAVE")){
 			event->key.keysym.sym = SDLK_GRAVE; 
 		}
-
 		else if(!strcmp(name, "CAPSLOCK")){
 			event->key.keysym.sym = SDLK_CAPSLOCK; 
 		}
@@ -293,7 +284,7 @@ int SDL_PollEvent(SDL_Event *event) {
 		/* printf("%s\n", name); */
 		/* printf("%d\n", __LINE__); */
 
-		return 1;
+	 	return 1;
 	}
 	return 0;
 }
@@ -309,8 +300,15 @@ int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
 }
 
 uint8_t* SDL_GetKeyState(int *numkeys) {
-	printf("\n\nevent.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
-	while(1);
-	exit(-1);
+	/* printf("\n\nevent.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
+	static uint8_t keystate[82];
+	for(int k = 0; k < 82; k++) keystate[k] = 0;
+	SDL_Event ev;
+    while(SDL_PollEvent(&ev)){
+		if(ev.type == SDL_KEYDOWN){
+		keystate[ev.key.keysym.sym] = 1;
+		}
+	}
+	return keystate;
 	return NULL;
 }
