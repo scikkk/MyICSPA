@@ -27,7 +27,7 @@ int sys_yield(){
 
 void sys_exit(int code){
 
-    sys_execve("bin/nterm", NULL, NULL);
+    sys_execve("/bin/nterm", NULL, NULL);
 	halt(code);
 }
 
