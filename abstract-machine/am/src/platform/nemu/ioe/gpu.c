@@ -11,7 +11,7 @@ void __am_gpu_init() {
 	int w = W;  // TODO: get the correct width
 	int h = H;  // TODO: get the correct height
 	uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
-	for (i = 0; i < w * h; i ++) fb[i] = 0x00ffffff;
+	for (i = 0; i < w * h; i ++) fb[i] = 0x00f0f0f0;
 	outl(SYNC_ADDR, 1);
 }
 
