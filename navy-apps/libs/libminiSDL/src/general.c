@@ -21,11 +21,11 @@ int SDL_SetError(const char* fmt, ...) {
 }
 
 int SDL_ShowCursor(int toggle) {
-	printf("\n\ngeneral.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
+	/* printf("\n\ngeneral.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
 	return 0;
 }
 
 void SDL_WM_SetCaption(const char *title, const char *icon) {
 	printf("title=%s\nicon=%s\n", title, icon);
-	printf("\n\ngeneral.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
+	/* printf("\n\ngeneral.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
 }
