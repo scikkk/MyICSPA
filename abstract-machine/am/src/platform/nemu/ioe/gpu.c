@@ -14,7 +14,7 @@ void __am_gpu_init() {
 	for (i = 0; i < w * h; i += 2) 
 	{
 	fb[i] = 0x0000ff00;
-	fb[i+1] = 0x0000ff00;
+	fb[i+1] = 0x000000ff;
 	/* fb[i+2] = 0x000000ff; */
 	}
 	outl(SYNC_ADDR, 1);
