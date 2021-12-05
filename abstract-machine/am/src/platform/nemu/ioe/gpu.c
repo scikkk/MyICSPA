@@ -15,7 +15,7 @@ void __am_gpu_init() {
 	{
 	fb[i] = 0x00ff0000;
 	fb[i+1] = 0x0000ff00;
-	fb[i+2] = 0x000000ff;
+	/* fb[i+2] = 0x000000ff; */
 	}
 	outl(SYNC_ADDR, 1);
 }
