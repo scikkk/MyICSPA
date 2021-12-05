@@ -26,6 +26,6 @@ int SDL_ShowCursor(int toggle) {
 }
 
 void SDL_WM_SetCaption(const char *title, const char *icon) {
-	printf("SDL_WM_SetCaptiontitle:%16sicon=%s\n", title, icon);
+	printf("SDL_WM_SetCaptiontitle:%-16sicon=%s\n", title, icon);
 	/* printf("\n\ngeneral.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
 }
