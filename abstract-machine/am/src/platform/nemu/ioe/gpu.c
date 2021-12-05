@@ -13,7 +13,7 @@ void __am_gpu_init() {
 	uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
 	for (i = 0; i < w * h; i += 2) 
 	{
-	fb[i] = 0x00ff0000;
+	fb[i] = 0x0000ff00;
 	fb[i+1] = 0x0000ff00;
 	/* fb[i+2] = 0x000000ff; */
 	}
