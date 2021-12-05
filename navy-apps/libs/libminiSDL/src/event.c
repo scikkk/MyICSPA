@@ -1,5 +1,7 @@
 #include <NDL.h>
 #include <SDL.h>
+#include <string.h>
+#include <assert.h>
 
 #define keyname(k) #k,
 
@@ -7,6 +9,9 @@ static const char *keyname[] = {
 	"NONE",
 	_KEYS(keyname)
 };
+static uint8_t keystate[82];
+
+static char key_buf[65535];
 
 int SDL_PushEvent(SDL_Event *ev) {
 	printf("\n\nevent.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
@@ -157,6 +162,8 @@ int SDL_PollEvent(SDL_Event *event) {
 			event->key.keysym.sym = SDLK_APOSTROPHE; 
 		}
 		else if(!strcmp(name, "SPACE")){
+
+			/* printf("SPACE\n"); */
 			event->key.keysym.sym = SDLK_SPACE; 
 		}
 		else if(!strcmp(name, "SLASH")){
@@ -184,6 +191,8 @@ int SDL_PollEvent(SDL_Event *event) {
 			event->key.keysym.sym = SDLK_DELETE; 
 		}
 		else if(!strcmp(name, "RETURN")){
+
+			/* printf("ENTER\n"); */
 			event->key.keysym.sym = SDLK_RETURN; 
 		}
 		else if(!strcmp(name, "MINUS")){
@@ -280,11 +289,15 @@ int SDL_PollEvent(SDL_Event *event) {
 			printf("\n\n!!!!!!!!!Error:event.c:%d\n\n", __LINE__);
 			return 0;
 		}
-		/* printf("%s\n", type); */
-		/* printf("%s\n", name); */
-		/* printf("%d\n", __LINE__); */
-
-	 	return 1;
+		printf("%s\n", type);
+		printf("%s\n", name);
+		printf("%d\n", __LINE__);
+		switch(event->type){
+			case SDL_KEYDOWN: keystate[event->key.keysym.sym] = 1; break;
+			case SDL_KEYUP: keystate[event->key.keysym.sym] = 0; break;
+			default: printf("Shouldn't reach here!\n"); assert(0);
+		}
+		return 1;
 	}
 	return 0;
 }
@@ -301,14 +314,7 @@ int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
 
 uint8_t* SDL_GetKeyState(int *numkeys) {
 	/* printf("\n\nevent.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
-	static uint8_t keystate[82];
-	for(int k = 0; k < 82; k++) keystate[k] = 0;
-	SDL_Event ev;
-    while(SDL_PollEvent(&ev)){
-		if(ev.type == SDL_KEYDOWN){
-		keystate[ev.key.keysym.sym] = 1;
-		}
-	}
+	if(numkeys != NULL) *numkeys = 82;
 	return keystate;
 	return NULL;
 }

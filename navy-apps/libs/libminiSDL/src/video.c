@@ -79,7 +79,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 	int bytes_num = dst->format->BytesPerPixel; 
-	assert(bytes_num == 4);
+	assert(bytes_num == 4 || bytes_num == 1);
 	int x,y,w,h,offset=0;
 	if(dstrect == NULL){
 		x = 0;
@@ -94,16 +94,20 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 		h = dstrect->h;
 	}
 	/* printf("x=%d; y=%d\n", x, y); */
-	assert(dst->format->BitsPerPixel == 32);
 	for(int cur_y = y; cur_y < y + h; cur_y++){
-		offset = w*cur_y + x;
-		/* printf("x=%d; y=%d\n", x, cur_y); */
-		uint32_t *pixels = (uint32_t*)(dst->pixels) + offset;
+		int offset = (dst->w*cur_y + x)*bytes_num;
+		uint8_t *pixels_8 = dst->pixels+offset;
 		for(int k = 0; k < w; k++){
-			*((uint32_t*)pixels+k) = color;
-		} 
+			if(bytes_num == 4){
+				*(uint32_t*)pixels_8 = color;
+				pixels_8 += 4;
+			}
+			else{
+				*pixels_8++ = color&0xff;
+			}
+		}
 	}
-	printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__);
+	/* printf("\n\nvideo.c: %d: TODO!!!!!!!!!!!!!!!!!!!\n\n", __LINE__); */
 }
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
