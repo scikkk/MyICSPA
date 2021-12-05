@@ -162,8 +162,6 @@ int SDL_PollEvent(SDL_Event *event) {
 			event->key.keysym.sym = SDLK_APOSTROPHE; 
 		}
 		else if(!strcmp(name, "SPACE")){
-
-			/* printf("SPACE\n"); */
 			event->key.keysym.sym = SDLK_SPACE; 
 		}
 		else if(!strcmp(name, "SLASH")){
@@ -191,8 +189,6 @@ int SDL_PollEvent(SDL_Event *event) {
 			event->key.keysym.sym = SDLK_DELETE; 
 		}
 		else if(!strcmp(name, "RETURN")){
-
-			/* printf("ENTER\n"); */
 			event->key.keysym.sym = SDLK_RETURN; 
 		}
 		else if(!strcmp(name, "MINUS")){
@@ -289,9 +285,9 @@ int SDL_PollEvent(SDL_Event *event) {
 			printf("\n\n!!!!!!!!!Error:event.c:%d\n\n", __LINE__);
 			return 0;
 		}
-		printf("%s\n", type);
-		printf("%s\n", name);
-		printf("%d\n", __LINE__);
+		/* printf("%s\n", type); */
+		/* printf("%s\n", name); */
+		/* printf("%d\n", __LINE__); */
 		switch(event->type){
 			case SDL_KEYDOWN: keystate[event->key.keysym.sym] = 1; break;
 			case SDL_KEYUP: keystate[event->key.keysym.sym] = 0; break;
