@@ -163,7 +163,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			}
 		}
 
-		/* assert(*out == '\0'); */
+		assert(*out == '\0');
 	}
 	assert(*out == '\0');
 	return ret;
