@@ -55,7 +55,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
 
 	return ctx;
 	// wk 4.1
-	return NULL;
+	/* return NULL; */
 }
 
 void yield() {
