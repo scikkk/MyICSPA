@@ -52,6 +52,10 @@ __am_asm_trap:
   move $a0, $sp
   jal __am_irq_handle
 
+  # wk 4.1
+  move $a0, $sp
+  # wk 4.1
+
   lw $t0, OFFSET_LO($sp)
   lw $t1, OFFSET_HI($sp)
   lw $t3, OFFSET_STATUS($sp)

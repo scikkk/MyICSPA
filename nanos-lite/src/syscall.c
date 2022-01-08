@@ -20,7 +20,11 @@ void sys_exit(int code);
 int sys_yield();
 int sys_write(int fd, const void *buf, int count);
 
+Context* schedule(Context *prev) ;
 int sys_yield(){
+	// wk 4.1
+	return (int)schedule(NULL);
+	// wk 4.1
 	yield();
 	return 0;
 }
