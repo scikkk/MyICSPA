@@ -24,22 +24,18 @@ extern Context* context_kload(PCB *pcb, void (*entry)(void *), void *arg);
 extern Context* context_uload(PCB *pcb, const char *filename);
 void init_proc() {
 	// wk 4.1
-	context_kload(&pcb[0], hello_fun, (void*)0x99);
-	context_kload(&pcb[1], hello_fun, (void*)0x66);
-	/* context_uload(&pcb[1], "/bin/pal"); */
+	/* context_kload(&pcb[0], hello_fun, (void*)0x99); */
+	/* context_kload(&pcb[1], hello_fun, (void*)0x66); */
+	context_uload(&pcb[1], "/bin/pal");
 	// wk 4.1
-
-
 	switch_boot_pcb();
 
 	Log("Initializing processes...");
 
 	// load program here
-
 	// TEST
 	/* naive_uload(NULL, "/bin/exec-test"); */
 	/* naive_uload(NULL, "/bin/cpp-test"); */
-
 	// PASSED!
 	/* naive_uload(NULL, "/bin/bmp-test"); */
 	naive_uload(NULL, "/bin/dummy");
@@ -47,14 +43,12 @@ void init_proc() {
 	/* naive_uload(NULL, "/bin/file-test"); */
 	/* naive_uload(NULL, "/bin/hello"); */
 	/* naive_uload(NULL, "/bin/timer-test"); */
-
 	// APP
 	/* naive_uload(NULL, "/bin/nslider"); */
 	/* naive_uload(NULL, "/bin/menu"); */
 	/* naive_uload(NULL, "/bin/nterm"); */
 	/* naive_uload(NULL, "/bin/bird"); */
 	/* naive_uload(NULL, "/bin/pal"); */
-
 }
 
 Context* schedule(Context *prev) {
