@@ -61,7 +61,7 @@ __am_asm_trap:
   # wk pc+4
   addi t2, t2, 4	
   ; csrw mepc, t2
-  csrw mepc, a0
+  csrw mepc, sp
   addi t2, t2, -4	
   # wk pc+4
 
