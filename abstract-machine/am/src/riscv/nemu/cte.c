@@ -50,6 +50,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
 	Context *ctx =  (Context*)kstack.end - 1;;
 	*ctx = (Context) { 0 };
 	ctx->mepc = (uintptr_t)entry;
+	printf("kcontex!!!\n");
 	/* ctx->GPR1 = (uintptr_t)arg; */
 	/* ctx->GPR2 = (uintptr_t)entry; */
 
