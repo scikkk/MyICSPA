@@ -70,5 +70,5 @@ Context* schedule(Context *prev) {
 	// then return the new context
 	return current->cp;
 	// wk 4.1
-	return NULL;
+	/* return NULL; */
 }
