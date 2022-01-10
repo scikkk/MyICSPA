@@ -71,6 +71,7 @@ Context* schedule(Context *prev) {
 	current = &pcb[0];
 	// then return the new context
 	printf("cur-cp=%p\n", current->cp);
+	printf("mepc=%p\n", (current->cp)->mepc);
 	return current->cp;
 	// wk 4.1
 	/* return NULL; */
