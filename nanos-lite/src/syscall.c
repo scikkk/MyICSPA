@@ -257,5 +257,6 @@ void do_syscall(Context *c) {
 	/* sprintf(sret, "%d", strace_ret); */
 	/* strace(c, sret); */
 	c->GPRx = strace_ret;
+	printf("GPRx->cp->mepc=%p\n", ((PCB*)c->GPRx)->cp->mepc);
 	/* printf("GPRx:%d\n", c->GPRx); */
 }
