@@ -27,7 +27,7 @@ Context* __am_irq_handle(Context *c) {
 			default: ev.event = EVENT_YIELD;
 		}
 		c = user_handler(ev, c);
-		/* printf("__am_irq_handle->mepc=%p\n", c->mepc); */
+		printf("__am_irq_handle=%p\n", c);
 		assert(c != NULL);
 		/* assert(0); */
 	}
