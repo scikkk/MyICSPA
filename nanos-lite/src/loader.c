@@ -91,7 +91,7 @@ Context* context_kload(PCB *pcb, void (*entry)(void *), void *arg){
 
 // wk 4.1
 Context* context_uload(PCB *pcb, const char *filename){
-	Area kstack = {heap.end, (void*)heap.end+sizeof(PCB)};
+	Area kstack = {&pcb[0], (void*)pcb+sizeof(PCB)};
     uintptr_t entry = loader(pcb, filename);
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
 	printf("ucontext-ret=%p\n", pcb->cp);
