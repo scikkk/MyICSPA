@@ -97,6 +97,7 @@ Context* context_uload(PCB *pcb, const char *filename){
 	/* printf("ucontext-ret=%p\n", pcb->cp); */
 	pcb->cp->GPRx = (unsigned)heap.end;
 	pcb->cp->GPRx = 0x12345678;
+	printf("heap-end=%p\n", heap.end);
 	return pcb->cp;
 }
 // wk 4.1
