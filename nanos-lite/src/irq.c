@@ -9,7 +9,7 @@ static Context* do_event(Event e, Context* c) {
 			break;
 		case EVENT_YIELD: 
 			Log("EVENT_YIELD!!!\n");
-			return schedule(NULL);
+			return schedule(c);
 			break;
 		case EVENT_SYSCALL: 
 			/* Log("\nUnhandled EVENT_SYSCALL!\n"); */
