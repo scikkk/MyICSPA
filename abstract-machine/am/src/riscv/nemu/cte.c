@@ -20,6 +20,7 @@ Context* __am_irq_handle(Context *c) {
 		/* } */
 		/* printf("x0:%d\n",c->gpr[0]); */
 		/* printf("mstatus:%d\nmepc:%d\nmcause:%d\n", c->mstatus,c->mepc,c->mcause); */
+		printf("__am_irq_handle=%p\n", c);
 		switch(c->GPR1){
 			case 0:case 1:case 2:case 3: case 4:case 5: case 6:case 7:
 			case 8:case 9:case 10:case 11:case 12: case 13:case 14: case 15: case 16: case 17:
@@ -27,7 +28,6 @@ Context* __am_irq_handle(Context *c) {
 			default: ev.event = EVENT_YIELD;
 		}
 		c = user_handler(ev, c);
-		/* printf("__am_irq_handle=%p\n", c); */
 		assert(c != NULL);
 		/* assert(0); */
 	}
