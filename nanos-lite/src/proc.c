@@ -31,8 +31,8 @@ Context* context_kload(PCB *pcb, void (*entry)(void *), void *arg){
 extern void naive_uload(PCB *pcb, const char *filename);
 void init_proc() {
 	// wk 4.1
-	context_kload(&pcb[0], hello_fun, NULL);
-	context_kload(&pcb[1], hello_fun, "wk");
+	context_kload(&pcb[0], hello_fun, (void*)0x99);
+	context_kload(&pcb[1], hello_fun, (void*)0x66);
 	// wk 4.1
 
 
