@@ -69,6 +69,7 @@ Context* schedule(Context *prev) {
 	// always select pcb[0] as the new process
 	current = &pcb[0];
 	// then return the new context
+	printf("cur-cp=%p\n", current->cp);
 	return current->cp;
 	// wk 4.1
 	/* return NULL; */
