@@ -54,18 +54,18 @@ void init_proc() {
 Context* schedule(Context *prev) {
 	// wk 4.1
 	// save the context pointer
-	printf("prev=%p\n", prev);
+	/* printf("prev=%p\n", prev); */
 	current->cp = prev;
 	// always select pcb[0] as the new process
 	current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
 	// then return the new context
-	printf("cur-cp=%p\n", current->cp);
+	/* printf("cur-cp=%p\n", current->cp); */
 
-	printf("pcb0->cp=%p\n", pcb[0].cp);
-	printf("pcb1->cp=%p\n", pcb[1].cp);
+	/* printf("pcb0->cp=%p\n", pcb[0].cp); */
+	/* printf("pcb1->cp=%p\n", pcb[1].cp); */
 
-	printf("mepc=%p\n", (current->cp)->mepc);
-	printf("gpr1=%p\n", (current->cp)->GPR1);
+	/* printf("mepc=%p\n", (current->cp)->mepc); */
+	/* printf("gpr1=%p\n", (current->cp)->GPR1); */
 	return current->cp;
 	// wk 4.1
 	/* return NULL; */
