@@ -26,6 +26,7 @@ void init_proc() {
 	// wk 4.1
 	context_kload(&pcb[0], hello_fun, (void*)0x99);
 	/* context_kload(&pcb[1], hello_fun, (void*)0x66); */
+	context_uload(&pcb[0], "/bin/hello");
 	context_uload(&pcb[1], "/bin/pal");
 	// wk 4.1
 	switch_boot_pcb();
