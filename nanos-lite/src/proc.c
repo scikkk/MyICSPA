@@ -73,6 +73,7 @@ Context* schedule(Context *prev) {
 	// then return the new context
 	printf("cur-cp=%p\n", current->cp);
 	printf("mepc=%p\n", (current->cp)->mepc);
+	printf("gpr1=%p\n", (current->cp)->GPR1);
 	return current->cp;
 	// wk 4.1
 	/* return NULL; */
