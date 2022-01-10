@@ -26,8 +26,8 @@ int sys_yield(){
 	printf("YIELD!!!\n");
 	return (int)schedule(NULL);
 	// wk 4.1
-	yield();
-	return 0;
+	/* yield(); */
+	/* return 0; */
 }
 
 void sys_exit(int code){
@@ -220,6 +220,7 @@ void do_syscall(Context *c) {
 			break;
 		case SYS_yield:
 			strace_ret = sys_yield();
+			printf("yield=%p\n", strace_ret);
 			break;
 		case SYS_open:
 			strace_ret = sys_open((char*)a[1], a[2], a[3]);
