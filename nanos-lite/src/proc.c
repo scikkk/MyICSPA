@@ -32,6 +32,7 @@ extern void naive_uload(PCB *pcb, const char *filename);
 void init_proc() {
 	// wk 4.1
 	context_kload(&pcb[0], hello_fun, NULL);
+	context_kload(&pcb[1], hello_fun, "wk");
 	// wk 4.1
 
 
@@ -68,7 +69,7 @@ Context* schedule(Context *prev) {
 	printf("prev=%p\n", prev);
 	current->cp = prev;
 	// always select pcb[0] as the new process
-	current = &pcb[0];
+	current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
 	// then return the new context
 	printf("cur-cp=%p\n", current->cp);
 	printf("mepc=%p\n", (current->cp)->mepc);
