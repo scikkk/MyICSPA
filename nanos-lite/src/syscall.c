@@ -23,11 +23,11 @@ int sys_write(int fd, const void *buf, int count);
 Context* schedule(Context *prev) ;
 int sys_yield(){
 	// wk 4.1
-	printf("YIELD!!!\n");
-	return (int)schedule(NULL);
+	/* printf("YIELD!!!\n"); */
+	/* return (int)schedule(NULL); */
 	// wk 4.1
-	/* yield(); */
-	/* return 0; */
+	yield();
+	return 0;
 }
 
 void sys_exit(int code){
