@@ -83,7 +83,7 @@ void naive_uload(PCB *pcb, const char *filename) {
 Context* context_kload(PCB *pcb, void (*entry)(void *), void *arg){
 	Area kstack = {pcb, pcb+1};
 	pcb->cp = kcontext(kstack, entry, arg);
-	printf("kcontext-ret=%p\n", pcb->cp);
+	/* printf("kcontext-ret=%p\n", pcb->cp); */
 	return pcb->cp;
 }
 // wk 4.1
@@ -94,7 +94,7 @@ Context* context_uload(PCB *pcb, const char *filename){
 	Area kstack = {pcb, pcb+1};
     uintptr_t entry = loader(pcb, filename);
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
-	printf("ucontext-ret=%p\n", pcb->cp);
+	/* printf("ucontext-ret=%p\n", pcb->cp); */
 	pcb->cp->GPRx = (unsigned)heap.end;
 	return pcb->cp;
 }
