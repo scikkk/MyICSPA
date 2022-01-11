@@ -12,9 +12,7 @@ void call_main(uintptr_t *args) {
 	int argc = *((int*)args);
 	char **argv = (char**)((uintptr_t)args+sizeof(int));
 	char **envp = (char**)(argv + argc + 1);
-	
-	
-		printf("ctr0=%p\n", envp);
+	printf("ctr0=%p\n", envp);
 	if(!envp){
 		printf("ctr0=%p\n", envp[0]);
 		if(envp[0]) printf("ctro0=%s\n", envp[0]);
