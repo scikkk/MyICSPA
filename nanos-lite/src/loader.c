@@ -65,7 +65,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			fs_lseek(fd, ph.p_offset, SEEK_SET);
 			fs_read(fd, (void*)ph.p_vaddr, ph.p_filesz);
 			if(ph.p_memsz > ph.p_filesz){
-
 				memset((void*)(ph.p_vaddr+ph.p_filesz), 0, ph.p_memsz-ph.p_filesz);
 			}
 		} 
@@ -95,8 +94,28 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
     uintptr_t entry = loader(pcb, filename);
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
 	/* printf("ucontext-ret=%p\n", pcb->cp); */
-	pcb->cp->GPRx = (unsigned)heap.end;
+	pcb->cp->GPRx = (uint32_t)heap.end;
 	/* pcb->cp->GPRx = 0x12345678; */
 	/* printf("heap-end=%p\n", heap.end); */
+	int argc = 0, envpc = 0;
+	while(argv[++argc]);
+	while(envp[++envpc]);
+	memcpy(heap.end, &argc, sizeof(argc));
+	uintptr_t argv_start = (uintptr_t)heap.end + 4;
+	/* uintptr_t envp_start = heap.end + 4 + 4*argc + 4; */
+	uintptr_t envp_end = argv_start + 4*argc + 4 + 4*envpc + 4;
+	uintptr_t string_end = envp_end;
+	for(int k = 0; k <= argc; k++){
+		int len = strlen(argv[k]) + 1;
+		*((uintptr_t*)argv_start + 4*k) = string_end;
+		memcpy((void*)string_end, argv[k], len);
+		string_end += len;
+	}
+	for(int k = 0; k <= envpc; k++){
+		int len = strlen(envp[k]) + 1;
+		*((uintptr_t*)argv_start + 4*k) = string_end;
+		memcpy((void*)string_end, envp[k], len);
+		string_end += len;
+	}
 }
 // wk 4.1
