@@ -96,7 +96,6 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	/* printf("ucontext-ret=%p\n", pcb->cp); */
 	pcb->cp->GPRx = (uint32_t)heap.end - 0x10000;
 	/* pcb->cp->GPRx = 0x12345678; */
-	printf("heap-end=%p\n", heap.end);
 	int argc = 0, envpc = 0;
 	while(argv && argv[++argc]);
 	while(envp && envp[++envpc]);
@@ -110,13 +109,11 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 		int len = strlen(argv[k]) + 1;
 		*((uintptr_t*)argv_start + 4*k) = string_end;
 		memcpy((void*)string_end, argv[k], len);
-		printf("string=%s\n", (char*)string_end);
-		printf("string=%p\n", (void*)string_end);
+		/* printf("string=%s\n", (char*)string_end); */
+		/* printf("string=%p\n", (void*)string_end); */
 		string_end += len;
 	}
-	printf("x87ff0010=%s\n", (char*)0x87ff0010);
 	memset((void*)argv_start + 4*argc, 0, 4);
-	printf("x87ff0010=%s\n", (char*)0x87ff0010);
 	for(int k = 0; k < envpc; k++){
 		int len = strlen(envp[k]) + 1;
 		*((uintptr_t*)argv_start + 4*k) = string_end;
@@ -124,9 +121,5 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 		string_end += len;
 	}
 	memset((void*)envp_start + 4*envpc, 0, 4);
-	printf("\nend of context_uload\n");
-	printf("argc=%d\tenvpc=%d\n", argc, envpc);
-	printf("x87ff0010=%s\n", (char*)0x87ff0010);
-	printf("argv[0]=%p\n", argv[0]);
 }
 // wk 4.1
