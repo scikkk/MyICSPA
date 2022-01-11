@@ -24,6 +24,7 @@ void call_main(uintptr_t *args) {
 			printf("%s\n", envp[k]);
 		}
 	}
+	printf("callmain\n");
 	/* if(*argv==NULL) argv = NULL; */
 	/* if(*envp==NULL) envp = NULL; */
 	environ = envp;
