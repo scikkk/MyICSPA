@@ -92,7 +92,7 @@ int sys_execve(const char *pathname, char *const argv[], char *const envp[]){
 		return -2;
 	}
 	printf("sys: argv=%p\tenvp[0]=%s\n", argv, envp[0]);
-	printf("sys: argv[0]=%p\tenvp[1]=%p\n", argv[0], envp[1]);
+	printf("sys: argv[0]=%p\tenvp[0]=%p\n", argv[0], envp[0]);
     context_uload(current, pathname, argv, envp);
 	switch_boot_pcb();
 	yield();
