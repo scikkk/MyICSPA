@@ -92,7 +92,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	Area kstack = {pcb, pcb+1};
     uintptr_t entry = loader(pcb, filename);
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
-	/* printf("ucontext-ret=%p\n", pcb->cp); */
+	printf("ucontext-ret=%p\n", pcb->cp);
 	/* pcb->cp->GPRx = (uint32_t)heap.end - 0x10000; */
 	pcb->cp->GPRx = (uintptr_t)new_page(8);
 	int argc = 0, envpc = 0;
