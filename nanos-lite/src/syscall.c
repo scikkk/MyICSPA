@@ -88,12 +88,12 @@ extern void context_uload(PCB *pcb, const char *filename, char *const argv[], ch
 extern void switch_boot_pcb();
 int sys_execve(const char *pathname, char *const argv[], char *const envp[]){
 	/* naive_uload(NULL, pathname); */
-	printf("current=%p\n", current);
+	printf("1current=%p\n", current);
     context_uload(current, pathname, argv, envp);
 	switch_boot_pcb();
+	printf("2current=%p\n", current);
 	yield();
-
-	printf("current=%p\n", current);
+	printf("3current=%p\n", current);
 	/* printf("pathname:%s\n", pathname); */
 	return -1;
 }
