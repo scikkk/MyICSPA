@@ -90,10 +90,11 @@ int sys_execve(const char *pathname, char *const argv[], char *const envp[]){
 	/* naive_uload(NULL, pathname); */
 	printf("1current=%p\n", current);
     context_uload(current, pathname, argv, envp);
-	switch_boot_pcb();
 	printf("2current=%p\n", current);
-	yield();
+	switch_boot_pcb();
 	printf("3current=%p\n", current);
+	yield();
+	printf("4current=%p\n", current);
 	/* printf("pathname:%s\n", pathname); */
 	return -1;
 }
