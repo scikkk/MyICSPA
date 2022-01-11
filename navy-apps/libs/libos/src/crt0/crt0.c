@@ -14,7 +14,10 @@ void call_main(uintptr_t *args) {
 	char **argv = (char**)(args+4);
 	char **envp = (char**)(args + 4 + argc*4 + 4);
 	environ =  envp;
+	// wk
 	printf("call_main %s\n", argv[0]);
+	assert(0);
+	// wk
 	exit(main(argc, argv,  envp));
 	assert(0);
 }
