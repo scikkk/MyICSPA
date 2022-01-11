@@ -123,7 +123,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 		memcpy((void*)string_end, envp[k], len);
 		string_end += len;
 	}
-	memset((void*)envp_start + 4*argc, 0, 4);
+	memset((void*)envp_start + 4*envpc, 0, 4);
 	printf("\nend of context_uload\n");
 	printf("argc=%d\tenvpc=%d\n", argc, envpc);
 	printf("x87ff0010=%s\n", (char*)0x87ff0010);
