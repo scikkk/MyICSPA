@@ -25,14 +25,18 @@ static void sh_prompt() {
 }
 
 static void sh_handle_cmd(const char *cmd) {
-	char *cur = (char*)cmd;
-	cur = strtok(cur, "\n");
+	char buf[255];
+	for(int k = 0; cmd[k] != '\n'; k++) {
+		buf[k] = cmd[k];
+		buf[k+1] = '\0';
+	}
+	char *cur = strtok(buf, "\n");
 	char *order;
 	char *argv[20];
 	int argc = 0;
-	order = strtok(cur, " ");
+	order = strtok(buf, " ");
 	while(cur){
-		argv[argc] = strtok(cur, " ");
+		argv[argc] = strtok(buf, " ");
 		argv[++argc] = NULL;
 	}
 	if (strcmp("echo", order) == 0){
