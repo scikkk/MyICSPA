@@ -24,19 +24,20 @@ extern void context_kload(PCB *pcb, void (*entry)(void *), void *arg);
 extern void context_uload(PCB *pcb, const char *filename, char *const argv[], char *const envp[]);
 void init_proc() {
 	// wk 4.1
-	context_kload(&pcb[0], hello_fun, (void*)0x99);
+	/* context_kload(&pcb[0], hello_fun, (void*)0x99); */
 	/* context_kload(&pcb[1], hello_fun, (void*)0x66); */
 	/* context_uload(&pcb[0], "/bin/hello"); */
 	/* char *argv[] = {"--skip", NULL}; */
 	/* context_uload(&pcb[1], "/bin/pal", argv, NULL); */
 	// wk 4.1
+	context_uload(&pcb[0], "/bin/exec-test", NULL, NULL);
 	switch_boot_pcb();
 
 	Log("Initializing processes...");
 
 	// load program here
 	// TEST
-	naive_uload(NULL, "/bin/exec-test");
+	/* naive_uload(NULL, "/bin/exec-test"); */
 	/* naive_uload(NULL, "/bin/cpp-test"); */
 	// PASSED!
 	/* naive_uload(NULL, "/bin/bmp-test"); */
