@@ -44,10 +44,11 @@ static void sh_handle_cmd(const char *cmd) {
 			argv[++argc] = NULL;	
 		}
 	}
-	if (strcmp("echo", order) == 0){
-		sh_printf("%s", &cmd[4]);
-	}
-	else if(strcmp("exit", order) == 0){
+	/* if (strcmp("echo", order) == 0){ */
+	/* 	sh_printf("%s", &cmd[4]); */
+	/* } */
+	/* else */
+	if(strcmp("exit", order) == 0){
 		_exit(0);
 	}
 	else {
