@@ -11,11 +11,11 @@ extern char **environ;
 void call_main(uintptr_t *args) {
 	printf("args=%p\n", args);
 	int argc = *((int*)args);
-	char **argv = (char**)((char*)args+4);
-	char **envp = (char**)((char*)args + 4 + argc*4 + 4);
+	char **argv = (char**)((uintptr_t)args+sizeof(int));
+	char **envp = (char**)(argv + argc + 1);
 	environ =  envp;
 	// wk
-	printf("call_main %s\n", argv[0]);
+	printf("call_main=%s\n", argv[0]);
 	assert(0);
 	// wk
 	exit(main(argc, argv,  envp));
