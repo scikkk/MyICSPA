@@ -121,5 +121,6 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	}
 	memset((void*)envp_start + 4*argc, 0, 4);
 	printf("\nend of context_uload\n");
+	printf("argc=%d\tenvpc=%d\n", argc, envpc);
 }
 // wk 4.1
