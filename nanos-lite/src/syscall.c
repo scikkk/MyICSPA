@@ -94,11 +94,9 @@ int sys_execve(const char *pathname, char *const argv[], char *const envp[]){
 	printf("sys: argv=%p\tenvp=%p\n", argv, envp);
 	printf("sys: argv[0]=%p\tenvp[0]=%p\n", argv[0], envp[0]);
     context_uload(current, pathname, argv, envp);
-	printf("pathname:%s\n", pathname);
+	/* printf("pathname:%s\n", pathname); */
 	switch_boot_pcb();
-	printf("endswitch:%s\n", pathname);
 	yield();
-	printf("pathname:%s\n", pathname);
 	return 0;
 }
 struct timeval{
