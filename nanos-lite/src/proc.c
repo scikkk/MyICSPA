@@ -35,8 +35,9 @@ void init_proc() {
 	
 	/* context_uload(&pcb[1], "/bin/menu", NULL, NULL); */
 
-	/* char *envp[] = {"USER=WK", NULL}; */
-	context_uload(&pcb[1], "/bin/nterm", NULL, NULL);
+	char *argv[] = {"WK", "SCS", NULL};
+	char *envp[] = {"USER=WK", NULL};
+	context_uload(&pcb[1], "/bin/nterm", argv, envp);
 
 	switch_boot_pcb();
 	// wk 4.1
