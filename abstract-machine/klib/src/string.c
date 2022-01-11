@@ -70,7 +70,7 @@ int strcmp(const char *s1, const char *s2) {
 		// printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, -1);
 		return -1;
 	}
-	printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, 0);
+	// printf("strcmp: s1: %s; s2: %s; out: %d\n", *s1, *s2, 0);
 	return 0;
 }
 
