@@ -128,7 +128,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	memset((uintptr_t*)argv_start + argc, 0, 4);
 	for(int k = 0; k < envpc; k++){
 		int len = strlen(envp[k]) + 1;
-		*((uintptr_t*)argv_start + k) = string_end;
+		*((uintptr_t*)envp_start + k) = string_end;
 		memcpy((void*)string_end, envp[k], len);
 		printf("envp[%d]=%s\n", k, (char*)string_end);
 		printf("string=%p\n", (void*)string_end);
