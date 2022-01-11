@@ -118,7 +118,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	uintptr_t envp_start = argv_start + 4*argc + 4;
 	uintptr_t envp_end = argv_start + 4*argc + 4 + 4*envpc + 4;
 	uintptr_t string_end = ((envp_end>>2)+1)<<2;
-	/* printf("argc=%d\n", argc); */
+	printf("argc=%d\n", argc);
 	for(int k = 0; k < argc; k++){
 		int len = strlen(argv[k]) + 1;
 		*((uintptr_t*)argv_start + k) = string_end;
@@ -128,7 +128,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 		string_end += len;
 	}
 	memset((uintptr_t*)argv_start + argc, 0, 4);
-	/* printf("envpc=%d\n", envpc); */
+	printf("envpc=%d\n", envpc);
 	for(int k = 0; k < envpc; k++){
 		int len = strlen(envp[k]) + 1;
 		*((uintptr_t*)argv_start + k) = string_end;
