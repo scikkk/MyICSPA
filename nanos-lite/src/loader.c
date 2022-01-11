@@ -103,13 +103,13 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	if(argv){
 		argc = -1;
 		while(argv[++argc]){
-			printf("argv[%d]=%s\n", argc ,argv[argc]);
+			printf("context_uload:argv[%d]=%s\n", argc ,argv[argc]);
 		}
 	}
 	if(envp){
 		envpc = -1;
 		while(envp[++envpc]){
-			printf("envp[%d]=%s\n", envpc ,envp[envpc]);
+			printf("context_uload:envp[%d]=%s\n", envpc ,envp[envpc]);
 		}
 	}
 	*(int*)(pcb->cp->GPRx) = argc > 0 ? argc : 0;
