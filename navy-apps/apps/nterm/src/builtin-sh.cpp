@@ -26,6 +26,7 @@ static void sh_prompt() {
 
 static void sh_handle_cmd(const char *cmd) {
 	char *cur = (char*)cmd;
+	cur = strtok(cur, "\n");
 	char *order;
 	char *argv[20];
 	int argc = 0;
