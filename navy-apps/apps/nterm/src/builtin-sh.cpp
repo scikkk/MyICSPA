@@ -49,7 +49,6 @@ void builtin_sh_run() {
 	sh_prompt();
 	printf("hit builtin_sh:%d", __LINE__);
 	setenv("PATH", "/bin", 0);
-
 	while (1) {
 		SDL_Event ev;
 		if (SDL_PollEvent(&ev)) {
