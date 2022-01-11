@@ -14,7 +14,7 @@ void call_main(uintptr_t *args) {
 	char **envp = (char**)(argv + argc + 1);
 	printf("ctr0:callamin:argv=%p\n", argv);
 	printf("ctr0:callamin:envp=%p\n", envp);
-	if(!envp){
+	if(envp){
 		printf("ctr0=%p\n", envp[0]);
 		if(envp[0]) printf("ctro0=%s\n", envp[0]);
 	}
