@@ -116,7 +116,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	uintptr_t envp_start = argv_start + 4*argc + 4;
 	printf("argv_start=%p\tenvp_start=%p\n", argv_start, envp_start);
 	uintptr_t envp_end = argv_start + 4*argc + 4 + 4*envpc + 4;
-	uintptr_t string_end = ((envp_end>>2)+1)<<2;
+	uintptr_t string_end = ((envp_end>>4)+1)<<4;
 	for(int k = 0; k < argc; k++){
 		int len = strlen(argv[k]) + 1;
 		*((uintptr_t*)argv_start + k) = string_end;
