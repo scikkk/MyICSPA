@@ -120,5 +120,6 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 		memcpy((void*)string_end, envp[k], len);
 		string_end += len;
 	}
+	printf("\nend of context_uload\n");
 }
 // wk 4.1
