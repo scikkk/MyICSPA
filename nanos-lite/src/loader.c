@@ -105,7 +105,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	uintptr_t argv_start = pcb->cp->GPRx + 4;
 	uintptr_t envp_start = argv_start + 4*argc + 4;
 	uintptr_t envp_end = argv_start + 4*argc + 4 + 4*envpc + 4;
-	uintptr_t string_end = envp_end;
+	uintptr_t string_end = envp_end + 4;
 	for(int k = 0; k < argc; k++){
 		int len = strlen(argv[k]) + 1;
 		*((uintptr_t*)argv_start + 4*k) = string_end;
