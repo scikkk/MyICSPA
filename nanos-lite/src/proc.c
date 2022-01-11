@@ -25,7 +25,8 @@ extern void context_uload(PCB *pcb, const char *filename, char *const argv[], ch
 void init_proc() {
 	// wk 4.1
 	context_kload(&pcb[0], hello_fun, (void*)0x99999999);
-	context_uload(&pcb[1], "/bin/exec-test", NULL, NULL);
+	char *argv[] = {"/bin/exec-test", NULL};
+	context_uload(&pcb[1], "/bin/exec-test", argv, NULL);
 	switch_boot_pcb();
 	// wk 4.1
 
