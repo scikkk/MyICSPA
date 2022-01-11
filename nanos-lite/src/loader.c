@@ -89,7 +89,7 @@ void context_kload(PCB *pcb, void (*entry)(void *), void *arg){
 
 // wk 4.1
 void context_uload(PCB *pcb, const char *filename, char *const argv[], char *const envp[]){
-	printf("context_uload:filename=%s\n", filename);
+	/* printf("context_uload:filename=%s\n", filename); */
 	/* printf("argv=%p\tenvp=%p\n", argv, envp); */
 	Area kstack = {pcb, pcb+1};
 	uintptr_t gprx = (uintptr_t)new_page(8);
@@ -97,16 +97,16 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	if(argv){
 		argc = -1;
 		while(argv[++argc]){
-			printf("context_uload:argv[%d]=%p\n", argc ,argv[argc]);
-			printf("context_uload:argv[%d]=%s\n", argc ,argv[argc]);
+			/* printf("context_uload:argv[%d]=%p\n", argc ,argv[argc]); */
+			/* printf("context_uload:argv[%d]=%s\n", argc ,argv[argc]); */
 		}
 	}
-	printf("argc=%d\n", argc);
+	/* printf("argc=%d\n", argc); */
 	if(envp){
 		envpc = -1;
 		while(envp[++envpc]){
-			printf("context_uload:envp[%d]=%p\n", envpc, envp[envpc]);
-			printf("context_uload:envp[%d]=%s\n", envpc, envp[envpc]);
+			/* printf("context_uload:envp[%d]=%p\n", envpc, envp[envpc]); */
+			/* printf("context_uload:envp[%d]=%s\n", envpc, envp[envpc]); */
 		}
 	}
 	/* if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]); */
@@ -114,15 +114,15 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	*(int*)(gprx) = argc > 0 ? argc : 0;
 	uintptr_t argv_start = gprx + 4;
 	uintptr_t envp_start = argv_start + 4*argc + 4;
-	printf("argv_start=%p\tenvp_start=%p\n", argv_start, envp_start);
+	/* printf("argv_start=%p\tenvp_start=%p\n", argv_start, envp_start); */
 	uintptr_t envp_end = argv_start + 4*argc + 4 + 4*envpc + 4;
 	uintptr_t string_end = ((envp_end>>4)+1)<<4;
 	for(int k = 0; k < argc; k++){
 		int len = strlen(argv[k]) + 1;
 		*((uintptr_t*)argv_start + k) = string_end;
 		memcpy((void*)string_end, argv[k], len);
-		printf("argv[%d]=%s\n", k, (char*)string_end);
-		printf("string=%p\n", (void*)string_end);
+		/* printf("argv[%d]=%s\n", k, (char*)string_end); */
+		/* printf("string=%p\n", (void*)string_end); */
 		string_end += len;
 	}
 	memset((uintptr_t*)argv_start + argc, 0, 4);
@@ -130,8 +130,8 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 		int len = strlen(envp[k]) + 1;
 		*((uintptr_t*)envp_start + k) = string_end;
 		memcpy((void*)string_end, envp[k], len);
-		printf("envp[%d]=%s\n", k, (char*)string_end);
-		printf("string=%p\n", (void*)string_end);
+		/* printf("envp[%d]=%s\n", k, (char*)string_end); */
+		/* printf("string=%p\n", (void*)string_end); */
 		string_end += len;
 	}
 	memset((uintptr_t*)envp_start + envpc, 0, 4);
@@ -139,13 +139,13 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
 	pcb->cp->GPRx = gprx;
 	/* if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]); */
-	char **wargv = (char**)((uintptr_t)gprx+sizeof(int));
-	char **wenvp = (char**)(wargv + argc + 1);
-	printf(":wargv=%p\n", wargv);
-	printf(":wenvp=%p\n", wenvp);
-	if(wenvp){
-		printf(":wenvp[0]=%p\n", wenvp[0]);
-		if(wenvp[0]) printf(":wenvp[0]=%s\n", wenvp[0]);
-	}
+	/* char **wargv = (char**)((uintptr_t)gprx+sizeof(int)); */
+	/* char **wenvp = (char**)(wargv + argc + 1); */
+	/* printf(":wargv=%p\n", wargv); */
+	/* printf(":wenvp=%p\n", wenvp); */
+	/* if(wenvp){ */
+	/* 	printf(":wenvp[0]=%p\n", wenvp[0]); */
+	/* 	if(wenvp[0]) printf(":wenvp[0]=%s\n", wenvp[0]); */
+	/* } */
 }
 // wk 4.1

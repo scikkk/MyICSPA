@@ -91,7 +91,7 @@ int sys_execve(const char *pathname, char *const argv[], char *const envp[]){
 	if(fs_open(pathname, 0, 0) == -2){
 		return -2;
 	}
-	printf("sys: argv=%p\tenvp=%p\n", argv, envp);
+	/* printf("sys: argv=%p\tenvp=%p\n", argv, envp); */
 	/* printf("sys: argv[0]=%p\tenvp[0]=%p\n", argv[0], envp[0]); */
     context_uload(current, pathname, argv, envp);
 	/* printf("pathname:%s\n", pathname); */
