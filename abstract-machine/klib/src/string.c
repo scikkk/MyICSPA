@@ -57,7 +57,7 @@ int strcmp(const char *s1, const char *s2) {
 	if(s1 == NULL || s2 == NULL){
 		printf("s1=%s\ts2=%s\n", s1, s2);
 	}
-	/* assert((s1 != NULL) && (s2 != NULL)); */
+	assert((s1 != NULL) && (s2 != NULL));
 	while((*s1 != '\0') && (*s1 == *s2)){
 		s1++;
 		s2++;
