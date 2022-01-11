@@ -17,8 +17,8 @@ void call_main(uintptr_t *args) {
 		printf("ctr0=%p\n", envp[0]);
 		if(envp[0]) printf("ctro0=%s\n", envp[0]);
 	}
-	if(*argv==NULL) argv = NULL;
-	if(*envp==NULL) envp = NULL;
+	/* if(*argv==NULL) argv = NULL; */
+	/* if(*envp==NULL) envp = NULL; */
 	environ = envp;
 	exit(main(argc, argv,  envp));
 	assert(0);
