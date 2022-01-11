@@ -27,14 +27,19 @@ static void sh_prompt() {
 static void sh_handle_cmd(const char *cmd) {
 	char buf[255];
 	for(int k = 0; cmd[k] != '\n'; k++){
-		buf[k] = cmd[k];
+		if(cmd[k] == ' '){
+			buf[k] = '\0';
+		}
+		else{
+			buf[k] = cmd[k];
+		}
 		buf[k+1] = '\0';
 	}
 	char *order = &buf[0];
 	char *argv[20];
 	int argc = 0;
 	for(int k = 0; cmd[k] != '\n'; k++) {
-		if(cmd[k] == '\0') {
+		if(cmd[k] == ' ') {
 			argv[argc] =  &buf[k+1];
 			argv[++argc] = NULL;	
 		}
