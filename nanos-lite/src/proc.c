@@ -35,8 +35,8 @@ void init_proc() {
 	
 	/* context_uload(&pcb[1], "/bin/menu", NULL, NULL); */
 
-	char *argv[] = {"WK", "SCS", NULL};
-	char *envp[] = {"USER=WK", NULL};
+	char *argv[] = {"WK", "SCS", "HaHaHa", NULL};
+	char *envp[] = {"USER=WK", "ID=LOVE", NULL};
 	context_uload(&pcb[1], "/bin/nterm", argv, envp);
 
 	switch_boot_pcb();
