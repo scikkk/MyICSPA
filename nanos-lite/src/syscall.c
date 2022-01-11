@@ -84,8 +84,10 @@ int sys_brk(int32_t addr){
 
 #include <proc.h>
 extern void naive_uload(PCB *pcb, const char *filename);
+extern void context_uload(PCB *pcb, const char *filename, char *const argv[], char *const envp[]);
 int sys_execve(const char *pathname, char *const argv[], char *const envp[]){
 	naive_uload(NULL, pathname);
+    /* context_uload(pcb, pathname, argv, envp); */
 	/* printf("pathname:%s\n", pathname); */
 	return -1;
 }

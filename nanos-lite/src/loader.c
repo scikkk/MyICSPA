@@ -94,13 +94,13 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
     uintptr_t entry = loader(pcb, filename);
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
 	/* printf("ucontext-ret=%p\n", pcb->cp); */
-	pcb->cp->GPRx = (uint32_t)heap.end - 0x10000;
+	/* pcb->cp->GPRx = (uint32_t)heap.end - 0x10000; */
+	pcb->cp->GPRx = (uintptr_t)new_page(8);
 	/* pcb->cp->GPRx = 0x12345678; */
 	int argc = 0, envpc = 0;
 	while(argv && argv[++argc]);
 	while(envp && envp[++envpc]);
 	*(int*)(pcb->cp->GPRx) = argc;
-	/* memcpy((void*)heap.end, &argc, 4); */
 	uintptr_t argv_start = pcb->cp->GPRx + 4;
 	uintptr_t envp_start = argv_start + 4*argc + 4;
 	uintptr_t envp_end = argv_start + 4*argc + 4 + 4*envpc + 4;
