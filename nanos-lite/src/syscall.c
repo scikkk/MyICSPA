@@ -91,8 +91,8 @@ int sys_execve(const char *pathname, char *const argv[], char *const envp[]){
 	if(fs_open(pathname, 0, 0) == -2){
 		return -2;
 	}
-    context_uload(current, pathname, argv, envp);
 	printf("sys: argv=%p\tenvp=%p\n", argv, envp);
+    context_uload(current, pathname, argv, envp);
 	switch_boot_pcb();
 	yield();
 	/* printf("pathname:%s\n", pathname); */
