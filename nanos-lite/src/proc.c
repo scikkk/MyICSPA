@@ -35,7 +35,7 @@ void init_proc() {
 	
 	/* context_uload(&pcb[1], "/bin/menu", NULL, NULL); */
 
-	context_uload(&pcb[1], "/bin/nterm", argv, argv);
+	context_uload(&pcb[1], "/bin/nterm", NULL, argv);
 
 	switch_boot_pcb();
 	// wk 4.1
