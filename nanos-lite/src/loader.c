@@ -106,7 +106,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 		}
 	}
 	/* printf("argc=%d\n", argc); */
-	if(0&&envp){
+	if(envp){
 		envpc = -1;
 		while(envp[++envpc]){
 			printf("context_uload:envp[%d]=%p\n", envpc ,envp[envpc]);
