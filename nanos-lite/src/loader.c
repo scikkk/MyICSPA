@@ -89,18 +89,17 @@ void context_kload(PCB *pcb, void (*entry)(void *), void *arg){
 
 // wk 4.1
 void context_uload(PCB *pcb, const char *filename, char *const argv[], char *const envp[]){
-	printf("uload filename=%p\n", filename);
-	printf("uload pcb=%p\n", pcb);
+
 	Area kstack = {pcb, pcb+1};
-	printf("uload pcb=%p\n", pcb);
+	/* printf("uload pcb=%p\n", pcb); */
 	uintptr_t entry = loader(pcb, filename);
-	printf("uload entry=%p\n", entry);
+	/* printf("uload entry=%p\n", entry); */
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
-	printf("ucontext-ret=%p\n", pcb->cp);
+	/* printf("ucontext-ret=%p\n", pcb->cp); */
 	/* pcb->cp->GPRx = (uint32_t)heap.end - 0x10000; */
 	pcb->cp->GPRx = (uintptr_t)new_page(8);
 	int argc = 0, envpc = 0;
-	if(envp)	printf("uload enxp[0]=%p\n", envp[-1]);
+	/* if(envp)	printf("uload enxp[0]=%p\n", envp[-1]); */
 	if(argv){
 		argc = -1;
 		while(argv[++argc]);
@@ -114,17 +113,17 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	uintptr_t envp_start = argv_start + 4*argc + 4;
 	uintptr_t envp_end = argv_start + 4*argc + 4 + 4*envpc + 4;
 	uintptr_t string_end = ((envp_end>>2)+1)<<2;
-	printf("argc=%d\n", argc);
+	/* printf("argc=%d\n", argc); */
 	for(int k = 0; k < argc; k++){
 		int len = strlen(argv[k]) + 1;
 		*((uintptr_t*)argv_start + k) = string_end;
 		memcpy((void*)string_end, argv[k], len);
-		printf("argv[%d]=%s\n", k, (char*)string_end);
+		/* printf("argv[%d]=%s\n", k, (char*)string_end); */
 		/* printf("string=%p\n", (void*)string_end); */
 		string_end += len;
 	}
 	memset((uintptr_t*)argv_start + argc, 0, 4);
-	printf("envpc=%d\n", envpc);
+	/* printf("envpc=%d\n", envpc); */
 	for(int k = 0; k < envpc; k++){
 		int len = strlen(envp[k]) + 1;
 		*((uintptr_t*)argv_start + k) = string_end;
