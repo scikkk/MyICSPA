@@ -93,12 +93,8 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 
 	printf("context_uload:filename=%s\n", filename);
 	printf("argv=%p\tenvp=%p\n", argv, envp);
-	if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]);
-	if(envp)	printf("uload:%d: envp[0]=%s\n",__LINE__,  envp[0]);
 	Area kstack = {pcb, pcb+1};
-	if(envp)	printf("uload:%d: envp[0]=%s\n",__LINE__,  envp[0]);
 	uintptr_t gprx = (uintptr_t)new_page(8);
-	if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]);
 	int argc = 0, envpc = 0;
 	if(argv){
 		argc = -1;
@@ -107,7 +103,6 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 			printf("context_uload:argv[%d]=%s\n", argc ,argv[argc]);
 		}
 	}
-	if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]);
 	printf("argc=%d\n", argc);
 	if(envp){
 		envpc = -1;
@@ -142,7 +137,6 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	}
 	memset((uintptr_t*)envp_start + envpc, 0, 4);
 	uintptr_t entry = loader(pcb, filename);
-	if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]);
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
 	pcb->cp->GPRx = gprx;
 	if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]);
