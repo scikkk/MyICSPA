@@ -43,9 +43,11 @@ static void sh_handle_cmd(const char *cmd) {
 }
 
 void builtin_sh_run() {
+	printf("hit builtin_sh:%d", __LINE__);
 	sh_banner();
+	printf("hit builtin_sh:%d", __LINE__);
 	sh_prompt();
-	printf("builtin_sh:%d", __LINE__);
+	printf("hit builtin_sh:%d", __LINE__);
 	setenv("PATH", "/bin", 0);
 
 	while (1) {
