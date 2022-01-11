@@ -3,7 +3,7 @@
 #include <assert.h>
 
 /* // wk */
-/* #include <stdio.h> */
+#include <stdio.h>
 /* // wk */
 
 int main(int argc, char *argv[], char *envp[]);
