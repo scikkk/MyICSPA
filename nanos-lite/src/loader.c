@@ -102,7 +102,8 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	int argc = 0, envpc = 0;
 	while(argv && argv[++argc]);
 	while(envp && envp[++envpc]){
-	printf("%p\n", envp[envpc]);
+	/* printf("%p\n", envp[envpc]); */
+		;
 	}
 	*(int*)(pcb->cp->GPRx) = argc;
 	uintptr_t argv_start = pcb->cp->GPRx + 4;
