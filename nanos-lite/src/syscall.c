@@ -96,7 +96,7 @@ int sys_execve(const char *pathname, char *const argv[], char *const envp[]){
     context_uload(current, pathname, argv, envp);
 	switch_boot_pcb();
 	yield();
-	/* printf("pathname:%s\n", pathname); */
+	printf("pathname:%s\n", pathname);
 	return 0;
 }
 struct timeval{
