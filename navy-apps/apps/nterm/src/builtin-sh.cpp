@@ -25,6 +25,7 @@ static void sh_prompt() {
 }
 
 static void sh_handle_cmd(const char *cmd) {
+		sh_printf("%s", cmd);
 	if (strncmp("echo", cmd, 4) == 0){
 		sh_printf("%s", &cmd[4]);
 	}
@@ -32,7 +33,6 @@ static void sh_handle_cmd(const char *cmd) {
 		_exit(0);
 	}
 	else {
-
 		char buf[256] = {};
 		char *p = buf;
 		while(*cmd) *p++ = *cmd++;
@@ -43,11 +43,8 @@ static void sh_handle_cmd(const char *cmd) {
 }
 
 void builtin_sh_run() {
-	printf("hit builtin_sh:%d", __LINE__);
 	sh_banner();
-	printf("hit builtin_sh:%d", __LINE__);
 	sh_prompt();
-	printf("hit builtin_sh:%d", __LINE__);
 	setenv("PATH", "/bin", 0);
 	while (1) {
 		SDL_Event ev;
