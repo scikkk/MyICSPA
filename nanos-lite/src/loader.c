@@ -101,16 +101,16 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	if(argv){
 		argc = -1;
 		while(argv[++argc]){
-			/* printf("context_uload:argv[%d]=%p\n", argc ,argv[argc]); */
-			/* printf("context_uload:argv[%d]=%s\n", argc ,argv[argc]); */
+			printf("context_uload:argv[%d]=%p\n", argc ,argv[argc]);
+			printf("context_uload:argv[%d]=%s\n", argc ,argv[argc]);
 		}
 	}
 	/* printf("argc=%d\n", argc); */
 	if(0&&envp){
 		envpc = -1;
 		while(envp[++envpc]){
-			/* printf("context_uload:envp[%d]=%p\n", envpc ,envp[envpc]); */
-			/* printf("context_uload:envp[%d]=%s\n", envpc ,envp[envpc]); */
+			printf("context_uload:envp[%d]=%p\n", envpc ,envp[envpc]);
+			printf("context_uload:envp[%d]=%s\n", envpc ,envp[envpc]);
 		}
 	}
 	/* printf("envpc=%d\n", envpc); */
