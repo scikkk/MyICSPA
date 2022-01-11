@@ -152,7 +152,7 @@ config MTRACE
 config MTRACE_COND
   depends on MTRACE
   string "Only trace memory when the condition is true"
-  default "true"
+  default "false"
 # wk 2.2 mtrace
 
 
@@ -175,7 +175,7 @@ config DTRACE
 config DTRACE_COND
   depends on DTRACE
   string "Only trace devices when the condition is true"
-  default "true"
+  default "false"
 # wk 2.3 dtrace
 
 # wk 3.1 etrace
