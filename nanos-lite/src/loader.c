@@ -89,9 +89,9 @@ void context_kload(PCB *pcb, void (*entry)(void *), void *arg){
 
 // wk 4.1
 void context_uload(PCB *pcb, const char *filename, char *const argv[], char *const envp[]){
-	printf("uload pcb=%p\n", pcb);
 	Area kstack = {pcb, pcb+1};
     uintptr_t entry = loader(pcb, filename);
+	printf("uload pcb=%p\n", pcb);
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
 	printf("ucontext-ret=%p\n", pcb->cp);
 	/* pcb->cp->GPRx = (uint32_t)heap.end - 0x10000; */
