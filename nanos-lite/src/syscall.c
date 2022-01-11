@@ -89,7 +89,8 @@ extern void switch_boot_pcb();
 int sys_execve(const char *pathname, char *const argv[], char *const envp[]){
 	/* naive_uload(NULL, pathname); */
 	printf("current=%p\n", current);
-    context_uload(current + 1, pathname, argv, envp);
+	PCB pcb;
+    context_uload(&pcb, pathname, argv, envp);
 	switch_boot_pcb();
 	yield();
 	/* printf("pathname:%s\n", pathname); */
