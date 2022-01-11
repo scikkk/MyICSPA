@@ -97,7 +97,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	if(envp)	printf("uload:%d: envp[0]=%s\n",__LINE__,  envp[0]);
 	Area kstack = {pcb, pcb+1};
 	if(envp)	printf("uload:%d: envp[0]=%s\n",__LINE__,  envp[0]);
-    uintptr_t gprx = (uintptr_t)new_page(8);
+	uintptr_t gprx = (uintptr_t)new_page(8);
 	if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]);
 	int argc = 0, envpc = 0;
 	if(argv){
