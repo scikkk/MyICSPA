@@ -29,15 +29,15 @@ void init_proc() {
 	/* context_uload(&pcb[0], "/bin/hello"); */
 	/* char *argv[] = {"--skip", NULL}; */
 	/* context_uload(&pcb[1], "/bin/pal", argv, NULL); */
-	/* context_uload(&pcb[0], "/bin/exec-test", NULL, NULL); */
-	/* switch_boot_pcb(); */
+	context_uload(&pcb[0], "/bin/exec-test", NULL, NULL);
+	switch_boot_pcb();
 	// wk 4.1
 
 	Log("Initializing processes...");
 
 	// load program here
 	// TEST
-	naive_uload(NULL, "/bin/exec-test");
+	/* naive_uload(NULL, "/bin/exec-test"); */
 	/* naive_uload(NULL, "/bin/cpp-test"); */
 	// PASSED!
 	/* naive_uload(NULL, "/bin/bmp-test"); */
