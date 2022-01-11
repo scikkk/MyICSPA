@@ -97,29 +97,29 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	pcb->cp->GPRx = (uint32_t)heap.end - 0x10000;
 	/* pcb->cp->GPRx = 0x12345678; */
 	printf("heap-end=%p\n", heap.end);
-	int argc = -1, envpc = -1;
+	int argc = 0, envpc = 0;
 	while(argv && argv[++argc]);
 	while(envp && envp[++envpc]);
 	*(int*)(pcb->cp->GPRx) = argc;
 	/* memcpy((void*)heap.end, &argc, 4); */
 	uintptr_t argv_start = pcb->cp->GPRx + 4;
 	uintptr_t envp_start = argv_start + 4*argc + 4;
-	memset((void*)argv_start, 0, 4);
-	memset((void*)envp_start, 0, 4);
 	uintptr_t envp_end = argv_start + 4*argc + 4 + 4*envpc + 4;
 	uintptr_t string_end = envp_end;
-	for(int k = 0; k <= argc; k++){
+	for(int k = 0; k < argc; k++){
 		int len = strlen(argv[k]) + 1;
 		*((uintptr_t*)argv_start + 4*k) = string_end;
 		memcpy((void*)string_end, argv[k], len);
 		string_end += len;
 	}
-	for(int k = 0; k <= envpc; k++){
+	memset((void*)argv_start + 4*argc, 0, 4);
+	for(int k = 0; k < envpc; k++){
 		int len = strlen(envp[k]) + 1;
 		*((uintptr_t*)argv_start + 4*k) = string_end;
 		memcpy((void*)string_end, envp[k], len);
 		string_end += len;
 	}
+	memset((void*)envp_start + 4*argc, 0, 4);
 	printf("\nend of context_uload\n");
 }
 // wk 4.1
