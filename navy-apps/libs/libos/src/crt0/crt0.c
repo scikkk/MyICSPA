@@ -14,6 +14,7 @@ void call_main(uintptr_t *args) {
 	printf("call_main:argc=%d\n", argc);
 	char **argv = (char**)((uintptr_t)args+sizeof(int));
 	char **envp = (char**)(argv + argc + 1);
+	printf("argv=%p\tenvp=%p\n", argv, envp);
 	environ =  envp;
 	// wk
 	printf("call_main=%s\n", argv[0]);
