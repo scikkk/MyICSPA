@@ -117,7 +117,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	printf("argc=%d\n", argc);
 	for(int k = 0; k < argc; k++){
 		int len = strlen(argv[k]) + 1;
-		*((uintptr_t*)argv_start + 4*k) = string_end;
+		*((uintptr_t*)argv_start + k) = string_end;
 		memcpy((void*)string_end, argv[k], len);
 		printf("argv[%d]=%s\n", k, (char*)string_end);
 		/* printf("string=%p\n", (void*)string_end); */
