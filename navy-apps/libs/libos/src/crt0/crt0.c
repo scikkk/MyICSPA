@@ -18,6 +18,7 @@ void call_main(uintptr_t *args) {
 	environ =  envp;
 	// wk
 	printf("call_main=%p\n", argv[0]);
+	printf("call_main=%p\n", *argv);
 	assert(0);
 	// wk
 	exit(main(argc, argv,  envp));
