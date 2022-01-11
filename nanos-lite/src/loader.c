@@ -97,12 +97,14 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	pcb->cp->GPRx = (uint32_t)heap.end;
 	/* pcb->cp->GPRx = 0x12345678; */
 	printf("heap-end=%p\n", heap.end);
-	int argc = 0, envpc = 0;
-	while(argv[++argc]);
-	while(envp[++envpc]);
-	memcpy(heap.end, &argc, sizeof(argc));
+	int argc = -1, envpc = -1;
+	while(argv && argv[++argc]);
+	while(envp && envp[++envpc]);
+	*(int*)(heap.end) = argc;
 	uintptr_t argv_start = (uintptr_t)heap.end + 4;
-	/* uintptr_t envp_start = heap.end + 4 + 4*argc + 4; */
+	uintptr_t envp_start = argv_start + 4*argc + 4;
+	memset((void*)argv_start, 0, 4);
+	memset((void*)envp_start, 0, 4);
 	uintptr_t envp_end = argv_start + 4*argc + 4 + 4*envpc + 4;
 	uintptr_t string_end = envp_end;
 	for(int k = 0; k <= argc; k++){
