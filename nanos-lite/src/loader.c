@@ -114,7 +114,9 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 		printf("string=%p\n", (void*)string_end);
 		string_end += len;
 	}
+	printf("x87ff0010=%s\n", (char*)0x87ff0010);
 	memset((void*)argv_start + 4*argc, 0, 4);
+	printf("x87ff0010=%s\n", (char*)0x87ff0010);
 	for(int k = 0; k < envpc; k++){
 		int len = strlen(envp[k]) + 1;
 		*((uintptr_t*)argv_start + 4*k) = string_end;
@@ -124,7 +126,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	memset((void*)envp_start + 4*argc, 0, 4);
 	printf("\nend of context_uload\n");
 	printf("argc=%d\tenvpc=%d\n", argc, envpc);
-	printf("ffoo10=%s\n", (char*)0x87ff0010);
+	printf("x87ff0010=%s\n", (char*)0x87ff0010);
 	printf("argv[0]=%p\n", argv[0]);
 }
 // wk 4.1
