@@ -96,7 +96,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	/* printf("ucontext-ret=%p\n", pcb->cp); */
 	pcb->cp->GPRx = (uint32_t)heap.end;
 	/* pcb->cp->GPRx = 0x12345678; */
-	/* printf("heap-end=%p\n", heap.end); */
+	printf("heap-end=%p\n", heap.end);
 	int argc = 0, envpc = 0;
 	while(argv[++argc]);
 	while(envp[++envpc]);
