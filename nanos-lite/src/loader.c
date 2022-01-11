@@ -100,7 +100,8 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	int argc = -1, envpc = -1;
 	while(argv && argv[++argc]);
 	while(envp && envp[++envpc]);
-	*(int*)(heap.end) = argc;
+	/* *(int*)(heap.end) = argc; */
+	memcpy((void*)heap.end, &argc, 4);
 	uintptr_t argv_start = (uintptr_t)heap.end + 4;
 	uintptr_t envp_start = argv_start + 4*argc + 4;
 	memset((void*)argv_start, 0, 4);
