@@ -92,15 +92,11 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 
 	printf("context_uload:filename=%s\n", filename);
 	Area kstack = {pcb, pcb+1};
-	/* printf("uload pcb=%p\n", pcb); */
 	uintptr_t entry = loader(pcb, filename);
-	/* printf("uload entry=%p\n", entry); */
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
-	/* printf("ucontext-ret=%p\n", pcb->cp); */
-	/* pcb->cp->GPRx = (uint32_t)heap.end - 0x10000; */
 	pcb->cp->GPRx = (uintptr_t)new_page(8);
 	int argc = 0, envpc = 0;
-	/* if(envp)	printf("uload enxp[0]=%p\n", envp[-1]); */
+	if(envp)	printf("uload enxp[0]=%p\n", envp[-1]);
 	if(argv){
 		argc = -1;
 		while(argv[++argc]){
