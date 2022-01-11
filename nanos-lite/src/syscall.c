@@ -255,7 +255,6 @@ void do_syscall(Context *c) {
 			strace_ret = sys_brk(a[1]);
 			break;
 		case SYS_execve:
-
 			strace_ret = sys_execve((char*)a[1], (char*const*)a[2], (char*const*)a[3]);
 			break;
 		case SYS_gettimeofday:
