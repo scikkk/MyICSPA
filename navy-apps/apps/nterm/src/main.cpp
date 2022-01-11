@@ -15,6 +15,7 @@ int main(int argc, char *argv[]) {
 	SDL_Init(0);
 	printf("nterm/main.cpp enter main:%d\n", __LINE__);
 	font = new BDF_Font(font_fname);
+	printf("font=%p\n", font);
 	printf("nterm/main.cpp enter main:%d\n", __LINE__);
 
 	// setup display
@@ -26,11 +27,11 @@ int main(int argc, char *argv[]) {
 	term = new Terminal(W, H);
 	printf("nterm/main.cpp enter main:%d\n", __LINE__);
 
-	if (argc < 2) { builtin_sh_run(); }
-	printf("nterm/main.cpp enter main:%d\n", __LINE__);
-	else { extern_app_run(argv[1]); }
-	printf("nterm/main.cpp enter main:%d\n", __LINE__);
-
+	if (argc < 2) { builtin_sh_run(); 
+		printf("nterm/main.cpp enter main:%d\n", __LINE__);}
+	else { extern_app_run(argv[1]); 
+		printf("nterm/main.cpp enter main:%d\n", __LINE__);
+	}
 	// should not reach here
 	assert(0);
 }
