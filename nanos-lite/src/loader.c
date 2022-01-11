@@ -138,5 +138,13 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
 	pcb->cp->GPRx = gprx;
 	/* if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]); */
+	char **wargv = (char**)((uintptr_t)gprx+sizeof(int));
+	char **wenvp = (char**)(wargv + argc + 1);
+	printf(":wargv=%p\n", wargv);
+	printf(":wenvp=%p\n", wenvp);
+	if(wenvp){
+		printf(":wenvp[0]=%p\n", wenvp[0]);
+		if(wenvp[0]) printf(":wenvp[0]=%s\n", wenvp[0]);
+	}
 }
 // wk 4.1
