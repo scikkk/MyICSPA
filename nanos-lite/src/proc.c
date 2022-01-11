@@ -35,13 +35,13 @@ void init_proc() {
 	
 	/* context_uload(&pcb[1], "/bin/menu", NULL, NULL); */
 
-	/* context_uload(&pcb[1], "/bin/nterm", NULL, NULL); */
+	context_uload(&pcb[1], "/bin/nterm", NULL, NULL);
 
 	switch_boot_pcb();
 	// wk 4.1
 
 	Log("Initializing processes...");
-	naive_uload(NULL, "/bin/dummy");
+	/* naive_uload(NULL, "/bin/dummy"); */
 }
 
 Context* schedule(Context *prev) {
