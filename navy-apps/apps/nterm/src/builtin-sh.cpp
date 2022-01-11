@@ -36,7 +36,7 @@ static void sh_handle_cmd(const char *cmd) {
 		buf[k+1] = '\0';
 	}
 	char *order = &buf[0];
-	char *argv[20];
+	char *argv[20]= {NULL};
 	int argc = 0;
 	for(int k = 0; cmd[k] != '\n'; k++) {
 		if(cmd[k] == ' ') {
