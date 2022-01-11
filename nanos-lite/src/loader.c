@@ -89,7 +89,7 @@ void context_kload(PCB *pcb, void (*entry)(void *), void *arg){
 
 // wk 4.1
 void context_uload(PCB *pcb, const char *filename, char *const argv[], char *const envp[]){
-	printf("uload filename=%s\n", filename);
+	printf("uload filename=%p\n", filename);
 	printf("uload pcb=%p\n", pcb);
 	Area kstack = {pcb, pcb+1};
 	printf("uload pcb=%p\n", pcb);
