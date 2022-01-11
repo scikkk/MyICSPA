@@ -37,7 +37,7 @@ void init_proc() {
 
 	/* context_uload(&pcb[1], "/bin/nterm", NULL, NULL); */
 
-	/* switch_boot_pcb(); */
+	switch_boot_pcb();
 	// wk 4.1
 
 	Log("Initializing processes...");
