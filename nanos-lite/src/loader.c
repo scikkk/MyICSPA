@@ -94,6 +94,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	printf("context_uload:filename=%s\n", filename);
 	printf("argv=%p\tenvp=%p\n", argv, envp);
 	if(envp)	printf("uload envp[0]=%p\n", envp[0]);
+	if(envp)	printf("uload envp[0]=%s\n", envp[0]);
 	Area kstack = {pcb, pcb+1};
 	uintptr_t entry = loader(pcb, filename);
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
