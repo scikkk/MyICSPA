@@ -27,6 +27,7 @@ int main(int argc, char *argv[]) {
 	term = new Terminal(W, H);
 	printf("nterm/main.cpp enter main:%d\n", __LINE__);
 
+	printf("argc=%d\n", argc);
 	if (argc < 2) { builtin_sh_run(); 
 		printf("nterm/main.cpp enter main:%d\n", __LINE__);}
 	else { extern_app_run(argv[1]); 
