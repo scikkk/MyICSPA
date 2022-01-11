@@ -5,7 +5,8 @@
 
 int main(int argc, char *argv[]) {
 	printf("main argc=%d\targv=%p\n", argc, argv);
-	printf("argv[0]=%s\targv[1]=%s\n", argv[0], argv[1]);
+	printf("argv[0]=%s\n", argv[0]);
+	printf("argv[1]=%s\n", argv[1]);
 	int n = (argc >= 2 ? atoi(argv[1]) : 1);
 	printf("%s: argv[1] = %d\n", argv[0], n);
 
