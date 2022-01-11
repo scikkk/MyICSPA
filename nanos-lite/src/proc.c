@@ -25,31 +25,11 @@ extern void context_uload(PCB *pcb, const char *filename, char *const argv[], ch
 void init_proc() {
 	// wk 4.1
 	context_kload(&pcb[0], hello_fun, NULL);
-	/* char *argv[] = {"--skip", NULL}; */
-	/* context_uload(&pcb[1], "/bin/pal", argv, NULL); */
 	context_uload(&pcb[1], "/bin/exec-test", NULL, NULL);
 	switch_boot_pcb();
 	// wk 4.1
 
 	Log("Initializing processes...");
-
-	// load program here
-	// TEST
-	/* naive_uload(NULL, "/bin/exec-test"); */
-	/* naive_uload(NULL, "/bin/cpp-test"); */
-	// PASSED!
-	/* naive_uload(NULL, "/bin/bmp-test"); */
-	/* naive_uload(NULL, "/bin/dummy"); */
-	/* naive_uload(NULL, "/bin/event-test"); */
-	/* naive_uload(NULL, "/bin/file-test"); */
-	/* naive_uload(NULL, "/bin/hello"); */
-	/* naive_uload(NULL, "/bin/timer-test"); */
-	// APP
-	/* naive_uload(NULL, "/bin/nslider"); */
-	/* naive_uload(NULL, "/bin/menu"); */
-	/* naive_uload(NULL, "/bin/nterm"); */
-	/* naive_uload(NULL, "/bin/bird"); */
-	/* naive_uload(NULL, "/bin/pal"); */
 }
 
 Context* schedule(Context *prev) {
