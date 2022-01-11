@@ -88,11 +88,14 @@ extern void context_uload(PCB *pcb, const char *filename, char *const argv[], ch
 extern void switch_boot_pcb();
 int sys_execve(const char *pathname, char *const argv[], char *const envp[]){
 	/* naive_uload(NULL, pathname); */
+	if(fs_open(pathname, 0, 0) == -2){
+		return -2;
+	}
     context_uload(current, pathname, argv, envp);
 	switch_boot_pcb();
 	yield();
 	/* printf("pathname:%s\n", pathname); */
-	return -1;
+	return 0;
 }
 struct timeval{
 	int32_t tv_sec;
