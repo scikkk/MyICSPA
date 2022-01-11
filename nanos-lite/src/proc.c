@@ -29,7 +29,7 @@ void init_proc() {
 	/* char *argv[] = {"/bin/exec-test", NULL}; */
 	/* context_uload(&pcb[1], "/bin/exec-test", argv, NULL); */
 	
-	context_uload(&pcb[1], "/bin/nmenu", NULL, NULL);
+	context_uload(&pcb[1], "/bin/menu", NULL, NULL);
 
 	switch_boot_pcb();
 	// wk 4.1
