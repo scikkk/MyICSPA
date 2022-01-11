@@ -11,31 +11,32 @@ void builtin_sh_run();
 void extern_app_run(const char *app_path);
 
 int main(int argc, char *argv[]) {
-	printf("nterm/main.cpp enter main:%d\n", __LINE__);
+	/* printf("nterm/main.cpp enter main:%d\n", __LINE__); */
 	SDL_Init(0);
-	printf("nterm/main.cpp enter main:%d\n", __LINE__);
+	/* printf("nterm/main.cpp enter main:%d\n", __LINE__); */
 	font = new BDF_Font(font_fname);
-	printf("font=%p\n", font);
-	printf("nterm/main.cpp enter main:%d\n", __LINE__);
+	/* printf("font=%p\n", font); */
+	/* printf("nterm/main.cpp enter main:%d\n", __LINE__); */
 
 	// setup display
 	int win_w = font->w * W;
 	int win_h = font->h * H;
 	screen = SDL_SetVideoMode(win_w, win_h, 32, SDL_HWSURFACE);
 
-	printf("nterm/main.cpp enter main:%d\n", __LINE__);
+	/* printf("nterm/main.cpp enter main:%d\n", __LINE__); */
 	term = new Terminal(W, H);
-	printf("nterm/main.cpp enter main:%d\n", __LINE__);
+	/* printf("nterm/main.cpp enter main:%d\n", __LINE__); */
 
-	printf("argc=%d\n", argc);
+	/* printf("argc=%d\n", argc); */
 	if (argc < 2) { 
-		printf("nterm/main.cpp enter main:%d\n", __LINE__);
+		/* printf("nterm/main.cpp enter main:%d\n", __LINE__); */
 		builtin_sh_run();
-		printf("nterm/main.cpp enter main:%d\n", __LINE__);}
+	}
+		/* printf("nterm/main.cpp enter main:%d\n", __LINE__); */
 	else { 
-		printf("nterm/main.cpp enter main:%d\n", __LINE__);
+		/* printf("nterm/main.cpp enter main:%d\n", __LINE__); */
 		extern_app_run(argv[1]); 
-		printf("nterm/main.cpp enter main:%d\n", __LINE__);
+		/* printf("nterm/main.cpp enter main:%d\n", __LINE__); */
 	}
 	// should not reach here
 	assert(0);
