@@ -123,14 +123,14 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 		/* printf("string=%p\n", (void*)string_end); */
 		string_end += len;
 	}
-	memset((void*)argv_start + 4*argc, 0, 4);
+	memset((uintptr_t*)argv_start + argc, 0, 4);
 	printf("envpc=%d\n", envpc);
 	for(int k = 0; k < envpc; k++){
 		int len = strlen(envp[k]) + 1;
-		*((uintptr_t*)argv_start + 4*k) = string_end;
+		*((uintptr_t*)argv_start + k) = string_end;
 		memcpy((void*)string_end, envp[k], len);
 		string_end += len;
 	}
-	memset((void*)envp_start + 4*envpc, 0, 4);
+	memset((uintptr_t*)envp_start + envpc, 0, 4);
 }
 // wk 4.1
