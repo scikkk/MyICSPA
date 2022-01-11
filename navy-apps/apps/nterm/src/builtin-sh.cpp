@@ -25,20 +25,23 @@ static void sh_prompt() {
 }
 
 static void sh_handle_cmd(const char *cmd) {
-		sh_printf("%s", cmd);
-	if (strncmp("echo", cmd, 4) == 0){
+	char *cur = (char*)cmd;
+	char *order;
+	char *argv[20];
+	int argc = 0;
+	order = strtok(cur, " ");
+	while(cur){
+		argv[argc] = strtok(cur, " ");
+		argv[++argc] = NULL;
+	}
+	if (strcmp("echo", order) == 0){
 		sh_printf("%s", &cmd[4]);
 	}
-	else if(strcmp("exit\n", cmd) == 0){
+	else if(strcmp("exit\n", order) == 0){
 		_exit(0);
 	}
 	else {
-		char buf[256] = {};
-		char *p = buf;
-		while(*cmd) *p++ = *cmd++;
-		*p = '\0';
-		if(*(--p) == '\n') *p = '\0';
-		execvp(buf, NULL);	
+		execvp(order, argv);	
 	}
 }
 
