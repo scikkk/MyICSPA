@@ -58,7 +58,7 @@ static void sh_handle_cmd(const char *cmd) {
 void builtin_sh_run() {
 	sh_banner();
 	sh_prompt();
-	setenv("PATH", "/bin", 0);
+	setenv("PATH", "/bin:/usr/bin", 1);
 	while (1) {
 		SDL_Event ev;
 		if (SDL_PollEvent(&ev)) {
