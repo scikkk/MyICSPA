@@ -100,7 +100,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	/* pcb->cp->GPRx = (uint32_t)heap.end - 0x10000; */
 	pcb->cp->GPRx = (uintptr_t)new_page(8);
 	int argc = -1, envpc = -1;
-	printf("uload enxp[0]=%p\n", envp[0]);
+if(!envp)	printf("uload enxp[0]=%p\n", envp[0]);
 	while(argv && argv[++argc]);
 	while(envp && envp[++envpc]){
 	/* printf("%p\n", envp[envpc]); */
