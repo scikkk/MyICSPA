@@ -117,6 +117,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 		string_end += len;
 	}
 	memset((void*)argv_start + 4*argc, 0, 4);
+	printf("\nhit there\n");
 	for(int k = 0; k < envpc; k++){
 		int len = strlen(envp[k]) + 1;
 		*((uintptr_t*)argv_start + 4*k) = string_end;
