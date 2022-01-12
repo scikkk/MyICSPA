@@ -106,7 +106,7 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 
 Context *ucontext(AddrSpace *as, Area kstack, void *entry) {
 	// wk 4.1
-	Context *ctx =  (Context*)kstack.start - 1;;
+	Context *ctx =  (Context*)kstack.end - 1;;
 	*ctx = (Context) { 0 };
 	ctx->mepc = (uintptr_t)entry;
 	/* printf("hit there line: %d\n", __LINE__); */
