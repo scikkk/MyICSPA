@@ -17,7 +17,8 @@ paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
 	/* printf("pte1_addr=0x%u\n", pte1_addr); */
 	paddr_t pte1 = paddr_read(pte1_addr, 4);
 	if((pte1 & 0x1) == 0){
-		printf("pte1=0x%x\n", pte1);
+		printf("mmu pte1_addr=0x%x", pte1_addr)
+		printf("mmu pte1=0x%x\n", pte1);
 	}
 	assert((pte1 & 0x1) == 1);
 
