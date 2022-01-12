@@ -3,6 +3,7 @@
 #include <memory/vaddr.h>
 
 paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
+		printf("mmu vaddr=0x%x\n", vaddr);
 	paddr_t paddr;
 	assert(type == 0);
 	assert((cpu.satp >> 31) == 1);
@@ -17,7 +18,6 @@ paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
 	/* printf("pte1_addr=0x%u\n", pte1_addr); */
 	paddr_t pte1 = paddr_read(pte1_addr, 4);
 	if((pte1 & 0x1) == 0){
-		printf("mmu vaddr=0x%x\n", vaddr);
 		printf("mmu satp=0x%x\n", cpu.satp);
 		printf("mmu pte1_addr=0x%x\n", pte1_addr);
 		printf("mmu pte1=0x%x\n", pte1);
