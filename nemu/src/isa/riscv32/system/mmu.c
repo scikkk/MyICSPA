@@ -22,7 +22,7 @@ paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
 		printf("mmu pte1_addr=0x%x\n", pte1_addr);
 		printf("mmu pte1=0x%x\n", pte1);
 	}
-	/* assert((pte1 & 0x1) == 1); */
+	assert((pte1 & 0x1) == 1);
 
 	paddr_t pte2_addr = (pte1 & ~0xfff) | (vpn0 << 2);
 	paddr_t pte2 = paddr_read(pte2_addr, 4);
