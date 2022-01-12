@@ -103,7 +103,7 @@ void context_kload(PCB *pcb, void (*entry)(void *), void *arg){
 // wk 4.1
 void context_uload(PCB *pcb, const char *filename, char *const argv[], char *const envp[]){
 	protect(&pcb->as);
-	printf("context_uload:filename=%s\n", filename);
+	/* printf("context_uload:filename=%s\n", filename); */
 	/* printf("argv=%p\tenvp=%p\n", argv, envp); */
 	Area kstack = {pcb, pcb+1};
 	/* printf("as.area.start=%p\tend=%p\n", pcb->as.area.start, pcb->as.area.end); */
@@ -162,7 +162,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	uintptr_t entry = loader(pcb, filename);
     pcb->cp = ucontext(&pcb->as, kstack, (void*)entry);
 	pcb->cp->GPRx = gprx;
-	Log("uload file=%s\tentry=%p\n", filename, entry);
+	Log("Uload file=%s, entry=%p", filename, entry);
 	/* if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]); */
 	/* char **wargv = (char**)((uintptr_t)gprx+sizeof(int)); */
 	/* char **wenvp = (char**)(wargv + argc + 1); */
