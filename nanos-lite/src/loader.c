@@ -111,7 +111,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 			/* printf("context_uload:argv[%d]=%s\n", argc ,argv[argc]); */
 		}
 	}
-	printf("argc=%d\n", argc);
+	/* printf("argc=%d\n", argc); */
 	if(envp){
 		envpc = -1;
 		while(envp[++envpc]){
@@ -121,7 +121,9 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	}
 	/* if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]); */
 	/* printf("envpc=%d\n", envpc); */
+	printf("gcpx = %p\n", gprx);
 	*(int*)(gprx) = argc > 0 ? argc : 0;
+	printf("gcpx = %p\n", gprx);
 	uintptr_t argv_start = gprx + 4;
 	uintptr_t envp_start = argv_start + 4*argc + 4;
 	/* printf("argv_start=%p\tenvp_start=%p\n", argv_start, envp_start); */
