@@ -78,9 +78,10 @@ int sys_lseek(int fd, size_t offset, int whence) {
 	return fs_lseek(fd, offset, whence);
 }
 
+extern int mm_brk(uintptr_t brk);
 int sys_brk(int32_t addr){
 	/* printf("brk_addr:%p\n", addr); */
-	return 0;
+	return mm_brk(addr);
 }
 
 #include <proc.h>
