@@ -59,9 +59,9 @@ __am_asm_trap:
   csrw mstatus, t1
 
   # wk pc+4
-  addi t2, t2, 4	
-  csrw mepc, t2
-  addi t2, t2, -4	
+  ; addi t2, t2, 4	
+  ; csrw mepc, t2
+  ; addi t2, t2, -4	
   # wk pc+4
 
   MAP(REGS, POP)
