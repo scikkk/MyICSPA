@@ -11,7 +11,7 @@ paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
 	/* pa = (pg_table[va >> 12] & ~0xfff) | (va & 0xfff); */
 	uintptr_t satp_ppn = cpu.satp >> 12;
 	uintptr_t pte1_addr = (satp_ppn << 12) | (vpn1 << 2);
-	uintptr_t pte1 = pgalloc_usr(PGSIZE);
+	uintptr_t pte1 = *(uintptr_t*)pte1_addr;
 	assert((pte1 & 0xfff) == 0);
 	pte1 = *(uintptr_t*)pte1_addr; 
 	uintptr_t pte2_addr = (pte1 & ~0xfff) | (vpn0 << 2);
