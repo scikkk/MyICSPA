@@ -53,6 +53,7 @@ Context* schedule(Context *prev) {
 	// save the context pointer
 	printf("prev=%p\n", prev);
 	current->cp = prev;
+	printf("prev=%p\n", prev);
 	// always select pcb[0] as the new process
 	current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
 	// then return the new context
