@@ -24,10 +24,10 @@ void free_page(void *p) {
 #include <proc.h>
 int mm_brk(uintptr_t brk) {
 	if(brk > current->max_brk){
+		printf("brk increase: %p --> %p\n", current->max_brk, brk);
 		while(brk > current->max_brk){
 			uintptr_t page_begin  = (uintptr_t)new_page(1);                                                                                                      
 			/* map(&current->as , (void*)(brk&~0xfff), (void*)page_begin, 0); */
-			printf("brk increase\n");
 			map(&current->as , (void*)(brk), (void*)page_begin, 0);
 		}
 		current->max_brk = brk;
