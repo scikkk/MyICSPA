@@ -8,7 +8,7 @@ word_t vaddr_ifetch(vaddr_t addr, int len) {
 word_t vaddr_read(vaddr_t addr, int len) {
 	switch(isa_mmu_check(addr, len, 0)){
 		case MMU_TRANSLATE:
-	printf("satp = 0x%x\n", cpu.satp);
+	/* printf("satp = 0x%x\n", cpu.satp); */
 			addr = isa_mmu_translate(addr, len, 0);
 		case MMU_DIRECT:
 			break;
