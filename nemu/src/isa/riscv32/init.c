@@ -45,6 +45,11 @@ static void restart() {
   // wk 2.3
   cpu.mstatus = 0x1800;
   // wk 2.3
+  
+  
+  // wk 4.2
+  cpu.satp = 0;
+  // wk 4.2
 }
 
 void init_isa() {
