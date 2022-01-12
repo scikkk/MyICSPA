@@ -100,10 +100,10 @@ Context *ucontext(AddrSpace *as, Area kstack, void *entry) {
 	Context *ctx =  (Context*)kstack.end - 1;;
 	*ctx = (Context) { 0 };
 	ctx->mepc = (uintptr_t)entry;
-	printf("hit there line: %d\n", __LINE__);
-	printf("%p\n", as->ptr);
+	/* printf("hit there line: %d\n", __LINE__); */
+	/* printf("%p\n", as->ptr); */
 	ctx->pdir = as->ptr;
-	printf("hit there line: %d\n", __LINE__);
+	/* printf("hit there line: %d\n", __LINE__); */
 	return ctx;
 	// wk 4.1
 	/* return NULL; */
