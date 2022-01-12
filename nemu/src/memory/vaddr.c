@@ -1,9 +1,6 @@
 #include <isa.h>
 #include <memory/paddr.h>
 
-word_t vaddr_ifetch(vaddr_t addr, int len) {
-	return paddr_read(addr, len);
-}
 
 word_t vaddr_read(vaddr_t addr, int len) {
 	switch(isa_mmu_check(addr, len, 0)){
@@ -27,4 +24,9 @@ void vaddr_write(vaddr_t addr, int len, word_t data) {
 			break;
 		default : assert(0);
 	}
+}
+
+word_t vaddr_ifetch(vaddr_t addr, int len) {
+	return vaddr_read(addr, len);
+	/* return paddr_read(addr, len); */
 }
