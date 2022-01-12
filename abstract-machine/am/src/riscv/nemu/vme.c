@@ -82,6 +82,7 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 	uintptr_t pte1_addr = (satp_ppn << 12) | (vpn1 << 2);
 	if((uintptr_t)va < 0x50000000)
 	printf("map hit line: %d\n", __LINE__);
+	printf("pte1_addr=%p\n", pte1_addr);
 	uintptr_t pte1 = *(uintptr_t*)pte1_addr;
 	if((uintptr_t)va < 0x50000000)
 	printf("map hit line: %d\n", __LINE__);
