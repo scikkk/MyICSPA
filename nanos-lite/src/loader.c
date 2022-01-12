@@ -58,6 +58,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	Elf_Phdr ph;
 	unsigned off = header.e_phoff;
 	for(int k = 0; k < header.e_phnum; k++){
+		printf("\nloader %d\n", k);
 		fs_lseek(fd, off, SEEK_SET);
 		fs_read(fd, &ph, header.e_phentsize);
 		off += header.e_phentsize;
@@ -67,14 +68,14 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			/* 	memset((void*)(ph.p_vaddr+ph.p_filesz), 0, ph.p_memsz-ph.p_filesz); */
 			/* } */
 			fs_lseek(fd, ph.p_offset, SEEK_SET);
-			for(int k = 0; ph.p_memsz > k*0x1000; k++){
+			for(int pagenum = 0; ph.p_memsz > pagenum*0x1000; k++){
 				/* printf("%p\n",  ph.p_memsz - k*0x1000 ); */
 				uintptr_t page_begin  = (uintptr_t)new_page(1);
 				map(&pcb->as , (void*)ph.p_vaddr + 0x1000*k, (void*)page_begin, 0);
-				printf("loader: pagenum=%d\tva=%p\tpa=%p\n", k, ph.p_vaddr + 0x1000*k, page_begin);
+				printf("loader: pagenum=%d\tva=%p\tpa=%p\n", pagenum, ph.p_vaddr + 0x1000*pagenum, page_begin);
 				memset((void*)page_begin, 0, 4096);
-				if(ph.p_filesz - k*0x1000 > 0){
-					fs_read(fd, (void*)page_begin, (ph.p_filesz - k*0x1000 > 4096) ? 4096 : ph.p_filesz - k*0x1000);
+				if(ph.p_filesz - pagenum*0x1000 > 0){
+					fs_read(fd, (void*)page_begin, (ph.p_filesz - pagenum*0x1000 > 4096) ? 4096 : ph.p_filesz - pagenum*0x1000);
 				}
 			}
 			/* fs_read(fd, (void*)ph.p_vaddr, ph.p_filesz); */
