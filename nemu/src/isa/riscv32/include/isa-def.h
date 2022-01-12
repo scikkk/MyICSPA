@@ -88,15 +88,16 @@ typedef struct {
 } riscv32_ISADecodeInfo;
 
 
-extern riscv32_CPU_state cpu;
-// enum { MMU_DIRECT, MMU_TRANSLATE, MMU_DYNAMIC };
-int isa_mmu_check(vaddr_t vaddr, int len, int type) {
-	if((cpu.satp >> 31) == 1){
-		return 1; // MMU_TRANSLATE;
-	}
-	else{
-		return 0; // MMU_DIRECT;
-	}
-}
+/* extern riscv32_CPU_state cpu; */
+/* // enum { MMU_DIRECT, MMU_TRANSLATE, MMU_DYNAMIC }; */
+/* int isa_mmu_check(vaddr_t vaddr, int len, int type) { */
+/* 	if((cpu.satp >> 31) == 1){ */
+/* 		return 1; // MMU_TRANSLATE; */
+/* 	} */
+/* 	else{ */
+/* 		return 0; // MMU_DIRECT; */
+/* 	} */
+/* } */
 
+#define isa_mmu_check(vaddr, len, type) (cpu.satp >> 31)
 #endif
