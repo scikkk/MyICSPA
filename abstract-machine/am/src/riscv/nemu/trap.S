@@ -51,7 +51,7 @@ __am_asm_trap:
   jal __am_irq_handle
 
   # wk 4.1
-  ; mv sp, a0
+  mv sp, a0
   # wk 4.1
 
   LOAD t1, OFFSET_STATUS(sp)
