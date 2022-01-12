@@ -5,7 +5,7 @@ static void *pf = NULL;
 void* new_page(size_t nr_page) {
 	void* ret = pf;
 	pf += nr_page*4096;
-	printf("new_page begin at %p\n", ret);
+	/* printf("new_page begin at %p\n", ret); */
 	return ret;
 }
 

@@ -7,7 +7,9 @@ static Context* (*user_handler)(Event, Context*) = NULL;
 extern void __am_get_cur_as(Context *c);
 extern void __am_switch(Context *c);
 Context* __am_irq_handle(Context *c) {
+	printf("before get cur as\n");
 	__am_get_cur_as(c);
+	printf("after get cur as\n");
 	if (user_handler) {
 		Event ev = {0};
 		/* ev.event = c->mcause; */
@@ -35,7 +37,9 @@ Context* __am_irq_handle(Context *c) {
 		assert(c != NULL);
 		/* assert(0); */
 	}
+	printf("before switch\n");
 	__am_switch(c);
+	printf("after switch\n");
 	return c;
 }
 
