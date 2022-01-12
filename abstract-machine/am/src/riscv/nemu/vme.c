@@ -80,6 +80,7 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 	pte1 |= 0x1;
 	*(uintptr_t*)pte1_addr = pte1; 
 	uintptr_t pte2_addr = (pte1 & ~0xfff) | (vpn0 << 2);
+	printf("pte2_addr=%p\n", pte2_addr);
 	*(uintptr_t*)pte2_addr = ((uintptr_t)pa & ~0xfff) | 0x1; 
 }
 
