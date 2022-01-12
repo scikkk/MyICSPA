@@ -67,7 +67,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			/* 	memset((void*)(ph.p_vaddr+ph.p_filesz), 0, ph.p_memsz-ph.p_filesz); */
 			/* } */
 			fs_lseek(fd, ph.p_offset, SEEK_SET);
-			for(int k = 0; ph.p_memsz - k*0x1000 > 0; k++){
+			for(int k = 0; ph.p_memsz > k*0x1000; k++){
 				/* printf("%p\n",  ph.p_memsz - k*0x1000 ); */
 				uintptr_t page_begin  = (uintptr_t)new_page(1);
 				map(&pcb->as , (void*)ph.p_vaddr + 0x1000*k, (void*)page_begin, 0);
