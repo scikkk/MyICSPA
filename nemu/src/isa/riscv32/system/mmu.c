@@ -22,6 +22,8 @@ paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
 	assert((pte2 & 0x1) == 1);
 	paddr = (pte2 & ~0xfff) | (vaddr & 0xfff); 
 	assert(paddr == vaddr);
+	
+	printf("pte1_addr=0x%u\n", pte1_addr);
 	return paddr;
 	return MEM_RET_FAIL;
 }
