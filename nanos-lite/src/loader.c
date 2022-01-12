@@ -155,7 +155,9 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 		string_end += len;
 	}
 	memset((uintptr_t*)envp_start + envpc, 0, 4);
+printf("ddvbjmkcnks\n");
 	uintptr_t entry = loader(pcb, filename);
+printf("ddvbjmkcnks\n");
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
 	pcb->cp->GPRx = gprx;
 	printf("uload entry=%p\n", entry);
