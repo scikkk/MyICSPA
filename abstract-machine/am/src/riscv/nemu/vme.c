@@ -91,9 +91,9 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 
 	/* printf("pte2_addr=%p\n", pte2_addr); */
 	*(uintptr_t*)pte2_addr = ((uintptr_t)pa & ~0xfff) | 0x1; 
-	if((uintptr_t)va == 0x40000000)
+	if((uintptr_t)va == 0x00000000)
 	printf("map: pte1addr=%p\tpte2addr=%p\n", pte1_addr, pte2_addr);
-	if((uintptr_t)va == 0x40000000)
+	if((uintptr_t)va == 0x00000000)
 	printf("map: pte1=%p\tpte2=%p\n", pte1, *(uintptr_t*)pte2_addr);
 }
 
