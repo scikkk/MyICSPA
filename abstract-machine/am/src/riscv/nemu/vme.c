@@ -16,13 +16,13 @@ static Area segments[] = {      // Kernel memory mappings
 static inline void set_satp(void *pdir) {
 	uintptr_t mode = 1ul << (__riscv_xlen - 1);
 	asm volatile("csrw satp, %0" : : "r"(mode | ((uintptr_t)pdir >> 12)));
-	printf("set_satp=%p", mode | ((uintptr_t)pdir >> 12));
+	printf("set_satp=%p\n", mode | ((uintptr_t)pdir >> 12));
 }
 
 static inline uintptr_t get_satp() {
 	uintptr_t satp;
 	asm volatile("csrr %0, satp" : "=r"(satp));
-	printf("get_satp=%p", satp);
+	printf("get_satp=%p\n", satp);
 	return satp << 12;
 }
 
