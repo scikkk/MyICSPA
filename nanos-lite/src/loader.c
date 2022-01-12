@@ -65,17 +65,17 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			/* if(ph.p_memsz > ph.p_filesz){ */
 			/* 	memset((void*)(ph.p_vaddr+ph.p_filesz), 0, ph.p_memsz-ph.p_filesz); */
 			/* } */
+			fs_lseek(fd, ph.p_offset, SEEK_SET);
 			for(int k = 0; ph.p_memsz - k*0x1000 > 0; k++){
 				uintptr_t page_begin  = (uintptr_t)new_page(1);
 				map(&pcb->as , (void*)ph.p_vaddr + 0x1000*k, (void*)page_begin, 0);
 				printf("loader: pagenum=%d\tva=%p\tpa=%p\n", k, ph.p_vaddr + 0x1000*k, page_begin);
-				fs_read(fd, (void*)ph.p_vaddr + 0x1000*k, 4096);
+				memset((void*)page_begin, 0, 4096);
+				if(ph.p_filesz - k*0x1000 > 0){
+					fs_read(fd, (void*)page_begin, (ph.p_filesz - k*0x1000 > 4096) ? 4096 : ph.p_filesz - k*0x1000);
+				}
 			}
-			fs_lseek(fd, ph.p_offset, SEEK_SET);
 			/* fs_read(fd, (void*)ph.p_vaddr, ph.p_filesz); */
-			for(int page_num = 0; ph.p_filesz - page_num*0x1000 > 0; page_num++){
-				fs_read(fd, (void*)ph.p_vaddr + 0x1000*page_num, 4096);
-			}
 			printf("line:%dloader: vaddr=%p\n", __LINE__, ph.p_vaddr);
 		} 
 	}
