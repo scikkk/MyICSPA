@@ -60,7 +60,7 @@ Context* schedule(Context *prev) {
 	current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
 	printf("current=%p\tcurrent->as=%p\tas.ptr=%p\tpdir=%p\tmaxbrk=%p\n", current, current->as, current->as.ptr, current->cp->pdir, current->max_brk);
 	
-	printf("pcb[0].as=%p\tpcb[1].as=%p\n", pcb[0].as.ptr, pcb[1].as.ptr);
+	printf("pcb[0].as=%p\tpcb[1].as=%p\n", &pcb[0].as.ptr, &pcb[1].as.ptr);
 	// then return the new context
 	/* printf("cur-cp=%p\n", current->cp); */
 
