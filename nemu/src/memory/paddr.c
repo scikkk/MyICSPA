@@ -67,9 +67,9 @@ void paddr_write(paddr_t addr, int len, word_t data) {
 #ifdef CONFIG_MTRACE
 		static int count = 1;
 		word_t old = pmem_read(addr, len);
-		if (mtrace_enable(addr))
+		if (mtrace_enable(addr)){
 		printf("0x%-10x:[write] count:%-6d begin:0x%-10x end:0x%-10x old :0x%-9x %-16d new :0x%-9x %d\n",cpu.pc, count++, addr, addr+len,old,old, data, data);
-		isa_reg_display();
+		isa_reg_display();}
 #endif 
 		pmem_write(addr, len, data); 
 		return;
