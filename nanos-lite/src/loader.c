@@ -82,7 +82,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			printf("line%d:loader: vaddr=%p\n", __LINE__, ph.p_vaddr);
 		} 
 	}
-			printf("line%d:loader: vaddr=%p\n", __LINE__, ph.p_vaddr);
 	return header.e_entry;
 }
 
@@ -161,7 +160,9 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	}
 	memset((uintptr_t*)envp_start + envpc, 0, 4);
 	uintptr_t entry = loader(pcb, filename);
+	printf("uload entry=%p\n", entry);
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
+	printf("uload entry=%p\n", entry);
 	pcb->cp->GPRx = gprx;
 	printf("uload entry=%p\n", entry);
 	/* if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]); */
