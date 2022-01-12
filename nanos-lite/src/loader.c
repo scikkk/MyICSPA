@@ -91,7 +91,7 @@ void context_kload(PCB *pcb, void (*entry)(void *), void *arg){
 // wk 4.1
 void context_uload(PCB *pcb, const char *filename, char *const argv[], char *const envp[]){
 	protect(&pcb->as);
-	/* printf("context_uload:filename=%s\n", filename); */
+	printf("context_uload:filename=%s\n", filename);
 	/* printf("argv=%p\tenvp=%p\n", argv, envp); */
 	Area kstack = {pcb, pcb+1};
 	uintptr_t gprx = (uintptr_t)new_page(8);
