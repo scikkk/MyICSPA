@@ -50,7 +50,7 @@ void init_proc() {
 
 Context* schedule(Context *prev) {
 	// wk 4.1
-	printf("prev=%p\n", prev);
+	/* printf("prev=%p\n", prev); */
 	// save the context pointer
 	current->cp = prev;
 	// always select pcb[0] as the new process
