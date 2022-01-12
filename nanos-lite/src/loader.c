@@ -96,14 +96,14 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	Area kstack = {pcb, pcb+1};
 	printf("as.area.start=%p\tend=%p\n", pcb->as.area.start, pcb->as.area.end);
 	uintptr_t gprx = (uintptr_t)new_page(8);
-	map(&pcb->as , (void*)gprx         , (void*)pcb->as.area.end - 0x8000, 0);
-	map(&pcb->as , (void*)gprx + 0x1000, (void*)pcb->as.area.end - 0x7000, 0);
-	map(&pcb->as , (void*)gprx + 0x2000, (void*)pcb->as.area.end - 0x6000, 0);
-	map(&pcb->as , (void*)gprx + 0x3000, (void*)pcb->as.area.end - 0x5000, 0);
-	map(&pcb->as , (void*)gprx + 0x4000, (void*)pcb->as.area.end - 0x4000, 0);
-	map(&pcb->as , (void*)gprx + 0x5000, (void*)pcb->as.area.end - 0x3000, 0);
-	map(&pcb->as , (void*)gprx + 0x6000, (void*)pcb->as.area.end - 0x2000, 0);
-	map(&pcb->as , (void*)gprx + 0x7000, (void*)pcb->as.area.end - 0x1000, 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x8000, (void*)gprx         , 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x7000, (void*)gprx + 0x1000, 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x6000, (void*)gprx + 0x2000, 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x5000, (void*)gprx + 0x3000, 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x4000, (void*)gprx + 0x4000, 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x3000, (void*)gprx + 0x5000, 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x2000, (void*)gprx + 0x6000, 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x1000, (void*)gprx + 0x7000, 0);
 	int argc = 0, envpc = 0;
 	if(argv){
 		argc = -1;
