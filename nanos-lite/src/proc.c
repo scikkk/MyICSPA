@@ -61,8 +61,8 @@ Context* schedule(Context *prev) {
 	/* printf("pcb0->cp=%p\n", pcb[0].cp); */
 	/* printf("pcb1->cp=%p\n", pcb[1].cp); */
 
-	/* printf("mepc=%p\n", (current->cp)->mepc); */
-	/* printf("gpr1=%p\n", (current->cp)->GPR1); */
+	printf("mepc=%p\n", (current->cp)->mepc);
+	printf("gpr1=%p\n", (current->cp)->GPR1);
 	return current->cp;
 	// wk 4.1
 	/* return NULL; */
