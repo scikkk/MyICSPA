@@ -25,12 +25,14 @@ void free_page(void *p) {
 int mm_brk(uintptr_t brk) {
 	if(brk > current->max_brk){
 		printf("pcb=%p\tbrk increase: %p --> %p\n", current, current->max_brk, brk);
+		uintptr_t old_brk = brk;
 		while(brk > current->max_brk){
 			uintptr_t page_begin  = (uintptr_t)new_page(1);                                                                                                      
 			/* map(&current->as , (void*)(brk&~0xfff), (void*)page_begin, 0); */
 			map(&current->as , (void*)(brk), (void*)page_begin, 0);
+			brk -= 0x1000;
 		}
-		current->max_brk = brk;
+		current->max_brk = old_brk;
 	}
 	return 0;
 }
