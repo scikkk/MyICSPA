@@ -68,6 +68,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			for(int k = 0; ph.p_memsz - k*0x1000 > 0; k++){
 				uintptr_t page_begin  = (uintptr_t)new_page(1);
 				map(&pcb->as , (void*)ph.p_vaddr + 0x1000*k, (void*)page_begin, 0);
+				printf("loader: pagenum=%d\tva=%p\tpa=%p\n", k, ph.p_vaddr + 0x1000*k, page_begin);
 				fs_read(fd, (void*)ph.p_vaddr + 0x1000*k, 4096);
 			}
 			fs_lseek(fd, ph.p_offset, SEEK_SET);
@@ -155,9 +156,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 		string_end += len;
 	}
 	memset((uintptr_t*)envp_start + envpc, 0, 4);
-printf("ddvbjmkcnks\n");
 	uintptr_t entry = loader(pcb, filename);
-printf("ddvbjmkcnks\n");
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
 	pcb->cp->GPRx = gprx;
 	printf("uload entry=%p\n", entry);
