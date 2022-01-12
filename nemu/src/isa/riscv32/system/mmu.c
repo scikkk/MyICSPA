@@ -3,23 +3,22 @@
 #include <memory/vaddr.h>
 
 paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
-	uintptr_t paddr;
+	paddr_t paddr;
 	assert(type == 0);
 	assert((cpu.satp >> 31) == 1);
 
-	uintptr_t vpn1 = (vaddr >> 22);
-	uintptr_t vpn0 = (vaddr >> 12) & 0x3ff;
+	vaddr_t vpn1 = (vaddr >> 22);
+	vaddr_t vpn0 = (vaddr >> 12) & 0x3ff;
 	
 	/* pa = (pg_table[va >> 12] & ~0xfff) | (va & 0xfff); */
 	
-	uintptr_t satp_ppn = cpu.satp & 0x3fffff;
-	uintptr_t pte1_addr = (satp_ppn << 12) | (vpn1 << 2);
+	vaddr_t satp_ppn = cpu.satp & 0x3fffff;
+	paddr_t pte1_addr = (satp_ppn << 12) | (vpn1 << 2);
 	printf("pte1_addr=0x%lu\n", pte1_addr);
-	uintptr_t pte1 = *(uintptr_t*)pte1_addr;
+	paddr_t pte1 = paddr_read(pte1_addr, 4);
 	assert((pte1 & 0x1) == 1);
-	pte1 = *(uintptr_t*)pte1_addr; 
-	uintptr_t pte2_addr = (pte1 & ~0xfff) | (vpn0 << 2);
-	uintptr_t pte2 = *(uintptr_t*)pte2_addr;
+	paddr_t pte2_addr = (pte1 & ~0xfff) | (vpn0 << 2);
+	paddr_t pte2 = paddr_read(pte2_addr, 4);
 	assert((pte2 & 0x1) == 1);
 	paddr = (pte2 & ~0xfff) | (vaddr & 0xfff); 
 	assert(paddr == vaddr);
