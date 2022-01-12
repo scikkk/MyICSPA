@@ -51,6 +51,7 @@ void init_proc() {
 }
 
 Context* schedule(Context *prev) {
+	printf("enter shedule\n");
 	// wk 4.1
 	/* printf("prev=%p\n", prev); */
 	// save the context pointer
@@ -69,6 +70,7 @@ Context* schedule(Context *prev) {
 
 	/* printf("mepc=%p\n", (current->cp)->mepc); */
 	/* printf("gpr1=%p\n", (current->cp)->GPR1); */
+	printf("exit shedule\n");
 	return current->cp;
 	// wk 4.1
 	/* return NULL; */
