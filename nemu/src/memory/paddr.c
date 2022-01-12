@@ -50,11 +50,11 @@ word_t paddr_read(paddr_t addr, int len) {
 	if (likely(in_pmem(addr))){
 
 		word_t ret = pmem_read(addr, len);
-#ifdef CONFIG_MTRACE
-		static int count = 1;
-		if (mtrace_enable(addr))
-		printf("[read ] count:%-6d begin:0x%-10x end:0x%-10x data:0x%-9x %-16d\n", count++, addr, addr+len, ret, ret);
-#endif
+/* #ifdef CONFIG_MTRACE */
+/* 		static int count = 1; */
+/* 		if (mtrace_enable(addr)) */
+/* 		printf("[read ] count:%-6d begin:0x%-10x end:0x%-10x data:0x%-9x %-16d\n", count++, addr, addr+len, ret, ret); */
+/* #endif */
 		return ret;
 	}
 	MUXDEF(CONFIG_DEVICE, return mmio_read(addr, len),
