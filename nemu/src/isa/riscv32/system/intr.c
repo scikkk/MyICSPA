@@ -24,7 +24,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
 	}
 	printf("[ETRACE] 0x%08x:ERROR: NO(cause):%d(%s); epc:0x%08x; mtvec:0x%08x; mstatus:0x%08x\n", cpu.pc, NO,type, epc, cpu.mtvec, cpu.mstatus);
 #endif
-	isa_reg_display();
+	/* isa_reg_display(); */
 	cpu.mepc = epc;
 	cpu.mcause = NO;
 	return cpu.mtvec;
