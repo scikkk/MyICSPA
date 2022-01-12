@@ -16,9 +16,16 @@ paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
 	paddr_t pte1_addr = (satp_ppn << 12) | (vpn1 << 2);
 	/* printf("pte1_addr=0x%u\n", pte1_addr); */
 	paddr_t pte1 = paddr_read(pte1_addr, 4);
+	if((pte1 & 0x1) == 0){
+		printf("pte1=0x%x\n", pte1);
+	}
 	assert((pte1 & 0x1) == 1);
+
 	paddr_t pte2_addr = (pte1 & ~0xfff) | (vpn0 << 2);
 	paddr_t pte2 = paddr_read(pte2_addr, 4);
+	if((pte2 & 0x1) == 0){
+		printf("pte2=0x%x\n", pte2);
+	}
 	assert((pte2 & 0x1) == 1);
 	paddr = (pte2 & ~0xfff) | (vaddr & 0xfff); 
 	if(paddr != vaddr){
