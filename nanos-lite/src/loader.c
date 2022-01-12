@@ -94,7 +94,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	printf("context_uload:filename=%s\n", filename);
 	/* printf("argv=%p\tenvp=%p\n", argv, envp); */
 	Area kstack = {pcb, pcb+1};
-	printf("as.area.start=%p\tend=%p\n", pcb->as.area.start, pcb->as.area.end);
+	/* printf("as.area.start=%p\tend=%p\n", pcb->as.area.start, pcb->as.area.end); */
 	uintptr_t gprx = (uintptr_t)new_page(8);
 	map(&pcb->as , (void*)pcb->as.area.end - 0x8000, (void*)gprx         , 0);
 	map(&pcb->as , (void*)pcb->as.area.end - 0x7000, (void*)gprx + 0x1000, 0);
