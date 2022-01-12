@@ -3,5 +3,20 @@
 #include <memory/vaddr.h>
 
 paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
-  return MEM_RET_FAIL;
+	uintptr_t paddr;
+	assert(type == 0);
+	assert((cpu.satp & 0xfff) == 0);
+	uintptr_t vpn1 = (vaddr >> 22);
+	uintptr_t vpn0 = (vaddr >> 12) & 0x3ff;
+	/* pa = (pg_table[va >> 12] & ~0xfff) | (va & 0xfff); */
+	uintptr_t satp_ppn = cpu.satp >> 12;
+	uintptr_t pte1_addr = (satp_ppn << 12) | (vpn1 << 2);
+	uintptr_t pte1 = pgalloc_usr(PGSIZE);
+	assert((pte1 & 0xfff) == 0);
+	pte1 = *(uintptr_t*)pte1_addr; 
+	uintptr_t pte2_addr = (pte1 & ~0xfff) | (vpn0 << 2);
+	paddr = (*(uintptr_t*)pte2_addr & ~0xfff) | (vaddr & 0xfff); 
+	assert(paddr == vaddr);
+	return paddr;
+	return MEM_RET_FAIL;
 }

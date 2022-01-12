@@ -13,6 +13,7 @@ typedef struct {
   // wk 3.1
   rtlreg_t mtvec;
   rtlreg_t mepc, mstatus, mcause; // CSR regs
+  rtlreg_t satp;
 
 
   // wk 3.1
