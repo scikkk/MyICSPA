@@ -6,11 +6,15 @@ paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
 	uintptr_t paddr;
 	assert(type == 0);
 	assert((cpu.satp >> 31) == 1);
+
 	uintptr_t vpn1 = (vaddr >> 22);
 	uintptr_t vpn0 = (vaddr >> 12) & 0x3ff;
+	
 	/* pa = (pg_table[va >> 12] & ~0xfff) | (va & 0xfff); */
+	
 	uintptr_t satp_ppn = cpu.satp & 0x3fffff;
 	uintptr_t pte1_addr = (satp_ppn << 12) | (vpn1 << 2);
+	printf("pte1_addr=0x%lu\n", pte1_addr);
 	uintptr_t pte1 = *(uintptr_t*)pte1_addr;
 	assert((pte1 & 0x1) == 1);
 	pte1 = *(uintptr_t*)pte1_addr; 
