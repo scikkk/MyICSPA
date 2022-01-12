@@ -68,6 +68,7 @@ void __am_switch(Context *c) {
 }
 
 void map(AddrSpace *as, void *va, void *pa, int prot) {
+	printf("map: va=%p\tpa=%p\n", va, pa);
 	assert(prot == 0);
 	uintptr_t pt1_base = (uintptr_t)as->ptr;
 	assert((pt1_base & 0xfff) == 0);
