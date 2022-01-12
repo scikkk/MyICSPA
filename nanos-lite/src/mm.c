@@ -12,7 +12,7 @@ void* new_page(size_t nr_page) {
 static void* pg_alloc(int n) {
 	void* ret = new_page(n >> 12);
 	
-	/* memset(ret, 0, n); */
+	memset(ret, 0, n);
 	return ret;
 }
 #endif
