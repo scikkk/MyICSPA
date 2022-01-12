@@ -162,9 +162,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	uintptr_t entry = loader(pcb, filename);
 	printf("uload entry=%p\n", entry);
 	pcb->cp = ucontext(NULL, kstack, (void*)entry);
-	printf("uload entry=%p\n", entry);
 	pcb->cp->GPRx = gprx;
-	printf("uload entry=%p\n", entry);
 	/* if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]); */
 	/* char **wargv = (char**)((uintptr_t)gprx+sizeof(int)); */
 	/* char **wenvp = (char**)(wargv + argc + 1); */
