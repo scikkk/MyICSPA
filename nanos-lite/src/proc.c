@@ -27,13 +27,13 @@ void init_proc() {
 	// wk 4.1
 	context_kload(&pcb[0], hello_fun, (void*)0x99999999);
 
-	/* char *argv[] = {"--skip", NULL}; */
-	/* context_uload(&pcb[1], "/bin/pal", argv, NULL); */
+	char *argv[] = {"--skip", NULL};
+	context_uload(&pcb[1], "/bin/pal", argv, NULL);
 
 	/* char *argv[] = {"/bin/exec-test", NULL}; */
 	/* context_uload(&pcb[1], "/bin/exec-test", argv, NULL); */
 	
-	context_uload(&pcb[1], "/bin/menu", NULL, NULL);
+	/* context_uload(&pcb[1], "/bin/menu", NULL, NULL); */
 
 	/* char *argv[] = {"WK", "SCS", "HaHaHa", NULL}; */
 	/* char *envp[] = {"USER=WK", "ID=LOVE", NULL}; */
