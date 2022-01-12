@@ -4,7 +4,10 @@
 
 static Context* (*user_handler)(Event, Context*) = NULL;
 
+extern void __am_get_cur_as(Context *c);
+extern void __am_switch(Context *c);
 Context* __am_irq_handle(Context *c) {
+	__am_get_cur_as(c);
 	if (user_handler) {
 		Event ev = {0};
 		/* ev.event = c->mcause; */
@@ -32,6 +35,7 @@ Context* __am_irq_handle(Context *c) {
 		assert(c != NULL);
 		/* assert(0); */
 	}
+	__am_switch(c);
 	return c;
 }
 
@@ -55,7 +59,6 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
 	/* printf("kcontex!!! arg=%p\n", arg); */
 	ctx->GPR2 = (uintptr_t)arg;
 	/* ctx->GPR2 = (uintptr_t)entry; */
-
 	return ctx;
 	// wk 4.1
 	/* return NULL; */
