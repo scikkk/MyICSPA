@@ -19,6 +19,7 @@ void isa_reg_display() {
 	printf("    %-6s\t0x%-8x\t%d\n", "mepc", cpu.mepc, cpu.mepc);
 	printf("    %-6s\t0x%-8x\t%d\n", "mstatus", cpu.mstatus, cpu.mstatus);
 	printf("    %-6s\t0x%-8x\t%d\n", "mcause", cpu.mcause, cpu.mcause);
+	printf("    %-6s\t0x%-8x\t%d\n", "satp", cpu.satp, cpu.satp);
 	// added by wk
 }
 
