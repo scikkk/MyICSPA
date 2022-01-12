@@ -74,6 +74,7 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 	printf("map: va=%p --> pa=%p\n", va, pa);
 	assert(prot == 0);
 	uintptr_t pt1_base = (uintptr_t)as->ptr;
+	printf("map hit line: %d\n", __LINE__);
 	assert((pt1_base & 0xfff) == 0);
 	uintptr_t vpn1 = ((uintptr_t)va >> 22);
 	uintptr_t vpn0 = ((uintptr_t)va >> 12) & 0x3ff;
