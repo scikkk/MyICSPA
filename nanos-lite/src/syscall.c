@@ -30,7 +30,7 @@ int sys_yield(){
 }
 
 void sys_exit(int code){
-    sys_execve("/bin/nterm", NULL, NULL);
+	sys_execve("/bin/nterm", NULL, NULL);
 	halt(code);
 }
 
@@ -93,7 +93,7 @@ int sys_execve(const char *pathname, char *const argv[], char *const envp[]){
 	}
 	/* printf("sys: argv=%p\tenvp=%p\n", argv, envp); */
 	/* printf("sys: argv[0]=%p\tenvp[0]=%p\n", argv[0], envp[0]); */
-    context_uload(current, pathname, argv, envp);
+	context_uload(current, pathname, argv, envp);
 	/* printf("pathname:%s\n", pathname); */
 	switch_boot_pcb();
 	yield();
@@ -241,7 +241,12 @@ void do_syscall(Context *c) {
 		case SYS_write:
 			/* printf("write_a[3]:%d\n", a[3]); */
 			strace_ret = sys_write(a[1], (void*)a[2], a[3]);
-
+			break;
+		case SYS_kill:
+			assert(0);
+			break;
+		case  SYS_getpid:
+			assert(0);
 			break;
 		case SYS_close:
 			strace_ret = sys_close(a[1]);
@@ -252,13 +257,36 @@ void do_syscall(Context *c) {
 		case SYS_brk:
 			strace_ret = sys_brk(a[1]);
 			break;
+		case SYS_fstat:
+			assert(0);
+			break;
+		case SYS_time:
+			assert(0);
+			break;
+		case SYS_signal:
+			assert(0);
+			break;
 		case SYS_execve:
 			strace_ret = sys_execve((char*)a[1], (char*const*)a[2], (char*const*)a[3]);
+			break;
+		case  SYS_fork:
+			assert(0);
+			break;
+		case  SYS_link:
+			assert(0);
+			break;
+		case  SYS_unlink:
+			assert(0);
+			break;
+		case  SYS_wait:
+			assert(0);
+			break;
+		case  SYS_times:
+			assert(0);
 			break;
 		case SYS_gettimeofday:
 			strace_ret = sys_gettimeofday((struct timeval*)a[1], (void*)a[2]);
 			break;
-
 		default: panic("Unhandled syscall ID = %d", a[0]);
 	}
 	/* printf("strace_ret=%d\n", strace_ret); */
