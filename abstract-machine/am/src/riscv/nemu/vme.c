@@ -87,6 +87,7 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 	uintptr_t pte2_addr = (pte1 & ~0xfff) | (vpn0 << 2);
 	/* printf("pte2_addr=%p\n", pte2_addr); */
 	*(uintptr_t*)pte2_addr = ((uintptr_t)pa & ~0xfff) | 0x1; 
+	printf("map: pte1=%p\tpte2=%p\n", pte1, *(uintptr_t*)pte2_addr);
 }
 
 Context *ucontext(AddrSpace *as, Area kstack, void *entry) {
