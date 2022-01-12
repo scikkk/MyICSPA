@@ -61,13 +61,14 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		fs_lseek(fd, off, SEEK_SET);
 		fs_read(fd, &ph, header.e_phentsize);
 		off += header.e_phentsize;
+		printf("filesz=%p\tmemsz=%p\n", ph.p_filesz, ph.p_memsz);
 		if(ph.p_type == PT_LOAD){
 			/* if(ph.p_memsz > ph.p_filesz){ */
 			/* 	memset((void*)(ph.p_vaddr+ph.p_filesz), 0, ph.p_memsz-ph.p_filesz); */
 			/* } */
 			fs_lseek(fd, ph.p_offset, SEEK_SET);
 			for(int k = 0; ph.p_memsz - k*0x1000 > 0; k++){
-				printf("%p\n",  ph.p_memsz - k*0x1000 );
+				/* printf("%p\n",  ph.p_memsz - k*0x1000 ); */
 				uintptr_t page_begin  = (uintptr_t)new_page(1);
 				map(&pcb->as , (void*)ph.p_vaddr + 0x1000*k, (void*)page_begin, 0);
 				/* printf("loader: pagenum=%d\tva=%p\tpa=%p\n", k, ph.p_vaddr + 0x1000*k, page_begin); */
