@@ -77,9 +77,10 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 	uintptr_t pte1_addr = (satp_ppn << 12) | (vpn1 << 2);
 	uintptr_t pte1 = (uintptr_t)pgalloc_usr(PGSIZE);
 	assert((pte1 & 0xfff) == 0);
+	pte1 |= 0x1;
 	*(uintptr_t*)pte1_addr = pte1; 
 	uintptr_t pte2_addr = (pte1 & ~0xfff) | (vpn0 << 2);
-	*(uintptr_t*)pte2_addr = (uintptr_t)pa & ~0xfff; 
+	*(uintptr_t*)pte2_addr = ((uintptr_t)pa & ~0xfff) | 0x1; 
 }
 
 Context *ucontext(AddrSpace *as, Area kstack, void *entry) {
