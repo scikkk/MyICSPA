@@ -82,6 +82,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			printf("line%d:loader: vaddr=%p\n", __LINE__, ph.p_vaddr);
 		} 
 	}
+			printf("line%d:loader: vaddr=%p\n", __LINE__, ph.p_vaddr);
 	return header.e_entry;
 }
 
