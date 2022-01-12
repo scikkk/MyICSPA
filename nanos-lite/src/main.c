@@ -25,8 +25,10 @@ int main() {
 	init_irq();
 #endif
 
+	Log("Finish initialization");
 	init_fs();
 
+	Log("Finish initialization");
 	init_proc();
 
 	Log("Finish initialization");
