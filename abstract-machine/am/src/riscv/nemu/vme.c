@@ -41,6 +41,7 @@ bool vme_init(void* (*pgalloc_f)(int), void (*pgfree_f)(void*)) {
 	set_satp(kas.ptr);
 	vme_enable = 1;
 
+	printf("vme_init finishen!\n");
 	return true;
 }
 
@@ -83,7 +84,7 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 		*(uintptr_t*)pte1_addr = pte1; 
 	}
 	uintptr_t pte2_addr = (pte1 & ~0xfff) | (vpn0 << 2);
-	printf("pte2_addr=%p\n", pte2_addr);
+	/* printf("pte2_addr=%p\n", pte2_addr); */
 	*(uintptr_t*)pte2_addr = ((uintptr_t)pa & ~0xfff) | 0x1; 
 }
 
