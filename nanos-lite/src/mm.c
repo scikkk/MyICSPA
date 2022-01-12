@@ -28,9 +28,12 @@ int mm_brk(uintptr_t brk) {
 		uintptr_t old_brk = brk;
 		while(brk > current->max_brk){
 			uintptr_t page_begin  = (uintptr_t)new_page(1);                                                                                                      
+			printf("hit line %d\n", __LINE__);
 			/* map(&current->as , (void*)(brk&~0xfff), (void*)page_begin, 0); */
 			map(&current->as , (void*)(brk), (void*)page_begin, 0);
+			printf("hit line %d\n", __LINE__);
 			brk -= 0x1000;
+			printf("hit line %d\n", __LINE__);
 		}
 		current->max_brk = old_brk;
 	}
