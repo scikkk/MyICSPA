@@ -36,7 +36,7 @@ Context* __am_irq_handle(Context *c) {
 		/* assert(0); */
 	}
 	__am_switch(c);
-	printf("irqhandle ret c = %p\n", c);
+	/* printf("irqhandle ret c = %p\n", c); */
 	return c;
 }
 
