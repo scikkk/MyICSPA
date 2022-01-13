@@ -20,6 +20,7 @@ void isa_reg_display() {
 	printf("    %-6s\t0x%-8x\t%d\n", "mstatus", cpu.mstatus, cpu.mstatus);
 	printf("    %-6s\t0x%-8x\t%d\n", "mcause", cpu.mcause, cpu.mcause);
 	printf("    %-6s\t0x%-8x\t%d\n", "satp", cpu.satp, cpu.satp);
+	printf("    %-6s\t0x%-8x\t%d\n", "INTR", cpu.INTR, cpu.INTR);
 	// added by wk
 }
 
@@ -27,6 +28,12 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	char ss[5];
 	strcpy(ss,s);
 	if(strcmp(ss,"pc")==0) return cpu.pc;
+	if(strcmp(ss,"mtvec")==0) return cpu.mtvec;
+	if(strcmp(ss,"mepc")==0) return cpu.mepc;
+	if(strcmp(ss,"mstatus")==0) return cpu.mstatus;
+	if(strcmp(ss,"mcause")==0) return cpu.causec;
+	if(strcmp(ss,"satp")==0) return cpu.satp;
+	if(strcmp(ss,"INTR")==0) return cpu.INTR;
 	for (int k = 0; ss[k] != '\0'; k++){
 		if(s[k] >= 'A' && s[k] <= 'Z') ss[k]+=32;
 	}
