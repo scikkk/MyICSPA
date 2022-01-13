@@ -57,7 +57,8 @@ Context* schedule(Context *prev) {
 	// wk 4.1
 	/* printf("prev=%p\n", prev); */
 	// save the context pointer
-	printf("current->cp=%p\n", &current->cp);
+	printf("current=%p\n", current);
+	printf("&current->cp=%p\n", &current->cp);
 	current->cp = prev;
 	printf("current=%p\tcurrent->as=%p\tas.ptr=%p\tpdir=%p\tmaxbrk=%p\n", current, current->as, current->as.ptr, current->cp->pdir, current->max_brk);
 	// always select pcb[0] as the new process
