@@ -55,6 +55,13 @@ void protect(AddrSpace *as) {
 	as->pgsize = PGSIZE;
 	// map kernel space
 	memcpy(updir, kas.ptr, PGSIZE);
+	int i;
+	for (i = 0; i < LENGTH(segments); i ++) {
+		void *va = segments[i].start;
+		for (; va < segments[i].end; va += PGSIZE) {
+			map(as, va, va, 0);
+		}
+	}
 }
 
 void unprotect(AddrSpace *as) {
