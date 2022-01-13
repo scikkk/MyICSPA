@@ -72,8 +72,8 @@ void __am_switch(Context *c) {
 void map(AddrSpace *as, void *va, void *pa, int prot) {
 	assert(prot == 0);
 	uintptr_t pt1_base = (uintptr_t)as->ptr;
-	if((uintptr_t)va < 0x50000000)
-	printf("map:pt1base=%p va=%p --> pa=%p\n", pt1_base, va, pa);
+	/* if((uintptr_t)va < 0x50000000) */
+	/* printf("map:pt1base=%p va=%p --> pa=%p\n", pt1_base, va, pa); */
 	/* if((uintptr_t)va < 0x50000000) */
 	/* printf("map as->ptr=%p\n", as->ptr); */
 	assert((pt1_base & 0xfff) == 0);
@@ -82,8 +82,8 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 	/* pa = (pg_table[va >> 12] & ~0xfff) | (va & 0xfff); */
 	uintptr_t satp_ppn = pt1_base >> 12;
 	uintptr_t pte1_addr = (satp_ppn << 12) | (vpn1 << 2);
-	if((uintptr_t)va < 0x50000000)
-	printf("pte1_addr=%p\n", pte1_addr);
+	/* if((uintptr_t)va < 0x50000000) */
+	/* printf("pte1_addr=%p\n", pte1_addr); */
 	/* printf("map hit line: %d\n", __LINE__); */
 	uintptr_t pte1 = *(uintptr_t*)pte1_addr;
 	/* if((uintptr_t)va < 0x50000000) */
@@ -96,8 +96,8 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 	}
 	uintptr_t pte2_addr = (pte1 & ~0xfff) | (vpn0 << 2);
 
-	if((uintptr_t)va < 0x50000000)
-	printf("pte2_addr=%p\n", pte2_addr);
+	/* if((uintptr_t)va < 0x50000000) */
+	/* printf("pte2_addr=%p\n", pte2_addr); */
 	*(uintptr_t*)pte2_addr = ((uintptr_t)pa & ~0xfff) | 0x1; 
 	/* if((uintptr_t)va == 0x00000000) */
 	/* printf("map: pte1addr=%p\tpte2addr=%p\n", pte1_addr, pte2_addr); */
