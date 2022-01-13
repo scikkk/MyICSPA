@@ -81,7 +81,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 				}
 			}
 			/* fs_read(fd, (void*)ph.p_vaddr, ph.p_filesz); */
-			/* printf("line%d:loader: vaddr=%p\n", __LINE__, ph.p_vaddr); */
+			printf("line%d:loader: vaddr=%p --- %p\n", __LINE__, ph.p_vaddr, ph.p_vaddr + ph.p_memsz);
 		} 
 	}
 	return header.e_entry;
