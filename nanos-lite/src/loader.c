@@ -162,8 +162,8 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	}
 	memset((uintptr_t*)envp_start + envpc, 0, 4);
 	uintptr_t entry = loader(pcb, filename);
-    pcb->cp = ucontext(&pcb->as, kstack, (void*)entry-4);
-	printf("%p-4=%p\n", (void*)entry, (void*)entry-4);
+    pcb->cp = ucontext(&pcb->as, kstack, (void*)entry);
+	/* printf("%p-4=%p\n", (void*)entry, (void*)entry-4); */
 	pcb->cp->GPRx = gprx;
 	pcb->max_brk = gprx;
 	/* printf("pcb=%p\tbrk=%p\n", pcb, pcb->max_brk); */
