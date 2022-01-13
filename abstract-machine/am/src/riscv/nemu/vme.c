@@ -55,13 +55,6 @@ void protect(AddrSpace *as) {
 	as->pgsize = PGSIZE;
 	// map kernel space
 	memcpy(updir, kas.ptr, PGSIZE);
-	int i;
-	for (i = 0; i < LENGTH(segments); i ++) {
-		void *va = segments[i].start;
-		for (; va < segments[i].end; va += PGSIZE) {
-			map(as, va, va, 0);
-		}
-	}
 }
 
 void unprotect(AddrSpace *as) {
@@ -107,7 +100,7 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 	uintptr_t old_pte2 =	*(uintptr_t*)pte2_addr;
 	if(old_pte2)
 	printf("old_pte2=%p\n", old_pte2);
-	/* assert(old_pte2==0); */
+	assert(old_pte2==0);
 	/* if((uintptr_t)va < 0x50000000) */
 	/* printf("pte2_addr=%p\n", pte2_addr); */
 
