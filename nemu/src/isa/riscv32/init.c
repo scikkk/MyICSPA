@@ -44,6 +44,7 @@ static void restart() {
 
   // wk 2.3
   /* cpu.mstatus = 0x1800; */
+  cpu.mstatus = 0;
   // wk 2.3
   
   
