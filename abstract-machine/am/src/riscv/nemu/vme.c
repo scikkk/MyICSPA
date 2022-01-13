@@ -16,7 +16,7 @@ static Area segments[] = {      // Kernel memory mappings
 static inline void set_satp(void *pdir) {
 	uintptr_t mode = 1ul << (__riscv_xlen - 1);
 	asm volatile("csrw satp, %0" : : "r"(mode | ((uintptr_t)pdir >> 12)));
-		printf("pdir=%p\n", pdir);
+	printf("pdir=%p\n", pdir);
 	printf("set_satp=%p\n", mode | ((uintptr_t)pdir >> 12));
 }
 
@@ -74,8 +74,8 @@ void __am_switch(Context *c) {
 void map(AddrSpace *as, void *va, void *pa, int prot) {
 	assert(prot == 0);
 	uintptr_t pt1_base = (uintptr_t)as->ptr;
-	if((uintptr_t)va > 0x88000000 )
-	printf("map:pt1base=%p va=%p --> pa=%p\n", pt1_base, va, pa);
+	/* if((uintptr_t)va > 0x88000000 ) */
+	/* printf("map:pt1base=%p va=%p --> pa=%p\n", pt1_base, va, pa); */
 	/* if((uintptr_t)va < 0x50000000) */
 	/* printf("map as->ptr=%p\n", as->ptr); */
 	assert((pt1_base & 0xfff) == 0);
@@ -99,7 +99,7 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 	uintptr_t pte2_addr = (pte1 & ~0xfff) | (vpn0 << 2);
 	uintptr_t old_pte2 =	*(uintptr_t*)pte2_addr;
 	if(old_pte2)
-	printf("old_pte2=%p\n", old_pte2);
+		printf("old_pte2=%p\n", old_pte2);
 	assert(old_pte2==0);
 	/* if((uintptr_t)va < 0x50000000) */
 	/* printf("pte2_addr=%p\n", pte2_addr); */
