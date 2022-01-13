@@ -26,7 +26,6 @@ void free_page(void *p) {
 /* The brk() system call handler. */
 #include <proc.h>
 int mm_brk(uintptr_t brk) {
-	printf("maxbrk increase: %p --> %p\n", current->max_brk, brk);
 	/* printf("current=%p\tcurrent->as=%p\n", current, current->as); */
 	brk &= ~0xfff;
 	if(brk > current->max_brk){
