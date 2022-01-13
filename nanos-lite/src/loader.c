@@ -96,7 +96,7 @@ void context_kload(PCB *pcb, void (*entry)(void *), void *arg){
 	Area kstack = {pcb, pcb+1};
 	/* printf("start=%p\tend=%p\n", kstack.start, kstack.end); */
 	pcb->cp = kcontext(kstack, entry-4, arg);
-	printf("%p-4=%p\n", entry, entry-4);
+	/* printf("%p-4=%p\n", entry, entry-4); */
 	/* printf("kcontext-ret=%p\n", pcb->cp); */
 }
 // wk 4.1
@@ -165,9 +165,9 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
     pcb->cp = ucontext(&pcb->as, kstack, (void*)entry);
 	/* printf("%p-4=%p\n", (void*)entry, (void*)entry-4); */
 	pcb->cp->GPRx = gprx;
-	pcb->max_brk = gprx;
+	/* pcb->max_brk = gprx; */
 	/* printf("pcb=%p\tbrk=%p\n", pcb, pcb->max_brk); */
-	printf("pcb=%p\tas=%p\tas->ptr=%p\n", pcb, pcb->as, pcb->as.ptr);
+	/* printf("pcb=%p\tas=%p\tas->ptr=%p\n", pcb, pcb->as, pcb->as.ptr); */
 	Log("Uload file=%s, entry=%p", filename, entry);
 	/* if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]); */
 	/* char **wargv = (char**)((uintptr_t)gprx+sizeof(int)); */
