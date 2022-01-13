@@ -3,7 +3,7 @@ void do_syscall(Context *c);
 Context* schedule(Context *prev) ;
 
 static Context* do_event(Event e, Context* c) {
-	printf("do_event:e.event=%p\n", e.event);
+	/* printf("do_event:e.event=%p\n", e.event); */
 	switch (e.event) {
 		case EVENT_NULL:
 			Log("Unhandled EVENT_NULL!\n");
