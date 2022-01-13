@@ -70,8 +70,8 @@ void __am_switch(Context *c) {
 }
 
 void map(AddrSpace *as, void *va, void *pa, int prot) {
-	if((uintptr_t)va < 0x50000000)
-	printf("map: va=%p --> pa=%p\n", va, pa);
+	/* if((uintptr_t)va < 0x50000000) */
+	/* printf("map: va=%p --> pa=%p\n", va, pa); */
 	assert(prot == 0);
 	uintptr_t pt1_base = (uintptr_t)as->ptr;
 	/* if((uintptr_t)va < 0x50000000) */

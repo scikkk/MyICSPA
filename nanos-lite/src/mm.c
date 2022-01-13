@@ -26,6 +26,7 @@ void free_page(void *p) {
 /* The brk() system call handler. */
 #include <proc.h>
 int mm_brk(uintptr_t brk) {
+	printf("mm_brk=%p\n", brk);
 	/* printf("current=%p\tcurrent->as=%p\n", current, current->as); */
 	if(brk > current->max_brk){
 		printf("currentpcb=%p\tmaxbrk increase: %p --> %p\n", current, current->max_brk, brk);
