@@ -56,6 +56,7 @@ bool cte_init(Context*(*handler)(Event, Context*)) {
 	asm volatile("csrw mtvec, %0" : : "r"(__am_asm_trap));
 
 	// register event handler
+	assert(user_handler == NULL);
 	user_handler = handler;
 
 	return true;
