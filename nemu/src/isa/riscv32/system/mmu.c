@@ -3,6 +3,7 @@
 #include <memory/vaddr.h>
 
 paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
+	if((vaddr&0x80000000)) return vaddr;
 	paddr_t paddr;
 	assert(type == 0);
 	assert((cpu.satp >> 31) == 1);
