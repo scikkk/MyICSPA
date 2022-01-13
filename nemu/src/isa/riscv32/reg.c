@@ -31,7 +31,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	if(strcmp(ss,"mtvec")==0) return cpu.mtvec;
 	if(strcmp(ss,"mepc")==0) return cpu.mepc;
 	if(strcmp(ss,"mstatus")==0) return cpu.mstatus;
-	if(strcmp(ss,"mcause")==0) return cpu.cause;
+	if(strcmp(ss,"mcause")==0) return cpu.mcause;
 	if(strcmp(ss,"satp")==0) return cpu.satp;
 	if(strcmp(ss,"INTR")==0) return cpu.INTR;
 	for (int k = 0; ss[k] != '\0'; k++){
