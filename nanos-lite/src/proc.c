@@ -80,6 +80,12 @@ Context* schedule(Context *prev) {
 	/* printf("mepc=%p\n", (current->cp)->mepc); */
 	/* printf("gpr1=%p\n", (current->cp)->GPR1); */
 	/* printf("exit shedule\n"); */
+	if(current == &pcb[0]){
+	printf("enter pcb[0]: pdir=%p\n", pcb[0].cp->pdir);
+	}
+	else{
+	printf("enter pcb[1]: pdir=%p\n", pcb[1].cp->pdir);
+	}
 	return current->cp;
 	// wk 4.1
 	/* return NULL; */
