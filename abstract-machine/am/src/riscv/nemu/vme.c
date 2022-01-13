@@ -98,7 +98,7 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 	}
 	uintptr_t pte2_addr = (pte1 & ~0xfff) | (vpn0 << 2);
 	uintptr_t old_pte2 =	*(uintptr_t*)pte2_addr;
-	printf("old_pte2=%p\n", old_pte2);
+	/* printf("old_pte2=%p\n", old_pte2); */
 	assert(old_pte2==0);
 	/* if((uintptr_t)va < 0x50000000) */
 	/* printf("pte2_addr=%p\n", pte2_addr); */
