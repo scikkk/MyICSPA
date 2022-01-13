@@ -58,17 +58,17 @@ Context* schedule(Context *prev) {
 	if(current == NULL){
 		return prev;
 	}
-	printf("enter shedule\n");
+	/* printf("enter shedule\n"); */
 	// wk 4.1
 	/* printf("prev=%p\n", prev); */
 	// save the context pointer
-	printf("current=%p\n", current);
-	printf("&current->cp=%p\n", &current->cp);
+	/* printf("current=%p\n", current); */
+	/* printf("&current->cp=%p\n", &current->cp); */
 	current->cp = prev;
-	printf("current=%p\tcurrent->as=%p\tas.ptr=%p\tpdir=%p\tmaxbrk=%p\n", current, current->as, current->as.ptr, current->cp->pdir, current->max_brk);
+	/* printf("current=%p\tcurrent->as=%p\tas.ptr=%p\tpdir=%p\tmaxbrk=%p\n", current, current->as, current->as.ptr, current->cp->pdir, current->max_brk); */
 	// always select pcb[0] as the new process
 	current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
-	printf("current=%p\tcurrent->as=%p\tas.ptr=%p\tpdir=%p\tmaxbrk=%p\n", current, current->as, current->as.ptr, current->cp->pdir, current->max_brk);
+	/* printf("current=%p\tcurrent->as=%p\tas.ptr=%p\tpdir=%p\tmaxbrk=%p\n", current, current->as, current->as.ptr, current->cp->pdir, current->max_brk); */
 	
 	/* printf("pcb[0].as=%p\tpcb[1].as=%p\n", &pcb[0].as, &pcb[1].as); */
 	// then return the new context
@@ -79,7 +79,7 @@ Context* schedule(Context *prev) {
 
 	/* printf("mepc=%p\n", (current->cp)->mepc); */
 	/* printf("gpr1=%p\n", (current->cp)->GPR1); */
-	printf("exit shedule\n");
+	/* printf("exit shedule\n"); */
 	return current->cp;
 	// wk 4.1
 	/* return NULL; */
