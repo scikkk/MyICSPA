@@ -27,9 +27,23 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
 	/* isa_reg_display(); */
 	cpu.mepc = epc;
 	cpu.mcause = NO;
+	if((cpu.mstatus & 0x8) == 0){
+		cpu.mstatus &= ~0x80;
+	}
+	else{
+		cpu.mstatus |= 0x80;
+	}
+	cpu.mstatus &= ~0x8;
 	return cpu.mtvec;
 }
 
+
+#define IRQ_TIMER 0x80000007  // for riscv32
+
 word_t isa_query_intr() {
+	if (cpu.INTR) {
+		cpu.INTR = false;
+		return IRQ_TIMER;
+	}
 	return INTR_EMPTY;
 }

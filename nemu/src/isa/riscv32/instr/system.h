@@ -31,6 +31,13 @@ def_EHelper(ecall) {
 
 def_EHelper(mret) {
   rtl_j(s, cpu.mepc);
+	if((cpu.mstatus & 0x80) == 0){
+		cpu.mstatus &= ~0x8;
+	}
+	else{
+		cpu.mstatus |= 0x8;
+	}
+	cpu.mstatus |= 0x80;
   /* rtl_j(s, cpu.mepc); */
 }
 def_EHelper(csrrw) {
