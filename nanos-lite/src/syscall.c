@@ -222,7 +222,7 @@ void do_syscall(Context *c) {
 	a[3] = c->GPR4;
 
 	int strace_ret = 0;
-	char sret[20]="ret";
+	/* char sret[20]="ret"; */
 	switch (a[0]) {
 		case SYS_exit:
 			/* strace(c, "void"); */
@@ -293,7 +293,7 @@ void do_syscall(Context *c) {
 	}
 	/* printf("strace_ret=%d\n", strace_ret); */
 	/* sprintf(sret, "%d", strace_ret); */
-	strace(c, sret);
+	/* strace(c, sret); */
 	c->GPRx = strace_ret;
 	/* printf("GPRx:%d\n", c->GPRx); */
 }
