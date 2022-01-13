@@ -7,11 +7,9 @@ static Context* (*user_handler)(Event, Context*) = NULL;
 extern void __am_get_cur_as(Context *c);
 extern void __am_switch(Context *c);
 Context* __am_irq_handle(Context *c) {
-	printf("%d:cause=%p\n", __LINE__, c->mcause);
+	/* printf("%d:cause=%p\n", __LINE__, c->mcause); */
 	__am_get_cur_as(c);
-	printf("%d:cause=%p\n", __LINE__, c->mcause);
 	if (user_handler) {
-		printf("%d:cause=%p\n", __LINE__, c->mcause);
 		Event ev = {0};
 		/* ev.event = c->mcause; */
 		/* switch (c->mcause) { */
@@ -29,24 +27,20 @@ Context* __am_irq_handle(Context *c) {
 
 		/* printf("__am_irq_handle=%p\n", c); */
 		/* if(c->mcause != 11) */ 
-		printf("%d:cause=%d\n", __LINE__, c->mcause);
 		switch(c->GPR1){
 			case 0:case 1:case 2:case 3: case 4:case 5: case 6:case 7:
 			case 8:case 9:case 10:case 11:case 12: case 13:case 14: case 15: case 16: case 17:
 			case 18: case 19: ev.event = EVENT_SYSCALL;break;
 			default: ev.event = EVENT_YIELD;
 		}
-		printf("%d:cause=%d\n", __LINE__, c->mcause);
 		if(c->mcause != 11) 
 			ev.event = EVENT_IRQ_TIMER;
 		c = user_handler(ev, c);
 		assert(c != NULL);
 		/* assert(0); */
 	}
-	printf("%d:cause=%p\n", __LINE__, c->mcause);
 	__am_switch(c);
 	/* printf("irqhandle ret c = %p\n", c); */
-	printf("%d:cause=%p\n", __LINE__, c->mcause);
 	return c;
 }
 
