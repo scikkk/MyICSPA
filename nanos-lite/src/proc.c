@@ -55,6 +55,9 @@ void init_proc() {
 }
 
 Context* schedule(Context *prev) {
+	if(current == NULL){
+		return prev;
+	}
 	printf("enter shedule\n");
 	// wk 4.1
 	/* printf("prev=%p\n", prev); */
