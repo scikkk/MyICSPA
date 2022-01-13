@@ -43,6 +43,7 @@ size_t fs_lseek(int fd, size_t offset, int whence);
 int fs_close(int fd);
 // wk 3.3
 
+static uintptr_t MAX_BRK = 0x40000000;
 
 enum {SEEK_SET, SEEK_CUR, SEEK_END};
 
@@ -72,6 +73,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 				/* printf("k=%d\t%p\n", k,  ph.p_memsz - pagenum*0x1000 ); */
 				uintptr_t page_begin  = (uintptr_t)new_page(1);
 				map(&pcb->as , (void*)(ph.p_vaddr) + 0x1000*pagenum, (void*)page_begin, 0);
+				MAX_BRK = ((ph.p_vaddr) + 0x1000*pagenum) & ~0xfff;
 				/* printf("loader: pagenum=%d\tva=%p\tpa=%p\n", pagenum, ph.p_vaddr + 0x1000*pagenum, page_begin); */
 				memset((void*)page_begin, 0, 4096);
 				if(ph.p_filesz - pagenum*0x1000 > 0){
@@ -165,7 +167,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
     pcb->cp = ucontext(&pcb->as, kstack, (void*)entry);
 	/* printf("%p-4=%p\n", (void*)entry, (void*)entry-4); */
 	pcb->cp->GPRx = gprx;
-	pcb->max_brk = 0x40000000;
+	pcb->max_brk = MAX_BRK;
 	/* printf("pcb=%p\tbrk=%p\n", pcb, pcb->max_brk); */
 	/* printf("pcb=%p\tas=%p\tas->ptr=%p\n", pcb, pcb->as, pcb->as.ptr); */
 	Log("Uload file=%s, entry=%p", filename, entry);
