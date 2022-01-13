@@ -38,7 +38,7 @@ paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
 	assert((pte2 & 0x1) == 1);
 	paddr = (pte2 & ~0xfff) | (vaddr & 0xfff); 
 	/* if(paddr != vaddr){ */
-		printf("mmu: vaddr=0x%x ---> paddr=0x%x\n", vaddr, paddr);
+		/* printf("mmu: vaddr=0x%x ---> paddr=0x%x\n", vaddr, paddr); */
 	/* } */
 	/* assert(paddr == vaddr); */
 	return paddr;
