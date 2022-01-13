@@ -25,7 +25,7 @@ Context* __am_irq_handle(Context *c) {
 		/* printf("mstatus:%d\nmepc:%d\nmcause:%d\n", c->mstatus,c->mepc,c->mcause); */
 
 		/* printf("__am_irq_handle=%p\n", c); */
-		if(c->mcause != 11) 
+		/* if(c->mcause != 11) */ 
 		printf("cause=%d\n", c->mcause);
 		switch(c->GPR1){
 			case 0:case 1:case 2:case 3: case 4:case 5: case 6:case 7:
