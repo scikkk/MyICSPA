@@ -66,13 +66,15 @@ void __am_get_cur_as(Context *c) {
 void __am_switch(Context *c) {
 	if (vme_enable && c->pdir != NULL) {
 		set_satp(c->pdir);
+		printf("set satp=%p\n", c->pdir);
 	}
+
 }
 
 void map(AddrSpace *as, void *va, void *pa, int prot) {
 	assert(prot == 0);
 	uintptr_t pt1_base = (uintptr_t)as->ptr;
-	/* if((uintptr_t)va < 0x50000000) */
+	if((uintptr_t)va < 0x50000000)
 	printf("map:pt1base=%p va=%p --> pa=%p\n", pt1_base, va, pa);
 	/* if((uintptr_t)va < 0x50000000) */
 	/* printf("map as->ptr=%p\n", as->ptr); */
