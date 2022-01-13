@@ -168,7 +168,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	/* printf("%p-4=%p\n", (void*)entry, (void*)entry-4); */
 	pcb->cp->GPRx = gprx;
 	pcb->max_brk = MAX_BRK;
-	/* printf("pcb=%p\tbrk=%p\n", pcb, pcb->max_brk); */
+	printf("pcb=%p\tbrk=%p\n", pcb, pcb->max_brk);
 	/* printf("pcb=%p\tas=%p\tas->ptr=%p\n", pcb, pcb->as, pcb->as.ptr); */
 	Log("Uload file=%s, entry=%p", filename, entry);
 	/* if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]); */
