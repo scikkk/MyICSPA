@@ -9,9 +9,9 @@ static Context* do_event(Event e, Context* c) {
 			Log("Unhandled EVENT_NULL!\n");
 			break;
 		case EVENT_YIELD: 
-			Log("enter EVENT_YIELD!!!\n");
+			Log("enter EVENT_YIELD!!!");
 			c = schedule(c);
-			Log("exit EVENT_YIELD!!!\n");
+			Log("exit EVENT_YIELD!!!");
 			break;
 		case EVENT_SYSCALL: 
 			/* Log("\nUnhandled EVENT_SYSCALL!\n"); */
@@ -24,9 +24,9 @@ static Context* do_event(Event e, Context* c) {
 			Log("Unhandled EVENT_ERROR!\n");
 			break;
 		case EVENT_IRQ_TIMER:
-			Log("enter EVENT_IRQ_TIMER!!!\n");
+			Log("enter EVENT_IRQ_TIMER!!!");
 			c = schedule(c);
-			Log("exit EVENT_IRQ_TIMER!!!\n");
+			Log("exit EVENT_IRQ_TIMER!!!");
 			break;
 		case EVENT_IRQ_IODEV:
 			Log("Unhandled EVENT_IRQ_IODEV!\n");
