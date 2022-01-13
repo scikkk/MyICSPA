@@ -5,7 +5,6 @@ Context* schedule(Context *prev) ;
 static Context* do_event(Event e, Context* c) {
 	printf("do_event:e.event=%p\n", e.event);
 	switch (e.event) {
-
 		case EVENT_NULL:
 			Log("Unhandled EVENT_NULL!\n");
 			break;
@@ -24,8 +23,9 @@ static Context* do_event(Event e, Context* c) {
 			Log("Unhandled EVENT_ERROR!\n");
 			break;
 		case EVENT_IRQ_TIMER:
-			Log("EVENT_IRQ_TIMER!!!\n");
+			Log("enter EVENT_IRQ_TIMER!!!\n");
 			return schedule(c);
+			Log("exit EVENT_IRQ_TIMER!!!\n");
 			break;
 		case EVENT_IRQ_IODEV:
 			Log("Unhandled EVENT_IRQ_IODEV!\n");
