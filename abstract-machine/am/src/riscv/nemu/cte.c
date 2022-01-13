@@ -7,10 +7,11 @@ static Context* (*user_handler)(Event, Context*) = NULL;
 extern void __am_get_cur_as(Context *c);
 extern void __am_switch(Context *c);
 Context* __am_irq_handle(Context *c) {
-		printf("%d:cause=%d\n", __LINE__, c->mcause);
+		printf("%d:cause=%p\n", __LINE__, c->mcause);
 	__am_get_cur_as(c);
-		printf("%d:cause=%d\n", __LINE__, c->mcause);
+		printf("%d:cause=%p\n", __LINE__, c->mcause);
 	if (user_handler) {
+		printf("%d:cause=%p\n", __LINE__, c->mcause);
 		Event ev = {0};
 		/* ev.event = c->mcause; */
 		/* switch (c->mcause) { */
@@ -41,6 +42,7 @@ Context* __am_irq_handle(Context *c) {
 		assert(c != NULL);
 		/* assert(0); */
 	}
+		printf("%d:cause=%p\n", __LINE__, c->mcause);
 	__am_switch(c);
 	/* printf("irqhandle ret c = %p\n", c); */
 	return c;
