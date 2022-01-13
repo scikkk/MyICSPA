@@ -70,7 +70,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			/* } */
 			fs_lseek(fd, ph.p_offset, SEEK_SET);
 			for(int pagenum = 0; ph.p_memsz >= pagenum*0x1000; pagenum++){
-				/* printf("k=%d\t%p\n", k,  ph.p_memsz - pagenum*0x1000 ); */
+				printf("k=%d\t%p\t%p\n", k,  ph.p_memsz, pagenum*0x1000 );
 				uintptr_t page_begin  = (uintptr_t)new_page(1);
 				map(&pcb->as , (void*)(ph.p_vaddr) + 0x1000*pagenum, (void*)page_begin, 0);
 				MAX_BRK = ((ph.p_vaddr) + 0x1000*pagenum) & ~0xfff;
