@@ -46,6 +46,7 @@ Context* __am_irq_handle(Context *c) {
 	printf("%d:cause=%p\n", __LINE__, c->mcause);
 	__am_switch(c);
 	/* printf("irqhandle ret c = %p\n", c); */
+	printf("%d:cause=%p\n", __LINE__, c->mcause);
 	return c;
 }
 
