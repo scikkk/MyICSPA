@@ -55,7 +55,7 @@ bool cte_init(Context*(*handler)(Event, Context*)) {
 Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
 	// wk 4.1
 	Context *ctx =  (Context*)kstack.end - 1;;
-	printf("kcontex ctx=%p\n", ctx);
+	/* printf("kcontex ctx=%p\n", ctx); */
 	*ctx = (Context) { 0 };
 	ctx->mepc = (uintptr_t)entry;
 	/* printf("kcontex!!! arg=%p\n", arg); */
