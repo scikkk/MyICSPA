@@ -22,7 +22,8 @@ static Context* do_event(Event e, Context* c) {
 			Log("Unhandled EVENT_ERROR!\n");
 			break;
 		case EVENT_IRQ_TIMER:
-			Log("Unhandled EVENT_IRQ_TIMER\n");
+			Log("EVENT_IRQ_TIMER!!!\n");
+			return schedule(c);
 			break;
 		case EVENT_IRQ_IODEV:
 			Log("Unhandled EVENT_IRQ_IODEV!\n");
