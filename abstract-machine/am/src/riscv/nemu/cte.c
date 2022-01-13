@@ -60,6 +60,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
 	ctx->mepc = (uintptr_t)entry;
 	/* printf("kcontex!!! arg=%p\n", arg); */
 	ctx->GPR2 = (uintptr_t)arg;
+	ctx->pdir = NULL;
 	/* ctx->GPR2 = (uintptr_t)entry; */
 	return ctx;
 	// wk 4.1
