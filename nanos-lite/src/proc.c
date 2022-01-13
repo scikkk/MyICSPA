@@ -30,8 +30,8 @@ void init_proc() {
 	/* char *argv[] = {"--skip", NULL}; */
 	/* context_uload(&pcb[1], "/bin/pal", argv, NULL); */
 
-	/* char *argv[] = {"/bin/exec-test", NULL}; */
-	/* context_uload(&pcb[1], "/bin/exec-test", argv, NULL); */
+	char *argv[] = {"/bin/exec-test", NULL};
+	context_uload(&pcb[1], "/bin/exec-test", argv, NULL);
 	
 	/* context_uload(&pcb[1], "/bin/menu", NULL, NULL); */
 
@@ -41,7 +41,7 @@ void init_proc() {
 
 	/* context_uload(&pcb[1], "/bin/dummy", NULL, NULL); */
 
-	context_uload(&pcb[1], "/bin/hello", NULL, NULL);
+	/* context_uload(&pcb[1], "/bin/hello", NULL, NULL); */
 
 	switch_boot_pcb();
 	// wk 4.1
