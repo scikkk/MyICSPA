@@ -28,7 +28,7 @@ void free_page(void *p) {
 int mm_brk(uintptr_t brk) {
 	/* printf("current=%p\tcurrent->as=%p\n", current, current->as); */
 	brk &= ~0xfff;
-	if(brk >= current->max_brk){
+	if(brk > current->max_brk){
 		printf("maxbrk increase: %p --> %p\n", current->max_brk, brk);
 		uintptr_t old_brk = brk;
 		while(brk > current->max_brk){
