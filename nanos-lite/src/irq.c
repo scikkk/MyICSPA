@@ -4,7 +4,7 @@ Context* schedule(Context *prev) ;
 
 static Context* do_event(Event e, Context* c) {
 	/* printf("do_event:e.event=%p\n", e.event); */
-	c->mepc += 4;
+	/* c->mepc += 4; */
 	switch (e.event) {
 		case EVENT_NULL:
 			Log("Unhandled EVENT_NULL!\n");
