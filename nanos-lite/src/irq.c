@@ -4,6 +4,7 @@ Context* schedule(Context *prev) ;
 
 static Context* do_event(Event e, Context* c) {
 	/* printf("do_event:e.event=%p\n", e.event); */
+	c->mepc += 4;
 	switch (e.event) {
 		case EVENT_NULL:
 			Log("Unhandled EVENT_NULL!\n");
@@ -34,7 +35,6 @@ static Context* do_event(Event e, Context* c) {
 		default: panic("Unhandled event ID = %d", e.event);
 	}
 	/* printf("do_event=%p\n", c); */
-	/* c->mepc += 4; */
 	return c;
 }
 
