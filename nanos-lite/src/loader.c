@@ -176,6 +176,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
     pcb->cp = ucontext(&pcb->as, kstack, (void*)entry);
 	/* printf("%p-4=%p\n", (void*)entry, (void*)entry-4); */
 	pcb->cp->GPRx = (uintptr_t)pcb->as.area.end - (p_stack_end - gprx);
+	printf("GPRx=%p\n", pcb->cp->GPRx);
 	pcb->max_brk = MAX_BRK;
 	printf("uload pcb=%p\tbrk=%p\n", pcb, pcb->max_brk);
 	/* printf("pcb=%p\tas=%p\tas->ptr=%p\n", pcb, pcb->as, pcb->as.ptr); */
