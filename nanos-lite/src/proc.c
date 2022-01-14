@@ -34,7 +34,7 @@ void init_proc() {
 
 	/* char *argv[] = {"/bin/exec-test", NULL}; */
 	/* context_uload(&pcb[1], "/bin/exec-test", argv, NULL); */
-	
+
 	/* context_uload(&pcb[1], "/bin/menu", NULL, NULL); */
 
 	/* char *argv[] = {"WK", "SCS", "HaHaHa", NULL}; */
@@ -69,7 +69,7 @@ Context* schedule(Context *prev) {
 	// always select pcb[0] as the new process
 	current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
 	/* printf("current=%p\tcurrent->as=%p\tas.ptr=%p\tpdir=%p\tmaxbrk=%p\n", current, current->as, current->as.ptr, current->cp->pdir, current->max_brk); */
-	
+
 	/* printf("pcb[0].as=%p\tpcb[1].as=%p\n", &pcb[0].as, &pcb[1].as); */
 	// then return the new context
 	/* printf("cur-cp=%p\n", current->cp); */
@@ -82,10 +82,11 @@ Context* schedule(Context *prev) {
 	/* printf("exit shedule\n"); */
 
 	if(current == &pcb[0]){
-	printf("enter pcb[0]: pdir=%p\n", pcb[0].cp->pdir);
+		printf("enter pcb[0]: pdir=%p\n", pcb[0].cp->pdir);
+		current->cp->pdir = NULL;
 	}
 	else{
-	printf("enter pcb[1]: pdir=%p\n", pcb[1].cp->pdir);
+		printf("enter pcb[1]: pdir=%p\n", pcb[1].cp->pdir);
 	}
 	return current->cp;
 	// wk 4.1
