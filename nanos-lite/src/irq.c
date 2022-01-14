@@ -34,7 +34,7 @@ static Context* do_event(Event e, Context* c) {
 		default: panic("Unhandled event ID = %d", e.event);
 	}
 	/* printf("do_event=%p\n", c); */
-	c->mepc+=4;
+	/* c->mepc+=4; */
 	return c;
 }
 
