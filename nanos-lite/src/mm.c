@@ -3,10 +3,10 @@
 static void *pf = NULL;
 
 void* new_page(size_t nr_page) {
-	static int no = 1;
+	/* static int no = 1; */
 	void* ret = pf;
 	pf += nr_page*4096;
-	printf("new_page(%d):%d=[ %p , %p ]\n", nr_page, no++, ret, pf);
+	/* printf("new_page(%d):%d=[ %p , %p ]\n", nr_page, no++, ret, pf); */
 	return ret;
 }
 
