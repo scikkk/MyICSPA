@@ -112,19 +112,22 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	/* printf("argv=%p\tenvp=%p\n", argv, envp); */
 	Area kstack = {pcb, pcb+1};
 	/* printf("as.area.start=%p\tend=%p\n", pcb->as.area.start, pcb->as.area.end); */
-	uintptr_t gprx = (uintptr_t)new_page(8);
-	map(&pcb->as , (void*)pcb->as.area.end - 0x8000, (void*)gprx         , 0);
-	map(&pcb->as , (void*)pcb->as.area.end - 0x7000, (void*)gprx + 0x1000, 0);
-	map(&pcb->as , (void*)pcb->as.area.end - 0x6000, (void*)gprx + 0x2000, 0);
-	map(&pcb->as , (void*)pcb->as.area.end - 0x5000, (void*)gprx + 0x3000, 0);
-	map(&pcb->as , (void*)pcb->as.area.end - 0x4000, (void*)gprx + 0x4000, 0);
-	map(&pcb->as , (void*)pcb->as.area.end - 0x3000, (void*)gprx + 0x5000, 0);
-	map(&pcb->as , (void*)pcb->as.area.end - 0x2000, (void*)gprx + 0x6000, 0);
-	map(&pcb->as , (void*)pcb->as.area.end - 0x1000, (void*)gprx + 0x7000, 0);
-	int argc = 0, envpc = 0;
+	uintptr_t gprx = (uintptr_t)new_page(8) + 0x8000;
+	uintptr_t p_stack_end = gprx;
+	map(&pcb->as , (void*)pcb->as.area.end - 0x8000, (void*)gprx - 0x8000, 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x7000, (void*)gprx - 0x7000, 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x6000, (void*)gprx - 0x6000, 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x5000, (void*)gprx - 0x5000, 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x4000, (void*)gprx - 0x4000, 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x3000, (void*)gprx - 0x3000, 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x2000, (void*)gprx - 0x2000, 0);
+	map(&pcb->as , (void*)pcb->as.area.end - 0x1000, (void*)gprx - 0x1000, 0);
+	
+	int argc = 0, envpc = 0, str_tot = 0;
 	if(argv){
 		argc = -1;
 		while(argv[++argc]){
+			str_tot += strlen(argv[argc]) + 1;
 			/* printf("context_uload:argv[%d]=%p\n", argc ,argv[argc]); */
 			/* printf("context_uload:argv[%d]=%s\n", argc ,argv[argc]); */
 		}
@@ -133,41 +136,46 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	if(envp){
 		envpc = -1;
 		while(envp[++envpc]){
+			str_tot += strlen(envp[envpc]) + 1;
 			/* printf("context_uload:envp[%d]=%p\n", envpc, envp[envpc]); */
 			/* printf("context_uload:envp[%d]=%s\n", envpc, envp[envpc]); */
 		}
 	}
+
+	str_tot = ((str_tot >> 2) + 1) << 2;
+	uintptr_t string_start = gprx - str_tot;
+
 	/* if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]); */
 	/* printf("envpc=%d\n", envpc); */
 	/* printf("gcpx = %p\n", gprx); */
+	gprx = string_start - 4*argc - 4*envpc - 4;
 	*(int*)(gprx) = argc > 0 ? argc : 0;
 	uintptr_t argv_start = gprx + 4;
 	uintptr_t envp_start = argv_start + 4*argc + 4;
 	/* printf("argv_start=%p\tenvp_start=%p\n", argv_start, envp_start); */
-	uintptr_t envp_end = argv_start + 4*argc + 4 + 4*envpc + 4;
-	uintptr_t string_end = ((envp_end>>4)+1)<<4;
 	for(int k = 0; k < argc; k++){
 		int len = strlen(argv[k]) + 1;
-		*((uintptr_t*)argv_start + k) = string_end;
-		memcpy((void*)string_end, argv[k], len);
-		/* printf("argv[%d]=%s\n", k, (char*)string_end); */
-		/* printf("string=%p\n", (void*)string_end); */
-		string_end += len;
+		*((uintptr_t*)argv_start + k) = string_start;
+		memcpy((void*)string_start, argv[k], len);
+		/* printf("argv[%d]=%s\n", k, (char*)string_start); */
+		/* printf("string=%p\n", (void*)string_start); */
+		string_start += len;
 	}
 	memset((uintptr_t*)argv_start + argc, 0, 4);
 	for(int k = 0; k < envpc; k++){
 		int len = strlen(envp[k]) + 1; 
-		*((uintptr_t*)envp_start + k) = string_end;
-		memcpy((void*)string_end, envp[k], len);
-		/* printf("envp[%d]=%s\n", k, (char*)string_end); */
-		/* printf("string=%p\n", (void*)string_end); */
-		string_end += len;
+		*((uintptr_t*)envp_start + k) = string_start;
+		memcpy((void*)string_start, envp[k], len);
+		/* printf("envp[%d]=%s\n", k, (char*)string_start); */
+		/* printf("string=%p\n", (void*)string_start); */
+		string_start += len;
 	}
 	memset((uintptr_t*)envp_start + envpc, 0, 4);
+
 	uintptr_t entry = loader(pcb, filename);
     pcb->cp = ucontext(&pcb->as, kstack, (void*)entry);
 	/* printf("%p-4=%p\n", (void*)entry, (void*)entry-4); */
-	pcb->cp->GPRx = gprx+0x8000;
+	pcb->cp->GPRx = (uintptr_t)pcb->as.area.end - (p_stack_end - gprx);
 	pcb->max_brk = MAX_BRK;
 	printf("uload pcb=%p\tbrk=%p\n", pcb, pcb->max_brk);
 	/* printf("pcb=%p\tas=%p\tas->ptr=%p\n", pcb, pcb->as, pcb->as.ptr); */
