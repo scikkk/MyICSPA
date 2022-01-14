@@ -12,9 +12,8 @@ void* new_page(size_t nr_page) {
 #ifdef HAS_VME
 static void* pg_alloc(int n) {
 	void* ret = new_page(n >> 12);
-
-
 	memset(ret, 0, n);
+	printf("pg_alloc(%d*4096):[ %p , %p ]\n", n/4096, ret, pf);
 	return ret;
 }
 #endif
