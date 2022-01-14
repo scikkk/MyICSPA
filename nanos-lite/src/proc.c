@@ -83,7 +83,7 @@ Context* schedule(Context *prev) {
 
 	if(current == &pcb[0]){
 		printf("enter pcb[0]: pdir=%p\n", pcb[0].cp->pdir);
-		pcb[0].cp->pdir = NULL;
+		/* pcb[0].cp->pdir = NULL; */
 	}
 	else{
 		printf("enter pcb[1]: pdir=%p\n", pcb[1].cp->pdir);
