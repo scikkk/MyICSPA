@@ -41,9 +41,9 @@ void init_proc() {
 	/* char *envp[] = {"USER=WK", "ID=LOVE", NULL}; */
 	/* context_uload(&pcb[1], "/bin/nterm", argv, envp); */
 
-	/* context_uload(&pcb[1], "/bin/dummy", NULL, NULL); */
+	context_uload(&pcb[1], "/bin/dummy", NULL, NULL);
 
-	context_uload(&pcb[1], "/bin/hello", NULL, NULL);
+	/* context_uload(&pcb[1], "/bin/hello", NULL, NULL); */
 
 	/* context_uload(&pcb[1], "/bin/nslider", NULL, NULL); */
 
