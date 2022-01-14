@@ -7,7 +7,7 @@ int main() {
   volatile int j = 0;
   while (1) {
     j ++;
-    if (j == 9999) {
+    if (j == 999999) {
       printf("Hello World from Navy-apps for the %dth time!\n", i ++);
       j = 0;
     }
