@@ -22,10 +22,10 @@ int sys_write(int fd, const void *buf, int count);
 
 int sys_yield(){
 	// wk 4.1
-	printf("YIELD!!!\n");
+	/* printf("YIELD!!!\n"); */
 	/* return (int)schedule(NULL); */
 	// wk 4.1
-	/* yield(); */
+	yield();
 	return 0;
 }
 
