@@ -10,9 +10,9 @@ static Context* do_event(Event e, Context* c) {
 			Log("Unhandled EVENT_NULL!\n");
 			break;
 		case EVENT_YIELD: 
-			Log("enter EVENT_YIELD!!!");
+			/* Log("enter EVENT_YIELD!!!"); */
 			c = schedule(c);
-			Log("exit EVENT_YIELD!!!");
+			/* Log("exit EVENT_YIELD!!!"); */
 			break;
 		case EVENT_SYSCALL: 
 			/* Log("\nUnhandled EVENT_SYSCALL!\n"); */
