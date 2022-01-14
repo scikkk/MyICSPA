@@ -5,7 +5,7 @@ static void *pf = NULL;
 void* new_page(size_t nr_page) {
 	void* ret = pf;
 	pf += nr_page*4096;
-	/* printf("new_page begin at %p\n", ret); */
+	printf("new_page(%d):[ %p , %p ]\n", nr_page, ret, pf);
 	return ret;
 }
 
@@ -13,7 +13,7 @@ void* new_page(size_t nr_page) {
 static void* pg_alloc(int n) {
 	void* ret = new_page(n >> 12);
 	memset(ret, 0, n);
-	printf("pg_alloc(%d*4096):[ %p , %p ]\n", n/4096, ret, pf);
+	/* printf("pg_alloc(%d*4096):[ %p , %p ]\n", n/4096, ret, pf); */
 	return ret;
 }
 #endif
