@@ -15,7 +15,7 @@ void switch_boot_pcb() {
 void hello_fun(void *arg) {
 	int j = 1;
 	while (1) {
-		/* if(j % 4096 == 0) */
+		if(j % 4096 == 0)
 			Log("Hello World from Nanos-lite with arg '%p' for the %dth time!", (uintptr_t)arg, j);
 		j ++;
 		yield();
@@ -37,13 +37,13 @@ void init_proc() {
 
 	/* context_uload(&pcb[1], "/bin/menu", NULL, NULL); */
 
-	/* char *argv[] = {"WK", "SCS", "HaHaHa", NULL}; */
-	/* char *envp[] = {"USER=WK", "ID=LOVE", NULL}; */
-	/* context_uload(&pcb[1], "/bin/nterm", argv, envp); */
+	char *argv[] = {"WK", "SCS", "HaHaHa", NULL};
+	char *envp[] = {"USER=WK", "ID=LOVE", NULL};
+	context_uload(&pcb[1], "/bin/nterm", argv, envp);
 
 	/* context_uload(&pcb[1], "/bin/dummy", NULL, NULL); */
 
-	context_uload(&pcb[1], "/bin/hello", NULL, NULL);
+	/* context_uload(&pcb[1], "/bin/hello", NULL, NULL); */
 
 	/* context_uload(&pcb[1], "/bin/nslider", NULL, NULL); */
 
