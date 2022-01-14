@@ -101,8 +101,10 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 	uintptr_t pte2_addr = (pte1 & ~0xfff) | (vpn0 << 2);
 	uintptr_t old_pte2 = *(uintptr_t*)pte2_addr;
 	uintptr_t pte2 = ((uintptr_t)pa & ~0xfff) | 0x1; 
-	if(old_pte2 && old_pte2 != pte2)
+	if(old_pte2 && old_pte2 != pte2){
+	printf("map:pt1base=%p va=%p --> pa=%p\n", pt1_base, va, pa);
 		printf("old_pte2=%p\tnew_pte2=%p\n", old_pte2, pte2);
+	}
 	assert(old_pte2==0 || old_pte2 == pte2);
 	/* if((uintptr_t)va < 0x50000000) */
 	/* printf("pte2_addr=%p\n", pte2_addr); */
