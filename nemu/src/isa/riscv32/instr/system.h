@@ -13,7 +13,7 @@ word_t* csr(int32_t number){
 			/* printf("mcause\n"); */
 			return &cpu.mcause;
 		case 0x180:
-			/* printf("satp\n"); */
+			printf("!!!nemu satp!!!\n");
 			return &cpu.satp;
 		default: assert(0);
 
