@@ -72,6 +72,8 @@ void __am_switch(Context *c) {
 }
 
 void map(AddrSpace *as, void *va, void *pa, int prot) {
+	assert(((uint32_t)va&0xfff)==0);
+	assert(((uint32_t)pa&0xfff)==0);
 	assert(prot == 0);
 	uintptr_t pt1_base = (uintptr_t)as->ptr;
 	/* if((uintptr_t)va > 0x88000000 ) */
