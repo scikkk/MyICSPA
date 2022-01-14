@@ -97,7 +97,7 @@ void naive_uload(PCB *pcb, const char *filename) {
 void context_kload(PCB *pcb, void (*entry)(void *), void *arg){
 	Area kstack = {pcb, pcb+1};
 	/* printf("start=%p\tend=%p\n", kstack.start, kstack.end); */
-	pcb->cp = kcontext(kstack, entry, arg);
+	pcb->cp = kcontext(kstack, entry-4, arg);
 	/* printf("%p-4=%p\n", entry, entry-4); */
 	/* printf("kcontext-ret=%p\n", pcb->cp); */
 }
@@ -165,7 +165,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	}
 	memset((uintptr_t*)envp_start + envpc, 0, 4);
 	uintptr_t entry = loader(pcb, filename);
-    pcb->cp = ucontext(&pcb->as, kstack, (void*)entry);
+    pcb->cp = ucontext(&pcb->as, kstack, (void*)entry-4);
 	/* printf("%p-4=%p\n", (void*)entry, (void*)entry-4); */
 	pcb->cp->GPRx = gprx;
 	pcb->max_brk = MAX_BRK;
