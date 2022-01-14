@@ -43,9 +43,9 @@ void init_proc() {
 
 	/* context_uload(&pcb[1], "/bin/dummy", NULL, NULL); */
 
-	context_uload(&pcb[1], "/bin/hello", NULL, NULL);
+	/* context_uload(&pcb[1], "/bin/hello", NULL, NULL); */
 
-	/* context_uload(&pcb[1], "/bin/nslider", NULL, NULL); */
+	context_uload(&pcb[1], "/bin/nslider", NULL, NULL);
 
 	switch_boot_pcb();
 	// wk 4.1
