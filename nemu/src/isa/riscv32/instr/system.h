@@ -1,6 +1,6 @@
 word_t* csr(int32_t number){
 	switch(number){
- 		case 0x300:
+  		case 0x300:
 			/* printf("mstatus\n"); */
 			return &cpu.mstatus;
 		case 0x305:
@@ -13,8 +13,8 @@ word_t* csr(int32_t number){
 			/* printf("mcause\n"); */
 			return &cpu.mcause;
 		case 0x180:
- 			printf("0x%x:!!!nemu satp=0x%x!!!\n", cpu.pc, cpu.satp);
-			return &cpu.satp;
+ //			printf("0x%x:!!!nemu satp=0x%x!!!\n", cpu.pc, cpu.satp);
+ 			return &cpu.satp;
 		default: assert(0);
 
 	}
