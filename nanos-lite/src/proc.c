@@ -7,9 +7,9 @@ static PCB pcb_boot = {};
 PCB *current = NULL;
 
 void switch_boot_pcb() {
-	printf("switch_boot_pcb current=%p\n", current);
+	/* printf("switch_boot_pcb current=%p\n", current); */
 	current = &pcb_boot;
-	printf("switch_boot_pcb current=%p\n", current);
+	/* printf("switch_boot_pcb current=%p\n", current); */
 }
 
 void hello_fun(void *arg) {
