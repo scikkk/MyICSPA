@@ -7,7 +7,7 @@ static Context* (*user_handler)(Event, Context*) = NULL;
 extern void __am_get_cur_as(Context *c);
 extern void __am_switch(Context *c);
 Context* __am_irq_handle(Context *c) {
-	printf("enter am irq handle %d:cause=%p\ta7=%d\n", __LINE__, c->mcause, c->GPR1);
+	/* printf("enter am irq handle %d:cause=%p\ta7=%d\n", __LINE__, c->mcause, c->GPR1); */
 	/* printf("c->mepc=%p\n", c->mepc); */
 	__am_get_cur_as(c);
 	if (user_handler) {
@@ -20,14 +20,6 @@ Context* __am_irq_handle(Context *c) {
 			case 0x80000007 :ev.event=EVENT_IRQ_TIMER;break;
 			default: printf("Unkonwn error num:%d\n", c->mcause); assert(0);
 		}
-		/* switch(c->GPR1){ */
-		/* 	case 0:case 1:case 2:case 3: case 4:case 5: case 6:case 7: */
-		/* 	case 8:case 9:case 10:case 11:case 12: case 13:case 14: case 15: case 16: case 17: */
-		/* 	case 18: case 19: ev.event = EVENT_SYSCALL;break; */
-		/* 	default: ev.event = EVENT_YIELD; */
-		/* } */
-		/* if(c->mcause == 0x80000007) */ 
-		/* 	ev.event = EVENT_IRQ_TIMER; */
 		c = user_handler(ev, c);
 		assert(c != NULL);
 		/* assert(0); */
