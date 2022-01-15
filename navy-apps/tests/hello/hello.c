@@ -1,15 +1,17 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv, char **envp) {
   write(1, "Hello World!\n", 13);
   int i = 2;
   volatile int j = 0;
   while (1) {
     j ++;
     if (j == 999999) {
-		printf("argc=%d\targv[0]=%s\targv[1]=%s\n", argc, argv[0], argv[1]);
-		printf("argc=%d\t&argv[0]=%p\t&argv[1]=%p\n", argc, &argv[0], &argv[1]);
+		for(int k = 0; k <= argc; k++)
+		printf("argc=%d\targv[%d]=%s\n", argc, k, argv[k]);
+		for(int k = 0; envp[k]; k++)
+		printf("envp[%d]=%s\n", k, envp[k]);
       printf("Hello World from Navy-apps for the %dth time!\n", i ++);
       j = 0;
     }
