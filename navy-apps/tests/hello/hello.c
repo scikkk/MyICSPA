@@ -8,6 +8,7 @@ int main() {
   while (1) {
     j ++;
     if (j == 999999) {
+		printf("argc=%d\targv[0]=%x\targv[1]=%x\n", argc, argv[0], argv[1]);
       printf("Hello World from Navy-apps for the %dth time!\n", i ++);
       j = 0;
     }
