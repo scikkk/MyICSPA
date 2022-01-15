@@ -148,7 +148,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	/* if(envp)	printf("uload:%d: envp[0]=%p\n",__LINE__,  envp[0]); */
 	/* printf("envpc=%d\n", envpc); */
 	/* printf("gcpx = %p\n", gprx); */
-	gprx = string_start - 4*argc - 4*envpc - 12;
+	gprx = string_start - 4*argc - 4*envpc - 8;
 	*(int*)(gprx) = argc > 0 ? argc : 0;
 	uintptr_t argv_start = gprx + 4;
 	uintptr_t envp_start = argv_start + 4*argc + 4;
