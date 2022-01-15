@@ -74,7 +74,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 				uintptr_t page_begin  = (uintptr_t)new_page(1);
 				map(&pcb->as , (void*)(ph.p_vaddr&~0xfff) + 0x1000*pagenum, (void*)page_begin, 0);
 				MAX_BRK = ((ph.p_vaddr) + 0x1000*pagenum) & ~0xfff;
-				/* printf("loader: pagenum=%d\tva=%p\tpa=%p\n", pagenum, ph.p_vaddr + 0x1000*pagenum, page_begin); */
+				printf("loader: pagenum=%d\tva=%p\tpa=%p\n", pagenum, ph.p_vaddr + 0x1000*pagenum, page_begin);
 				memset((void*)page_begin, 0, 4096);
 				if(ph.p_filesz - pagenum*0x1000 > 0){
 					fs_read(fd, (void*)page_begin, (ph.p_filesz - pagenum*0x1000 > 4096) ? 4096 : ph.p_filesz - pagenum*0x1000);
