@@ -15,6 +15,9 @@ word_t* csr(int32_t number){
 		case 0x180:
  //			printf("0x%x:!!!nemu satp=0x%x!!!\n", cpu.pc, cpu.satp);
  			return &cpu.satp;
+		case 0x340:
+ 			printf("0x%x:!!!nemu mscratch=0x%x!!!\n", cpu.pc, cpu.mscratch);
+ 			return &cpu.mscratch;
 		default: assert(0);
 
 	}

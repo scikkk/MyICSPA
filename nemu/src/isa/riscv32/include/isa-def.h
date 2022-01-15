@@ -14,6 +14,7 @@ typedef struct {
 	rtlreg_t mtvec;
 	rtlreg_t mepc, mstatus, mcause; // CSR regs
 	rtlreg_t satp;
+	rtlreg_t mscratch;
 	bool INTR;
 
 
