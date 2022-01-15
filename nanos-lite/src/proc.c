@@ -84,11 +84,11 @@ Context* schedule(Context *prev) {
 	/* printf("exit shedule\n"); */
 
 	if(current == &pcb[0]){
-		printf("enter pcb[0]: pdir=%p\n", pcb[0].cp->pdir);
+		/* printf("enter pcb[0]: pdir=%p\n", pcb[0].cp->pdir); */
 		pcb[0].cp->pdir = NULL;
 	}
 	else{
-		printf("enter pcb[1]: pdir=%p\n", pcb[1].cp->pdir);
+		/* printf("enter pcb[1]: pdir=%p\n", pcb[1].cp->pdir); */
 	}
 	return current->cp;
 	// wk 4.1
