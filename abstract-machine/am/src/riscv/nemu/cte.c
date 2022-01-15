@@ -51,8 +51,9 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
 	/* printf("kcontex ctx=%p\n", ctx); */
 	*ctx = (Context) { 0 };
 	ctx->mepc = (uintptr_t)entry;
-	ctx->mstatus &= ~0x8;
-	ctx->mstatus |= 0x80;
+	/* ctx->mstatus &= ~0x8; */
+	/* ctx->mstatus |= 0x80; */
+	ctx->mstatus |= 0x8;
 	/* printf("kcontex!!! arg=%p\n", arg); */
 	ctx->GPR2 = (uintptr_t)arg;
 	ctx->pdir = NULL;
