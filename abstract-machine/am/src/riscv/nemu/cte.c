@@ -34,7 +34,7 @@ Context* __am_irq_handle(Context *c) {
 			case 18: case 19: ev.event = EVENT_SYSCALL;break;
 			default: ev.event = EVENT_YIELD;
 		}
-		if(c->mcause != 11) 
+		if(c->mcause == 0x80000007) 
 			ev.event = EVENT_IRQ_TIMER;
 		c = user_handler(ev, c);
 		assert(c != NULL);
