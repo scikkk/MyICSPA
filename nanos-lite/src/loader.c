@@ -157,7 +157,8 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 		*((uintptr_t*)argv_start + k) = (uintptr_t)pcb->as.area.end - (p_stack_end - string_start);
 		memcpy((void*)string_start, argv[k], len);
 		printf("argv[%d]=%s\n", k, (char*)string_start);
-		/* printf("string=%p\n", (void*)string_start); */
+		printf("string=%p\n", (void*)string_start);
+		printf("string=%p\n", (uintptr_t)pcb->as.area.end - (p_stack_end - string_start));
 		string_start += len;
 	}
 	memset((uintptr_t*)argv_start + argc, 0, 4);
