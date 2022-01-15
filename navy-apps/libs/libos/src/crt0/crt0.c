@@ -26,7 +26,6 @@ void call_main(uintptr_t *args) {
 		}
 	}
 	printf("callmain\n");
-	assert(0);
 	/* if(*argv==NULL) argv = NULL; */
 	/* if(*envp==NULL) envp = NULL; */
 	environ = envp;
