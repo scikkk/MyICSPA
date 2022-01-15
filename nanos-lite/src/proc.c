@@ -72,7 +72,7 @@ Context* schedule(Context *prev) {
 	/* printf("current=%p\tcurrent->as=%p\tas.ptr=%p\tpdir=%p\tmaxbrk=%p\n", current, current->as, current->as.ptr, current->cp->pdir, current->max_brk); */
 	// always select pcb[0] as the new process
 	static short no = 0;
-	no = (no + 1) % 4;
+	no = (no + 1) % 40;
 
 	if(no == 0){
 	current = &pcb[0];
