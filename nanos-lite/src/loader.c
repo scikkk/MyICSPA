@@ -79,6 +79,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 				/* if(ph.p_filesz - pagenum*0x1000 > 0){ */
 				if(ph.p_filesz + ph.p_vaddr >= (ph.p_vaddr & ~0xfff) + (pagenum)*0x1000){
 					fs_read(fd, (void*)page_begin, (ph.p_filesz - pagenum*0x1000 > 4096) ? 4096 : ph.p_filesz - pagenum*0x1000);
+					printf("rest=%d",ph.p_filesz-pagenum*0x1000 );
 				}
 			}
 			/* fs_read(fd, (void*)ph.p_vaddr, ph.p_filesz); */
