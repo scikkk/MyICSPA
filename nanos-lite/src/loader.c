@@ -86,6 +86,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			}
 			fs_lseek(fd, ph.p_offset, SEEK_SET);
 			fs_read(fd, (void*)((uintptr_t)ph.p_vaddr & 0xfff) + load_begin, ph.p_filesz);
+			printf("loder begin%p\n", ((uintptr_t)ph.p_vaddr & 0xfff) + load_begin);
 			printf("line%d:loader: vaddr=%p --- %p\n", __LINE__, ph.p_vaddr, ph.p_vaddr + ph.p_memsz);
 		} 
 	}
