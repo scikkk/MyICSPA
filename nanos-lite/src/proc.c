@@ -44,10 +44,10 @@ void init_proc() {
 
 	/* context_uload(&pcb[1], "/bin/dummy", NULL, NULL); */
 
-	/* char *argv[] = {"WK", "SCS", "HaHaHa", NULL}; */
-	/* char *envp[] = {"envWK", "envSCS", "envHaHaHa", NULL}; */
-	/* context_uload(&pcb[1], "/bin/hello", argv, envp); */
-	context_uload(&pcb[1], "/bin/hello", NULL, NULL);
+	char *argv[] = {"I","WK", "SCS", "HaHaHa", "TIME", NULL};
+	char *envp[] = {"NAME=WK", "NAME=SCS", "ID=201300008", NULL};
+	context_uload(&pcb[1], "/bin/hello", argv, envp);
+	/* context_uload(&pcb[1], "/bin/hello", NULL, NULL); */
 
 	/* context_uload(&pcb[1], "/bin/nslider", NULL, NULL); */
 
