@@ -78,8 +78,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 				memset((void*)page_begin, 0, 4096);
 				/* if(ph.p_filesz - pagenum*0x1000 > 0){ */
 				if(ph.p_filesz + ph.p_vaddr >= (ph.p_vaddr & ~0xfff) + (pagenum)*0x1000){
-					fs_read(fd, (void*)page_begin, (ph.p_filesz - pagenum*0x1000 > 0x1000) ? 0x1000 : ph.p_filesz - pagenum*0x1000);
-					printf("fs_read:[%p,%p]\n", (uintptr_t)page_begin, (uintptr_t)page_begin+(ph.p_filesz - pagenum*0x1000 > 0x1000) ? 0x1000 : ph.p_filesz - pagenum*0x1000);
+					fs_read(fd, (void*)page_begin, (ph.p_filesz - pagenum*0x1000 > 0x1000) ? 0x1000 : (ph.p_filesz - pagenum*0x1000));
+					printf("fs_read:[%p,%p]\n", (uintptr_t)page_begin, (uintptr_t)page_begin+(ph.p_filesz - pagenum*0x1000 > 0x1000) ? 0x1000 : (ph.p_filesz - pagenum*0x1000));
 					printf("rest=%p\n",ph.p_filesz-pagenum*0x1000 );
 				}
 			}
