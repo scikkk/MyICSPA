@@ -4,17 +4,18 @@ Context* schedule(Context *prev) ;
 
 static Context* do_event(Event e, Context* c) {
 	/* printf("do_event:e.event=%p\n", e.event); */
-	c->mepc += 4;
 	switch (e.event) {
 		case EVENT_NULL:
 			Log("Unhandled EVENT_NULL!\n");
 			break;
 		case EVENT_YIELD: 
+	c->mepc += 4;
 			/* Log("enter EVENT_YIELD!!!"); */
 			c = schedule(c);
 			/* Log("exit EVENT_YIELD!!!"); */
 			break;
 		case EVENT_SYSCALL: 
+	c->mepc += 4;
 			/* Log("\nUnhandled EVENT_SYSCALL!\n"); */
 			do_syscall(c);
 			break;
