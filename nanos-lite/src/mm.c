@@ -15,7 +15,7 @@ void* new_page(size_t nr_page) {
 static void* pg_alloc(int n) {
 	void* ret = new_page(n >> 12);
 	memset(ret, 0, n);
-	printf("pg_alloc(%d*4096):[ %p , %p ]\n", n/4096, ret, pf);
+	/* printf("pg_alloc(%d*4096):[ %p , %p ]\n", n/4096, ret, pf); */
 	return ret;
 }
 #endif
@@ -30,7 +30,7 @@ int mm_brk(uintptr_t brk) {
 	/* printf("current=%p\tcurrent->as=%p\n", current, current->as); */
 	brk &= ~0xfff;
 	if(brk > current->max_brk){
-		printf("maxbrk increase: %p --> %p\n", current->max_brk, brk);
+		/* printf("maxbrk increase: %p --> %p\n", current->max_brk, brk); */
 		uintptr_t old_brk = brk;
 		while(brk > current->max_brk){
 			uintptr_t page_begin  = (uintptr_t)new_page(1);                                                                                                      
