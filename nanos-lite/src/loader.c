@@ -68,7 +68,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 			/* if(ph.p_memsz > ph.p_filesz){ */
 			/* 	memset((void*)(ph.p_vaddr+ph.p_filesz), 0, ph.p_memsz-ph.p_filesz); */
 			/* } */
-			fs_lseek(fd, ph.p_offset, SEEK_SET);
 			uintptr_t load_begin = 0;
 			for(int pagenum = 0; ph.p_memsz + ph.p_vaddr >= (ph.p_vaddr & ~0xfff) + (pagenum)*0x1000; pagenum++){
 				/* printf("k=%d\t%p\t%p\n", k,  ph.p_memsz, pagenum*0x1000 ); */
@@ -85,6 +84,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 				/* 	printf("rest=%p\n",ph.p_filesz-pagenum*0x1000 ); */
 				/* } */
 			}
+			fs_lseek(fd, ph.p_offset, SEEK_SET);
 			fs_read(fd, (void*)((uintptr_t)ph.p_vaddr & 0xfff) + load_begin, ph.p_filesz);
 			printf("line%d:loader: vaddr=%p --- %p\n", __LINE__, ph.p_vaddr, ph.p_vaddr + ph.p_memsz);
 		} 
