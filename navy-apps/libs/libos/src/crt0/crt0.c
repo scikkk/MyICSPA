@@ -11,7 +11,7 @@ extern char **environ;
 void call_main(uintptr_t *args) {
 	printf("\n\ncall_main\n");
 	int argc = *((int*)args);
-	char **argv = (char**)((uintptr_t)args+1);
+	char **argv = (char**)((int*)args+1);
 	char **envp = (char**)(argv + argc + 1);
 	printf("ctr0:callamin:argc=%d\targv=%p\n",argc,  argv);
 	printf("ctr0:callamin:envp=%p\n", envp);
