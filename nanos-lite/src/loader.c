@@ -65,12 +65,11 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 		off += header.e_phentsize;
 		printf("vaddr=%p\tpaddr=%\tfilesz=%p\tmemsz=%p\n", ph.p_vaddr, ph.p_paddr, ph.p_filesz, ph.p_memsz);
 		if(ph.p_type == PT_LOAD){
-			uintptr_t load_begin = 0;
-			for(int pagenum = 0; ph.p_memsz + ph.p_vaddr >= (ph.p_vaddr & ~0xfff) + (pagenum)*0x1000; pagenum++){
-				uintptr_t page_begin  = (uintptr_t)new_page(1);
-				printf("loader: pagenum=%d\tva=%p\tpa=%p\n", pagenum, ph.p_vaddr + 0x1000*pagenum, page_begin);
-				if(pagenum == 0) load_begin = page_begin;
-				map(&pcb->as , (void*)(ph.p_vaddr&~0xfff) + 0x1000*pagenum, (void*)page_begin, 0);
+			int tot_num = 1 + (((ph.p_vaddr + ph.p_memsz) - (ph.p_vaddr & ~0xfff)) >> 12);
+			uintptr_t load_begin  = (uintptr_t)new_page(tot_num);
+			for(int pagenum = 0; pagenum < tot_num; pagenum++){
+				/* printf("loader: pagenum=%d\tva=%p\tpa=%p\n", pagenum, ph.p_vaddr + 0x1000*pagenum, page_begin); */
+				map(&pcb->as , (void*)(ph.p_vaddr&~0xfff) + 0x1000*pagenum, (void*)(load_begin + 0x1000*pagenum), 0);
 				MAX_BRK = ((ph.p_vaddr) + 0x1000*pagenum) & ~0xfff;
 			}
 			fs_lseek(fd, ph.p_offset, SEEK_SET);
