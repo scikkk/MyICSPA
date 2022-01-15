@@ -17,12 +17,12 @@ void call_main(uintptr_t *args) {
 	printf("ctr0:callamin:envp=%p\n", envp);
 	if(argv){
 		for(int k = 0; argv[k]; k++){
-			printf("%p: %s\n", &argv[k], argv[k]);
+			printf("%p: %s\n", argv[k], argv[k]);
 		}
 	}
 	if(envp){
 		for(int k = 0; envp[k]; k++){
-			printf("%p: %s\n", &envp[k], envp[k]);
+			printf("%p: %s\n", envp[k], envp[k]);
 		}
 	}
 	printf("callmain\n");
