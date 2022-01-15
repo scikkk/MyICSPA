@@ -44,7 +44,7 @@ void init_proc() {
 
 	/* context_uload(&pcb[1], "/bin/dummy", NULL, NULL); */
 
-	char *argv[] = {"--skip", NULL};
+	char *argv[] = {"WK", "SCS", "HaHaHa", NULL};
 	context_uload(&pcb[1], "/bin/hello", argv, NULL);
 
 	/* context_uload(&pcb[1], "/bin/nslider", NULL, NULL); */
