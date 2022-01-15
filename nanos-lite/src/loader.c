@@ -156,7 +156,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 		int len = strlen(argv[k]) + 1;
 		*((uintptr_t*)argv_start + k) = string_start;
 		memcpy((void*)string_start, argv[k], len);
-		/* printf("argv[%d]=%s\n", k, (char*)string_start); */
+		printf("argv[%d]=%s\n", k, (char*)string_start);
 		/* printf("string=%p\n", (void*)string_start); */
 		string_start += len;
 	}
