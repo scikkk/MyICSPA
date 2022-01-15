@@ -154,7 +154,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	uintptr_t envp_start = argv_start + 4*argc + 4;
 	for(int k = 0; k < argc; k++){
 		int len = strlen(argv[k]) + 1;
-		*((uintptr_t*)argv_start + k) = string_start;
+		*((uintptr_t*)argv_start + k) = (uintptr_t)pcb->as.area.end - (p_stack_end - string_start);
 		memcpy((void*)string_start, argv[k], len);
 		printf("argv[%d]=%s\n", k, (char*)string_start);
 		/* printf("string=%p\n", (void*)string_start); */
@@ -163,7 +163,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
 	memset((uintptr_t*)argv_start + argc, 0, 4);
 	for(int k = 0; k < envpc; k++){
 		int len = strlen(envp[k]) + 1; 
-		*((uintptr_t*)envp_start + k) = string_start;
+		*((uintptr_t*)envp_start + k) = (uintptr_t)pcb->as.area.end - (p_stack_end - string_start);
 		memcpy((void*)string_start, envp[k], len);
 		/* printf("envp[%d]=%s\n", k, (char*)string_start); */
 		/* printf("string=%p\n", (void*)string_start); */
