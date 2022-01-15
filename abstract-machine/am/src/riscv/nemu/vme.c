@@ -65,7 +65,7 @@ void __am_get_cur_as(Context *c) {
 }
 
 void __am_switch(Context *c) {
-	printf("switch satp(%p) \n", c->pdir);
+	/* printf("switch satp(%p) \n", c->pdir); */
 	if (vme_enable && c->pdir != NULL) {
 		set_satp(c->pdir);
 	}
