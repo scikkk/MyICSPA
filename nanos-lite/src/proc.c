@@ -31,16 +31,16 @@ void init_proc() {
 
 	/* char *argv[] = {"--skip", NULL}; */
 	/* context_uload(&pcb[1], "/bin/pal", argv, NULL); */
-	/* context_uload(&pcb[1], "/bin/pal", NULL, NULL); */
+	context_uload(&pcb[1], "/bin/pal", NULL, NULL);
 
 	/* char *argv[] = {"/bin/exec-test", NULL}; */
 	/* context_uload(&pcb[1], "/bin/exec-test", argv, NULL); */
 
 	/* context_uload(&pcb[1], "/bin/menu", NULL, NULL); */
 
-	char *argv[] = {"WK", "SCS", "HaHaHa", NULL};
-	char *envp[] = {"USER=WK", "ID=LOVE", NULL};
-	context_uload(&pcb[1], "/bin/nterm", argv, envp);
+	/* char *argv[] = {"WK", "SCS", "HaHaHa", NULL}; */
+	/* char *envp[] = {"USER=WK", "ID=LOVE", NULL}; */
+	/* context_uload(&pcb[1], "/bin/nterm", argv, envp); */
 
 	/* context_uload(&pcb[1], "/bin/dummy", NULL, NULL); */
 
